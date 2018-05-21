@@ -7,15 +7,15 @@
     "folds" : "",
     "hash" : "0",
     "id" : "7EAA5E9",
-    "lastKnownWriteTime" : 1526906010,
-    "last_content_update" : 1526906010909,
+    "lastKnownWriteTime" : 1526906789,
+    "last_content_update" : 1526906789387,
     "path" : "E://bspr-workshop-2018/index.Rmd",
     "project_path" : "index.Rmd",
     "properties" : {
-        "cursorPosition" : "2,62",
-        "scrollLine" : "0"
+        "cursorPosition" : "55,39",
+        "scrollLine" : "11"
     },
-    "relative_order" : 4,
+    "relative_order" : 1,
     "source_on_save" : false,
     "source_window" : "",
     "type" : "r_markdown"

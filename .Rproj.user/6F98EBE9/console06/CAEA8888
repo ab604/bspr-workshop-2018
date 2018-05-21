@@ -353,4 +353,27 @@ no changes added to commit (use "git add" and/or "git commit -a")[0K
 [0K[?25h[?25l
 [0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K
 $[0K[3G[?25h[?25l$ git status[0K[?25h[?25l$ git push origin master[0K[?25h[?25l$ git commit -m "change .gitignore"[0K[?25h[?25l$ git add .[0K[?25h[?25l
+[0K[?25hwarning: LF will be replaced by CRLF in .Rproj.user/6F98EBE9/sources/prop/CB891292.[0K[?25l
+The file will have its original line endings in your working directory.[0K
+warning: LF will be replaced by CRLF in .Rproj.user/6F98EBE9/sources/s-4F4FE32/969CA4B7.[0K
+The file will have its original line endings in your working directory.[0K
+[0K[?25h[?25l
+[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K
+$[0K[3G[?25h[?25l$ git add .[0K[?25h[?25l$ git status[0K[?25h[?25l$ git push origin master[0K[?25h[?25l$ git commit -m "change .gitignore"[0K[?25h[?25l
+[0K[?25h[master[0K[9G[?25l[master f771f5f] change .gitignore[0K
+ 3 files changed, 42 insertions(+), 4 deletions(-)[0K
+[0K[?25h[?25l
+[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K
+$[0K[3G[?25h[?25l$ git commit -m "change .gitignore"[0K[?25h[?25l$ git add .[0K[?25h[?25l$ git status[0K[?25h[?25l$ git push origin master[0K[?25h[?25l
+[0K[?25hCounting objects: 11, done.[0K[?25l
+[0K[?25hDelta compression using up to 16 threads.[0K[?25l
+Compressing objects:   9% (1/11)[0K[1G[?25h[?25lCompressing objects:  63% (7/11)[0K[1G[?25hCompressing objects: 100% (11/11), done.[0K[?25l
+Writing objects: 100% (11/11), 1.40 KiB | 0 bytes/s, done.[0K
+Total 11 (delta 5), reused 0 (delta 0)[0K
+[0K[?25hremote: Resolving deltas: 100% (5/5), completed with 5 local objects.[0K[?25l
+[0K[?25hTo github.com:ab604/bspr-workshop-2018.git[0K[?25l
+   3759fd6..f771f5f  master -> master[0K
+[0K[?25h[?25l
+[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K
+$[0K[3G[?25h[?25l$ git push origin master[0K[?25h[?25l$ git commit -m "change .gitignore"[0K[?25h[?25l$ git add .[0K[?25h[?25l
 [0K[?25h

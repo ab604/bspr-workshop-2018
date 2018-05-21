@@ -1,0 +1,7 @@
+# Visualising proteomics data
+
+Some _significant_ applications are demonstrated in this chapter.
+
+## Creating a volcano plot
+
+## Creating a heatmap

@@ -1,0 +1,5 @@
+# Importing and transforming proteomics data
+
+## Importing flat files
+
+## Calculating fold change and enrichment

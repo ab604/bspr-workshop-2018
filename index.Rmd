@@ -48,4 +48,9 @@ futile.logger::flog.threshold(futile.logger::ERROR, name = "VennDiagramLogger")
 
 # Overview {-}
 
-Stuff
+These lessons cover:
+
+1. An introduction to R and RStudio
+2. An introduction to the tidyverse
+3. Importing and transforming proteomics data
+4. Visualisation of proteomics analysis
