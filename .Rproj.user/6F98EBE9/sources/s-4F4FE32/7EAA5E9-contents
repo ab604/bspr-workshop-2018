@@ -29,12 +29,10 @@ description: "Lessons for the BSPR 2018 Data Science Workshop"
 
 ```{r include=FALSE}
 library(tidyverse)
-library(stringr)
 library(janitor)
-library(ggseqlogo)
-library(VennDiagram)
-library(gridExtra)
-library(cowplot)
+#library(VennDiagram)
+#library(gridExtra)
+#library(cowplot)
 # automatically create a bib database for R packages
 knitr::write_bib(c(
   .packages(), 'bookdown', 'knitr', 'rmarkdown'
@@ -43,7 +41,7 @@ knitr::write_bib(c(
 options(knitr.graphics.auto_pdf = TRUE)
 
 # Surpress text file log output
-futile.logger::flog.threshold(futile.logger::ERROR, name = "VennDiagramLogger")
+# futile.logger::flog.threshold(futile.logger::ERROR, name = "VennDiagramLogger")
 ```
 
 # Overview {-}
@@ -54,3 +52,16 @@ These lessons cover:
 2. An introduction to the tidyverse
 3. Importing and transforming proteomics data
 4. Visualisation of proteomics analysis
+
+## Requirements {-}
+
+Up to date version of R and Rstudio
+
+The following R packages:
+
+```{r packages, eval=FALSE}
+install.packages(c("tidyverse","janitor"))
+```
+
+
+

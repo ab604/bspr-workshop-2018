@@ -5,15 +5,15 @@
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "0",
+    "hash" : "1394758733",
     "id" : "7EAA5E9",
-    "lastKnownWriteTime" : 1526906789,
-    "last_content_update" : 1526906789387,
+    "lastKnownWriteTime" : 1526909190,
+    "last_content_update" : 1526909190018,
     "path" : "E://bspr-workshop-2018/index.Rmd",
     "project_path" : "index.Rmd",
     "properties" : {
-        "cursorPosition" : "55,39",
-        "scrollLine" : "11"
+        "cursorPosition" : "55,2",
+        "scrollLine" : "22"
     },
     "relative_order" : 1,
     "source_on_save" : false,

@@ -98,15 +98,23 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
       <nav role="navigation">
 
 <ul class="summary">
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Overview</a></li>
-<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
-<li class="chapter" data-level="2" data-path="literature.html"><a href="literature.html"><i class="fa fa-check"></i><b>2</b> Literature</a></li>
-<li class="chapter" data-level="3" data-path="methods.html"><a href="methods.html"><i class="fa fa-check"></i><b>3</b> Methods</a></li>
-<li class="chapter" data-level="4" data-path="applications.html"><a href="applications.html"><i class="fa fa-check"></i><b>4</b> Applications</a><ul>
-<li class="chapter" data-level="4.1" data-path="applications.html"><a href="applications.html#example-one"><i class="fa fa-check"></i><b>4.1</b> Example one</a></li>
-<li class="chapter" data-level="4.2" data-path="applications.html"><a href="applications.html#example-two"><i class="fa fa-check"></i><b>4.2</b> Example two</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Overview</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#requirements"><i class="fa fa-check"></i>Requirements</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="final-words.html"><a href="final-words.html"><i class="fa fa-check"></i><b>5</b> Final Words</a></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="the-tidyverse.html"><a href="the-tidyverse.html"><i class="fa fa-check"></i><b>2</b> The tidyverse</a></li>
+<li class="chapter" data-level="3" data-path="importing-and-transforming-proteomics-data.html"><a href="importing-and-transforming-proteomics-data.html"><i class="fa fa-check"></i><b>3</b> Importing and transforming proteomics data</a><ul>
+<li class="chapter" data-level="3.1" data-path="importing-and-transforming-proteomics-data.html"><a href="importing-and-transforming-proteomics-data.html#importing-flat-files"><i class="fa fa-check"></i><b>3.1</b> Importing flat files</a></li>
+<li class="chapter" data-level="3.2" data-path="importing-and-transforming-proteomics-data.html"><a href="importing-and-transforming-proteomics-data.html#calculating-fold-change-and-enrichment"><i class="fa fa-check"></i><b>3.2</b> Calculating fold change and enrichment</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="visualising-proteomics-data.html"><a href="visualising-proteomics-data.html"><i class="fa fa-check"></i><b>4</b> Visualising proteomics data</a><ul>
+<li class="chapter" data-level="4.1" data-path="visualising-proteomics-data.html"><a href="visualising-proteomics-data.html#creating-a-volcano-plot"><i class="fa fa-check"></i><b>4.1</b> Creating a volcano plot</a></li>
+<li class="chapter" data-level="4.2" data-path="visualising-proteomics-data.html"><a href="visualising-proteomics-data.html#creating-a-heatmap"><i class="fa fa-check"></i><b>4.2</b> Creating a heatmap</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="going-further.html"><a href="going-further.html"><i class="fa fa-check"></i><b>5</b> Going further</a><ul>
+<li class="chapter" data-level="5.1" data-path="going-further.html"><a href="going-further.html#getting-help-and-joining-the-r-community"><i class="fa fa-check"></i><b>5.1</b> Getting help and joining the R community</a></li>
+<li class="chapter" data-level="5.2" data-path="going-further.html"><a href="going-further.html#communication-creating-reports-presentations-and-websites"><i class="fa fa-check"></i><b>5.2</b> Communication: creating reports, presentations and websites</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 </ul>
 
@@ -133,8 +141,20 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="overview" class="section level1 unnumbered">
 <h1>Overview</h1>
-<p>Stuff</p>
+<p>These lessons cover:</p>
+<ol style="list-style-type: decimal">
+<li>An introduction to R and RStudio</li>
+<li>An introduction to the tidyverse</li>
+<li>Importing and transforming proteomics data</li>
+<li>Visualisation of proteomics analysis</li>
+</ol>
+<div id="requirements" class="section level2 unnumbered">
+<h2>Requirements</h2>
+<p>Up to date version of R and Rstudio</p>
+<p>The following R packages:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="kw">c</span>(<span class="st">&quot;tidyverse&quot;</span>,<span class="st">&quot;janitor&quot;</span>))</code></pre></div>
 
+</div>
 </div>
             </section>
 
