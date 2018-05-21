@@ -1,0 +1,12 @@
+\usepackage{booktabs}
+
+% Preamble
+\usepackage[none]{hyphenat}
+\usepackage[default,osfigures,scale=0.95]{opensans} % Open sans font
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage{lettrine} % The lettrine is the first enlarged letter at the beginning of the text
+\raggedbottom 
+\usepackage{makeidx} % These lines add bibliography to TOC
+\makeindex
+\usepackage[nottoc]{tocbibind}
+\renewcommand{\bibname}{References} % Rename biblography as References

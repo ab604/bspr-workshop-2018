@@ -1,0 +1,5 @@
+book_filename: "bspr-workshop-2018"
+delete_merged_file: true
+language:
+  ui:
+    chapter_name: "Chapter "

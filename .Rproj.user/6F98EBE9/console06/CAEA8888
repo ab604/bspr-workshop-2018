@@ -1,0 +1,179 @@
+[0m[0K]0;:/e/bspr-workshop-2018[?25l
+[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0m[0K
+$[0K[3G[?25h[?25l$ g[0K[?25hi[0Kt[0K[7G[?25l$ git i[0K[?25hn[0Ki[0K[?25lt[0K[10G[?25h[11G[?25l
+[0K[?25hInitialized empty Git repository in E:/bspr-workshop-2018/.git/[0K[?25l
+[0K[?25h[?25l
+[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K
+$[0K[3G[?25h[?25l$ git remote add origin git@github.com:ab604/bspr-workshop-2018.git[0K
+[0K[?25h[?25l
+[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K
+$ git push -u origin master[0K[?25h[?25l$ git push -u origin maste[0K[28G[?25h[27G[?25l$ git push -u origin mast[0K[?25h[?25l$ git push -u origin mas[0K[?25h[?25l$ git push -u origin ma[0K[?25h[?25l$ git push -u origin m[0K[?25h[?25l$ git push -u origin[0K[22G[?25h[21G[?25l$ git push -u origi[0K[?25h[?25l$ git push -u ori[0K[19G[?25h[?25l$ git push -u or[0K[18G[?25h[?25l$ git push -u o[0K[17G[?25h[16G[?25l$ git push -u[0K[15G[?25h[14G[?25l$ git push -[0K[?25h[?25l$ git push[0K[12G[?25h[11G[?25l$ git pus[0K[?25h[?25l$ git pu[0K[?25h[?25l$ git p[0K[?25h[?25l$ git[0K[7G[?25h[6G[7G[?25l$ git s[0K[?25ht[0Ka[0Kt[0Ku[0Ks[0K[?25l
+[0K[?25hOn branch master[0K[?25l
+[0K
+Initial commit[0K
+[0K
+Untracked files:[0K
+  (use "git add <file>..." to include in what will be committed)[0K
+[0K
+        [0;31m.Rproj.user/[0m[0K
+        [0;31m01-intro.Rmd[0m[0K
+        [0;31m02-literature.Rmd[0m[0K
+        [0;31m03-method.Rmd[0m[0K
+        [0;31m04-application.Rmd[0m[0K
+        [0;31m05-summary.Rmd[0m[0K
+        [0;31m06-references.Rmd[0m[0K
+        [0;31mREADME.md[0m[0K
+        [0;31m_bookdown.yml[0m[0K
+        [0;31m_output.yml[0m[0K
+        [0;31mbook.bib[0m[0K
+        [0;31mbspr-workshop-2018.Rproj[0m[0K
+        [0;31mindex.Rmd[0m[0K
+        [0;31mpreamble.tex[0m[0K
+        [0;31mstyle.css[0m[0K
+[0K
+nothing added to commit but untracked files present (use "git add" to track)[0K
+[0K[?25h[?25l
+[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K
+$[0K[3G[?25h[?25l$ t[0K[?25ho[0Ku[0Kc[0Kh[0K[9G[?25l$ touch .[0K[?25hg[0Ki[0Kt[0Ki[0Kg[0Kn[0Ko[0Kr[0Ke[0K[?25l
+[0K[?25h[?25l
+[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K
+$[0K[3G[?25h[?25l[31A[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0K
+[0m$ git status[0K
+On branch master[0K
+[0K
+Initial commit[0K
+[0K
+Untracked files:[0K
+  (use "git add <file>..." to include in what will be committed)[0K
+[0K
+        [0;31m.Rproj.user/[0K
+[0m        [0;31m01-intro.Rmd[0K
+[0m        [0;31m02-literature.Rmd[0K
+[0m        [0;31m03-method.Rmd[0K
+[0m        [0;31m04-application.Rmd[0K
+[0m        [0;31m05-summary.Rmd[0K
+[0m        [0;31m06-references.Rmd[0K
+[0m        [0;31mREADME.md[0K
+[0m        [0;31m_bookdown.yml[0K
+[0m        [0;31m_output.yml[0K
+[0m        [0;31mbook.bib[0K
+[0m        [0;31mbspr-workshop-2018.Rproj[0K
+[0m        [0;31mindex.Rmd[0K
+[0m        [0;31mpreamble.tex[0K
+[0m        [0;31mstyle.css[0K
+[0m[0K
+nothing added to commit but untracked files present (use "git add" to track)[0K
+[0K
+[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0K
+[0m$ touch .gitignore[0K
+[0K
+[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0K
+[0m$[0K[3G[?25h[?25l$ g[0K[?25hi[0Kt[0K[7G[?25l$ git a[0K[?25hd[0Kd[0K[11G[?25l$ git add .[0K[?25h[?25l
+[0K[?25hwarning: LF will be replaced by CRLF in 01-intro.Rmd.[0K[?25l
+The file will have its original line endings in your working directory.[0K
+warning: LF will be replaced by CRLF in 02-literature.Rmd.[0K
+The file will have its original line endings in your working directory.[0K
+warning: LF will be replaced by CRLF in 03-method.Rmd.[0K
+The file will have its original line endings in your working directory.[0K
+warning: LF will be replaced by CRLF in 04-application.Rmd.[0K
+The file will have its original line endings in your working directory.[0K
+warning: LF will be replaced by CRLF in 05-summary.Rmd.[0K
+The file will have its original line endings in your working directory.[0K
+warning: LF will be replaced by CRLF in 06-references.Rmd.[0K
+The file will have its original line endings in your working directory.[0K
+warning: LF will be replaced by CRLF in README.md.[0K
+The file will have its original line endings in your working directory.[0K
+[0K[?25hwarning: LF will be replaced by CRLF in _book/libs/gitbook-2.6.7/css/plugin-bookdown.css.[0K[?25l
+The file will have its original line endings in your working directory.[0K
+warning: LF will be replaced by CRLF in _book/libs/gitbook-2.6.7/css/plugin-fontsettings.css.[0K
+The file will have its original line endings in your working directory.[0K
+warning: LF will be replaced by CRLF in _book/libs/gitbook-2.6.7/css/plugin-highlight.css.[0K
+The file will have its original line endings in your working directory.[0K
+warning: LF will be replaced by CRLF in _book/libs/gitbook-2.6.7/css/plugin-search.css.[0K
+The file will have its original line endings in your working directory.[0K
+warning: LF will be replaced by CRLF in _book/libs/gitbook-2.6.7/css/style.css.[0K
+The file will have its original line endings in your working directory.[0K
+warning: LF will be replaced by CRLF in _book/libs/gitbook-2.6.7/js/app.min.js.[0K
+The file will have its original line endings in your working directory.[0K
+warning: LF will be replaced by CRLF in _book/libs/gitbook-2.6.7/js/jquery.highlight.js.[0K
+The file will have its original line endings in your working directory.[0K
+warning: LF will be replaced by CRLF in _book/libs/gitbook-2.6.7/js/lunr.js.[0K
+The file will have its original line endings in your working directory.[0K
+[0K[?25hwarning: LF will be replaced by CRLF in _book/libs/gitbook-2.6.7/js/plugin-bookdown.js.[0K[?25l
+The file will have its original line endings in your working directory.[0K
+warning: LF will be replaced by CRLF in _book/libs/gitbook-2.6.7/js/plugin-fontsettings.js.[0K
+The file will have its original line endings in your working directory.[0K
+warning: LF will be replaced by CRLF in _book/libs/gitbook-2.6.7/js/plugin-search.js.[0K
+The file will have its original line endings in your working directory.[0K
+warning: LF will be replaced by CRLF in _book/libs/gitbook-2.6.7/js/plugin-sharing.js.[0K
+The file will have its original line endings in your working directory.[0K
+warning: LF will be replaced by CRLF in _book/libs/jquery-2.2.3/jquery.min.js.[0K
+The file will have its original line endings in your working directory.[0K
+[0K[?25hwarning: LF will be replaced by CRLF in _output.yml.[0K[?25l
+The file will have its original line endings in your working directory.[0K
+warning: LF will be replaced by CRLF in book.bib.[0K
+The file will have its original line endings in your working directory.[0K
+warning: LF will be replaced by CRLF in style.css.[0K
+The file will have its original line endings in your working directory.[0K
+[0K[?25h[?25l
+[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K
+$[0K[3G[?25h[?25l$ g[0K[?25hi[0Kt[0K[7G[?25l$ git i[0K[?25hn[0Ki[0Kt[0Ki[0Ka[0Kl[0K[15G[14G[?25l$ git initia[0K[?25h[?25l$ git initi[0K[?25h[?25l$ git init[0K[?25h[?25l$ git ini[0K[?25h[?25l$ git in[0K[?25h[?25l$ git i[0K[?25h[?25l$ git[0K[7G[?25h[6G[?25l$ gi[0K[?25ht[0K[7G[?25l$ git c[0K[?25ho[0Km[0Km[0Ki[0Kt[0K[14G[?25l$ git commit -[0K[?25hm[0K[17G[?25l$ git commit -m "[0K[?25hi[0Kn[0Ki[0Kt[0Ki[0Ka[0Kl[0K[26G[?25l$ git commit -m "initial c[0K[?25ho[0Km[0Km[0Ki[0Kt[0K"[0K[?25l
+[0K[?25h[master (root-commit)[0K[23G[?25l[master (root-commit) 5871f2b] initial commit[0K
+[0K[?25h 43 files changed, 3750 insertions(+)[0K[?25l
+ create mode 100644 .gitignore[0K
+ create mode 100644 01-intro.Rmd[0K
+ create mode 100644 02-literature.Rmd[0K
+ create mode 100644 03-method.Rmd[0K
+ create mode 100644 04-application.Rmd[0K
+ create mode 100644 05-summary.Rmd[0K
+ create mode 100644 06-references.Rmd[0K
+ create mode 100644 README.md[0K
+ create mode 100644 _book/applications.html[0K
+ create mode 100644 _book/bspr-workshop-2018.epub[0K
+ create mode 100644 _book/bspr-workshop-2018.pdf[0K
+ create mode 100644 _book/bspr-workshop-2018.tex[0K
+ create mode 100644 _book/bspr-workshop-2018_files/figure-html/nice-fig-1.png[0K
+ create mode 100644 _book/final-words.html[0K
+ create mode 100644 _book/index.html[0K
+ create mode 100644 _book/intro.html[0K
+ create mode 100644 _book/libs/gitbook-2.6.7/css/fontawesome/fontawesome-webfont.ttf[0K
+ create mode 100644 _book/libs/gitbook-2.6.7/css/plugin-bookdown.css[0K
+ create mode 100644 _book/libs/gitbook-2.6.7/css/plugin-fontsettings.css[0K
+ create mode 100644 _book/libs/gitbook-2.6.7/css/plugin-highlight.css[0K
+ create mode 100644 _book/libs/gitbook-2.6.7/css/plugin-search.css[0K
+ create mode 100644 _book/libs/gitbook-2.6.7/css/style.css[0K
+ create mode 100644 _book/libs/gitbook-2.6.7/js/app.min.js[0K
+ create mode 100644 _book/libs/gitbook-2.6.7/js/jquery.highlight.js[0K
+ create mode 100644 _book/libs/gitbook-2.6.7/js/lunr.js[0K
+ create mode 100644 _book/libs/gitbook-2.6.7/js/plugin-bookdown.js[0K
+ create mode 100644 _book/libs/gitbook-2.6.7/js/plugin-fontsettings.js[0K
+ create mode 100644 _book/libs/gitbook-2.6.7/js/plugin-search.js[0K
+ create mode 100644 _book/libs/gitbook-2.6.7/js/plugin-sharing.js[0K
+ create mode 100644 _book/libs/jquery-2.2.3/jquery.min.js[0K
+ create mode 100644 _book/literature.html[0K
+ create mode 100644 _book/methods.html[0K
+ create mode 100644 _book/references.html[0K
+ create mode 100644 _book/search_index.json[0K
+ create mode 100644 _bookdown.yml[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_files/figure-html/nice-fig-1.png[0K
+ create mode 100644 _output.yml[0K
+ create mode 100644 book.bib[0K
+ create mode 100644 bspr-workshop-2018.Rproj[0K
+ create mode 100644 index.Rmd[0K
+ create mode 100644 packages.bib[0K
+ create mode 100644 preamble.tex[0K
+ create mode 100644 style.css[0K
+[0K[?25h[?25l
+[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K
+$[0K[3G[?25h[?25l$ g[0K[3G[?25h[4G[?25l$ gi[0K[?25ht[0K[7G[?25l$ git p[0K[?25hu[0Ks[0Kh[0K[12G[?25l$ git push o[0K[?25hr[0Ki[0Kg[0Ki[0Kn[0K[19G[?25l$ git push origin m[0K[?25ha[0Ks[0Ke[0K[?25l$ git push origin mas[0K[?25ht[0Ke[0Kr[0K[?25l
+[0K[?25hCounting objects: 54, done.[0K[?25l
+[0K[?25hDelta compression using up to 16 threads.[0K[?25l
+Compressing objects:  28% (14/50)[0K[1G[?25h[?25lCompressing objects:  48% (24/50)[0K[1G[?25h[?25lCompressing objects:  76% (38/50)[0K[1G[?25h[?25lCompressing objects:  98% (49/50)[0K[1G[?25hCompressing objects: 100% (50/50), done.[0K[?25l
+Writing objects:  25% (14/54)[0K[1G[?25h[?25lWriting objects:  42% (23/54)[0K[1G[?25h[?25lWriting objects:  53% (29/54)[0K[1G[?25h[?25lWriting objects:  66% (36/54)[0K[1G[?25h[?25lWriting objects:  88% (48/54)[0K[1G[?25hWriting objects: 100% (54/54), 258.36 KiB | 0 bytes/s, done.[0K[?25l
+Total 54 (delta 6), reused 0 (delta 0)[0K
+[0K[?25hremote: Resolving deltas: 100% (6/6), done.[0K[?25l
+[0K[?25hTo github.com:ab604/bspr-workshop-2018.git[0K[?25l
+ * [new branch]      master -> master[0K
+[0K[?25h[?25l
+[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K
+$[0K[3G[?25h[?25l$ git push origin master[0K[3G[?25h[25G[?25l$ git commit -m "initial commit"[0K[?25h[?25l$ git add .[0K[33G[?25h[12G
