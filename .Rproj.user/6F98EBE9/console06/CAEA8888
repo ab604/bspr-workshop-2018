@@ -282,4 +282,37 @@ Total 32 (delta 7), reused 0 (delta 0)[0K
    5871f2b..393f496  master -> master[0K
 [0K[?25h[?25l
 [0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K
-$[0K[3G[?25h[?25l$ git push origin master[0K[?25h[?25l$ git commit -m "change .gitignore"[0K[?25h[?25l$ git add .[0K[?25h
+$[0K[3G[?25h[?25l$ git push origin master[0K[?25h[?25l$ git commit -m "change .gitignore"[0K[?25h[?25l$ git add .[0K[?25hwarning: LF will be replaced by CRLF in .Rproj.user/6F98EBE9/sources/prop/234D8CAA.[0K[?25l
+The file will have its original line endings in your working directory.[0K
+[0K[?25hwarning: LF will be replaced by CRLF in .Rproj.user/6F98EBE9/sources/prop/9A412A16.[0K[?25l
+The file will have its original line endings in your working directory.[0K
+warning: LF will be replaced by CRLF in .Rproj.user/6F98EBE9/sources/s-4F4FE32/196978E7.[0K
+The file will have its original line endings in your working directory.[0K
+warning: LF will be replaced by CRLF in .Rproj.user/6F98EBE9/sources/s-4F4FE32/196978E7-contents.[0K
+The file will have its original line endings in your working directory.[0K
+warning: LF will be replaced by CRLF in .Rproj.user/6F98EBE9/sources/s-4F4FE32/7EAA5E9.[0K
+The file will have its original line endings in your working directory.[0K
+warning: LF will be replaced by CRLF in .Rproj.user/shared/notebooks/paths.[0K
+The file will have its original line endings in your working directory.[0K
+[0K[?25h[?25l
+[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K
+$[0K[3G[?25h[?25l$ git add .[0K[?25h[?25l$ git push origin master[0K[?25h[?25l$ git commit -m "change .gitignore"[0K[?25h[35G[?25l$ git commit -m "change .gitignor"[0K[34G[?25h[?25l$ git commit -m "change .gitigno"[0K[33G[?25h[?25l$ git commit -m "change .gitign"[0K[32G[?25h[?25l$ git commit -m "change .gitig"[0K[31G[?25h[?25l$ git commit -m "change .giti"[0K[30G[?25h[?25l$ git commit -m "change .git"[0K[29G[?25h[?25l$ git commit -m "change .gi"[0K[28G[?25h[?25l$ git commit -m "change .g"[0K[27G[?25h[?25l$ git commit -m "change ."[0K[26G[?25h[?25l$ git commit -m "change "[0K[25G[?25h[?25l$ git commit -m "change R"[0K[26G[?25h[?25l$ git commit -m "change RE"[0K[27G[?25h[?25l$ git commit -m "change REA"[0K[28G[?25h[?25l$ git commit -m "change READ"[0K[29G[?25h[?25l$ git commit -m "change READM"[0K[30G[?25h[?25l$ git commit -m "change README"[0K[31G[?25h[?25l
+[0K[?25h[master[0K[9G[?25l[master 8dcb515] change README[0K
+[0K[?25h 10 files changed, 125 insertions(+), 49 deletions(-)[0K[?25l
+ delete mode 100644 .Rproj.user/6F98EBE9/sources/s-4F4FE32/4ACFE2FD[0K
+ delete mode 100644 .Rproj.user/6F98EBE9/sources/s-4F4FE32/A2AA155A[0K
+[0K[?25h[?25l
+[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K
+$[0K[3G[?25h[?25l$ git commit -m "change README"[0K[3G[?25h[32G[?25l$ git add .[0K[?25h[?25l$ git push origin master[0K[?25h[?25l
+[0K[?25hCounting objects: 17, done.[0K[?25l
+[0K[?25hDelta compression using up to 16 threads.[0K[?25l
+Compressing objects:  25% (4/16)[0K[1G[?25h[?25lCompressing objects:  68% (11/16)[0K[1G[?25hCompressing objects: 100% (16/16), done.[0K[?25l
+Writing objects:  47% (8/17)[0K[1G[?25hWriting objects: 100% (17/17), 2.57 KiB | 0 bytes/s, done.[0K[?25l
+Total 17 (delta 8), reused 0 (delta 0)[0K
+[0K[?25hremote: Resolving deltas: 100% (8/8), completed with 8 local objects.[0K[?25l
+[0K[?25hTo github.com:ab604/bspr-workshop-2018.git[0K[?25l
+   393f496..8dcb515  master -> master[0K
+[0K[?25h[?25l
+[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K
+$[0K[3G[?25h[?25l$ git push origin master[0K[?25h[?25l$ git commit -m "change README"[0K[?25h[?25l$ git add .[0K[?25h[?25l
+[0K[?25h
