@@ -3,3 +3,92 @@
 ## Importing flat files
 
 ## Calculating fold change and enrichment
+
+### Fold change and log-fold change
+
+Fold changes are ratios, the ratio of say protein expression before and
+after treatment, where a value larger than 1 for a protein implies that 
+protein expression was greater after the treatment.
+
+In life sciences, fold change is often reported as log-fold change. Why is that?
+There are at least two reasons which can be shown by plotting.
+
+One is that ratios are not symmetrical around 1, so it's difficult to observe
+both changes in the forwards and backwards direcion i.e. proteins where expression
+went up and proteins where expression went down due to treatment. When we 
+transform ratios on a log scale, the scale becomes symmetric around 0 and thus
+we can now observe the distribution of ratios in terms of positive, negative or
+no change.
+
+```{r fold-change-1}
+set.seed(10)
+x <- 2^(rnorm(100))
+y <- 2^(rnorm(100))
+ratios <- tibble(value = x/y, label = "ratios")
+logratios <- tibble(value = log2(ratios$value), label = "logratios")
+
+bind_rows(ratios,logratios) %>% 
+  ggplot(aes(value)) +
+  geom_histogram(binwidth = 2, colour = "grey50", fill = "white") +
+  ggplot2::facet_wrap(~ label) +
+  theme_minimal()
+```
+
+A second reason is that transforming values onto a log scale changes where
+the numbers actually occur when plotted on that scale. If we consider the log
+scale to represent magnitudes, then we can more easily see changes of small and
+large magnitudes when we plot the data.
+
+For example, a fold change of 32 times can be either a ratio 1/32 or 32/1. 
+
+1/32 is much closer to 1 than 32/1, but transformed to a log scale we see that in 
+terms of magnitude of difference it is the same as 32/1.
+
+```{r fold-change-2}
+x2 <- 2^seq(1,5)
+y_vals <- c(rev(1/x2),1,x2)
+names <- c(paste0("1/",rev(x2)),1,x2)
+x_vals <- seq(along=y_vals)
+
+dat <- tibble(x_vals,y_vals,names)
+
+p1 <- ggplot(dat,aes(x_vals,y_vals, label = names)) +
+  geom_text() +
+  geom_hline(yintercept = 1) +
+  theme_minimal() +
+  labs(x = NULL, y = NULL) +
+  scale_x_continuous(breaks = NULL)
+
+
+p2 <- ggplot(dat,aes(x_vals,y_vals, label = names)) +
+  geom_text() +
+  geom_hline(yintercept = 1) +
+  scale_y_continuous(trans = "log2") +
+  theme_minimal() +
+  labs(x = NULL, y = NULL) +
+  scale_x_continuous(breaks = NULL)
+
+plot_grid(p1,p2)
+
+```
+
+# Fold change and t-test
+
+1. Load the data, we need multiple replicates for each condition. To be tidy
+each protein is a set of observations (rows) of the variables, which are the
+values recorded for each replicate (columns).
+
+2. Deal with missing values, either impute or exclude missing values
+
+3. Use `t.test` to perform Welch Two Sample t-test. This output will include
+the p-values we need for each protein.
+
+4. Perform log transformation of the observations for each protein.
+
+5. Calculate the mean observation for each protein under each condition.
+
+6. The log fold change is then the difference between condition 1 and condition 2.
+Plot a histogram to look at the distribution.
+
+7. Create a combined table of log fold change and p-values for all the proteins
+for plotting a volcano plot.

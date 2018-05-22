@@ -1,7 +1,32 @@
 # Visualising proteomics data
 
-Some _significant_ applications are demonstrated in this chapter.
+Based on empircal research, there are some general rules on visulisations
+that are worth bearing in mind:
+
+1. Plot
 
 ## Creating a volcano plot
 
+VOlcano plot is a plot of the log fold change in the observation between two
+conditions on the x-axis, for example the protein expression between treatment 
+and control conditions. And on the y-axis is the corresponding p-value for each
+observation. The p-value representing the likelihood that an observed change
+is due to the different conditions rather than arising from natural variation 
+in the fold change that might be observed if we performed many replications of 
+the experiment.
+
+The aim of a volcano plot is to enable the viewer to quickly see the effect
+(if any) of an experiment with two conditions on many species i.e. proteins
+in terms of both increased and decreased expression.
+
+Like all plots it has it's good and bad points, namely it's good that we can
+visualise a lot of complex information in one plot. However this is also it's 
+main weakness, it's rather complicated to understand in one glance.
+
+However, volcano plots are widely used in the literature, so there may be an 
+amount of [social proof](https://en.wikipedia.org/wiki/Social_proof) giving rise
+to their popularity as opposed to their utility.
+
 ## Creating a heatmap
+
+A 
