@@ -78,17 +78,74 @@ plot_grid(p1,p2)
 each protein is a set of observations (rows) of the variables, which are the
 values recorded for each replicate (columns).
 
+```{r load-data}
+dat <- readr::read_csv("data/secretome_leanne_example.csv")
+
+glimpse(dat)
+```
+
 2. Deal with missing values, either impute or exclude missing values
 
-3. Use `t.test` to perform Welch Two Sample t-test. This output will include
-the p-values we need for each protein.
+```{r omit-na}
+# Filter out rows with NA
+dat_drop <- dat %>% drop_na() 
+# Impute NA with lowest value, need to change this!
+control <- dat %>% select(C1,C2,C3)
+
+# Impute minimum
+row_min <- function(x) apply(x,1,min,na.rm = TRUE)
+impute_min <- function(x) replace(x, is.na(x), row_min(x))
+
+control_na <- control %>% filter(!complete.cases(.))
+impute_min(control_na[1:149,])
+
+ 
+control %>% replace_na(apply(.,1,min))
+```
+
+3. Use `t.test` to perform Welch Two Sample t-test on untransformed data. 
+This outputs the p-values we need for each protein.
+
+```{r t-test}
+# T-test function
+ttest_function <- function(dat,grp1,grp2){
+  # Subset control group and convert to numeric
+  x <- dat[grp1] %>% as.numeric()
+  # Subset treatment group and convert to numeric
+  y <- dat[grp2] %>% as.numeric()
+  # Perform t-test
+  result <- t.test(x, y)
+  # Return p-values
+  return(result$p.value)
+}
+
+# Apply t-test function to data
+# array = dat, 1 = rows, FUN = ttest_function, and arguements
+p_vals <- apply(dat_drop,1,ttest_function, grp1 = c(3:5), grp2 = c(6:8))
+```
 
 4. Perform log transformation of the observations for each protein.
 
+```{r log-data}
+# Select columns and log data
+dat_log <- dat_drop %>% select(-c(1:2)) %>% log2()
+```
+
 5. Calculate the mean observation for each protein under each condition.
+
+```{r mean-log}
+control <- apply(dat_log[,1:3],1,mean)
+treatment <- apply(dat_log[,4:6],1,mean)
+```
 
 6. The log fold change is then the difference between condition 1 and condition 2.
 Plot a histogram to look at the distribution.
+
+```{r fold-change}
+foldchange <- control - treatment
+
+hist(foldchange)
+```
 
 7. Create a combined table of log fold change and p-values for all the proteins
 for plotting a volcano plot.
