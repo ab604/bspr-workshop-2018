@@ -78,26 +78,57 @@ plot_grid(p1,p2)
 each protein is a set of observations (rows) of the variables, which are the
 values recorded for each replicate (columns).
 
-```{r load-data}
-dat <- readr::read_csv("data/secretome_leanne_example.csv")
+```{r load-data, echo=FALSE, eval=FALSE}
+# Read in Charlottes data
+dat <- read_csv("data/MergedFinalProt_1colPerFile_6files_filtered.csv",
+                       na = "NaN") %>% clean_names()
+
+dat <- read_csv("data/secretome_leanne_example.csv")
+
+rat <- read_tsv("data/rat_KD.txt") %>% clean_names()
 
 glimpse(dat)
+glimpse(rat)
+
+# Select 200 proteins for three control and three treatments
+dat_select <- dat %>% as.data.frame()
+dat_select <- dat_select[,3:8]
+  #top_n(2000,protein_entry_protein_accession) %>%
+  #select(1,2,9,11,13,21,23,25)
+  # select(1:8)
+  #select(protein_accession = 1, protein_description = 2,
+         # kog1 = 3, kog2 = 4, kog3 = 5,
+         # wt1 = 6, wt2 = 7, wt3 = 8)
+
+glimpse(dat_select)
+
+write_excel_csv(dat_select,"data/example_proteomics_data.csv")
 ```
 
 2. Deal with missing values, either impute or exclude missing values
 
 ```{r omit-na}
 # Filter out rows with NA
-dat_drop <- dat %>% drop_na() 
+dat_drop <- dat_select %>% drop_na() %>% as.data.frame() 
+dat_drop <- dat %>% drop_na() %>% as.data.frame()
+
+t.test(dat_drop[1,3:5], dat_drop[1,6:8])
+
 # Impute NA with lowest value, need to change this!
-control <- dat %>% select(C1,C2,C3)
+control <- dat_select %>% filter(!is.na(control_1) | 
+                                   !is.na(control_2) | 
+                                   !is.na(control_3)) %>% select(3,4,5) 
+
+treatment <- dat_select %>% filter(!is.na(ras_1) | 
+                                   !is.na(ras_2) | 
+                                   !is.na(ras_3)) %>% select(6,7,8) 
 
 # Impute minimum
 row_min <- function(x) apply(x,1,min,na.rm = TRUE)
 impute_min <- function(x) replace(x, is.na(x), row_min(x))
 
-control_na <- control %>% filter(!complete.cases(.))
-impute_min(control_na[1:149,])
+#control_na <- control %>% filter(!complete.cases(.))
+impute_min(control)
 
  
 control %>% replace_na(apply(.,1,min))
@@ -106,22 +137,57 @@ control %>% replace_na(apply(.,1,min))
 3. Use `t.test` to perform Welch Two Sample t-test on untransformed data. 
 This outputs the p-values we need for each protein.
 
+
 ```{r t-test}
+# dat_drop %>% 
+#   select(protein_accession,control_1,control_2,control_3,ras_1,ras_2,ras_3) %>% 
+#   gather(key = variable, value = value,) %>% head
+
+# dummy data
+set.seed(769)
+dt <- data.frame(c1 = runif(5000,1,100),
+                 c2 = runif(5000,1,100),
+                 c3 = runif(5000,1,100),
+                 t1 = runif(5000,1,100),
+                 t2 = runif(5000,1,100),
+                 t3 = runif(5000,1,100))
+
+dt2 <- data.frame(c1 = dat_drop$wt1, 
+                  c2 = dat_drop$wt2,
+                  c3 = dat_drop$wt3,
+                  t1 = dat_drop$kog1, 
+                  t2 = dat_drop$kog2,
+                  t3 = dat_drop$kog3)
+
+dt <- as.data.frame(rat)
+dt <- dat_drop[,3:8]
+grp1 <- c(1:3) 
+grp2 <-  c(4:6)
 # T-test function
-ttest_function <- function(dat,grp1,grp2){
+ttest_function <- function(dt,grp1,grp2){
   # Subset control group and convert to numeric
-  x <- dat[grp1] %>% as.numeric()
+  x <- dt[grp1] %>% unlist %>% as.numeric()
   # Subset treatment group and convert to numeric
-  y <- dat[grp2] %>% as.numeric()
+  y <- dt[grp2] %>% unlist %>% as.numeric()
   # Perform t-test
   result <- t.test(x, y)
   # Return p-values
   return(result$p.value)
-}
+}  
 
 # Apply t-test function to data
 # array = dat, 1 = rows, FUN = ttest_function, and arguements
-p_vals <- apply(dat_drop,1,ttest_function, grp1 = c(3:5), grp2 = c(6:8))
+p_vals <- apply(dat_drop,1,ttest_function, grp1 = c(1:3), grp2 = c(4:6))
+
+dt_p_vals <- apply(dt,1,ttest_function, grp1 = c(1:3), grp2 = c(4:6))
+
+rat_p_vals <- apply(rat,1,ttest_function, grp1 = c(2:7), grp2 = c(8:12))
+
+p_test <- ttest_function(dt,c(1:2),c(4:5))
+#t.test(rat$control_diet_19300,rat$ketogenic_diet_19306)
+
+hist(rat_p_vals)
+hist(dt_p_vals)
 ```
 
 4. Perform log transformation of the observations for each protein.
@@ -129,6 +195,8 @@ p_vals <- apply(dat_drop,1,ttest_function, grp1 = c(3:5), grp2 = c(6:8))
 ```{r log-data}
 # Select columns and log data
 dat_log <- dat_drop %>% select(-c(1:2)) %>% log2()
+dt_log <- dt %>% log2()
+rat_log <- rat %>% select(-1) %>% log2()
 ```
 
 5. Calculate the mean observation for each protein under each condition.
@@ -136,6 +204,12 @@ dat_log <- dat_drop %>% select(-c(1:2)) %>% log2()
 ```{r mean-log}
 control <- apply(dat_log[,1:3],1,mean)
 treatment <- apply(dat_log[,4:6],1,mean)
+
+dt_con <- apply(dt_log[,1:3],1,mean)
+dt_trt <- apply(dt_log[,4:6],1,mean)
+
+rat_control <- apply(rat_log[,1:6],1,mean)
+rat_treatment <- apply(rat_log[,7:11],1,mean)
 ```
 
 6. The log fold change is then the difference between condition 1 and condition 2.
@@ -143,9 +217,40 @@ Plot a histogram to look at the distribution.
 
 ```{r fold-change}
 foldchange <- control - treatment
+dt_fc <- dt_con - dt_trt
+rat_foldchange <- rat_control - rat_treatment
 
 hist(foldchange)
+hist(dt_fc)
+hist(rat_foldchange)
+
+rat_genes <- rat$row_names
+
+rat_vol <- data.frame(genes = rat_genes,
+                     logfc = rat_foldchange, 
+                     pval = -1*log10(rat_p_vals))
+
+dt_vol <- data.frame(logfc = dt_fc,
+                     pval = -1*log10(dt_p_vals))
+
+dat_calc <- data.frame(prots= dat_drop$protein.Accession,
+                       logfc = foldchange, 
+                       pval = -1*log10(p_vals))
 ```
 
 7. Create a combined table of log fold change and p-values for all the proteins
 for plotting a volcano plot.
+
+```{r vol-pot}
+rat_vol %>% 
+  ggplot(aes(logfc,pval)) +
+  geom_point()
+
+dt_vol %>% 
+  ggplot(aes(logfc,pval)) +
+  geom_point()
+
+dat_calc %>% 
+  ggplot(aes(logfc,pval)) +
+  geom_point()
+```
