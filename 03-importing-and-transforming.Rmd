@@ -79,41 +79,61 @@ each protein is a set of observations (rows) of the variables, which are the
 values recorded for each replicate (columns).
 
 ```{r load-data, echo=FALSE, eval=FALSE}
-# Read in Charlottes data
-dat <- read_csv("data/MergedFinalProt_1colPerFile_6files_filtered.csv",
-                       na = "NaN") %>% clean_names()
+# Emily's sample data set, missing values are NaN and clean up names
+dat_em <- read_csv("data/MergedFinalProt_1colPerFile_6files_filtered.csv", 
+                   na = "NaN") %>% clean_names()
 
-dat <- read_csv("data/secretome_leanne_example.csv")
-
-rat <- read_tsv("data/rat_KD.txt") %>% clean_names()
-
-glimpse(dat)
-glimpse(rat)
-
-# Select 200 proteins for three control and three treatments
-dat_select <- dat %>% as.data.frame()
-dat_select <- dat_select[,3:8]
-  #top_n(2000,protein_entry_protein_accession) %>%
-  #select(1,2,9,11,13,21,23,25)
-  # select(1:8)
-  #select(protein_accession = 1, protein_description = 2,
-         # kog1 = 3, kog2 = 4, kog3 = 5,
-         # wt1 = 6, wt2 = 7, wt3 = 8)
-
-glimpse(dat_select)
-
-write_excel_csv(dat_select,"data/example_proteomics_data.csv")
+# Have a look at the dataset
+glimpse(dat_em)
 ```
 
-2. Deal with missing values, either impute or exclude missing values
+2. Tidy up and deal with missing values, either impute or exclude missing values
 
-```{r omit-na}
-# Filter out rows with NA
-dat_drop <- dat_select %>% drop_na() %>% as.data.frame() 
-dat_drop <- dat %>% drop_na() %>% as.data.frame()
+```{r tidy-data}
+# Tidy data up
+dat_tidy <- dat_em %>%
+  # Remove missing values
+  drop_na() %>% 
+  # Select and rename columns
+  select(protein_accession = protein_key_protein_accession,
+         protein_description,
+         wt1 = protein_ngram_on_column_emilly_bowler_wt_rep1_001_merged_spectrum_ia_final_protein,
+         wt2 = protein_ngram_on_column_emilly_bowler_wt_rep2_001_merged_spectrum_ia_final_protein,
+         wt3 = protein_ngram_on_column_emilly_bowler_wt_rep3_001_merged_spectrum_ia_final_protein,
+         kog1 = protein_ngram_on_column_emilly_bowler_kogsk_rep1_001_merged_spectrum_ia_final_protein,
+         kog2 = protein_ngram_on_column_emilly_bowler_kogsk_rep2_merged_ia_final_protein,
+         kog3 = protein_ngram_on_column_emilly_bowler_kogsk_rep3_001_merged_spectrum_ia_final_protein)
 
-t.test(dat_drop[1,3:5], dat_drop[1,6:8])
+# Normalise to maximum column value
+dat_norm_max <- dat_tidy %>% 
+  mutate(wt1 = wt1/max(wt1),
+         wt2 = wt2/max(wt3),
+         wt3 = wt3/max(wt3),
+         kog1 = kog1 / max(kog1),
+         kog2 = kog2 / max(kog2),
+         kog3 = kog3 / max(kog3)
+         )
 
+# Normalise to median column value
+dat_norm_med <- dat_tidy %>% 
+  mutate(wt1 = wt1/median(wt1),
+         wt2 = wt2/median(wt3),
+         wt3 = wt3/median(wt3),
+         kog1 = kog1 / median(kog1),
+         kog2 = kog2 / median(kog2),
+         kog3 = kog3 / median(kog3)
+         )
+
+# Have a look at the median normalised data
+glimpse(dat_norm_med)
+
+# Save the median normalised data
+write_excel_csv(dat_norm_med,"data/example_median_nomralised_proteomics_data.csv")
+
+```
+
+
+```{r impute}
 # Impute NA with lowest value, need to change this!
 control <- dat_select %>% filter(!is.na(control_1) | 
                                    !is.na(control_2) | 
@@ -139,32 +159,8 @@ This outputs the p-values we need for each protein.
 
 
 ```{r t-test}
-# dat_drop %>% 
-#   select(protein_accession,control_1,control_2,control_3,ras_1,ras_2,ras_3) %>% 
-#   gather(key = variable, value = value,) %>% head
-
-# dummy data
-set.seed(769)
-dt <- data.frame(c1 = runif(5000,1,100),
-                 c2 = runif(5000,1,100),
-                 c3 = runif(5000,1,100),
-                 t1 = runif(5000,1,100),
-                 t2 = runif(5000,1,100),
-                 t3 = runif(5000,1,100))
-
-dt2 <- data.frame(c1 = dat_drop$wt1, 
-                  c2 = dat_drop$wt2,
-                  c3 = dat_drop$wt3,
-                  t1 = dat_drop$kog1, 
-                  t2 = dat_drop$kog2,
-                  t3 = dat_drop$kog3)
-
-dt <- as.data.frame(rat)
-dt <- dat_drop[,3:8]
-grp1 <- c(1:3) 
-grp2 <-  c(4:6)
-# T-test function
-ttest_function <- function(dt,grp1,grp2){
+# T-test function for multiple experiments
+expriments_ttest <- function(dt,grp1,grp2){
   # Subset control group and convert to numeric
   x <- dt[grp1] %>% unlist %>% as.numeric()
   # Subset treatment group and convert to numeric
@@ -176,81 +172,64 @@ ttest_function <- function(dt,grp1,grp2){
 }  
 
 # Apply t-test function to data
-# array = dat, 1 = rows, FUN = ttest_function, and arguements
-p_vals <- apply(dat_drop,1,ttest_function, grp1 = c(1:3), grp2 = c(4:6))
+# array = dat, 1 = rows, FUN = expriments_ttest, and arguements
+# For median normalised data
+p_vals_med <- apply(dat_norm_med,1,expriments_ttest, grp1 = c(3:5), grp2 = c(6:8))
+# For maximum normalised data
+p_vals_max <- apply(dat_norm_max,1,expriments_ttest, grp1 = c(3:5), grp2 = c(6:8))
 
-dt_p_vals <- apply(dt,1,ttest_function, grp1 = c(1:3), grp2 = c(4:6))
-
-rat_p_vals <- apply(rat,1,ttest_function, grp1 = c(2:7), grp2 = c(8:12))
-
-p_test <- ttest_function(dt,c(1:2),c(4:5))
-#t.test(rat$control_diet_19300,rat$ketogenic_diet_19306)
-
-hist(rat_p_vals)
-hist(dt_p_vals)
+# Plot histograms
+hist(p_vals_med)
+hist(p_vals_max)
 ```
 
 4. Perform log transformation of the observations for each protein.
 
 ```{r log-data}
 # Select columns and log data
-dat_log <- dat_drop %>% select(-c(1:2)) %>% log2()
-dt_log <- dt %>% log2()
-rat_log <- rat %>% select(-1) %>% log2()
+dat_med_log <- dat_norm_med %>% 
+  select(-c(protein_accession,protein_description)) %>% log2()
+dat_max_log <- dat_norm_max %>% 
+  select(-c(protein_accession,protein_description)) %>% log2()
 ```
 
 5. Calculate the mean observation for each protein under each condition.
 
 ```{r mean-log}
-control <- apply(dat_log[,1:3],1,mean)
-treatment <- apply(dat_log[,4:6],1,mean)
+con_med <- apply(dat_med_log[,1:3],1,mean)
+trt_med <- apply(dat_med_log[,4:6],1,mean)
 
-dt_con <- apply(dt_log[,1:3],1,mean)
-dt_trt <- apply(dt_log[,4:6],1,mean)
-
-rat_control <- apply(rat_log[,1:6],1,mean)
-rat_treatment <- apply(rat_log[,7:11],1,mean)
+con_max <- apply(dat_max_log[,1:3],1,mean)
+trt_max <- apply(dat_max_log[,4:6],1,mean)
 ```
 
 6. The log fold change is then the difference between condition 1 and condition 2.
 Plot a histogram to look at the distribution.
 
 ```{r fold-change}
-foldchange <- control - treatment
-dt_fc <- dt_con - dt_trt
-rat_foldchange <- rat_control - rat_treatment
+# Calculate fold change
+dat_med_fc <- con_med - trt_med
+dat_max_fc <- con_max - trt_max
 
-hist(foldchange)
-hist(dt_fc)
-hist(rat_foldchange)
-
-rat_genes <- rat$row_names
-
-rat_vol <- data.frame(genes = rat_genes,
-                     logfc = rat_foldchange, 
-                     pval = -1*log10(rat_p_vals))
-
-dt_vol <- data.frame(logfc = dt_fc,
-                     pval = -1*log10(dt_p_vals))
-
-dat_calc <- data.frame(prots= dat_drop$protein.Accession,
-                       logfc = foldchange, 
-                       pval = -1*log10(p_vals))
+# Plot histograms
+hist(dat_med_fc)
+hist(dat_max_fc)
 ```
 
 7. Create a combined table of log fold change and p-values for all the proteins
 for plotting a volcano plot.
 
 ```{r vol-pot}
-rat_vol %>% 
-  ggplot(aes(logfc,pval)) +
-  geom_point()
+dat_med <- data.frame(prots= dat_norm_med$protein_accession,
+                      logfc = dat_med_fc, 
+                      pval = -1*log10(p_vals_med))
 
-dt_vol %>% 
-  ggplot(aes(logfc,pval)) +
-  geom_point()
+dat_max <- data.frame(prots= dat_norm_max$protein_accession,
+                      logfc = dat_max_fc, 
+                      pval = -1*log10(p_vals_max))
 
-dat_calc %>% 
-  ggplot(aes(logfc,pval)) +
-  geom_point()
+dat_max %>% ggplot(aes(logfc,pval)) + geom_point()
+
+dat_med %>% ggplot(aes(logfc,pval)) + geom_point()
+
 ```
