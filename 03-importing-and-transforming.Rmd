@@ -78,7 +78,7 @@ plot_grid(p1,p2)
 each protein is a set of observations (rows) of the variables, which are the
 values recorded for each replicate (columns).
 
-```{r load-data, echo=FALSE, eval=FALSE}
+```{r load-data, echo=FALSE, eval=T}
 # Emily's sample data set, missing values are NaN and clean up names
 dat_em <- read_csv("data/MergedFinalProt_1colPerFile_6files_filtered.csv", 
                    na = "NaN") %>% clean_names()
@@ -88,6 +88,27 @@ glimpse(dat_em)
 ```
 
 2. Tidy up and deal with missing values, either impute or exclude missing values
+and normalise.
+
+Let's consider our proteomics data as a distribution of values, one value for each
+protein in our experiment that together form a distribution. 
+If we have replicate experiments we'll therefore have multiple distributions.
+
+A quantile represents a region of distribution, for example the 0.95 quantile
+is the value such that 95% of the data lies below it. To normalise two or more
+distributions with each other without recourse to a reference distribution we:
+
+(i) Rank (quantile) the value in each experiment (column) from lowest to highest.
+(ii) Sort each experiment (column) from lowest to highest value.
+(iii) Calculate the mean across the experiments (rows) on the sorted values.
+(iv) Substitute the mean values according to rank for each experiment to restore
+the original order.
+
+[Dave Tang's Blog : Quantile Normalisation in R](https://davetang.org/muse/2014/07/07/quantile-normalisation-in-r/)
+
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">.<a href="https://twitter.com/ewanbirney?ref_src=twsrc%5Etfw">@ewanbirney</a> Neither corresponds to the <a href="https://twitter.com/Bioconductor?ref_src=twsrc%5Etfw">@Bioconductor</a> implementation of quantile norm (est 2001 and explained below) <a href="http://t.co/lCyy6YyNB8">pic.twitter.com/lCyy6YyNB8</a></p>&mdash; Rafael Irizarry (@rafalab) <a href="https://twitter.com/rafalab/status/545586012219772928?ref_src=twsrc%5Etfw">December 18, 2014</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
 
 ```{r tidy-data}
 # Tidy data up
@@ -103,6 +124,14 @@ dat_tidy <- dat_em %>%
          kog1 = protein_ngram_on_column_emilly_bowler_kogsk_rep1_001_merged_spectrum_ia_final_protein,
          kog2 = protein_ngram_on_column_emilly_bowler_kogsk_rep2_merged_ia_final_protein,
          kog3 = protein_ngram_on_column_emilly_bowler_kogsk_rep3_001_merged_spectrum_ia_final_protein)
+
+# Plot data
+dat_tidy %>% 
+  ggplot(aes(log2(wt1))) + 
+  geom_density() +
+  geom_density(aes(log2(wt2), colour = "blue")) +
+  geom_density(aes(log2(wt3), colour = "red"))
+  
 
 # Normalise to maximum column value
 dat_norm_max <- dat_tidy %>% 
@@ -124,16 +153,62 @@ dat_norm_med <- dat_tidy %>%
          kog3 = kog3 / median(kog3)
          )
 
+dat_rank <- dat_tidy %>% select(-c(1:2,6:8)) %>% 
+  apply(., 2, rank, ties.method="min") %>% as.data.frame()
+
+dat_sort <- dat_tidy %>% select(-c(1:2,6:8)) %>% 
+  apply(., 2, sort) %>% as.data.frame()
+
+dat_mean <- dat_sort %>% apply(., 1, mean)
+
+index_mean <- function(my_idx, my_mean){
+  return(my_mean[my_idx])
+}
+
+dat_norm <- dat_rank %>% 
+  apply(.,2,index_mean, my_mean = dat_mean) %>% 
+  as.data.frame()
+
+# dat_wt %>% 
+#   ggplot(aes(log2(wt1))) + 
+#   geom_density() +
+#   geom_density(aes(log2(wt2), colour = "blue")) +
+#   geom_density(aes(log2(wt3), colour = "red"))
+
+# Quantile normalisation : the aim is to give different distributions the
+# same statistical properties
+quantile_normalisation <- function(df){
+  #
+  df_rank <- apply(df,2,rank,ties.method="average")
+  df_sorted <- data.frame(apply(df, 2, sort))
+  df_mean <- apply(df_sorted, 1, mean)
+   
+  index_to_mean <- function(my_index, my_mean){
+    return(my_mean[my_index])
+  }
+   
+  df_final <- apply(df_rank, 2, index_to_mean, my_mean=df_mean) %>% as.data.frame()
+  #rownames(df_final) <- rownames(df)
+  return(df_final)
+}
+
+dt_wt <- dat_tidy %>% select(-c(1:2,6:8))
+dt_kog <- dat_tidy %>% select(-c(1:5))
+
+dt_wt_norm <- quantile_normalisation(dt_wt)
+dt_kog_norm <- quantile_normalisation(dt_kog)
+
+dat_norm <- bind_cols(dat_tidy[,1:2],dt_wt_norm,dt_kog_norm)
 # Have a look at the median normalised data
 glimpse(dat_norm_med)
 
 # Save the median normalised data
-write_excel_csv(dat_norm_med,"data/example_median_nomralised_proteomics_data.csv")
+write_excel_csv(dat_norm,"data/example_median_nomralised_proteomics_data.csv")
 
 ```
 
 
-```{r impute}
+```{r impute, eval=FALSE}
 # Impute NA with lowest value, need to change this!
 control <- dat_select %>% filter(!is.na(control_1) | 
                                    !is.na(control_2) | 
@@ -174,12 +249,12 @@ expriments_ttest <- function(dt,grp1,grp2){
 # Apply t-test function to data
 # array = dat, 1 = rows, FUN = expriments_ttest, and arguements
 # For median normalised data
-p_vals_med <- apply(dat_norm_med,1,expriments_ttest, grp1 = c(3:5), grp2 = c(6:8))
+p_vals <- apply(dat_norm,1,expriments_ttest, grp1 = c(3:5), grp2 = c(6:8))
 # For maximum normalised data
 p_vals_max <- apply(dat_norm_max,1,expriments_ttest, grp1 = c(3:5), grp2 = c(6:8))
 
 # Plot histograms
-hist(p_vals_med)
+hist(p_vals)
 hist(p_vals_max)
 ```
 
@@ -187,7 +262,7 @@ hist(p_vals_max)
 
 ```{r log-data}
 # Select columns and log data
-dat_med_log <- dat_norm_med %>% 
+dat_log <- dat_norm %>% 
   select(-c(protein_accession,protein_description)) %>% log2()
 dat_max_log <- dat_norm_max %>% 
   select(-c(protein_accession,protein_description)) %>% log2()
@@ -196,8 +271,8 @@ dat_max_log <- dat_norm_max %>%
 5. Calculate the mean observation for each protein under each condition.
 
 ```{r mean-log}
-con_med <- apply(dat_med_log[,1:3],1,mean)
-trt_med <- apply(dat_med_log[,4:6],1,mean)
+con <- apply(dat_log[,1:3],1,mean)
+trt <- apply(dat_log[,4:6],1,mean)
 
 con_max <- apply(dat_max_log[,1:3],1,mean)
 trt_max <- apply(dat_max_log[,4:6],1,mean)
@@ -208,11 +283,11 @@ Plot a histogram to look at the distribution.
 
 ```{r fold-change}
 # Calculate fold change
-dat_med_fc <- con_med - trt_med
+dat_fc <- con - trt
 dat_max_fc <- con_max - trt_max
 
 # Plot histograms
-hist(dat_med_fc)
+hist(dat_fc)
 hist(dat_max_fc)
 ```
 
@@ -220,9 +295,9 @@ hist(dat_max_fc)
 for plotting a volcano plot.
 
 ```{r vol-pot}
-dat_med <- data.frame(prots= dat_norm_med$protein_accession,
-                      logfc = dat_med_fc, 
-                      pval = -1*log10(p_vals_med))
+dat <- data.frame(prots= dat_norm$protein_accession,
+                      logfc = dat_fc, 
+                      pval = -1*log10(p_vals))
 
 dat_max <- data.frame(prots= dat_norm_max$protein_accession,
                       logfc = dat_max_fc, 
@@ -230,6 +305,6 @@ dat_max <- data.frame(prots= dat_norm_max$protein_accession,
 
 dat_max %>% ggplot(aes(logfc,pval)) + geom_point()
 
-dat_med %>% ggplot(aes(logfc,pval)) + geom_point()
+dat %>% ggplot(aes(logfc,pval)) + geom_point()
 
 ```

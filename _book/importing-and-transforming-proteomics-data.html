@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="the-tidyverse.html">
-<link rel="next" href="visualising-proteomics-data.html">
+<link rel="next" href="fold-change-and-t-test.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -105,15 +105,18 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2" data-path="the-tidyverse.html"><a href="the-tidyverse.html"><i class="fa fa-check"></i><b>2</b> The tidyverse</a></li>
 <li class="chapter" data-level="3" data-path="importing-and-transforming-proteomics-data.html"><a href="importing-and-transforming-proteomics-data.html"><i class="fa fa-check"></i><b>3</b> Importing and transforming proteomics data</a><ul>
 <li class="chapter" data-level="3.1" data-path="importing-and-transforming-proteomics-data.html"><a href="importing-and-transforming-proteomics-data.html#importing-flat-files"><i class="fa fa-check"></i><b>3.1</b> Importing flat files</a></li>
-<li class="chapter" data-level="3.2" data-path="importing-and-transforming-proteomics-data.html"><a href="importing-and-transforming-proteomics-data.html#calculating-fold-change-and-enrichment"><i class="fa fa-check"></i><b>3.2</b> Calculating fold change and enrichment</a></li>
+<li class="chapter" data-level="3.2" data-path="importing-and-transforming-proteomics-data.html"><a href="importing-and-transforming-proteomics-data.html#calculating-fold-change-and-enrichment"><i class="fa fa-check"></i><b>3.2</b> Calculating fold change and enrichment</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="importing-and-transforming-proteomics-data.html"><a href="importing-and-transforming-proteomics-data.html#fold-change-and-log-fold-change"><i class="fa fa-check"></i><b>3.2.1</b> Fold change and log-fold change</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="visualising-proteomics-data.html"><a href="visualising-proteomics-data.html"><i class="fa fa-check"></i><b>4</b> Visualising proteomics data</a><ul>
-<li class="chapter" data-level="4.1" data-path="visualising-proteomics-data.html"><a href="visualising-proteomics-data.html#creating-a-volcano-plot"><i class="fa fa-check"></i><b>4.1</b> Creating a volcano plot</a></li>
-<li class="chapter" data-level="4.2" data-path="visualising-proteomics-data.html"><a href="visualising-proteomics-data.html#creating-a-heatmap"><i class="fa fa-check"></i><b>4.2</b> Creating a heatmap</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="going-further.html"><a href="going-further.html"><i class="fa fa-check"></i><b>5</b> Going further</a><ul>
-<li class="chapter" data-level="5.1" data-path="going-further.html"><a href="going-further.html#getting-help-and-joining-the-r-community"><i class="fa fa-check"></i><b>5.1</b> Getting help and joining the R community</a></li>
-<li class="chapter" data-level="5.2" data-path="going-further.html"><a href="going-further.html#communication-creating-reports-presentations-and-websites"><i class="fa fa-check"></i><b>5.2</b> Communication: creating reports, presentations and websites</a></li>
+<li class="chapter" data-level="4" data-path="fold-change-and-t-test.html"><a href="fold-change-and-t-test.html"><i class="fa fa-check"></i><b>4</b> Fold change and t-test</a></li>
+<li class="chapter" data-level="5" data-path="visualising-proteomics-data.html"><a href="visualising-proteomics-data.html"><i class="fa fa-check"></i><b>5</b> Visualising proteomics data</a><ul>
+<li class="chapter" data-level="5.1" data-path="visualising-proteomics-data.html"><a href="visualising-proteomics-data.html#creating-a-volcano-plot"><i class="fa fa-check"></i><b>5.1</b> Creating a volcano plot</a></li>
+<li class="chapter" data-level="5.2" data-path="visualising-proteomics-data.html"><a href="visualising-proteomics-data.html#creating-a-heatmap"><i class="fa fa-check"></i><b>5.2</b> Creating a heatmap</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="going-further.html"><a href="going-further.html"><i class="fa fa-check"></i><b>6</b> Going further</a><ul>
+<li class="chapter" data-level="6.1" data-path="going-further.html"><a href="going-further.html#getting-help-and-joining-the-r-community"><i class="fa fa-check"></i><b>6.1</b> Getting help and joining the R community</a></li>
+<li class="chapter" data-level="6.2" data-path="going-further.html"><a href="going-further.html#communication-creating-reports-presentations-and-websites"><i class="fa fa-check"></i><b>6.2</b> Communication: creating reports, presentations and websites</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 </ul>
@@ -140,7 +143,52 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="calculating-fold-change-and-enrichment" class="section level2">
 <h2><span class="header-section-number">3.2</span> Calculating fold change and enrichment</h2>
+<div id="fold-change-and-log-fold-change" class="section level3">
+<h3><span class="header-section-number">3.2.1</span> Fold change and log-fold change</h3>
+<p>Fold changes are ratios, the ratio of say protein expression before and after treatment, where a value larger than 1 for a protein implies that protein expression was greater after the treatment.</p>
+<p>In life sciences, fold change is often reported as log-fold change. Why is that? There are at least two reasons which can be shown by plotting.</p>
+<p>One is that ratios are not symmetrical around 1, so it’s difficult to observe both changes in the forwards and backwards direcion i.e. proteins where expression went up and proteins where expression went down due to treatment. When we transform ratios on a log scale, the scale becomes symmetric around 0 and thus we can now observe the distribution of ratios in terms of positive, negative or no change.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">10</span>)
+x &lt;-<span class="st"> </span><span class="dv">2</span><span class="op">^</span>(<span class="kw">rnorm</span>(<span class="dv">100</span>))
+y &lt;-<span class="st"> </span><span class="dv">2</span><span class="op">^</span>(<span class="kw">rnorm</span>(<span class="dv">100</span>))
+ratios &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">value =</span> x<span class="op">/</span>y, <span class="dt">label =</span> <span class="st">&quot;ratios&quot;</span>)
+logratios &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">value =</span> <span class="kw">log2</span>(ratios<span class="op">$</span>value), <span class="dt">label =</span> <span class="st">&quot;logratios&quot;</span>)
 
+<span class="kw">bind_rows</span>(ratios,logratios) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(value)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="dv">2</span>, <span class="dt">colour =</span> <span class="st">&quot;grey50&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;white&quot;</span>) <span class="op">+</span>
+<span class="st">  </span>ggplot2<span class="op">::</span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>label) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_minimal</span>()</code></pre></div>
+<p><img src="bspr-workshop-2018_files/figure-html/fold-change-1-1.png" width="672" /></p>
+<p>A second reason is that transforming values onto a log scale changes where the numbers actually occur when plotted on that scale. If we consider the log scale to represent magnitudes, then we can more easily see changes of small and large magnitudes when we plot the data.</p>
+<p>For example, a fold change of 32 times can be either a ratio 1/32 or 32/1.</p>
+<p>1/32 is much closer to 1 than 32/1, but transformed to a log scale we see that in terms of magnitude of difference it is the same as 32/1.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x2 &lt;-<span class="st"> </span><span class="dv">2</span><span class="op">^</span><span class="kw">seq</span>(<span class="dv">1</span>,<span class="dv">5</span>)
+y_vals &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">rev</span>(<span class="dv">1</span><span class="op">/</span>x2),<span class="dv">1</span>,x2)
+names &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">paste0</span>(<span class="st">&quot;1/&quot;</span>,<span class="kw">rev</span>(x2)),<span class="dv">1</span>,x2)
+x_vals &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dt">along=</span>y_vals)
+
+dat &lt;-<span class="st"> </span><span class="kw">tibble</span>(x_vals,y_vals,names)
+
+p1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(dat,<span class="kw">aes</span>(x_vals,y_vals, <span class="dt">label =</span> names)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_text</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">1</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_minimal</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="ot">NULL</span>, <span class="dt">y =</span> <span class="ot">NULL</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">breaks =</span> <span class="ot">NULL</span>)
+
+
+p2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(dat,<span class="kw">aes</span>(x_vals,y_vals, <span class="dt">label =</span> names)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_text</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">1</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">trans =</span> <span class="st">&quot;log2&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_minimal</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="ot">NULL</span>, <span class="dt">y =</span> <span class="ot">NULL</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">breaks =</span> <span class="ot">NULL</span>)
+
+<span class="kw">plot_grid</span>(p1,p2)</code></pre></div>
+<p><img src="bspr-workshop-2018_files/figure-html/fold-change-2-1.png" width="672" /></p>
+</div>
 </div>
 </div>
             </section>
@@ -149,7 +197,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
         </div>
       </div>
 <a href="the-tidyverse.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="visualising-proteomics-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="fold-change-and-t-test.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

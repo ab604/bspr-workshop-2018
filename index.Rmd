@@ -30,6 +30,7 @@ description: "Lessons for the BSPR 2018 Data Science Workshop"
 ```{r include=FALSE}
 library(tidyverse)
 library(janitor)
+library(cowplot)
 #library(VennDiagram)
 #library(gridExtra)
 #library(cowplot)

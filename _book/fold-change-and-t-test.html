@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Data Science Workshop</title>
+  <meta name="description" content="Lessons for the BSPR 2018 Data Science Workshop">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Data Science Workshop" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Lessons for the BSPR 2018 Data Science Workshop" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Data Science Workshop" />
+  
+  <meta name="twitter:description" content="Lessons for the BSPR 2018 Data Science Workshop" />
+  
+
+<meta name="author" content="Alistair Bailey">
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="importing-and-transforming-proteomics-data.html">
+<link rel="next" href="visualising-proteomics-data.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Overview</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#requirements"><i class="fa fa-check"></i>Requirements</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="the-tidyverse.html"><a href="the-tidyverse.html"><i class="fa fa-check"></i><b>2</b> The tidyverse</a></li>
+<li class="chapter" data-level="3" data-path="importing-and-transforming-proteomics-data.html"><a href="importing-and-transforming-proteomics-data.html"><i class="fa fa-check"></i><b>3</b> Importing and transforming proteomics data</a><ul>
+<li class="chapter" data-level="3.1" data-path="importing-and-transforming-proteomics-data.html"><a href="importing-and-transforming-proteomics-data.html#importing-flat-files"><i class="fa fa-check"></i><b>3.1</b> Importing flat files</a></li>
+<li class="chapter" data-level="3.2" data-path="importing-and-transforming-proteomics-data.html"><a href="importing-and-transforming-proteomics-data.html#calculating-fold-change-and-enrichment"><i class="fa fa-check"></i><b>3.2</b> Calculating fold change and enrichment</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="importing-and-transforming-proteomics-data.html"><a href="importing-and-transforming-proteomics-data.html#fold-change-and-log-fold-change"><i class="fa fa-check"></i><b>3.2.1</b> Fold change and log-fold change</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="fold-change-and-t-test.html"><a href="fold-change-and-t-test.html"><i class="fa fa-check"></i><b>4</b> Fold change and t-test</a></li>
+<li class="chapter" data-level="5" data-path="visualising-proteomics-data.html"><a href="visualising-proteomics-data.html"><i class="fa fa-check"></i><b>5</b> Visualising proteomics data</a><ul>
+<li class="chapter" data-level="5.1" data-path="visualising-proteomics-data.html"><a href="visualising-proteomics-data.html#creating-a-volcano-plot"><i class="fa fa-check"></i><b>5.1</b> Creating a volcano plot</a></li>
+<li class="chapter" data-level="5.2" data-path="visualising-proteomics-data.html"><a href="visualising-proteomics-data.html#creating-a-heatmap"><i class="fa fa-check"></i><b>5.2</b> Creating a heatmap</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="going-further.html"><a href="going-further.html"><i class="fa fa-check"></i><b>6</b> Going further</a><ul>
+<li class="chapter" data-level="6.1" data-path="going-further.html"><a href="going-further.html#getting-help-and-joining-the-r-community"><i class="fa fa-check"></i><b>6.1</b> Getting help and joining the R community</a></li>
+<li class="chapter" data-level="6.2" data-path="going-further.html"><a href="going-further.html#communication-creating-reports-presentations-and-websites"><i class="fa fa-check"></i><b>6.2</b> Communication: creating reports, presentations and websites</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Science Workshop</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="fold-change-and-t-test" class="section level1">
+<h1><span class="header-section-number">Chapter 4</span> Fold change and t-test</h1>
+<ol style="list-style-type: decimal">
+<li>Load the data, we need multiple replicates for each condition. To be tidy each protein is a set of observations (rows) of the variables, which are the values recorded for each replicate (columns).</li>
+</ol>
+<pre><code>## Parsed with column specification:
+## cols(
+##   protein.key_protein.Accession = col_character(),
+##   protein.Description = col_character(),
+##   `protein.ngramOnColumn -&gt; EmillyBowler_KOGSK_Rep1_001_Merged_Spectrum_IA_final_protein` = col_double(),
+##   `protein.ngramOnColumn -&gt; EmillyBowler_KOGSK_Rep2_Merged_IA_final_protein` = col_double(),
+##   `protein.ngramOnColumn -&gt; EmillyBowler_KOGSK_Rep3_001_Merged_Spectrum_IA_final_protein` = col_double(),
+##   `protein.ngramOnColumn -&gt; EmillyBowler_WT_Rep1_001_Merged_Spectrum_IA_final_protein` = col_double(),
+##   `protein.ngramOnColumn -&gt; EmillyBowler_WT_Rep2_001_Merged_Spectrum_IA_final_protein` = col_double(),
+##   `protein.ngramOnColumn -&gt; EmillyBowler_WT_Rep3_001_Merged_Spectrum_IA_final_protein` = col_double(),
+##   Present_NumFiles = col_integer()
+## )</code></pre>
+<pre><code>## Observations: 6,150
+## Variables: 9
+## $ protein_key_protein_accession                                                         &lt;chr&gt; ...
+## $ protein_description                                                                   &lt;chr&gt; ...
+## $ protein_ngram_on_column_emilly_bowler_kogsk_rep1_001_merged_spectrum_ia_final_protein &lt;dbl&gt; ...
+## $ protein_ngram_on_column_emilly_bowler_kogsk_rep2_merged_ia_final_protein              &lt;dbl&gt; ...
+## $ protein_ngram_on_column_emilly_bowler_kogsk_rep3_001_merged_spectrum_ia_final_protein &lt;dbl&gt; ...
+## $ protein_ngram_on_column_emilly_bowler_wt_rep1_001_merged_spectrum_ia_final_protein    &lt;dbl&gt; ...
+## $ protein_ngram_on_column_emilly_bowler_wt_rep2_001_merged_spectrum_ia_final_protein    &lt;dbl&gt; ...
+## $ protein_ngram_on_column_emilly_bowler_wt_rep3_001_merged_spectrum_ia_final_protein    &lt;dbl&gt; ...
+## $ present_num_files                                                                     &lt;int&gt; ...</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>Tidy up and deal with missing values, either impute or exclude missing values and normalise.</li>
+</ol>
+<p>Let’s consider our proteomics data as a distribution of values, one value for each protein in our experiment that together form a distribution. If we have replicate experiments we’ll therefore have multiple distributions.</p>
+<p>A quantile represents a region of distribution, for example the 0.95 quantile is the value such that 95% of the data lies below it. To normalise two or more distributions with each other without recourse to a reference distribution we:</p>
+<ol style="list-style-type: lower-roman">
+<li>Rank (quantile) the value in each experiment (column) from lowest to highest.</li>
+<li>Sort each experiment (column) from lowest to highest value.</li>
+<li>Calculate the mean across the experiments (rows) on the sorted values.</li>
+<li>Substitute the mean values according to rank for each experiment to restore the original order.</li>
+</ol>
+<p><a href="https://davetang.org/muse/2014/07/07/quantile-normalisation-in-r/">Dave Tang’s Blog : Quantile Normalisation in R</a></p>
+<blockquote class="twitter-tweet" data-lang="en">
+<p lang="en" dir="ltr">
+.<a href="https://twitter.com/ewanbirney?ref_src=twsrc%5Etfw"><span class="citation">(<span class="citeproc-not-found" data-reference-id="ewanbirney"><strong>???</strong></span>)</span></a> Neither corresponds to the <a href="https://twitter.com/Bioconductor?ref_src=twsrc%5Etfw"><span class="citation">(<span class="citeproc-not-found" data-reference-id="Bioconductor"><strong>???</strong></span>)</span></a> implementation of quantile norm (est 2001 and explained below) <a href="http://t.co/lCyy6YyNB8">pic.twitter.com/lCyy6YyNB8</a>
+</p>
+— Rafael Irizarry (<span class="citation">(<span class="citeproc-not-found" data-reference-id="rafalab"><strong>???</strong></span>)</span>) <a href="https://twitter.com/rafalab/status/545586012219772928?ref_src=twsrc%5Etfw">December 18, 2014</a>
+</blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Tidy data up</span>
+dat_tidy &lt;-<span class="st"> </span>dat_em <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># Remove missing values</span>
+<span class="st">  </span><span class="kw">drop_na</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="co"># Select and rename columns</span>
+<span class="st">  </span><span class="kw">select</span>(<span class="dt">protein_accession =</span> protein_key_protein_accession,
+         protein_description,
+         <span class="dt">wt1 =</span> protein_ngram_on_column_emilly_bowler_wt_rep1_001_merged_spectrum_ia_final_protein,
+         <span class="dt">wt2 =</span> protein_ngram_on_column_emilly_bowler_wt_rep2_001_merged_spectrum_ia_final_protein,
+         <span class="dt">wt3 =</span> protein_ngram_on_column_emilly_bowler_wt_rep3_001_merged_spectrum_ia_final_protein,
+         <span class="dt">kog1 =</span> protein_ngram_on_column_emilly_bowler_kogsk_rep1_001_merged_spectrum_ia_final_protein,
+         <span class="dt">kog2 =</span> protein_ngram_on_column_emilly_bowler_kogsk_rep2_merged_ia_final_protein,
+         <span class="dt">kog3 =</span> protein_ngram_on_column_emilly_bowler_kogsk_rep3_001_merged_spectrum_ia_final_protein)
+
+<span class="co"># Plot data</span>
+dat_tidy <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="kw">log2</span>(wt1))) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_density</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_density</span>(<span class="kw">aes</span>(<span class="kw">log2</span>(wt2), <span class="dt">colour =</span> <span class="st">&quot;blue&quot;</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_density</span>(<span class="kw">aes</span>(<span class="kw">log2</span>(wt3), <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>))</code></pre></div>
+<p><img src="bspr-workshop-2018_files/figure-html/tidy-data-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Normalise to maximum column value</span>
+dat_norm_max &lt;-<span class="st"> </span>dat_tidy <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">wt1 =</span> wt1<span class="op">/</span><span class="kw">max</span>(wt1),
+         <span class="dt">wt2 =</span> wt2<span class="op">/</span><span class="kw">max</span>(wt3),
+         <span class="dt">wt3 =</span> wt3<span class="op">/</span><span class="kw">max</span>(wt3),
+         <span class="dt">kog1 =</span> kog1 <span class="op">/</span><span class="st"> </span><span class="kw">max</span>(kog1),
+         <span class="dt">kog2 =</span> kog2 <span class="op">/</span><span class="st"> </span><span class="kw">max</span>(kog2),
+         <span class="dt">kog3 =</span> kog3 <span class="op">/</span><span class="st"> </span><span class="kw">max</span>(kog3)
+         )
+
+<span class="co"># Normalise to median column value</span>
+dat_norm_med &lt;-<span class="st"> </span>dat_tidy <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">wt1 =</span> wt1<span class="op">/</span><span class="kw">median</span>(wt1),
+         <span class="dt">wt2 =</span> wt2<span class="op">/</span><span class="kw">median</span>(wt3),
+         <span class="dt">wt3 =</span> wt3<span class="op">/</span><span class="kw">median</span>(wt3),
+         <span class="dt">kog1 =</span> kog1 <span class="op">/</span><span class="st"> </span><span class="kw">median</span>(kog1),
+         <span class="dt">kog2 =</span> kog2 <span class="op">/</span><span class="st"> </span><span class="kw">median</span>(kog2),
+         <span class="dt">kog3 =</span> kog3 <span class="op">/</span><span class="st"> </span><span class="kw">median</span>(kog3)
+         )
+
+dat_rank &lt;-<span class="st"> </span>dat_tidy <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="op">-</span><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>,<span class="dv">6</span><span class="op">:</span><span class="dv">8</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">apply</span>(., <span class="dv">2</span>, rank, <span class="dt">ties.method=</span><span class="st">&quot;min&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.data.frame</span>()
+
+dat_sort &lt;-<span class="st"> </span>dat_tidy <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="op">-</span><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>,<span class="dv">6</span><span class="op">:</span><span class="dv">8</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">apply</span>(., <span class="dv">2</span>, sort) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.data.frame</span>()
+
+dat_mean &lt;-<span class="st"> </span>dat_sort <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">apply</span>(., <span class="dv">1</span>, mean)
+
+index_mean &lt;-<span class="st"> </span><span class="cf">function</span>(my_idx, my_mean){
+  <span class="kw">return</span>(my_mean[my_idx])
+}
+
+dat_norm &lt;-<span class="st"> </span>dat_rank <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">apply</span>(.,<span class="dv">2</span>,index_mean, <span class="dt">my_mean =</span> dat_mean) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">as.data.frame</span>()
+
+<span class="co"># dat_wt %&gt;% </span>
+<span class="co">#   ggplot(aes(log2(wt1))) + </span>
+<span class="co">#   geom_density() +</span>
+<span class="co">#   geom_density(aes(log2(wt2), colour = &quot;blue&quot;)) +</span>
+<span class="co">#   geom_density(aes(log2(wt3), colour = &quot;red&quot;))</span>
+
+<span class="co"># Quantile normalisation : the aim is to give different distributions the</span>
+<span class="co"># same statistical properties</span>
+quantile_normalisation &lt;-<span class="st"> </span><span class="cf">function</span>(df){
+  <span class="co">#</span>
+  df_rank &lt;-<span class="st"> </span><span class="kw">apply</span>(df,<span class="dv">2</span>,rank,<span class="dt">ties.method=</span><span class="st">&quot;average&quot;</span>)
+  df_sorted &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">apply</span>(df, <span class="dv">2</span>, sort))
+  df_mean &lt;-<span class="st"> </span><span class="kw">apply</span>(df_sorted, <span class="dv">1</span>, mean)
+   
+  index_to_mean &lt;-<span class="st"> </span><span class="cf">function</span>(my_index, my_mean){
+    <span class="kw">return</span>(my_mean[my_index])
+  }
+   
+  df_final &lt;-<span class="st"> </span><span class="kw">apply</span>(df_rank, <span class="dv">2</span>, index_to_mean, <span class="dt">my_mean=</span>df_mean) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.data.frame</span>()
+  <span class="co">#rownames(df_final) &lt;- rownames(df)</span>
+  <span class="kw">return</span>(df_final)
+}
+
+dt_wt &lt;-<span class="st"> </span>dat_tidy <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="op">-</span><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>,<span class="dv">6</span><span class="op">:</span><span class="dv">8</span>))
+dt_kog &lt;-<span class="st"> </span>dat_tidy <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="op">-</span><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>))
+
+dt_wt_norm &lt;-<span class="st"> </span><span class="kw">quantile_normalisation</span>(dt_wt)
+dt_kog_norm &lt;-<span class="st"> </span><span class="kw">quantile_normalisation</span>(dt_kog)
+
+dat_norm &lt;-<span class="st"> </span><span class="kw">bind_cols</span>(dat_tidy[,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>],dt_wt_norm,dt_kog_norm)
+<span class="co"># Have a look at the median normalised data</span>
+<span class="kw">glimpse</span>(dat_norm_med)</code></pre></div>
+<pre><code>## Observations: 1,095
+## Variables: 8
+## $ protein_accession   &lt;chr&gt; &quot;4562_DHE3_HUMAN&quot;, &quot;14948_RS2_HUMAN&quot;, &quot;143...
+## $ protein_description &lt;chr&gt; &quot;Glutamate dehydrogenase 1_ mitochondrial ...
+## $ wt1                 &lt;dbl&gt; 1.46455644, 3.78274902, 0.10257018, 1.5593...
+## $ wt2                 &lt;dbl&gt; 1.29015126, 3.06162560, 0.06677263, 1.2956...
+## $ wt3                 &lt;dbl&gt; 1.3898245, 4.6907618, 0.1136384, 0.7625680...
+## $ kog1                &lt;dbl&gt; 2.1246421, 2.2498354, 0.2868330, 0.9172013...
+## $ kog2                &lt;dbl&gt; 0.06248655, 3.78198563, 0.08551018, 0.5341...
+## $ kog3                &lt;dbl&gt; 1.55811005, 2.16717459, 0.32849794, 0.8012...</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Save the median normalised data</span>
+<span class="kw">write_excel_csv</span>(dat_norm,<span class="st">&quot;data/example_median_nomralised_proteomics_data.csv&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Impute NA with lowest value, need to change this!</span>
+control &lt;-<span class="st"> </span>dat_select <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(control_<span class="dv">1</span>) <span class="op">|</span><span class="st"> </span>
+<span class="st">                                   </span><span class="op">!</span><span class="kw">is.na</span>(control_<span class="dv">2</span>) <span class="op">|</span><span class="st"> </span>
+<span class="st">                                   </span><span class="op">!</span><span class="kw">is.na</span>(control_<span class="dv">3</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>) 
+
+treatment &lt;-<span class="st"> </span>dat_select <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(ras_<span class="dv">1</span>) <span class="op">|</span><span class="st"> </span>
+<span class="st">                                   </span><span class="op">!</span><span class="kw">is.na</span>(ras_<span class="dv">2</span>) <span class="op">|</span><span class="st"> </span>
+<span class="st">                                   </span><span class="op">!</span><span class="kw">is.na</span>(ras_<span class="dv">3</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">8</span>) 
+
+<span class="co"># Impute minimum</span>
+row_min &lt;-<span class="st"> </span><span class="cf">function</span>(x) <span class="kw">apply</span>(x,<span class="dv">1</span>,min,<span class="dt">na.rm =</span> <span class="ot">TRUE</span>)
+impute_min &lt;-<span class="st"> </span><span class="cf">function</span>(x) <span class="kw">replace</span>(x, <span class="kw">is.na</span>(x), <span class="kw">row_min</span>(x))
+
+<span class="co">#control_na &lt;- control %&gt;% filter(!complete.cases(.))</span>
+<span class="kw">impute_min</span>(control)
+
+ 
+control <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">replace_na</span>(<span class="kw">apply</span>(.,<span class="dv">1</span>,min))</code></pre></div>
+<ol start="3" style="list-style-type: decimal">
+<li>Use <code>t.test</code> to perform Welch Two Sample t-test on untransformed data. This outputs the p-values we need for each protein.</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># T-test function for multiple experiments</span>
+expriments_ttest &lt;-<span class="st"> </span><span class="cf">function</span>(dt,grp1,grp2){
+  <span class="co"># Subset control group and convert to numeric</span>
+  x &lt;-<span class="st"> </span>dt[grp1] <span class="op">%&gt;%</span><span class="st"> </span>unlist <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.numeric</span>()
+  <span class="co"># Subset treatment group and convert to numeric</span>
+  y &lt;-<span class="st"> </span>dt[grp2] <span class="op">%&gt;%</span><span class="st"> </span>unlist <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.numeric</span>()
+  <span class="co"># Perform t-test</span>
+  result &lt;-<span class="st"> </span><span class="kw">t.test</span>(x, y)
+  <span class="co"># Return p-values</span>
+  <span class="kw">return</span>(result<span class="op">$</span>p.value)
+}  
+
+<span class="co"># Apply t-test function to data</span>
+<span class="co"># array = dat, 1 = rows, FUN = expriments_ttest, and arguements</span>
+<span class="co"># For median normalised data</span>
+p_vals &lt;-<span class="st"> </span><span class="kw">apply</span>(dat_norm,<span class="dv">1</span>,expriments_ttest, <span class="dt">grp1 =</span> <span class="kw">c</span>(<span class="dv">3</span><span class="op">:</span><span class="dv">5</span>), <span class="dt">grp2 =</span> <span class="kw">c</span>(<span class="dv">6</span><span class="op">:</span><span class="dv">8</span>))
+<span class="co"># For maximum normalised data</span>
+p_vals_max &lt;-<span class="st"> </span><span class="kw">apply</span>(dat_norm_max,<span class="dv">1</span>,expriments_ttest, <span class="dt">grp1 =</span> <span class="kw">c</span>(<span class="dv">3</span><span class="op">:</span><span class="dv">5</span>), <span class="dt">grp2 =</span> <span class="kw">c</span>(<span class="dv">6</span><span class="op">:</span><span class="dv">8</span>))
+
+<span class="co"># Plot histograms</span>
+<span class="kw">hist</span>(p_vals)</code></pre></div>
+<p><img src="bspr-workshop-2018_files/figure-html/t-test-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(p_vals_max)</code></pre></div>
+<p><img src="bspr-workshop-2018_files/figure-html/t-test-2.png" width="672" /></p>
+<ol start="4" style="list-style-type: decimal">
+<li>Perform log transformation of the observations for each protein.</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Select columns and log data</span>
+dat_log &lt;-<span class="st"> </span>dat_norm <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span><span class="kw">c</span>(protein_accession,protein_description)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">log2</span>()
+dat_max_log &lt;-<span class="st"> </span>dat_norm_max <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span><span class="kw">c</span>(protein_accession,protein_description)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">log2</span>()</code></pre></div>
+<ol start="5" style="list-style-type: decimal">
+<li>Calculate the mean observation for each protein under each condition.</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">con &lt;-<span class="st"> </span><span class="kw">apply</span>(dat_log[,<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>],<span class="dv">1</span>,mean)
+trt &lt;-<span class="st"> </span><span class="kw">apply</span>(dat_log[,<span class="dv">4</span><span class="op">:</span><span class="dv">6</span>],<span class="dv">1</span>,mean)
+
+con_max &lt;-<span class="st"> </span><span class="kw">apply</span>(dat_max_log[,<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>],<span class="dv">1</span>,mean)
+trt_max &lt;-<span class="st"> </span><span class="kw">apply</span>(dat_max_log[,<span class="dv">4</span><span class="op">:</span><span class="dv">6</span>],<span class="dv">1</span>,mean)</code></pre></div>
+<ol start="6" style="list-style-type: decimal">
+<li>The log fold change is then the difference between condition 1 and condition 2. Plot a histogram to look at the distribution.</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Calculate fold change</span>
+dat_fc &lt;-<span class="st"> </span>con <span class="op">-</span><span class="st"> </span>trt
+dat_max_fc &lt;-<span class="st"> </span>con_max <span class="op">-</span><span class="st"> </span>trt_max
+
+<span class="co"># Plot histograms</span>
+<span class="kw">hist</span>(dat_fc)</code></pre></div>
+<p><img src="bspr-workshop-2018_files/figure-html/fold-change-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(dat_max_fc)</code></pre></div>
+<p><img src="bspr-workshop-2018_files/figure-html/fold-change-2.png" width="672" /></p>
+<ol start="7" style="list-style-type: decimal">
+<li>Create a combined table of log fold change and p-values for all the proteins for plotting a volcano plot.</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">prots=</span> dat_norm<span class="op">$</span>protein_accession,
+                      <span class="dt">logfc =</span> dat_fc, 
+                      <span class="dt">pval =</span> <span class="op">-</span><span class="dv">1</span><span class="op">*</span><span class="kw">log10</span>(p_vals))
+
+dat_max &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">prots=</span> dat_norm_max<span class="op">$</span>protein_accession,
+                      <span class="dt">logfc =</span> dat_max_fc, 
+                      <span class="dt">pval =</span> <span class="op">-</span><span class="dv">1</span><span class="op">*</span><span class="kw">log10</span>(p_vals_max))
+
+dat_max <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(logfc,pval)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()</code></pre></div>
+<p><img src="bspr-workshop-2018_files/figure-html/vol-pot-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(logfc,pval)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()</code></pre></div>
+<p><img src="bspr-workshop-2018_files/figure-html/vol-pot-2.png" width="672" /></p>
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="importing-and-transforming-proteomics-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="visualising-proteomics-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": ["bspr-workshop-2018.pdf", "bspr-workshop-2018.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
