@@ -4,7 +4,7 @@
 
 ## Calculating fold change and enrichment
 
-### Fold change and log-fold change
+## Fold change and log-fold change
 
 Fold changes are ratios, the ratio of say protein expression before and
 after treatment, where a value larger than 1 for a protein implies that 
@@ -81,10 +81,16 @@ values recorded for each replicate (columns).
 ```{r load-data, echo=FALSE, eval=T}
 # Emily's sample data set, missing values are NaN and clean up names
 dat_em <- read_csv("data/MergedFinalProt_1colPerFile_6files_filtered.csv", 
-                   na = "NaN") %>% clean_names()
+                   na = "NaN", col_types = cols()) %>% clean_names()
+
+dat_em <- read_csv("data/Leannes data/MergedFinalProt_2colPerFile_6files_filtered.csv", 
+                   na = "NaN", col_types = cols()) %>% clean_names()
+
+dat_char <- read_csv("data/MergedFinalProt_2colPerFile_12files.csv",
+                     na = "NaN", col_types = cols()) %>% clean_names()
 
 # Have a look at the dataset
-glimpse(dat_em)
+glimpse(dat_char)
 ```
 
 2. Tidy up and deal with missing values, either impute or exclude missing values
@@ -106,9 +112,9 @@ the original order.
 
 [Dave Tang's Blog : Quantile Normalisation in R](https://davetang.org/muse/2014/07/07/quantile-normalisation-in-r/)
 
+
 <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">.<a href="https://twitter.com/ewanbirney?ref_src=twsrc%5Etfw">@ewanbirney</a> Neither corresponds to the <a href="https://twitter.com/Bioconductor?ref_src=twsrc%5Etfw">@Bioconductor</a> implementation of quantile norm (est 2001 and explained below) <a href="http://t.co/lCyy6YyNB8">pic.twitter.com/lCyy6YyNB8</a></p>&mdash; Rafael Irizarry (@rafalab) <a href="https://twitter.com/rafalab/status/545586012219772928?ref_src=twsrc%5Etfw">December 18, 2014</a></blockquote>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-
 
 ```{r tidy-data}
 # Tidy data up
@@ -118,19 +124,39 @@ dat_tidy <- dat_em %>%
   # Select and rename columns
   select(protein_accession = protein_key_protein_accession,
          protein_description,
-         wt1 = protein_ngram_on_column_emilly_bowler_wt_rep1_001_merged_spectrum_ia_final_protein,
-         wt2 = protein_ngram_on_column_emilly_bowler_wt_rep2_001_merged_spectrum_ia_final_protein,
-         wt3 = protein_ngram_on_column_emilly_bowler_wt_rep3_001_merged_spectrum_ia_final_protein,
-         kog1 = protein_ngram_on_column_emilly_bowler_kogsk_rep1_001_merged_spectrum_ia_final_protein,
-         kog2 = protein_ngram_on_column_emilly_bowler_kogsk_rep2_merged_ia_final_protein,
-         kog3 = protein_ngram_on_column_emilly_bowler_kogsk_rep3_001_merged_spectrum_ia_final_protein)
+         con1 = protein_ngram_on_column_emilly_bowler_wt_rep1_001_merged_spectrum_ia_final_protein,
+         con2 = protein_ngram_on_column_emilly_bowler_wt_rep2_001_merged_spectrum_ia_final_protein,
+         con3 = protein_ngram_on_column_emilly_bowler_wt_rep3_001_merged_spectrum_ia_final_protein,
+         trt1 = protein_ngram_on_column_emilly_bowler_kogsk_rep1_001_merged_spectrum_ia_final_protein,
+         trt2 = protein_ngram_on_column_emilly_bowler_kogsk_rep2_merged_ia_final_protein,
+         trt3 = protein_ngram_on_column_emilly_bowler_kogsk_rep3_001_merged_spectrum_ia_final_protein)
+
+
+dat_tidy <- dat_char %>%
+  # Remove missing values
+  drop_na() %>% 
+  # Select and rename columns
+  select(protein_accession = protein_entry_protein_accession,
+         protein_description,
+         con1 = 9,
+         con2 = 11,
+         con3 = 13,
+         trt1 = 21,
+         trt2 = 23,
+         trt3 = 25)
 
 # Plot data
 dat_tidy %>% 
-  ggplot(aes(log2(wt1))) + 
+  ggplot(aes(log2(con1))) + 
   geom_density() +
-  geom_density(aes(log2(wt2), colour = "blue")) +
-  geom_density(aes(log2(wt3), colour = "red"))
+  geom_density(aes(log2(con2), colour = "blue")) +
+  geom_density(aes(log2(con3), colour = "red"))
+
+dat_tidy %>% 
+  ggplot(aes(log2(trt1))) + 
+  geom_density() +
+  geom_density(aes(log2(trt2), colour = "blue")) +
+  geom_density(aes(log2(trt3), colour = "red"))
   
 
 # Normalise to maximum column value
@@ -143,37 +169,22 @@ dat_norm_max <- dat_tidy %>%
          kog3 = kog3 / max(kog3)
          )
 
-# Normalise to median column value
-dat_norm_med <- dat_tidy %>% 
-  mutate(wt1 = wt1/median(wt1),
-         wt2 = wt2/median(wt3),
-         wt3 = wt3/median(wt3),
-         kog1 = kog1 / median(kog1),
-         kog2 = kog2 / median(kog2),
-         kog3 = kog3 / median(kog3)
-         )
-
-dat_rank <- dat_tidy %>% select(-c(1:2,6:8)) %>% 
-  apply(., 2, rank, ties.method="min") %>% as.data.frame()
-
-dat_sort <- dat_tidy %>% select(-c(1:2,6:8)) %>% 
-  apply(., 2, sort) %>% as.data.frame()
-
-dat_mean <- dat_sort %>% apply(., 1, mean)
-
-index_mean <- function(my_idx, my_mean){
-  return(my_mean[my_idx])
-}
-
-dat_norm <- dat_rank %>% 
-  apply(.,2,index_mean, my_mean = dat_mean) %>% 
-  as.data.frame()
-
-# dat_wt %>% 
-#   ggplot(aes(log2(wt1))) + 
-#   geom_density() +
-#   geom_density(aes(log2(wt2), colour = "blue")) +
-#   geom_density(aes(log2(wt3), colour = "red"))
+# Normalise 
+# dat_rank <- dat_tidy %>% select(-c(1:2,6:8)) %>% 
+#   apply(., 2, rank, ties.method="average") %>% as.data.frame()
+# 
+# dat_sort <- dat_tidy %>% select(-c(1:2,6:8)) %>% 
+#   apply(., 2, sort) %>% as.data.frame()
+# 
+# dat_mean <- dat_sort %>% apply(., 1, mean)
+# 
+# index_mean <- function(my_idx, my_mean){
+#   return(my_mean[my_idx])
+# }
+# 
+# dat_norm <- dat_rank %>% 
+#   apply(.,2,index_mean, my_mean = dat_mean) %>% 
+#   as.data.frame()
 
 # Quantile normalisation : the aim is to give different distributions the
 # same statistical properties
@@ -192,42 +203,27 @@ quantile_normalisation <- function(df){
   return(df_final)
 }
 
-dt_wt <- dat_tidy %>% select(-c(1:2,6:8))
-dt_kog <- dat_tidy %>% select(-c(1:5))
+dt_con <- dat_tidy %>% select(-c(1:2,6:8))
+dt_trt <- dat_tidy %>% select(-c(1:5))
 
-dt_wt_norm <- quantile_normalisation(dt_wt)
-dt_kog_norm <- quantile_normalisation(dt_kog)
+dt_con_norm <- quantile_normalisation(dt_con)
+dt_trt_norm <- quantile_normalisation(dt_trt)
 
-dat_norm <- bind_cols(dat_tidy[,1:2],dt_wt_norm,dt_kog_norm)
+dat_norm <- bind_cols(dat_tidy[,1:2],dt_con_norm,dt_trt_norm)
 # Have a look at the median normalised data
-glimpse(dat_norm_med)
+glimpse(dat_norm)
+
+dat_norm %>% 
+  ggplot(aes(log2(con1))) + 
+  geom_density() +
+  geom_density(aes(log2(con2), colour = "blue")) +
+  geom_density(aes(log2(con3), colour = "red"))
 
 # Save the median normalised data
 write_excel_csv(dat_norm,"data/example_median_nomralised_proteomics_data.csv")
 
 ```
 
-
-```{r impute, eval=FALSE}
-# Impute NA with lowest value, need to change this!
-control <- dat_select %>% filter(!is.na(control_1) | 
-                                   !is.na(control_2) | 
-                                   !is.na(control_3)) %>% select(3,4,5) 
-
-treatment <- dat_select %>% filter(!is.na(ras_1) | 
-                                   !is.na(ras_2) | 
-                                   !is.na(ras_3)) %>% select(6,7,8) 
-
-# Impute minimum
-row_min <- function(x) apply(x,1,min,na.rm = TRUE)
-impute_min <- function(x) replace(x, is.na(x), row_min(x))
-
-#control_na <- control %>% filter(!complete.cases(.))
-impute_min(control)
-
- 
-control %>% replace_na(apply(.,1,min))
-```
 
 3. Use `t.test` to perform Welch Two Sample t-test on untransformed data. 
 This outputs the p-values we need for each protein.
@@ -307,4 +303,67 @@ dat_max %>% ggplot(aes(logfc,pval)) + geom_point()
 
 dat %>% ggplot(aes(logfc,pval)) + geom_point()
 
+```
+
+
+## Heatmap transformation
+
+1. Clustering the data
+
+```{r }
+dat_mut <- dat_norm %>%
+  mutate(pval = dat$pval, logfc = dat$logfc) %>%
+  filter(pval >= 2 & (logfc >=2 | logfc <= 2)) %>%
+  select(-c(2,9:10))
+
+dat_sel <- as.matrix.data.frame(dat_mut[,2:7]) %>% log2()
+row.names(dat_sel) <- dat_mut$protein_accession
+
+dat.tn <- scale(t(dat_sel)) %>% t()
+#dat.tn <- t(dat.n)
+#dat.tn <- dat_sel
+
+#gplots::heatmap.2(dat.tn, scale = 'row',trace="none")
+library(pheatmap)
+pheatmap(dat.tn,cutree_rows = 2,
+         cutree_cols = 2)
+
+cal_z_score <- function(x){
+  (x - mean(x)) / sd(x)
+}
+ 
+data_subset_norm <- t(apply(dat_mut[,2:7], 1, cal_z_score))
+row.names(data_subset_norm) <- dat_mut$protein_accession
+pheatmap(data_subset_norm)
+
+d1 <- dat.tn %>% t() %>% 
+  dist(.,method = "euclidean", diag = FALSE, upper = FALSE)
+
+d2 <- dat.tn %>% 
+  dist(.,method = "euclidean", diag = FALSE, upper = FALSE)
+
+# Clustering distance between experiments using Ward linkage
+c1 <- hclust(d1, method = "ward.D2", members = NULL)
+# Clustering distance between proteins using Ward linkage
+c2 <- hclust(d2, method = "ward.D2", members = NULL)
+
+# Check clustering by plotting dendrograms
+par(mfrow=c(2,1),cex=0.5) # Make 2 rows, 1 col plot frame and shrink labels
+plot(c1); plot(c2) # Plot both cluster dendrograms
+```
+2. Plot the data
+
+```{r heatmap}
+# Set colours for heatmap, 25 increments
+my_palette <- colorRampPalette(c("blue","white","red"))(n = 25)
+
+# Plot heatmap with heatmap.2
+par(cex.main=0.75) # Shrink title fonts on plot
+gplots::heatmap.2(dat.tn,                     # Tidy, normalised data
+          Colv=as.dendrogram(c1),     # Experiments clusters in cols
+          Rowv=as.dendrogram(c2),     # Protein clusters in rows
+          density.info="histogram",   # Plot histogram of data and colour key
+          trace="none",               # Turn of trace lines from heat map
+          col = my_palette,           # Use my colour scheme
+          cexRow=0.5,cexCol=0.75)     # Amend row and column label fonts
 ```

@@ -139,33 +139,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="fold-change-and-t-test" class="section level1">
 <h1><span class="header-section-number">Chapter 4</span> Fold change and t-test</h1>
 <ol style="list-style-type: decimal">
-<li>Load the data, we need multiple replicates for each condition. To be tidy each protein is a set of observations (rows) of the variables, which are the values recorded for each replicate (columns).</li>
-</ol>
-<pre><code>## Parsed with column specification:
-## cols(
-##   protein.key_protein.Accession = col_character(),
-##   protein.Description = col_character(),
-##   `protein.ngramOnColumn -&gt; EmillyBowler_KOGSK_Rep1_001_Merged_Spectrum_IA_final_protein` = col_double(),
-##   `protein.ngramOnColumn -&gt; EmillyBowler_KOGSK_Rep2_Merged_IA_final_protein` = col_double(),
-##   `protein.ngramOnColumn -&gt; EmillyBowler_KOGSK_Rep3_001_Merged_Spectrum_IA_final_protein` = col_double(),
-##   `protein.ngramOnColumn -&gt; EmillyBowler_WT_Rep1_001_Merged_Spectrum_IA_final_protein` = col_double(),
-##   `protein.ngramOnColumn -&gt; EmillyBowler_WT_Rep2_001_Merged_Spectrum_IA_final_protein` = col_double(),
-##   `protein.ngramOnColumn -&gt; EmillyBowler_WT_Rep3_001_Merged_Spectrum_IA_final_protein` = col_double(),
-##   Present_NumFiles = col_integer()
-## )</code></pre>
-<pre><code>## Observations: 6,150
-## Variables: 9
-## $ protein_key_protein_accession                                                         &lt;chr&gt; ...
-## $ protein_description                                                                   &lt;chr&gt; ...
-## $ protein_ngram_on_column_emilly_bowler_kogsk_rep1_001_merged_spectrum_ia_final_protein &lt;dbl&gt; ...
-## $ protein_ngram_on_column_emilly_bowler_kogsk_rep2_merged_ia_final_protein              &lt;dbl&gt; ...
-## $ protein_ngram_on_column_emilly_bowler_kogsk_rep3_001_merged_spectrum_ia_final_protein &lt;dbl&gt; ...
-## $ protein_ngram_on_column_emilly_bowler_wt_rep1_001_merged_spectrum_ia_final_protein    &lt;dbl&gt; ...
-## $ protein_ngram_on_column_emilly_bowler_wt_rep2_001_merged_spectrum_ia_final_protein    &lt;dbl&gt; ...
-## $ protein_ngram_on_column_emilly_bowler_wt_rep3_001_merged_spectrum_ia_final_protein    &lt;dbl&gt; ...
-## $ present_num_files                                                                     &lt;int&gt; ...</code></pre>
-<ol start="2" style="list-style-type: decimal">
-<li>Tidy up and deal with missing values, either impute or exclude missing values and normalise.</li>
+<li><p>Load the data, we need multiple replicates for each condition. To be tidy each protein is a set of observations (rows) of the variables, which are the values recorded for each replicate (columns).</p></li>
+<li><p>Tidy up and deal with missing values, either impute or exclude missing values and normalise.</p></li>
 </ol>
 <p>Let’s consider our proteomics data as a distribution of values, one value for each protein in our experiment that together form a distribution. If we have replicate experiments we’ll therefore have multiple distributions.</p>
 <p>A quantile represents a region of distribution, for example the 0.95 quantile is the value such that 95% of the data lies below it. To normalise two or more distributions with each other without recourse to a reference distribution we:</p>
