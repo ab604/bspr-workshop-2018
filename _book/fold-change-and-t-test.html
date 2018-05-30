@@ -105,11 +105,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2" data-path="the-tidyverse.html"><a href="the-tidyverse.html"><i class="fa fa-check"></i><b>2</b> The tidyverse</a></li>
 <li class="chapter" data-level="3" data-path="importing-and-transforming-proteomics-data.html"><a href="importing-and-transforming-proteomics-data.html"><i class="fa fa-check"></i><b>3</b> Importing and transforming proteomics data</a><ul>
 <li class="chapter" data-level="3.1" data-path="importing-and-transforming-proteomics-data.html"><a href="importing-and-transforming-proteomics-data.html#importing-flat-files"><i class="fa fa-check"></i><b>3.1</b> Importing flat files</a></li>
-<li class="chapter" data-level="3.2" data-path="importing-and-transforming-proteomics-data.html"><a href="importing-and-transforming-proteomics-data.html#calculating-fold-change-and-enrichment"><i class="fa fa-check"></i><b>3.2</b> Calculating fold change and enrichment</a><ul>
-<li class="chapter" data-level="3.2.1" data-path="importing-and-transforming-proteomics-data.html"><a href="importing-and-transforming-proteomics-data.html#fold-change-and-log-fold-change"><i class="fa fa-check"></i><b>3.2.1</b> Fold change and log-fold change</a></li>
+<li class="chapter" data-level="3.2" data-path="importing-and-transforming-proteomics-data.html"><a href="importing-and-transforming-proteomics-data.html#calculating-fold-change-and-enrichment"><i class="fa fa-check"></i><b>3.2</b> Calculating fold change and enrichment</a></li>
+<li class="chapter" data-level="3.3" data-path="importing-and-transforming-proteomics-data.html"><a href="importing-and-transforming-proteomics-data.html#fold-change-and-log-fold-change"><i class="fa fa-check"></i><b>3.3</b> Fold change and log-fold change</a></li>
 </ul></li>
+<li class="chapter" data-level="4" data-path="fold-change-and-t-test.html"><a href="fold-change-and-t-test.html"><i class="fa fa-check"></i><b>4</b> Fold change and t-test</a><ul>
+<li class="chapter" data-level="4.1" data-path="fold-change-and-t-test.html"><a href="fold-change-and-t-test.html#heatmap-transformation"><i class="fa fa-check"></i><b>4.1</b> Heatmap transformation</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="fold-change-and-t-test.html"><a href="fold-change-and-t-test.html"><i class="fa fa-check"></i><b>4</b> Fold change and t-test</a></li>
 <li class="chapter" data-level="5" data-path="visualising-proteomics-data.html"><a href="visualising-proteomics-data.html"><i class="fa fa-check"></i><b>5</b> Visualising proteomics data</a><ul>
 <li class="chapter" data-level="5.1" data-path="visualising-proteomics-data.html"><a href="visualising-proteomics-data.html#creating-a-volcano-plot"><i class="fa fa-check"></i><b>5.1</b> Creating a volcano plot</a></li>
 <li class="chapter" data-level="5.2" data-path="visualising-proteomics-data.html"><a href="visualising-proteomics-data.html#creating-a-heatmap"><i class="fa fa-check"></i><b>5.2</b> Creating a heatmap</a></li>
@@ -165,61 +166,66 @@ dat_tidy &lt;-<span class="st"> </span>dat_em <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="co"># Select and rename columns</span>
 <span class="st">  </span><span class="kw">select</span>(<span class="dt">protein_accession =</span> protein_key_protein_accession,
          protein_description,
-         <span class="dt">wt1 =</span> protein_ngram_on_column_emilly_bowler_wt_rep1_001_merged_spectrum_ia_final_protein,
-         <span class="dt">wt2 =</span> protein_ngram_on_column_emilly_bowler_wt_rep2_001_merged_spectrum_ia_final_protein,
-         <span class="dt">wt3 =</span> protein_ngram_on_column_emilly_bowler_wt_rep3_001_merged_spectrum_ia_final_protein,
-         <span class="dt">kog1 =</span> protein_ngram_on_column_emilly_bowler_kogsk_rep1_001_merged_spectrum_ia_final_protein,
-         <span class="dt">kog2 =</span> protein_ngram_on_column_emilly_bowler_kogsk_rep2_merged_ia_final_protein,
-         <span class="dt">kog3 =</span> protein_ngram_on_column_emilly_bowler_kogsk_rep3_001_merged_spectrum_ia_final_protein)
+         <span class="dt">con1 =</span> protein_ngram_on_column_emilly_bowler_wt_rep1_001_merged_spectrum_ia_final_protein,
+         <span class="dt">con2 =</span> protein_ngram_on_column_emilly_bowler_wt_rep2_001_merged_spectrum_ia_final_protein,
+         <span class="dt">con3 =</span> protein_ngram_on_column_emilly_bowler_wt_rep3_001_merged_spectrum_ia_final_protein,
+         <span class="dt">trt1 =</span> protein_ngram_on_column_emilly_bowler_kogsk_rep1_001_merged_spectrum_ia_final_protein,
+         <span class="dt">trt2 =</span> protein_ngram_on_column_emilly_bowler_kogsk_rep2_merged_ia_final_protein,
+         <span class="dt">trt3 =</span> protein_ngram_on_column_emilly_bowler_kogsk_rep3_001_merged_spectrum_ia_final_protein)
+
+
+<span class="co"># dat_tidy &lt;- dat_char %&gt;%</span>
+<span class="co">#   # Remove missing values</span>
+<span class="co">#   drop_na() %&gt;% </span>
+<span class="co">#   # Select and rename columns</span>
+<span class="co">#   select(protein_accession = protein_entry_protein_accession,</span>
+<span class="co">#          protein_description,</span>
+<span class="co">#          con1 = 9,</span>
+<span class="co">#          con2 = 11,</span>
+<span class="co">#          con3 = 13,</span>
+<span class="co">#          trt1 = 21,</span>
+<span class="co">#          trt2 = 23,</span>
+<span class="co">#          trt3 = 25)</span>
 
 <span class="co"># Plot data</span>
 dat_tidy <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="kw">log2</span>(wt1))) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="kw">log2</span>(con1))) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_density</span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_density</span>(<span class="kw">aes</span>(<span class="kw">log2</span>(wt2), <span class="dt">colour =</span> <span class="st">&quot;blue&quot;</span>)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_density</span>(<span class="kw">aes</span>(<span class="kw">log2</span>(wt3), <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>))</code></pre></div>
+<span class="st">  </span><span class="kw">geom_density</span>(<span class="kw">aes</span>(<span class="kw">log2</span>(con2), <span class="dt">colour =</span> <span class="st">&quot;blue&quot;</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_density</span>(<span class="kw">aes</span>(<span class="kw">log2</span>(con3), <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>))</code></pre></div>
 <p><img src="bspr-workshop-2018_files/figure-html/tidy-data-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat_tidy <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="kw">log2</span>(trt1))) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_density</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_density</span>(<span class="kw">aes</span>(<span class="kw">log2</span>(trt2), <span class="dt">colour =</span> <span class="st">&quot;blue&quot;</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_density</span>(<span class="kw">aes</span>(<span class="kw">log2</span>(trt3), <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>))</code></pre></div>
+<p><img src="bspr-workshop-2018_files/figure-html/tidy-data-2.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Normalise to maximum column value</span>
 dat_norm_max &lt;-<span class="st"> </span>dat_tidy <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">wt1 =</span> wt1<span class="op">/</span><span class="kw">max</span>(wt1),
-         <span class="dt">wt2 =</span> wt2<span class="op">/</span><span class="kw">max</span>(wt3),
-         <span class="dt">wt3 =</span> wt3<span class="op">/</span><span class="kw">max</span>(wt3),
-         <span class="dt">kog1 =</span> kog1 <span class="op">/</span><span class="st"> </span><span class="kw">max</span>(kog1),
-         <span class="dt">kog2 =</span> kog2 <span class="op">/</span><span class="st"> </span><span class="kw">max</span>(kog2),
-         <span class="dt">kog3 =</span> kog3 <span class="op">/</span><span class="st"> </span><span class="kw">max</span>(kog3)
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">wt1 =</span> con1<span class="op">/</span><span class="kw">max</span>(con1),
+         <span class="dt">con2 =</span> con2<span class="op">/</span><span class="kw">max</span>(con3),
+         <span class="dt">con3 =</span> con3<span class="op">/</span><span class="kw">max</span>(con3),
+         <span class="dt">trt1 =</span> trt1 <span class="op">/</span><span class="st"> </span><span class="kw">max</span>(trt1),
+         <span class="dt">trt2 =</span> trt2 <span class="op">/</span><span class="st"> </span><span class="kw">max</span>(trt2),
+         <span class="dt">trt3 =</span> trt3 <span class="op">/</span><span class="st"> </span><span class="kw">max</span>(trt3)
          )
 
-<span class="co"># Normalise to median column value</span>
-dat_norm_med &lt;-<span class="st"> </span>dat_tidy <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">wt1 =</span> wt1<span class="op">/</span><span class="kw">median</span>(wt1),
-         <span class="dt">wt2 =</span> wt2<span class="op">/</span><span class="kw">median</span>(wt3),
-         <span class="dt">wt3 =</span> wt3<span class="op">/</span><span class="kw">median</span>(wt3),
-         <span class="dt">kog1 =</span> kog1 <span class="op">/</span><span class="st"> </span><span class="kw">median</span>(kog1),
-         <span class="dt">kog2 =</span> kog2 <span class="op">/</span><span class="st"> </span><span class="kw">median</span>(kog2),
-         <span class="dt">kog3 =</span> kog3 <span class="op">/</span><span class="st"> </span><span class="kw">median</span>(kog3)
-         )
-
-dat_rank &lt;-<span class="st"> </span>dat_tidy <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="op">-</span><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>,<span class="dv">6</span><span class="op">:</span><span class="dv">8</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">apply</span>(., <span class="dv">2</span>, rank, <span class="dt">ties.method=</span><span class="st">&quot;min&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.data.frame</span>()
-
-dat_sort &lt;-<span class="st"> </span>dat_tidy <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="op">-</span><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>,<span class="dv">6</span><span class="op">:</span><span class="dv">8</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">apply</span>(., <span class="dv">2</span>, sort) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.data.frame</span>()
-
-dat_mean &lt;-<span class="st"> </span>dat_sort <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">apply</span>(., <span class="dv">1</span>, mean)
-
-index_mean &lt;-<span class="st"> </span><span class="cf">function</span>(my_idx, my_mean){
-  <span class="kw">return</span>(my_mean[my_idx])
-}
-
-dat_norm &lt;-<span class="st"> </span>dat_rank <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">apply</span>(.,<span class="dv">2</span>,index_mean, <span class="dt">my_mean =</span> dat_mean) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">as.data.frame</span>()
-
-<span class="co"># dat_wt %&gt;% </span>
-<span class="co">#   ggplot(aes(log2(wt1))) + </span>
-<span class="co">#   geom_density() +</span>
-<span class="co">#   geom_density(aes(log2(wt2), colour = &quot;blue&quot;)) +</span>
-<span class="co">#   geom_density(aes(log2(wt3), colour = &quot;red&quot;))</span>
+<span class="co"># Normalise </span>
+<span class="co"># dat_rank &lt;- dat_tidy %&gt;% select(-c(1:2,6:8)) %&gt;% </span>
+<span class="co">#   apply(., 2, rank, ties.method=&quot;average&quot;) %&gt;% as.data.frame()</span>
+<span class="co"># </span>
+<span class="co"># dat_sort &lt;- dat_tidy %&gt;% select(-c(1:2,6:8)) %&gt;% </span>
+<span class="co">#   apply(., 2, sort) %&gt;% as.data.frame()</span>
+<span class="co"># </span>
+<span class="co"># dat_mean &lt;- dat_sort %&gt;% apply(., 1, mean)</span>
+<span class="co"># </span>
+<span class="co"># index_mean &lt;- function(my_idx, my_mean){</span>
+<span class="co">#   return(my_mean[my_idx])</span>
+<span class="co"># }</span>
+<span class="co"># </span>
+<span class="co"># dat_norm &lt;- dat_rank %&gt;% </span>
+<span class="co">#   apply(.,2,index_mean, my_mean = dat_mean) %&gt;% </span>
+<span class="co">#   as.data.frame()</span>
 
 <span class="co"># Quantile normalisation : the aim is to give different distributions the</span>
 <span class="co"># same statistical properties</span>
@@ -238,45 +244,33 @@ quantile_normalisation &lt;-<span class="st"> </span><span class="cf">function</
   <span class="kw">return</span>(df_final)
 }
 
-dt_wt &lt;-<span class="st"> </span>dat_tidy <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="op">-</span><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>,<span class="dv">6</span><span class="op">:</span><span class="dv">8</span>))
-dt_kog &lt;-<span class="st"> </span>dat_tidy <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="op">-</span><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>))
+dt_con &lt;-<span class="st"> </span>dat_tidy <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="op">-</span><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>,<span class="dv">6</span><span class="op">:</span><span class="dv">8</span>))
+dt_trt &lt;-<span class="st"> </span>dat_tidy <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="op">-</span><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>))
 
-dt_wt_norm &lt;-<span class="st"> </span><span class="kw">quantile_normalisation</span>(dt_wt)
-dt_kog_norm &lt;-<span class="st"> </span><span class="kw">quantile_normalisation</span>(dt_kog)
+dt_con_norm &lt;-<span class="st"> </span><span class="kw">quantile_normalisation</span>(dt_con)
+dt_trt_norm &lt;-<span class="st"> </span><span class="kw">quantile_normalisation</span>(dt_trt)
 
-dat_norm &lt;-<span class="st"> </span><span class="kw">bind_cols</span>(dat_tidy[,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>],dt_wt_norm,dt_kog_norm)
+dat_norm &lt;-<span class="st"> </span><span class="kw">bind_cols</span>(dat_tidy[,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>],dt_con_norm,dt_trt_norm)
 <span class="co"># Have a look at the median normalised data</span>
-<span class="kw">glimpse</span>(dat_norm_med)</code></pre></div>
+<span class="kw">glimpse</span>(dat_norm)</code></pre></div>
 <pre><code>## Observations: 1,095
 ## Variables: 8
 ## $ protein_accession   &lt;chr&gt; &quot;4562_DHE3_HUMAN&quot;, &quot;14948_RS2_HUMAN&quot;, &quot;143...
 ## $ protein_description &lt;chr&gt; &quot;Glutamate dehydrogenase 1_ mitochondrial ...
-## $ wt1                 &lt;dbl&gt; 1.46455644, 3.78274902, 0.10257018, 1.5593...
-## $ wt2                 &lt;dbl&gt; 1.29015126, 3.06162560, 0.06677263, 1.2956...
-## $ wt3                 &lt;dbl&gt; 1.3898245, 4.6907618, 0.1136384, 0.7625680...
-## $ kog1                &lt;dbl&gt; 2.1246421, 2.2498354, 0.2868330, 0.9172013...
-## $ kog2                &lt;dbl&gt; 0.06248655, 3.78198563, 0.08551018, 0.5341...
-## $ kog3                &lt;dbl&gt; 1.55811005, 2.16717459, 0.32849794, 0.8012...</code></pre>
+## $ con1                &lt;dbl&gt; 7.8310667, 21.5313333, 0.5681333, 8.300833...
+## $ con2                &lt;dbl&gt; 10.6751000, 24.4078667, 0.6307333, 10.7494...
+## $ con3                &lt;dbl&gt; 7.7651667, 26.7921000, 0.5851667, 4.170266...
+## $ trt1                &lt;dbl&gt; 14.712467, 15.748733, 1.701367, 5.902433, ...
+## $ trt2                &lt;dbl&gt; 0.9415000, 16.0559000, 1.1579667, 4.593200...
+## $ trt3                &lt;dbl&gt; 10.1932667, 15.1735000, 2.3017000, 5.09490...</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat_norm <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="kw">log2</span>(con1))) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_density</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_density</span>(<span class="kw">aes</span>(<span class="kw">log2</span>(con2), <span class="dt">colour =</span> <span class="st">&quot;blue&quot;</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_density</span>(<span class="kw">aes</span>(<span class="kw">log2</span>(con3), <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>))</code></pre></div>
+<p><img src="bspr-workshop-2018_files/figure-html/tidy-data-3.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Save the median normalised data</span>
-<span class="kw">write_excel_csv</span>(dat_norm,<span class="st">&quot;data/example_median_nomralised_proteomics_data.csv&quot;</span>)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Impute NA with lowest value, need to change this!</span>
-control &lt;-<span class="st"> </span>dat_select <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(control_<span class="dv">1</span>) <span class="op">|</span><span class="st"> </span>
-<span class="st">                                   </span><span class="op">!</span><span class="kw">is.na</span>(control_<span class="dv">2</span>) <span class="op">|</span><span class="st"> </span>
-<span class="st">                                   </span><span class="op">!</span><span class="kw">is.na</span>(control_<span class="dv">3</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>) 
-
-treatment &lt;-<span class="st"> </span>dat_select <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(ras_<span class="dv">1</span>) <span class="op">|</span><span class="st"> </span>
-<span class="st">                                   </span><span class="op">!</span><span class="kw">is.na</span>(ras_<span class="dv">2</span>) <span class="op">|</span><span class="st"> </span>
-<span class="st">                                   </span><span class="op">!</span><span class="kw">is.na</span>(ras_<span class="dv">3</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">8</span>) 
-
-<span class="co"># Impute minimum</span>
-row_min &lt;-<span class="st"> </span><span class="cf">function</span>(x) <span class="kw">apply</span>(x,<span class="dv">1</span>,min,<span class="dt">na.rm =</span> <span class="ot">TRUE</span>)
-impute_min &lt;-<span class="st"> </span><span class="cf">function</span>(x) <span class="kw">replace</span>(x, <span class="kw">is.na</span>(x), <span class="kw">row_min</span>(x))
-
-<span class="co">#control_na &lt;- control %&gt;% filter(!complete.cases(.))</span>
-<span class="kw">impute_min</span>(control)
-
- 
-control <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">replace_na</span>(<span class="kw">apply</span>(.,<span class="dv">1</span>,min))</code></pre></div>
+<span class="kw">write_excel_csv</span>(dat_norm,<span class="st">&quot;data/example_nomralised_proteomics_data.csv&quot;</span>)</code></pre></div>
 <ol start="3" style="list-style-type: decimal">
 <li>Use <code>t.test</code> to perform Welch Two Sample t-test on untransformed data. This outputs the p-values we need for each protein.</li>
 </ol>
@@ -347,7 +341,66 @@ dat_max <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">
 <p><img src="bspr-workshop-2018_files/figure-html/vol-pot-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(logfc,pval)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()</code></pre></div>
 <p><img src="bspr-workshop-2018_files/figure-html/vol-pot-2.png" width="672" /></p>
+<div id="heatmap-transformation" class="section level2">
+<h2><span class="header-section-number">4.1</span> Heatmap transformation</h2>
+<ol style="list-style-type: decimal">
+<li>Clustering the data</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat_mut &lt;-<span class="st"> </span>dat_norm <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">pval =</span> dat<span class="op">$</span>pval, <span class="dt">logfc =</span> dat<span class="op">$</span>logfc) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(pval <span class="op">&gt;=</span><span class="st"> </span><span class="dv">2</span> <span class="op">&amp;</span><span class="st"> </span>(logfc <span class="op">&gt;=</span><span class="dv">2</span> <span class="op">|</span><span class="st"> </span>logfc <span class="op">&lt;=</span><span class="st"> </span><span class="dv">2</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">9</span><span class="op">:</span><span class="dv">10</span>))
 
+dat_sel &lt;-<span class="st"> </span><span class="kw">as.matrix.data.frame</span>(dat_mut[,<span class="dv">2</span><span class="op">:</span><span class="dv">7</span>]) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">log2</span>()
+<span class="kw">row.names</span>(dat_sel) &lt;-<span class="st"> </span>dat_mut<span class="op">$</span>protein_accession
+
+dat.tn &lt;-<span class="st"> </span><span class="kw">scale</span>(<span class="kw">t</span>(dat_sel)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">t</span>()
+<span class="co">#dat.tn &lt;- t(dat.n)</span>
+<span class="co">#dat.tn &lt;- dat_sel</span>
+
+<span class="co">#gplots::heatmap.2(dat.tn, scale = &#39;row&#39;,trace=&quot;none&quot;)</span>
+<span class="kw">library</span>(pheatmap)
+<span class="kw">pheatmap</span>(dat.tn,<span class="dt">cutree_rows =</span> <span class="dv">2</span>,
+         <span class="dt">cutree_cols =</span> <span class="dv">2</span>)</code></pre></div>
+<p><img src="bspr-workshop-2018_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cal_z_score &lt;-<span class="st"> </span><span class="cf">function</span>(x){
+  (x <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(x)) <span class="op">/</span><span class="st"> </span><span class="kw">sd</span>(x)
+}
+ 
+data_subset_norm &lt;-<span class="st"> </span><span class="kw">t</span>(<span class="kw">apply</span>(dat_mut[,<span class="dv">2</span><span class="op">:</span><span class="dv">7</span>], <span class="dv">1</span>, cal_z_score))
+<span class="kw">row.names</span>(data_subset_norm) &lt;-<span class="st"> </span>dat_mut<span class="op">$</span>protein_accession
+<span class="kw">pheatmap</span>(data_subset_norm)</code></pre></div>
+<p><img src="bspr-workshop-2018_files/figure-html/unnamed-chunk-2-2.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">d1 &lt;-<span class="st"> </span>dat.tn <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">t</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">dist</span>(.,<span class="dt">method =</span> <span class="st">&quot;euclidean&quot;</span>, <span class="dt">diag =</span> <span class="ot">FALSE</span>, <span class="dt">upper =</span> <span class="ot">FALSE</span>)
+
+d2 &lt;-<span class="st"> </span>dat.tn <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">dist</span>(.,<span class="dt">method =</span> <span class="st">&quot;euclidean&quot;</span>, <span class="dt">diag =</span> <span class="ot">FALSE</span>, <span class="dt">upper =</span> <span class="ot">FALSE</span>)
+
+<span class="co"># Clustering distance between experiments using Ward linkage</span>
+c1 &lt;-<span class="st"> </span><span class="kw">hclust</span>(d1, <span class="dt">method =</span> <span class="st">&quot;ward.D2&quot;</span>, <span class="dt">members =</span> <span class="ot">NULL</span>)
+<span class="co"># Clustering distance between proteins using Ward linkage</span>
+c2 &lt;-<span class="st"> </span><span class="kw">hclust</span>(d2, <span class="dt">method =</span> <span class="st">&quot;ward.D2&quot;</span>, <span class="dt">members =</span> <span class="ot">NULL</span>)
+
+<span class="co"># Check clustering by plotting dendrograms</span>
+<span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">1</span>),<span class="dt">cex=</span><span class="fl">0.5</span>) <span class="co"># Make 2 rows, 1 col plot frame and shrink labels</span>
+<span class="kw">plot</span>(c1); <span class="kw">plot</span>(c2) <span class="co"># Plot both cluster dendrograms</span></code></pre></div>
+<p><img src="bspr-workshop-2018_files/figure-html/unnamed-chunk-2-3.png" width="672" /> 2. Plot the data</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Set colours for heatmap, 25 increments</span>
+my_palette &lt;-<span class="st"> </span><span class="kw">colorRampPalette</span>(<span class="kw">c</span>(<span class="st">&quot;blue&quot;</span>,<span class="st">&quot;white&quot;</span>,<span class="st">&quot;red&quot;</span>))(<span class="dt">n =</span> <span class="dv">25</span>)
+
+<span class="co"># Plot heatmap with heatmap.2</span>
+<span class="kw">par</span>(<span class="dt">cex.main=</span><span class="fl">0.75</span>) <span class="co"># Shrink title fonts on plot</span>
+gplots<span class="op">::</span><span class="kw">heatmap.2</span>(dat.tn,                     <span class="co"># Tidy, normalised data</span>
+          <span class="dt">Colv=</span><span class="kw">as.dendrogram</span>(c1),     <span class="co"># Experiments clusters in cols</span>
+          <span class="dt">Rowv=</span><span class="kw">as.dendrogram</span>(c2),     <span class="co"># Protein clusters in rows</span>
+          <span class="dt">density.info=</span><span class="st">&quot;histogram&quot;</span>,   <span class="co"># Plot histogram of data and colour key</span>
+          <span class="dt">trace=</span><span class="st">&quot;none&quot;</span>,               <span class="co"># Turn of trace lines from heat map</span>
+          <span class="dt">col =</span> my_palette,           <span class="co"># Use my colour scheme</span>
+          <span class="dt">cexRow=</span><span class="fl">0.5</span>,<span class="dt">cexCol=</span><span class="fl">0.75</span>)     <span class="co"># Amend row and column label fonts</span></code></pre></div>
+<p><img src="bspr-workshop-2018_files/figure-html/heatmap-1.png" width="672" /></p>
+
+</div>
 </div>
             </section>
 

@@ -83,32 +83,37 @@ values recorded for each replicate (columns).
 dat_em <- read_csv("data/MergedFinalProt_1colPerFile_6files_filtered.csv", 
                    na = "NaN", col_types = cols()) %>% clean_names()
 
-dat_em <- read_csv("data/Leannes data/MergedFinalProt_2colPerFile_6files_filtered.csv", 
+dat_le <- read_csv("data/Leannes data/MergedFinalProt_2colPerFile_6files_filtered.csv",
                    na = "NaN", col_types = cols()) %>% clean_names()
-
-dat_char <- read_csv("data/MergedFinalProt_2colPerFile_12files.csv",
-                     na = "NaN", col_types = cols()) %>% clean_names()
+# 
+# dat_char <- read_csv("data/MergedFinalProt_2colPerFile_12files.csv",
+#                      na = "NaN", col_types = cols()) %>% clean_names()
 
 # Have a look at the dataset
-glimpse(dat_char)
+#glimpse(dat_char)
 ```
 
 2. Tidy up and deal with missing values, either impute or exclude missing values
 and normalise.
 
-Let's consider our proteomics data as a distribution of values, one value for each
-protein in our experiment that together form a distribution. 
+Let's consider our proteomics data as a distribution of values, one value for 
+each protein in our experiment that together form a distribution. 
 If we have replicate experiments we'll therefore have multiple distributions.
 
 A quantile represents a region of distribution, for example the 0.95 quantile
 is the value such that 95% of the data lies below it. To normalise two or more
 distributions with each other without recourse to a reference distribution we:
 
-(i) Rank (quantile) the value in each experiment (column) from lowest to highest.
-(ii) Sort each experiment (column) from lowest to highest value.
-(iii) Calculate the mean across the experiments (rows) on the sorted values.
-(iv) Substitute the mean values according to rank for each experiment to restore
-the original order.
+(i) Rank the value in each experiment (represented in the columns) from 
+lowest to highest. In other words identify the quantiles.
+(ii) Sort each experiment (the columns) from lowest to highest value.
+(iii) Calculate the mean across the rows for the sorted values.
+(iv) Then substitute these mean values back according to rank for each experiment to restore the original order.
+
+This results in the highest ranking observation in each experiment
+becoming the mean of the highest observations across all experiments, the
+second ranking observation in each experiment becoming the mean of the 
+second highest observations across all experiments.
 
 [Dave Tang's Blog : Quantile Normalisation in R](https://davetang.org/muse/2014/07/07/quantile-normalisation-in-r/)
 
@@ -132,11 +137,24 @@ dat_tidy <- dat_em %>%
          trt3 = protein_ngram_on_column_emilly_bowler_kogsk_rep3_001_merged_spectrum_ia_final_protein)
 
 
-dat_tidy <- dat_char %>%
+# dat_tidy <- dat_char %>%
+#   # Remove missing values
+#   drop_na() %>%
+#   # Select and rename columns
+#   select(protein_accession = protein_entry_protein_accession,
+#          protein_description,
+#          con1 = 9,
+#          con2 = 11,
+#          con3 = 13,
+#          trt1 = 21,
+#          trt2 = 23,
+#          trt3 = 25)
+
+dat_tidy <- dat_le %>%
   # Remove missing values
-  drop_na() %>% 
+  drop_na() %>%
   # Select and rename columns
-  select(protein_accession = protein_entry_protein_accession,
+  select(protein_accession = protein_accession,
          protein_description,
          con1 = 9,
          con2 = 11,
@@ -161,12 +179,12 @@ dat_tidy %>%
 
 # Normalise to maximum column value
 dat_norm_max <- dat_tidy %>% 
-  mutate(wt1 = wt1/max(wt1),
-         wt2 = wt2/max(wt3),
-         wt3 = wt3/max(wt3),
-         kog1 = kog1 / max(kog1),
-         kog2 = kog2 / max(kog2),
-         kog3 = kog3 / max(kog3)
+  mutate(wt1 = con1/max(con1),
+         con2 = con2/max(con3),
+         con3 = con3/max(con3),
+         trt1 = trt1 / max(trt1),
+         trt2 = trt2 / max(trt2),
+         trt3 = trt3 / max(trt3)
          )
 
 # Normalise 
@@ -209,6 +227,10 @@ dt_trt <- dat_tidy %>% select(-c(1:5))
 dt_con_norm <- quantile_normalisation(dt_con)
 dt_trt_norm <- quantile_normalisation(dt_trt)
 
+dt <- dat_tidy %>% select(-c(1:2)) %>% quantile_normalisation()
+
+dat_norm <- bind_cols(dat_tidy[,1:2],dt)
+
 dat_norm <- bind_cols(dat_tidy[,1:2],dt_con_norm,dt_trt_norm)
 # Have a look at the median normalised data
 glimpse(dat_norm)
@@ -217,10 +239,11 @@ dat_norm %>%
   ggplot(aes(log2(con1))) + 
   geom_density() +
   geom_density(aes(log2(con2), colour = "blue")) +
-  geom_density(aes(log2(con3), colour = "red"))
+  geom_density(aes(log2(con3), colour = "red")) +
+  geom_density(aes(log2(trt3), colour = "green"))
 
 # Save the median normalised data
-write_excel_csv(dat_norm,"data/example_median_nomralised_proteomics_data.csv")
+write_excel_csv(dat_norm,"data/example_nomralised_proteomics_data.csv")
 
 ```
 
@@ -301,8 +324,14 @@ dat_max <- data.frame(prots= dat_norm_max$protein_accession,
 
 dat_max %>% ggplot(aes(logfc,pval)) + geom_point()
 
-dat %>% ggplot(aes(logfc,pval)) + geom_point()
-
+dat %>% 
+  mutate(threshold = if_else(logfc >= 2 & pval >= 1.5 | 
+                               logfc <= -2 & pval >= 1.5,"A", "B")) %>% 
+  ggplot(aes(logfc,pval, colour = threshold)) + 
+  geom_point() +
+  scale_colour_manual(values = c("A"= "red", "B"= "black")) +
+  xlab("log2 fold change") + ylab("-log10 p-value") +
+  theme_minimal()
 ```
 
 

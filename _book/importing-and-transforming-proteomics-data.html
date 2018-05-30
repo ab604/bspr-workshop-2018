@@ -105,11 +105,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2" data-path="the-tidyverse.html"><a href="the-tidyverse.html"><i class="fa fa-check"></i><b>2</b> The tidyverse</a></li>
 <li class="chapter" data-level="3" data-path="importing-and-transforming-proteomics-data.html"><a href="importing-and-transforming-proteomics-data.html"><i class="fa fa-check"></i><b>3</b> Importing and transforming proteomics data</a><ul>
 <li class="chapter" data-level="3.1" data-path="importing-and-transforming-proteomics-data.html"><a href="importing-and-transforming-proteomics-data.html#importing-flat-files"><i class="fa fa-check"></i><b>3.1</b> Importing flat files</a></li>
-<li class="chapter" data-level="3.2" data-path="importing-and-transforming-proteomics-data.html"><a href="importing-and-transforming-proteomics-data.html#calculating-fold-change-and-enrichment"><i class="fa fa-check"></i><b>3.2</b> Calculating fold change and enrichment</a><ul>
-<li class="chapter" data-level="3.2.1" data-path="importing-and-transforming-proteomics-data.html"><a href="importing-and-transforming-proteomics-data.html#fold-change-and-log-fold-change"><i class="fa fa-check"></i><b>3.2.1</b> Fold change and log-fold change</a></li>
+<li class="chapter" data-level="3.2" data-path="importing-and-transforming-proteomics-data.html"><a href="importing-and-transforming-proteomics-data.html#calculating-fold-change-and-enrichment"><i class="fa fa-check"></i><b>3.2</b> Calculating fold change and enrichment</a></li>
+<li class="chapter" data-level="3.3" data-path="importing-and-transforming-proteomics-data.html"><a href="importing-and-transforming-proteomics-data.html#fold-change-and-log-fold-change"><i class="fa fa-check"></i><b>3.3</b> Fold change and log-fold change</a></li>
 </ul></li>
+<li class="chapter" data-level="4" data-path="fold-change-and-t-test.html"><a href="fold-change-and-t-test.html"><i class="fa fa-check"></i><b>4</b> Fold change and t-test</a><ul>
+<li class="chapter" data-level="4.1" data-path="fold-change-and-t-test.html"><a href="fold-change-and-t-test.html#heatmap-transformation"><i class="fa fa-check"></i><b>4.1</b> Heatmap transformation</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="fold-change-and-t-test.html"><a href="fold-change-and-t-test.html"><i class="fa fa-check"></i><b>4</b> Fold change and t-test</a></li>
 <li class="chapter" data-level="5" data-path="visualising-proteomics-data.html"><a href="visualising-proteomics-data.html"><i class="fa fa-check"></i><b>5</b> Visualising proteomics data</a><ul>
 <li class="chapter" data-level="5.1" data-path="visualising-proteomics-data.html"><a href="visualising-proteomics-data.html#creating-a-volcano-plot"><i class="fa fa-check"></i><b>5.1</b> Creating a volcano plot</a></li>
 <li class="chapter" data-level="5.2" data-path="visualising-proteomics-data.html"><a href="visualising-proteomics-data.html#creating-a-heatmap"><i class="fa fa-check"></i><b>5.2</b> Creating a heatmap</a></li>
@@ -143,8 +144,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="calculating-fold-change-and-enrichment" class="section level2">
 <h2><span class="header-section-number">3.2</span> Calculating fold change and enrichment</h2>
-<div id="fold-change-and-log-fold-change" class="section level3">
-<h3><span class="header-section-number">3.2.1</span> Fold change and log-fold change</h3>
+</div>
+<div id="fold-change-and-log-fold-change" class="section level2">
+<h2><span class="header-section-number">3.3</span> Fold change and log-fold change</h2>
 <p>Fold changes are ratios, the ratio of say protein expression before and after treatment, where a value larger than 1 for a protein implies that protein expression was greater after the treatment.</p>
 <p>In life sciences, fold change is often reported as log-fold change. Why is that? There are at least two reasons which can be shown by plotting.</p>
 <p>One is that ratios are not symmetrical around 1, so it’s difficult to observe both changes in the forwards and backwards direcion i.e. proteins where expression went up and proteins where expression went down due to treatment. When we transform ratios on a log scale, the scale becomes symmetric around 0 and thus we can now observe the distribution of ratios in terms of positive, negative or no change.</p>
@@ -188,7 +190,6 @@ p2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(dat,<span class=
 
 <span class="kw">plot_grid</span>(p1,p2)</code></pre></div>
 <p><img src="bspr-workshop-2018_files/figure-html/fold-change-2-1.png" width="672" /></p>
-</div>
 </div>
 </div>
             </section>
