@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-
-<link rel="next" href="intro.html">
+<link rel="prev" href="tidyverse.html">
+<link rel="next" href="fold-change-and-t-test.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -151,27 +151,59 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Data Science Workshop</h1>
-<h3 class="subtitle"><em>British Society for Proteomic Research Meeting 2018</em></h3>
-<h4 class="author"><em>Alistair Bailey</em></h4>
-<h4 class="date"><em>May 31 2018</em></h4>
+<div id="transform" class="section level1">
+<h1><span class="header-section-number">Chapter 3</span> Importing and transforming proteomics data</h1>
+<div id="importing-flat-files" class="section level2">
+<h2><span class="header-section-number">3.1</span> Importing flat files</h2>
 </div>
-<div id="overview" class="section level1 unnumbered">
-<h1>Overview</h1>
-<p>These lessons cover:</p>
-<ol style="list-style-type: decimal">
-<li>An introduction to R and RStudio</li>
-<li>An introduction to the tidyverse</li>
-<li>Importing and transforming proteomics data</li>
-<li>Visualisation of proteomics analysis</li>
-</ol>
-<div id="requirements" class="section level2 unnumbered">
-<h2>Requirements</h2>
-<p>Up to date version of R and Rstudio</p>
-<p>The following R packages:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="kw">c</span>(<span class="st">&quot;tidyverse&quot;</span>,<span class="st">&quot;janitor&quot;</span>))</code></pre></div>
+<div id="calculating-fold-change-and-enrichment" class="section level2">
+<h2><span class="header-section-number">3.2</span> Calculating fold change and enrichment</h2>
+</div>
+<div id="fold-change-and-log-fold-change" class="section level2">
+<h2><span class="header-section-number">3.3</span> Fold change and log-fold change</h2>
+<p>Fold changes are ratios, the ratio of say protein expression before and after treatment, where a value larger than 1 for a protein implies that protein expression was greater after the treatment.</p>
+<p>In life sciences, fold change is often reported as log-fold change. Why is that? There are at least two reasons which can be shown by plotting.</p>
+<p>One is that ratios are not symmetrical around 1, so it’s difficult to observe both changes in the forwards and backwards direcion i.e. proteins where expression went up and proteins where expression went down due to treatment. When we transform ratios on a log scale, the scale becomes symmetric around 0 and thus we can now observe the distribution of ratios in terms of positive, negative or no change.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">10</span>)
+x &lt;-<span class="st"> </span><span class="dv">2</span><span class="op">^</span>(<span class="kw">rnorm</span>(<span class="dv">100</span>))
+y &lt;-<span class="st"> </span><span class="dv">2</span><span class="op">^</span>(<span class="kw">rnorm</span>(<span class="dv">100</span>))
+ratios &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">value =</span> x<span class="op">/</span>y, <span class="dt">label =</span> <span class="st">&quot;ratios&quot;</span>)
+logratios &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">value =</span> <span class="kw">log2</span>(ratios<span class="op">$</span>value), <span class="dt">label =</span> <span class="st">&quot;logratios&quot;</span>)
 
+<span class="kw">bind_rows</span>(ratios,logratios) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(value)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="dv">2</span>, <span class="dt">colour =</span> <span class="st">&quot;grey50&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;white&quot;</span>) <span class="op">+</span>
+<span class="st">  </span>ggplot2<span class="op">::</span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>label) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_minimal</span>()</code></pre></div>
+<p><img src="bspr-workshop-2018_files/figure-html/fold-change-1-1.png" width="672" /></p>
+<p>A second reason is that transforming values onto a log scale changes where the numbers actually occur when plotted on that scale. If we consider the log scale to represent magnitudes, then we can more easily see changes of small and large magnitudes when we plot the data.</p>
+<p>For example, a fold change of 32 times can be either a ratio 1/32 or 32/1.</p>
+<p>1/32 is much closer to 1 than 32/1, but transformed to a log scale we see that in terms of magnitude of difference it is the same as 32/1.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x2 &lt;-<span class="st"> </span><span class="dv">2</span><span class="op">^</span><span class="kw">seq</span>(<span class="dv">1</span>,<span class="dv">5</span>)
+y_vals &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">rev</span>(<span class="dv">1</span><span class="op">/</span>x2),<span class="dv">1</span>,x2)
+names &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">paste0</span>(<span class="st">&quot;1/&quot;</span>,<span class="kw">rev</span>(x2)),<span class="dv">1</span>,x2)
+x_vals &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dt">along=</span>y_vals)
+
+dat &lt;-<span class="st"> </span><span class="kw">tibble</span>(x_vals,y_vals,names)
+
+p1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(dat,<span class="kw">aes</span>(x_vals,y_vals, <span class="dt">label =</span> names)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_text</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">1</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_minimal</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="ot">NULL</span>, <span class="dt">y =</span> <span class="ot">NULL</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">breaks =</span> <span class="ot">NULL</span>)
+
+
+p2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(dat,<span class="kw">aes</span>(x_vals,y_vals, <span class="dt">label =</span> names)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_text</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">1</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">trans =</span> <span class="st">&quot;log2&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_minimal</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="ot">NULL</span>, <span class="dt">y =</span> <span class="ot">NULL</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">breaks =</span> <span class="ot">NULL</span>)
+
+<span class="kw">plot_grid</span>(p1,p2)</code></pre></div>
+<p><img src="bspr-workshop-2018_files/figure-html/fold-change-2-1.png" width="672" /></p>
 </div>
 </div>
             </section>
@@ -179,8 +211,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           </div>
         </div>
       </div>
-
-<a href="intro.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="tidyverse.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="fold-change-and-t-test.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

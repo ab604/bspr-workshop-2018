@@ -31,7 +31,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="importing-and-transforming-proteomics-data.html">
+<link rel="prev" href="transform.html">
 <link rel="next" href="visualising-proteomics-data.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -101,12 +101,26 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Overview</a><ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#requirements"><i class="fa fa-check"></i>Requirements</a></li>
 </ul></li>
-<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
-<li class="chapter" data-level="2" data-path="the-tidyverse.html"><a href="the-tidyverse.html"><i class="fa fa-check"></i><b>2</b> The tidyverse</a></li>
-<li class="chapter" data-level="3" data-path="importing-and-transforming-proteomics-data.html"><a href="importing-and-transforming-proteomics-data.html"><i class="fa fa-check"></i><b>3</b> Importing and transforming proteomics data</a><ul>
-<li class="chapter" data-level="3.1" data-path="importing-and-transforming-proteomics-data.html"><a href="importing-and-transforming-proteomics-data.html#importing-flat-files"><i class="fa fa-check"></i><b>3.1</b> Importing flat files</a></li>
-<li class="chapter" data-level="3.2" data-path="importing-and-transforming-proteomics-data.html"><a href="importing-and-transforming-proteomics-data.html#calculating-fold-change-and-enrichment"><i class="fa fa-check"></i><b>3.2</b> Calculating fold change and enrichment</a></li>
-<li class="chapter" data-level="3.3" data-path="importing-and-transforming-proteomics-data.html"><a href="importing-and-transforming-proteomics-data.html#fold-change-and-log-fold-change"><i class="fa fa-check"></i><b>3.3</b> Fold change and log-fold change</a></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#what-are-r-and-rstudio"><i class="fa fa-check"></i><b>1.1</b> What are R and RStudio?</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="intro.html"><a href="intro.html#environments"><i class="fa fa-check"></i><b>1.1.1</b> Environments</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#why-learn-r-or-any-language"><i class="fa fa-check"></i><b>1.2</b> Why learn R, or any language ?</a></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#finding-your-way-around-rstudio"><i class="fa fa-check"></i><b>1.3</b> Finding your way around RStudio</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="intro.html"><a href="intro.html#what-is-real"><i class="fa fa-check"></i><b>1.3.1</b> What is real?</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="intro.html"><a href="intro.html#where-am-i"><i class="fa fa-check"></i><b>1.4</b> Where am I?</a></li>
+<li class="chapter" data-level="1.5" data-path="intro.html"><a href="intro.html#r-projects"><i class="fa fa-check"></i><b>1.5</b> R projects</a></li>
+<li class="chapter" data-level="1.6" data-path="intro.html"><a href="intro.html#naming-things"><i class="fa fa-check"></i><b>1.6</b> Naming things</a></li>
+<li class="chapter" data-level="1.7" data-path="intro.html"><a href="intro.html#seeking-help"><i class="fa fa-check"></i><b>1.7</b> Seeking help</a><ul>
+<li class="chapter" data-level="1.7.1" data-path="intro.html"><a href="intro.html#asking-for-help"><i class="fa fa-check"></i><b>1.7.1</b> Asking for help</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="tidyverse.html"><a href="tidyverse.html"><i class="fa fa-check"></i><b>2</b> Getting started in R and the tidyverse</a></li>
+<li class="chapter" data-level="3" data-path="transform.html"><a href="transform.html"><i class="fa fa-check"></i><b>3</b> Importing and transforming proteomics data</a><ul>
+<li class="chapter" data-level="3.1" data-path="transform.html"><a href="transform.html#importing-flat-files"><i class="fa fa-check"></i><b>3.1</b> Importing flat files</a></li>
+<li class="chapter" data-level="3.2" data-path="transform.html"><a href="transform.html#calculating-fold-change-and-enrichment"><i class="fa fa-check"></i><b>3.2</b> Calculating fold change and enrichment</a></li>
+<li class="chapter" data-level="3.3" data-path="transform.html"><a href="transform.html#fold-change-and-log-fold-change"><i class="fa fa-check"></i><b>3.3</b> Fold change and log-fold change</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="fold-change-and-t-test.html"><a href="fold-change-and-t-test.html"><i class="fa fa-check"></i><b>4</b> Fold change and t-test</a><ul>
 <li class="chapter" data-level="4.1" data-path="fold-change-and-t-test.html"><a href="fold-change-and-t-test.html#heatmap-transformation"><i class="fa fa-check"></i><b>4.1</b> Heatmap transformation</a></li>
@@ -146,19 +160,21 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Let’s consider our proteomics data as a distribution of values, one value for each protein in our experiment that together form a distribution. If we have replicate experiments we’ll therefore have multiple distributions.</p>
 <p>A quantile represents a region of distribution, for example the 0.95 quantile is the value such that 95% of the data lies below it. To normalise two or more distributions with each other without recourse to a reference distribution we:</p>
 <ol style="list-style-type: lower-roman">
-<li>Rank (quantile) the value in each experiment (column) from lowest to highest.</li>
-<li>Sort each experiment (column) from lowest to highest value.</li>
-<li>Calculate the mean across the experiments (rows) on the sorted values.</li>
-<li>Substitute the mean values according to rank for each experiment to restore the original order.</li>
+<li>Rank the value in each experiment (represented in the columns) from lowest to highest. In other words identify the quantiles.</li>
+<li>Sort each experiment (the columns) from lowest to highest value.</li>
+<li>Calculate the mean across the rows for the sorted values.</li>
+<li>Then substitute these mean values back according to rank for each experiment to restore the original order.</li>
 </ol>
+<p>This results in the highest ranking observation in each experiment becoming the mean of the highest observations across all experiments, the second ranking observation in each experiment becoming the mean of the second highest observations across all experiments.</p>
 <p><a href="https://davetang.org/muse/2014/07/07/quantile-normalisation-in-r/">Dave Tang’s Blog : Quantile Normalisation in R</a></p>
-<blockquote class="twitter-tweet" data-lang="en">
-<p lang="en" dir="ltr">
-.<a href="https://twitter.com/ewanbirney?ref_src=twsrc%5Etfw"><span class="citation">(<span class="citeproc-not-found" data-reference-id="ewanbirney"><strong>???</strong></span>)</span></a> Neither corresponds to the <a href="https://twitter.com/Bioconductor?ref_src=twsrc%5Etfw"><span class="citation">(<span class="citeproc-not-found" data-reference-id="Bioconductor"><strong>???</strong></span>)</span></a> implementation of quantile norm (est 2001 and explained below) <a href="http://t.co/lCyy6YyNB8">pic.twitter.com/lCyy6YyNB8</a>
+<p><a href="https://twitter.com/rafalab/status/545586012219772928?ref_src=twsrc%5Etfw">Rafael Irizarry’s tweet</a></p>
+
+<div class="figure" style="text-align: center"><span id="fig:quant-norm"></span>
+<img src="img/quant_norm.png" alt="Quantile Normalisation." width="80%" />
+<p class="caption">
+Figure 4.1: Quantile Normalisation.
 </p>
-— Rafael Irizarry (<span class="citation">(<span class="citeproc-not-found" data-reference-id="rafalab"><strong>???</strong></span>)</span>) <a href="https://twitter.com/rafalab/status/545586012219772928?ref_src=twsrc%5Etfw">December 18, 2014</a>
-</blockquote>
-<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Tidy data up</span>
 dat_tidy &lt;-<span class="st"> </span>dat_em <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="co"># Remove missing values</span>
@@ -176,7 +192,7 @@ dat_tidy &lt;-<span class="st"> </span>dat_em <span class="op">%&gt;%</span>
 
 <span class="co"># dat_tidy &lt;- dat_char %&gt;%</span>
 <span class="co">#   # Remove missing values</span>
-<span class="co">#   drop_na() %&gt;% </span>
+<span class="co">#   drop_na() %&gt;%</span>
 <span class="co">#   # Select and rename columns</span>
 <span class="co">#   select(protein_accession = protein_entry_protein_accession,</span>
 <span class="co">#          protein_description,</span>
@@ -186,6 +202,19 @@ dat_tidy &lt;-<span class="st"> </span>dat_em <span class="op">%&gt;%</span>
 <span class="co">#          trt1 = 21,</span>
 <span class="co">#          trt2 = 23,</span>
 <span class="co">#          trt3 = 25)</span>
+
+<span class="co"># dat_tidy &lt;- dat_le %&gt;%</span>
+<span class="co">#   # Remove missing values</span>
+<span class="co">#   drop_na() %&gt;%</span>
+<span class="co">#   # Select and rename columns</span>
+<span class="co">#   select(protein_accession = protein_accession,</span>
+<span class="co">#          protein_description,</span>
+<span class="co">#          con1 = 5,</span>
+<span class="co">#          con2 = 7,</span>
+<span class="co">#          con3 = 11,</span>
+<span class="co">#          trt1 = 3,</span>
+<span class="co">#          trt2 = 9,</span>
+<span class="co">#          trt3 = 13)</span>
 
 <span class="co"># Plot data</span>
 dat_tidy <span class="op">%&gt;%</span><span class="st"> </span>
@@ -244,30 +273,35 @@ quantile_normalisation &lt;-<span class="st"> </span><span class="cf">function</
   <span class="kw">return</span>(df_final)
 }
 
-dt_con &lt;-<span class="st"> </span>dat_tidy <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="op">-</span><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>,<span class="dv">6</span><span class="op">:</span><span class="dv">8</span>))
-dt_trt &lt;-<span class="st"> </span>dat_tidy <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="op">-</span><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>))
+<span class="co">#dt_con &lt;- dat_tidy %&gt;% select(-c(1:2,6:8))</span>
+<span class="co">#dt_trt &lt;- dat_tidy %&gt;% select(-c(1:5))</span>
 
-dt_con_norm &lt;-<span class="st"> </span><span class="kw">quantile_normalisation</span>(dt_con)
-dt_trt_norm &lt;-<span class="st"> </span><span class="kw">quantile_normalisation</span>(dt_trt)
+<span class="co">#dt_con_norm &lt;- quantile_normalisation(dt_con)</span>
+<span class="co">#dt_trt_norm &lt;- quantile_normalisation(dt_trt)</span>
 
-dat_norm &lt;-<span class="st"> </span><span class="kw">bind_cols</span>(dat_tidy[,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>],dt_con_norm,dt_trt_norm)
+dt &lt;-<span class="st"> </span>dat_tidy <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="op">-</span><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">quantile_normalisation</span>()
+
+dat_norm &lt;-<span class="st"> </span><span class="kw">bind_cols</span>(dat_tidy[,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>],dt)
+
+<span class="co">#dat_norm &lt;- bind_cols(dat_tidy[,1:2],dt_con_norm,dt_trt_norm)</span>
 <span class="co"># Have a look at the median normalised data</span>
 <span class="kw">glimpse</span>(dat_norm)</code></pre></div>
 <pre><code>## Observations: 1,095
 ## Variables: 8
 ## $ protein_accession   &lt;chr&gt; &quot;4562_DHE3_HUMAN&quot;, &quot;14948_RS2_HUMAN&quot;, &quot;143...
 ## $ protein_description &lt;chr&gt; &quot;Glutamate dehydrogenase 1_ mitochondrial ...
-## $ con1                &lt;dbl&gt; 7.8310667, 21.5313333, 0.5681333, 8.300833...
-## $ con2                &lt;dbl&gt; 10.6751000, 24.4078667, 0.6307333, 10.7494...
-## $ con3                &lt;dbl&gt; 7.7651667, 26.7921000, 0.5851667, 4.170266...
-## $ trt1                &lt;dbl&gt; 14.712467, 15.748733, 1.701367, 5.902433, ...
-## $ trt2                &lt;dbl&gt; 0.9415000, 16.0559000, 1.1579667, 4.593200...
-## $ trt3                &lt;dbl&gt; 10.1932667, 15.1735000, 2.3017000, 5.09490...</code></pre>
+## $ con1                &lt;dbl&gt; 8.7383500, 24.6381167, 0.6251333, 9.166716...
+## $ con2                &lt;dbl&gt; 11.8365000, 28.3875333, 0.7185167, 11.9014...
+## $ con3                &lt;dbl&gt; 8.666500, 31.284083, 0.646800, 4.532583, 5...
+## $ trt1                &lt;dbl&gt; 13.337283, 14.171300, 1.584183, 5.452217, ...
+## $ trt2                &lt;dbl&gt; 0.8607500, 14.4218000, 1.0512833, 4.244433...
+## $ trt3                &lt;dbl&gt; 9.343483, 13.670950, 2.139083, 4.735550, 6...</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat_norm <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="kw">log2</span>(con1))) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_density</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_density</span>(<span class="kw">aes</span>(<span class="kw">log2</span>(con2), <span class="dt">colour =</span> <span class="st">&quot;blue&quot;</span>)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_density</span>(<span class="kw">aes</span>(<span class="kw">log2</span>(con3), <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>))</code></pre></div>
+<span class="st">  </span><span class="kw">geom_density</span>(<span class="kw">aes</span>(<span class="kw">log2</span>(con3), <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_density</span>(<span class="kw">aes</span>(<span class="kw">log2</span>(trt3), <span class="dt">colour =</span> <span class="st">&quot;green&quot;</span>))</code></pre></div>
 <p><img src="bspr-workshop-2018_files/figure-html/tidy-data-3.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Save the median normalised data</span>
 <span class="kw">write_excel_csv</span>(dat_norm,<span class="st">&quot;data/example_nomralised_proteomics_data.csv&quot;</span>)</code></pre></div>
@@ -339,7 +373,14 @@ dat_max &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span c
 
 dat_max <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(logfc,pval)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()</code></pre></div>
 <p><img src="bspr-workshop-2018_files/figure-html/vol-pot-1.png" width="672" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(logfc,pval)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">threshold =</span> <span class="kw">if_else</span>(logfc <span class="op">&gt;=</span><span class="st"> </span><span class="dv">2</span> <span class="op">&amp;</span><span class="st"> </span>pval <span class="op">&gt;=</span><span class="st"> </span><span class="fl">1.5</span> <span class="op">|</span><span class="st"> </span>
+<span class="st">                               </span>logfc <span class="op">&lt;=</span><span class="st"> </span><span class="op">-</span><span class="dv">2</span> <span class="op">&amp;</span><span class="st"> </span>pval <span class="op">&gt;=</span><span class="st"> </span><span class="fl">1.5</span>,<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(logfc,pval, <span class="dt">colour =</span> threshold)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_colour_manual</span>(<span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&quot;A&quot;</span>=<span class="st"> &quot;red&quot;</span>, <span class="st">&quot;B&quot;</span>=<span class="st"> &quot;black&quot;</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;log2 fold change&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;-log10 p-value&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_minimal</span>()</code></pre></div>
 <p><img src="bspr-workshop-2018_files/figure-html/vol-pot-2.png" width="672" /></p>
 <div id="heatmap-transformation" class="section level2">
 <h2><span class="header-section-number">4.1</span> Heatmap transformation</h2>
@@ -407,7 +448,7 @@ gplots<span class="op">::</span><span class="kw">heatmap.2</span>(dat.tn,       
           </div>
         </div>
       </div>
-<a href="importing-and-transforming-proteomics-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="transform.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="visualising-proteomics-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>

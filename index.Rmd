@@ -20,7 +20,7 @@ secnumdepth: 1
 lof: FALSE
 lot: FALSE
 site: bookdown::bookdown_site
-bibliography: [packages.bib]
+bibliography: [packages.bib, book.bib]
 biblio-style: apalike
 link-citations: yes
 #geometry: "left=4cm, right=3cm, top=2.5cm, bottom=2.5cm"
@@ -35,14 +35,9 @@ library(cowplot)
 #library(gridExtra)
 #library(cowplot)
 # automatically create a bib database for R packages
-knitr::write_bib(c(
-  .packages(), 'bookdown', 'knitr', 'rmarkdown'
-), 'packages.bib')
+knitr::write_bib(c(.packages(), 'bookdown', 'knitr', 'rmarkdown'), 'packages.bib')
 
 options(knitr.graphics.auto_pdf = TRUE)
-
-# Surpress text file log output
-# futile.logger::flog.threshold(futile.logger::ERROR, name = "VennDiagramLogger")
 ```
 
 # Overview {-}

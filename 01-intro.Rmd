@@ -1,21 +1,256 @@
 # Introduction {#intro}
 
-You can label chapter and section titles using `{#label}` after them, e.g., we can reference Chapter \@ref(intro). If you do not manually label them, there will be automatic labels anyway, e.g., Chapter \@ref(methods).
+There are many resources for learning R on the web, but much of this material 
+derives from a [Data Carpentry lesson](http://www.datacarpentry.org/lessons/) 
+using ecological data that I have previously 
+[reworked](https://southampton-rsg.github.io/2017-08-01-southampton-dc/novice/R-ecology-lesson/index.html), 
+which in turn takes a lot from [Hadley Wickham's R for Data Science](http://r4ds.had.co.nz/). 
+Follow the links to access those materials.
 
-Figures and tables with captions will be placed in `figure` and `table` environments, respectively.
+In terms of philosophy:
 
-```{r nice-fig, fig.cap='Here is a nice figure!', out.width='80%', fig.asp=.75, fig.align='center'}
-par(mar = c(4, 4, .1, .1))
-plot(pressure, type = 'b', pch = 19)
+1. The primary motivation for using tools such as R is to get more done, in less
+time and with less pain.
+
+2. And the overall aim is to *understand and communicate* findings from our 
+data.
+
+(ref:pipeline) Data project workflow.
+
+```{r pipeline, fig.cap='(ref:pipeline)',fig.asp=1, out.width= '80%', fig.align='center', echo=FALSE}
+knitr::include_graphics("img/data_project_pipeline.png")
 ```
 
-Reference a figure by its code chunk label with the `fig:` prefix, e.g., see Figure \@ref(fig:nice-fig). Similarly, you can reference tables generated from `knitr::kable()`, e.g., see Table \@ref(tab:nice-tab).
+As shown in Figure \@ref(fig:pipeline) of typical data analysis workflow,
+to acheive this aim we need to learn tools that enable us to perform the 
+fundamental tasks of tasks of importing, tidying and 
+often transforming the data. Transformation means for example, selecting a 
+subset of the data to work with, or calculating the mean of a set of observations.
+We'll cover that in Chapter \@ref(transform).
 
-```{r nice-tab, tidy=FALSE}
-knitr::kable(
-  head(iris, 20), caption = 'Here is a nice table!',
-  booktabs = TRUE
-)
+But first...
+
+## What are R and RStudio?
+
+***"There are only two kinds of languages: the ones people complain about and the ones nobody uses"***
+
+*Bjarne Stroustrup*
+
+**R** is a programming language that follows the philosophy laid down by it's
+predecessor S. The philosophy being that users begin in an interactive
+environment where they don't consciously think of themselves as programming. 
+It was created in 1993, and documented in [@ihaka1996].
+
+Reasons R has become popular include that it is both open source and cross platform,
+and that it has broad functionality, from the analysis of data and creating 
+powerful graphical visualisations and web apps.
+
+Like all languages though it has limitations, for example the syntax is initially
+confusing. 
+
+Take for example the word `environment`...
+
+### Environments
+
+An environment is where we bring our data to work with it. Here we work in a R 
+envrionment, using the R language as a set of tools.
+**RStudio** is an integrated development environment, or IDE for R programming. 
+It is regularly updated, and upgrading enables access to the latest features. 
+
+The latest version can be downloaded here: http://www.rstudio.com/download
+
+## Why learn R, or any language ?
+
+We can write R code without saving it, but it's generally more useful to write 
+and save our code as a script. Working with scripts makes the steps you used in 
+your analysis clear, and the code you write can be inspected by someone else who 
+can give  you feedback and spot mistakes.
+
+Learning R (or any programming language) and working with scripts forces you to 
+have deeper understanding of what you are doing, facilitates your learning 
+and comprehension of the methods you use:
+
++ Writing and publishing code is important for reproducible resarch
++ R has many thousands of packages covering many disciplines.
++ R can work with many types of data.
++ They is a large R community for development and support.
++ Using R gives you control over your figures and reports.
+
+## Finding your way around RStudio
+
+Let's begin by learning about [RStudio](https://www.rstudio.com/), the
+Integrated Development Environment (IDE).
+
+We will use R Studio IDE to write code, navigate the files found on our computer,
+inspect the variables we are going to create, and visualize the plots we will
+generate. R Studio can also be used for other things (e.g., version control,
+developing packages, writing Shiny apps) that we don't have time to cover during
+this workshop.
+
+R Studio is divided into "Panes", see Figure \@ref(fig:rstudio). 
+
+When you first open it, there are three panes,the console where you type 
+commands, your environment/history (top-right), and your
+files/plots/packages/help/viewer (bottom-right).
+
+The enivronment shows all the R objects you have created or are using, such
+as data you have imported.
+
+The output pane can be used to view any plots you have created.
+
+Not opened at first start up is the fourth default pane: the script editor pane, 
+but this will open as soon as we create/edit a R script (or many other document types). *The script editor is where will be typing much of the time.*
+
+
+(ref:rstudio) The Rstudio Integrated Development Environment (IDE).
+
+```{r rstudio,fig.cap='(ref:rstudio)',fig.asp=1, out.width= '80%', fig.align='center', echo=FALSE}
+knitr::include_graphics("img/rstudio_ide_image.png")
 ```
 
-You can write citations, too. For example, we are using the **bookdown** package [@R-bookdown] in this sample book, which was built on top of R Markdown and **knitr** [@xie2015].
+The placement of these panes and their content can be customized (see menu, 
+R Studio -> Tools -> Global Options -> Pane Layout). One of the advantages of 
+using R Studio is that all the information you need to write code is available 
+ina single window. Additionally, with many shortcuts, auto-completion, and 
+highlighting for the major file types you use while developing in R, R Studio 
+will make typing easier and less error-prone.
+
+Time for a philosphical diversion...
+
+### What is real?
+
+At the start, we might consider our environment "real" - that is to say the objects
+we've created/loaded and are using are "real". But it's much better in the long run
+to consider our scripts as "real" - our scripts are where we write down the code
+that creates our objects that we'll be using in our environment.
+
+**As a script is a document, it is reproducible**
+
+Or to put it another way: we can easily recreate an environment from our scripts, 
+but not so easily create a script from an enivronment.
+
+To support this notion of thinking in terms of our scripts as real, we recommend
+turning off the preservation of workspaces between sessions by setting the 
+Tools > Global Options menu in R studio as shown in Figure @\ref(fig:turn-off):
+
+(ref:turn-off) Don't save your workspace!
+
+
+```{r workspace,fig.cap='(ref:turn-off)',fig.asp=1, out.width= '80%', fig.align='center', echo=FALSE}
+knitr::include_graphics("img/rdata_turn_off.png")
+```
+
+## Where am I?
+
+R studio tells you where you are in terms of directory address like so:
+
+(ref:working-dir)
+
+```{r working-directory,fig.cap='(ref:working-dir)',fig.asp=1, out.width= '80%', fig.align='center', echo=FALSE}
+knitr::include_graphics("img/rstudio_working_directory.png")
+```
+
+If you are unfamiliar with how computers structure folders and files, then 
+consider a tree with a root from which the trunk extends and branches divide.
+In the image above, the ~ symbol represents a contraction of the path from the
+root to the 'home' directory (in Windows this is 'Documents') and then the 
+forward slashes are the branches. (Note: Windows uses backslashes, Unix type 
+systems and R use forwardslashes).
+
+It is good practice to keep a set of related data, analyses, and text
+self-contained in a single folder, called the **working directory**. All of the
+scripts within this folder can then use *relative paths* to files that indicate
+where inside the project a file is located (as opposed to absolute paths, which
+point to where a file is on a specific computer). Working this way makes it
+a lot easier to move your project around on your computer and share it with
+others without worrying about whether or not the underlying scripts will still
+work.
+
+(ref:dir-structure) A typical directory structure
+
+```{r dir-structure,fig.cap='(ref:dir-structure)',fig.asp=1, out.width= '80%', fig.align='center', echo=FALSE}
+knitr::include_graphics("img/R-ecology-work_dir_structure.png")
+```
+
+## R projects
+
+RStudio also has a facility to keep all files associated with a particular 
+analysis together called a project.
+
+Creating a project creates a working directory for you and also remembers
+its location (allowing you to quickly navigate to it) and optionally preserves
+custom settings and open files to make it easier to resume work after a
+break. 
+
+(ref:r-projects)
+
+```{r r-projects,fig.cap='(ref:r-projects)',fig.asp=1, out.width= '80%', fig.align='center', echo=FALSE}
+knitr::include_graphics("img/rstudio_create_project.PNG")
+```
+
+Below, we will go through the steps for creating an "R Project":
+
+* Start R Studio (presentation of R Studio -below- should happen here)
+* Under the `File` menu, click on `New project`, choose `New directory`, then
+  `Empty project`
+* Enter a name for this new folder (or "directory", in computer science), and
+  choose a convenient location for it. This will be your **working directory**
+  for the rest of the day (e.g., `~/bspr-workshop`)
+* Click on "Create project"
+* Under the `Files` tab on the right of the screen, click on `New Folder` and
+  create a folder named `data` within your newly created working directory. (e.g., `~/bspr-workshopdata`)
+* Create a new R script (File > New File > R script) and save it in your working
+  directory (e.g. `bspr-workshop-script.R`)
+  
+## Naming things
+  
+[Jenny Bryan](https://ropensci.org/blog/2017/12/08/rprofile-jenny-bryan/)
+has three principles for [naming things](http://www2.stat.duke.edu/~rcs46/lectures_2015/01-markdown-git/slides/naming-slides/naming-slides.pdf) that are well worth remembering.
+
+When you names something, a file or an object, ideally it should be:
+  
+1. Machine readable (no whitespace, punctuation, upper AND lowercase...)
+2. Human readable  (makes sense in 6 months or 2 years time)
+3. Plays well with default ordering (numerical or date order)
+
+## Seeking help
+
+If you need help with a specific R function, let's say `barplot()`, you can type:
+
+```{r barplot, eval=FALSE}
+?barplot
+```
+
+
+If you can't find what you are looking for, you can use the
+[rdocumention.org](http://www.rdocumentation.org) website that searches through
+the help files across all packages available.
+
+A Google or internet search "R \<task\>" will often either send you to the appropriate package documentation or a helpful forum question that someone else already asked,
+such as [Stack Overflow](http://stackoverflow.com/questions/tagged/r).
+
+### Asking for help
+
+The key to get help from someone is for them to grasp your problem rapidly. You
+should make it as easy as possible to pinpoint where the issue might be.
+
+Try to use the correct words to describe your problem. For instance, a package
+is not the same thing as a library. Most people will understand what you meant,
+but others have really strong feelings about the difference in meaning. The key
+point is that it can make things confusing for people trying to help you. Be as
+precise as possible when describing your problem.
+
+If possible, try to reduce what doesn't work to a simple *reproducible
+example*. 
+
+If you can reproduce the problem using a very small `data.frame`
+instead of your 50,000 rows and 10,000 columns one, provide the small one with
+the description of your problem. 
+
+When appropriate, try to generalize what you
+are doing so even people who are not in your field can understand the
+question. For instance instead of using a subset of your real dataset, create a
+small (3 columns, 5 row) generic one. 
+
+For more information on how to write a
+reproducible example see [this article by Hadley Wickham](http://adv-r.had.co.nz/Reproducibility.html).

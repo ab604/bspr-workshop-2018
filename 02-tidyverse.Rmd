@@ -1,3 +1,3 @@
-# The tidyverse
+# Getting started in R and the tidyverse {#tidyverse}
 
 An introduction to the tidyverse.
