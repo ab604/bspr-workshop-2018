@@ -9,10 +9,10 @@ Follow the links to access those materials.
 
 In terms of philosophy:
 
-1. The primary motivation for using tools such as R is to get more done, in less
-time and with less pain.
+1. The primary motivation for using tools such as R is to get more done, in
+less time and with less pain.
 
-2. And the overall aim is to *understand and communicate* findings from our 
+2. And the overall aim is to *understand and communicate* findings from our
 data.
 
 (ref:pipeline) Data project workflow.
@@ -231,26 +231,17 @@ such as [Stack Overflow](http://stackoverflow.com/questions/tagged/r).
 
 ### Asking for help
 
-The key to get help from someone is for them to grasp your problem rapidly. You
+As well as knowing [where to ask](https://www.tidyverse.org/help/#where-to-ask), the key to get help 
+from someone is for them to grasp your problem rapidly. You
 should make it as easy as possible to pinpoint where the issue might be.
 
-Try to use the correct words to describe your problem. For instance, a package
-is not the same thing as a library. Most people will understand what you meant,
-but others have really strong feelings about the difference in meaning. The key
-point is that it can make things confusing for people trying to help you. Be as
-precise as possible when describing your problem.
+Try to use the correct words to describe your problem. For instance, a 
+package is not the same thing as a library. Most people will understand 
+what you meant, but others have really strong feelings about the difference
+in meaning. The key point is that it can make things confusing for people 
+trying to help you. Be as precise as possible when describing your problem.
 
 If possible, try to reduce what doesn't work to a simple *reproducible
-example*. 
+example* otherwise known as a *reprex*. 
 
-If you can reproduce the problem using a very small `data.frame`
-instead of your 50,000 rows and 10,000 columns one, provide the small one with
-the description of your problem. 
-
-When appropriate, try to generalize what you
-are doing so even people who are not in your field can understand the
-question. For instance instead of using a subset of your real dataset, create a
-small (3 columns, 5 row) generic one. 
-
-For more information on how to write a
-reproducible example see [this article by Hadley Wickham](http://adv-r.had.co.nz/Reproducibility.html).
+For more information on how to write a reproducible example see [this article](https://www.tidyverse.org/help/#reprex).

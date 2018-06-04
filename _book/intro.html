@@ -116,7 +116,21 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="1.7.1" data-path="intro.html"><a href="intro.html#asking-for-help"><i class="fa fa-check"></i><b>1.7.1</b> Asking for help</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="tidyverse.html"><a href="tidyverse.html"><i class="fa fa-check"></i><b>2</b> Getting started in R and the tidyverse</a></li>
+<li class="chapter" data-level="2" data-path="tidyverse.html"><a href="tidyverse.html"><i class="fa fa-check"></i><b>2</b> Getting started in R and the tidyverse</a><ul>
+<li class="chapter" data-level="2.1" data-path="tidyverse.html"><a href="tidyverse.html#tidy-data-and-the-tidyverse"><i class="fa fa-check"></i><b>2.1</b> Tidy data and the tidyverse</a></li>
+<li class="chapter" data-level="2.2" data-path="tidyverse.html"><a href="tidyverse.html#data-visualisation"><i class="fa fa-check"></i><b>2.2</b> Data visualisation</a></li>
+<li class="chapter" data-level="2.3" data-path="tidyverse.html"><a href="tidyverse.html#workflow-basics"><i class="fa fa-check"></i><b>2.3</b> Workflow basics</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="tidyverse.html"><a href="tidyverse.html#assigning-objects"><i class="fa fa-check"></i><b>2.3.1</b> Assigning objects</a></li>
+<li class="chapter" data-level="2.3.2" data-path="tidyverse.html"><a href="tidyverse.html#calling-functions"><i class="fa fa-check"></i><b>2.3.2</b> Calling functions</a></li>
+<li class="chapter" data-level="2.3.3" data-path="tidyverse.html"><a href="tidyverse.html#atomic-vectors"><i class="fa fa-check"></i><b>2.3.3</b> Atomic vectors</a></li>
+<li class="chapter" data-level="2.3.4" data-path="tidyverse.html"><a href="tidyverse.html#attributes"><i class="fa fa-check"></i><b>2.3.4</b> Attributes</a></li>
+<li class="chapter" data-level="2.3.5" data-path="tidyverse.html"><a href="tidyverse.html#factors"><i class="fa fa-check"></i><b>2.3.5</b> Factors</a></li>
+<li class="chapter" data-level="2.3.6" data-path="tidyverse.html"><a href="tidyverse.html#lists"><i class="fa fa-check"></i><b>2.3.6</b> Lists</a></li>
+<li class="chapter" data-level="2.3.7" data-path="tidyverse.html"><a href="tidyverse.html#matrices-and-arrays"><i class="fa fa-check"></i><b>2.3.7</b> Matrices and arrays</a></li>
+<li class="chapter" data-level="2.3.8" data-path="tidyverse.html"><a href="tidyverse.html#data-frames"><i class="fa fa-check"></i><b>2.3.8</b> Data frames</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="tidyverse.html"><a href="tidyverse.html#learning-more-r"><i class="fa fa-check"></i><b>2.4</b> Learning more R</a></li>
+</ul></li>
 <li class="chapter" data-level="3" data-path="transform.html"><a href="transform.html"><i class="fa fa-check"></i><b>3</b> Importing and transforming proteomics data</a><ul>
 <li class="chapter" data-level="3.1" data-path="transform.html"><a href="transform.html#importing-flat-files"><i class="fa fa-check"></i><b>3.1</b> Importing flat files</a></li>
 <li class="chapter" data-level="3.2" data-path="transform.html"><a href="transform.html#calculating-fold-change-and-enrichment"><i class="fa fa-check"></i><b>3.2</b> Calculating fold change and enrichment</a></li>
@@ -286,12 +300,10 @@ Figure 1.6: (ref:r-projects)
 <p>A Google or internet search “R &lt;task&gt;” will often either send you to the appropriate package documentation or a helpful forum question that someone else already asked, such as <a href="http://stackoverflow.com/questions/tagged/r">Stack Overflow</a>.</p>
 <div id="asking-for-help" class="section level3">
 <h3><span class="header-section-number">1.7.1</span> Asking for help</h3>
-<p>The key to get help from someone is for them to grasp your problem rapidly. You should make it as easy as possible to pinpoint where the issue might be.</p>
+<p>As well as knowing <a href="https://www.tidyverse.org/help/#where-to-ask">where to ask</a>, the key to get help from someone is for them to grasp your problem rapidly. You should make it as easy as possible to pinpoint where the issue might be.</p>
 <p>Try to use the correct words to describe your problem. For instance, a package is not the same thing as a library. Most people will understand what you meant, but others have really strong feelings about the difference in meaning. The key point is that it can make things confusing for people trying to help you. Be as precise as possible when describing your problem.</p>
-<p>If possible, try to reduce what doesn’t work to a simple <em>reproducible example</em>.</p>
-<p>If you can reproduce the problem using a very small <code>data.frame</code> instead of your 50,000 rows and 10,000 columns one, provide the small one with the description of your problem.</p>
-<p>When appropriate, try to generalize what you are doing so even people who are not in your field can understand the question. For instance instead of using a subset of your real dataset, create a small (3 columns, 5 row) generic one.</p>
-<p>For more information on how to write a reproducible example see <a href="http://adv-r.had.co.nz/Reproducibility.html">this article by Hadley Wickham</a>.</p>
+<p>If possible, try to reduce what doesn’t work to a simple <em>reproducible example</em> otherwise known as a <em>reprex</em>.</p>
+<p>For more information on how to write a reproducible example see <a href="https://www.tidyverse.org/help/#reprex">this article</a>.</p>
 
 </div>
 </div>

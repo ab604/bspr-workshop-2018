@@ -116,7 +116,21 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="1.7.1" data-path="intro.html"><a href="intro.html#asking-for-help"><i class="fa fa-check"></i><b>1.7.1</b> Asking for help</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="tidyverse.html"><a href="tidyverse.html"><i class="fa fa-check"></i><b>2</b> Getting started in R and the tidyverse</a></li>
+<li class="chapter" data-level="2" data-path="tidyverse.html"><a href="tidyverse.html"><i class="fa fa-check"></i><b>2</b> Getting started in R and the tidyverse</a><ul>
+<li class="chapter" data-level="2.1" data-path="tidyverse.html"><a href="tidyverse.html#tidy-data-and-the-tidyverse"><i class="fa fa-check"></i><b>2.1</b> Tidy data and the tidyverse</a></li>
+<li class="chapter" data-level="2.2" data-path="tidyverse.html"><a href="tidyverse.html#data-visualisation"><i class="fa fa-check"></i><b>2.2</b> Data visualisation</a></li>
+<li class="chapter" data-level="2.3" data-path="tidyverse.html"><a href="tidyverse.html#workflow-basics"><i class="fa fa-check"></i><b>2.3</b> Workflow basics</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="tidyverse.html"><a href="tidyverse.html#assigning-objects"><i class="fa fa-check"></i><b>2.3.1</b> Assigning objects</a></li>
+<li class="chapter" data-level="2.3.2" data-path="tidyverse.html"><a href="tidyverse.html#calling-functions"><i class="fa fa-check"></i><b>2.3.2</b> Calling functions</a></li>
+<li class="chapter" data-level="2.3.3" data-path="tidyverse.html"><a href="tidyverse.html#atomic-vectors"><i class="fa fa-check"></i><b>2.3.3</b> Atomic vectors</a></li>
+<li class="chapter" data-level="2.3.4" data-path="tidyverse.html"><a href="tidyverse.html#attributes"><i class="fa fa-check"></i><b>2.3.4</b> Attributes</a></li>
+<li class="chapter" data-level="2.3.5" data-path="tidyverse.html"><a href="tidyverse.html#factors"><i class="fa fa-check"></i><b>2.3.5</b> Factors</a></li>
+<li class="chapter" data-level="2.3.6" data-path="tidyverse.html"><a href="tidyverse.html#lists"><i class="fa fa-check"></i><b>2.3.6</b> Lists</a></li>
+<li class="chapter" data-level="2.3.7" data-path="tidyverse.html"><a href="tidyverse.html#matrices-and-arrays"><i class="fa fa-check"></i><b>2.3.7</b> Matrices and arrays</a></li>
+<li class="chapter" data-level="2.3.8" data-path="tidyverse.html"><a href="tidyverse.html#data-frames"><i class="fa fa-check"></i><b>2.3.8</b> Data frames</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="tidyverse.html"><a href="tidyverse.html#learning-more-r"><i class="fa fa-check"></i><b>2.4</b> Learning more R</a></li>
+</ul></li>
 <li class="chapter" data-level="3" data-path="transform.html"><a href="transform.html"><i class="fa fa-check"></i><b>3</b> Importing and transforming proteomics data</a><ul>
 <li class="chapter" data-level="3.1" data-path="transform.html"><a href="transform.html#importing-flat-files"><i class="fa fa-check"></i><b>3.1</b> Importing flat files</a></li>
 <li class="chapter" data-level="3.2" data-path="transform.html"><a href="transform.html#calculating-fold-change-and-enrichment"><i class="fa fa-check"></i><b>3.2</b> Calculating fold change and enrichment</a></li>
@@ -403,7 +417,7 @@ dat.tn &lt;-<span class="st"> </span><span class="kw">scale</span>(<span class="
 <span class="kw">library</span>(pheatmap)
 <span class="kw">pheatmap</span>(dat.tn,<span class="dt">cutree_rows =</span> <span class="dv">2</span>,
          <span class="dt">cutree_cols =</span> <span class="dv">2</span>)</code></pre></div>
-<p><img src="bspr-workshop-2018_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p><img src="bspr-workshop-2018_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cal_z_score &lt;-<span class="st"> </span><span class="cf">function</span>(x){
   (x <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(x)) <span class="op">/</span><span class="st"> </span><span class="kw">sd</span>(x)
 }
@@ -411,7 +425,7 @@ dat.tn &lt;-<span class="st"> </span><span class="kw">scale</span>(<span class="
 data_subset_norm &lt;-<span class="st"> </span><span class="kw">t</span>(<span class="kw">apply</span>(dat_mut[,<span class="dv">2</span><span class="op">:</span><span class="dv">7</span>], <span class="dv">1</span>, cal_z_score))
 <span class="kw">row.names</span>(data_subset_norm) &lt;-<span class="st"> </span>dat_mut<span class="op">$</span>protein_accession
 <span class="kw">pheatmap</span>(data_subset_norm)</code></pre></div>
-<p><img src="bspr-workshop-2018_files/figure-html/unnamed-chunk-2-2.png" width="672" /></p>
+<p><img src="bspr-workshop-2018_files/figure-html/unnamed-chunk-3-2.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">d1 &lt;-<span class="st"> </span>dat.tn <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">t</span>() <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">dist</span>(.,<span class="dt">method =</span> <span class="st">&quot;euclidean&quot;</span>, <span class="dt">diag =</span> <span class="ot">FALSE</span>, <span class="dt">upper =</span> <span class="ot">FALSE</span>)
 
@@ -426,7 +440,7 @@ c2 &lt;-<span class="st"> </span><span class="kw">hclust</span>(d2, <span class=
 <span class="co"># Check clustering by plotting dendrograms</span>
 <span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">1</span>),<span class="dt">cex=</span><span class="fl">0.5</span>) <span class="co"># Make 2 rows, 1 col plot frame and shrink labels</span>
 <span class="kw">plot</span>(c1); <span class="kw">plot</span>(c2) <span class="co"># Plot both cluster dendrograms</span></code></pre></div>
-<p><img src="bspr-workshop-2018_files/figure-html/unnamed-chunk-2-3.png" width="672" /> 2. Plot the data</p>
+<p><img src="bspr-workshop-2018_files/figure-html/unnamed-chunk-3-3.png" width="672" /> 2. Plot the data</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Set colours for heatmap, 25 increments</span>
 my_palette &lt;-<span class="st"> </span><span class="kw">colorRampPalette</span>(<span class="kw">c</span>(<span class="st">&quot;blue&quot;</span>,<span class="st">&quot;white&quot;</span>,<span class="st">&quot;red&quot;</span>))(<span class="dt">n =</span> <span class="dv">25</span>)
 
