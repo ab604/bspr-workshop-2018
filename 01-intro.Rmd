@@ -202,7 +202,7 @@ Below, we will go through the steps for creating an "R Project":
 * Create a new R script (File > New File > R script) and save it in your working
   directory (e.g. `bspr-workshop-script.R`)
   
-## Naming things
+## Naming things {#names}
   
 [Jenny Bryan](https://ropensci.org/blog/2017/12/08/rprofile-jenny-bryan/)
 has three principles for [naming things](http://www2.stat.duke.edu/~rcs46/lectures_2015/01-markdown-git/slides/naming-slides/naming-slides.pdf) that are well worth remembering.

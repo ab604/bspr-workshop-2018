@@ -1,6 +1,68 @@
-# Importing and transforming proteomics data {#transform}
+# Importing and transforming data {#transform}
 
-## Importing flat files
+## Some definitions
+
+ + Importing means getting data into our R environment by turning into into a
+ R object that we can then manipulate. The raw data file remains unchanged.
+ + Inspecting means looking at the dataset to understand what it contains.
+ + Tidying refers to getting data into a consistent format that makes it easy to
+ use in later steps.
+ 
+ A note here is that we are focusing on rectangular data, the sort that comes
+ in rows and columns such as in a spreadsheet. Lots of our data types exist,
+ such as images, which are beyond the scope of this lesson, but can also be
+ handled by R.
+ 
+### Using scripts
+
+Using the console is useful, but as we build up a workflow, that is to say,
+wring code to:
+
++ load packages 
++ load data
++ explore the data 
++ and output some results
+
+Then it's much more useful to contain this in a script: a document of our code.
+
+Why? When we write and save our code in scripts, we can re-use it, share it or 
+edit it. But **most importantly a script is a record**.
+
+Cmd/Ctrl + Shift + N will open a new script file up and you should see something
+like Figure \@ref(fig:script-pane) with the script editor pane open:
+
+(ref:script-pane) Rstudio with the script editor pane open.
+
+```{r script-pane, fig.cap = '(ref:script-pane)', fig.asp=1, out.width= '80%', fig.align='center', echo=FALSE}
+knitr::include_graphics("img/rstudio_screenshot_four_panes.PNG")
+```
+
+### Running code
+
+We can run a highlighted portion of code in your script if you click the Run
+button at the top of the scripts pane as shown in Figure \@ref(fig:run-script). 
+
+(ref:run-script)
+
+```{r run-script, fig.cap= '(ref:run-script)',fig.asp=1, out.width= '80%', fig.align='center', echo=FALSE}
+knitr::include_graphics("img/run_script.PNG")
+```
+
+You can run the entire script by clicking the Source button.
+
+Or we can run chunks of code if we split our script into sections, see below.
+
+### Creating a R script
+
+We first need to create a script that will form the basis of our analysis.
+
+Go to the file menu and select New Files > R script. This should open the script
+editor pane.
+
+Now let's save the script, by going to File > Save and we should find ourselves
+prompted to save the script in our Project Directory.
+
+Following the advice about [naming things](#names)
 
 ## Calculating fold change and enrichment
 
@@ -20,17 +82,23 @@ transform ratios on a log scale, the scale becomes symmetric around 0 and thus
 we can now observe the distribution of ratios in terms of positive, negative or
 no change.
 
-```{r fold-change-1}
+(ref:logratios) Ratios are not symmetric around zero, logratios are.
+
+```{r fold-change-1,fig.cap='(ref:logratios)', echo=FALSE, cache=TRUE}
 set.seed(10)
 x <- 2^(rnorm(100))
 y <- 2^(rnorm(100))
 ratios <- tibble(value = x/y, label = "ratios")
 logratios <- tibble(value = log2(ratios$value), label = "logratios")
 
+
 bind_rows(ratios,logratios) %>% 
+  mutate(label = factor(label, levels = c("ratios","logratios"))) %>% 
   ggplot(aes(value)) +
   geom_histogram(binwidth = 2, colour = "grey50", fill = "white") +
   ggplot2::facet_wrap(~ label) +
+  xlab("") +
+  ylab("") +
   theme_minimal()
 ```
 
@@ -44,7 +112,7 @@ For example, a fold change of 32 times can be either a ratio 1/32 or 32/1.
 1/32 is much closer to 1 than 32/1, but transformed to a log scale we see that in 
 terms of magnitude of difference it is the same as 32/1.
 
-```{r fold-change-2}
+```{r fold-change-2, cache=TRUE}
 x2 <- 2^seq(1,5)
 y_vals <- c(rev(1/x2),1,x2)
 names <- c(paste0("1/",rev(x2)),1,x2)
@@ -78,7 +146,7 @@ plot_grid(p1,p2)
 each protein is a set of observations (rows) of the variables, which are the
 values recorded for each replicate (columns).
 
-```{r load-data, echo=FALSE, eval=T}
+```{r load-data, echo=FALSE, cache=TRUE}
 # Emily's sample data set, missing values are NaN and clean up names
 dat_em <- read_csv("data/MergedFinalProt_1colPerFile_6files_filtered.csv", 
                    na = "NaN", col_types = cols()) %>% clean_names()
