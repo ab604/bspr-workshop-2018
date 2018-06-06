@@ -1,3 +1,4 @@
+% Encoding: UTF-8
 @Book{xie2015,
   title = {Dynamic Documents with {R} and knitr},
   author = {Yihui Xie},
@@ -8,3 +9,46 @@
   note = {ISBN 978-1498716963},
   url = {http://yihui.name/knitr/},
 }
+
+@Article{ihaka1996,
+  author        = {Ihaka, Ross and Gentleman, Robert},
+  title         = {R: a language for data analysis and graphics},
+  journal       = {Journal of computational and graphical statistics},
+  year          = {1996},
+  volume        = {5},
+  number        = {3},
+  pages         = {299--314},
+  __markedentry = {[ab604:]},
+  publisher     = {Taylor \& Francis},
+}
+
+@Article{huber2015,
+  author          = {Huber, Wolfgang and Carey, Vincent J and Gentleman, Robert and Anders, Simon and Carlson, Marc and Carvalho, Benilton S and Bravo, Hector Corrada and Davis, Sean and Gatto, Laurent and Girke, Thomas and Gottardo, Raphael and Hahne, Florian and Hansen, Kasper D and Irizarry, Rafael A and Lawrence, Michael and Love, Michael I and MacDonald, James and Obenchain, Valerie and Oleś, Andrzej K and Pagès, Hervé and Reyes, Alejandro and Shannon, Paul and Smyth, Gordon K and Tenenbaum, Dan and Waldron, Levi and Morgan, Martin},
+  title           = {Orchestrating high-throughput genomic analysis with Bioconductor.},
+  journal         = {Nature methods},
+  year            = {2015},
+  volume          = {12},
+  pages           = {115--121},
+  month           = feb,
+  issn            = {1548-7105},
+  __markedentry   = {[ab604:6]},
+  abstract        = {Bioconductor is an open-source, open-development software project for the analysis and comprehension of high-throughput data in genomics and molecular biology. The project aims to enable interdisciplinary research, collaboration and rapid development of scientific software. Based on the statistical programming language R, Bioconductor comprises 934 interoperable packages contributed by a large, diverse community of scientists. Packages cover a range of bioinformatic and statistical applications. They undergo formal initial review and continuous automated testing. We present an overview for prospective users and contributors. },
+  citation-subset = {IM},
+  completed       = {2015-04-08},
+  country         = {United States},
+  doi             = {10.1038/nmeth.3252},
+  issn-linking    = {1548-7091},
+  issue           = {2},
+  keywords        = {Computational Biology; Gene Expression Profiling; Genomics, methods; High-Throughput Screening Assays, methods; Programming Languages; Software; User-Computer Interface},
+  mid             = {NIHMS661499},
+  nlm-id          = {101215604},
+  owner           = {NLM},
+  pii             = {nmeth.3252},
+  pmc             = {PMC4509590},
+  pmid            = {25633503},
+  pubmodel        = {Print},
+  pubstatus       = {ppublish},
+  revised         = {2018-05-15},
+}
+
+@Comment{jabref-meta: databaseType:bibtex;}

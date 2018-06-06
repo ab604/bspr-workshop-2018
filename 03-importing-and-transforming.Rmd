@@ -13,7 +13,7 @@
  such as images, which are beyond the scope of this lesson, but can also be
  handled by R.
  
-### Using scripts
+## Using scripts
 
 Using the console is useful, but as we build up a workflow, that is to say,
 wring code to:
@@ -37,7 +37,7 @@ like Figure \@ref(fig:script-pane) with the script editor pane open:
 knitr::include_graphics("img/rstudio_screenshot_four_panes.PNG")
 ```
 
-### Running code
+## Running code
 
 We can run a highlighted portion of code in your script if you click the Run
 button at the top of the scripts pane as shown in Figure \@ref(fig:run-script). 
@@ -52,7 +52,7 @@ You can run the entire script by clicking the Source button.
 
 Or we can run chunks of code if we split our script into sections, see below.
 
-### Creating a R script
+## Creating a R script
 
 We first need to create a script that will form the basis of our analysis.
 
@@ -62,7 +62,81 @@ editor pane.
 Now let's save the script, by going to File > Save and we should find ourselves
 prompted to save the script in our Project Directory.
 
-Following the advice about [naming things](#names)
+Following the advice about [naming things](#names) we can create a new R script
+called `01-bspr-workshop-july-2018`.
+
+This name is machine readable (no spaces or special characters), human readable,
+and works well with default ordering by beginning with `01`.
+
+## Setting up our environment
+
+At the head of our script it's common to put a title, the name of the author
+and the date, and any other useful information. This is created as comments 
+using the `#` at the start of each line.
+
+It's then usual to follow this by code to load the packages we need into our
+our R environment using the `library()` function and providing the name of the
+package we wish to load. Packages are collections of R functions.
+
+Often we break the code up into regions by adding dashes (or equals symbols) 
+to the comment line. This enables us to run chunks of the script separately from
+running the whole script when using our code.
+
+Here is a typical head for a script:
+
+```{r set-up, eval=FALSE}
+# My workshop script
+# 7th July 2018
+# Alistair Bailey
+
+# Load packages ----------------------------------------------------------------
+library(tidyverse)
+library(janitor)
+library(gplots)
+library(pheatmap)
+```
+
+### Bioconductor
+
+As an aside there are many proteomics specific R packages, these are generally
+found through [Bioconductor](https://www.bioconductor.org/) which is a project
+that was initiated in 2001 to create tools for the analysis of high-throughput 
+genomic data, but also includes other 'omics data tools [@gentleman2004,@huber2015].
+
+Exploring Bioconductor is beyond our scope here, but well worth exploring for
+manipulation and analysis of raw data formats such as mzxml files.
+
+## Importing data
+
+Assuming our data is in a flat format, we can import it into our environment
+using the tidyverse `readr` package. A flat format is a file that contains only
+text  such as `csv` or tab separated data without meta-data (extra information), 
+such as the colour of cells in an excel file. 
+
+If we our data was an excel file, we can use the tidyverse `readxl` package to 
+import the data.
+
+For the purposes of this workshop we have a `csv` (comma separated variable) file.
+
+The example data can be downloaded from [here](link) as saved to our project
+directory. Check the `Files` pane to see it's there.
+
+We then import data and assign it to an object we'll call `data` like so:
+
+```{r import-data, eval=FALSE}
+# Import example data ----------------------------------------------------------
+
+# Import the example data with read_csv from the readr package
+# Tell read_csv that missing values are the string NaN
+# Clean up the variable names with clean_names() from the janitor package
+dat <- readr::read_csv("070718-proteomics-example-data.csv",
+                na = "NaN") %>%
+                janitor::clean_names()
+```
+
+## Exploring the data
+
+The first thing to do with any data set is to actually look at it!
 
 ## Calculating fold change and enrichment
 
@@ -82,7 +156,7 @@ transform ratios on a log scale, the scale becomes symmetric around 0 and thus
 we can now observe the distribution of ratios in terms of positive, negative or
 no change.
 
-(ref:logratios) Ratios are not symmetric around zero, logratios are.
+(ref:logratios) Ratios are not symmetric around one, logratios are symmetric around zero.
 
 ```{r fold-change-1,fig.cap='(ref:logratios)', echo=FALSE, cache=TRUE}
 set.seed(10)
@@ -109,10 +183,12 @@ large magnitudes when we plot the data.
 
 For example, a fold change of 32 times can be either a ratio 1/32 or 32/1. 
 
-1/32 is much closer to 1 than 32/1, but transformed to a log scale we see that in 
-terms of magnitude of difference it is the same as 32/1.
+As shown in Figure \@ref(fig:fold-change-2), 1/32 is much closer to 1 than 32/1, but 
+transformed to a log scale we see that in terms of magnitude of difference it is the same as 32/1.
 
-```{r fold-change-2, cache=TRUE}
+(ref:logratio-2) Transformation of scales using log transformation.
+
+```{r fold-change-2, fig.cap='(ref:logratio-2)', echo=FALSE, cache=TRUE}
 x2 <- 2^seq(1,5)
 y_vals <- c(rev(1/x2),1,x2)
 names <- c(paste0("1/",rev(x2)),1,x2)
@@ -183,11 +259,12 @@ becoming the mean of the highest observations across all experiments, the
 second ranking observation in each experiment becoming the mean of the 
 second highest observations across all experiments.
 
-[Dave Tang's Blog : Quantile Normalisation in R](https://davetang.org/muse/2014/07/07/quantile-normalisation-in-r/)
+[Dave Tang's Blog:Quantile Normalisation in R](https://davetang.org/muse/2014/07/07/quantile-normalisation-in-r/) has more
+details on this approach.
 
-[Rafael Irizarry's tweet](https://twitter.com/rafalab/status/545586012219772928?ref_src=twsrc%5Etfw)
 
-(ref:quant-norm) Quantile Normalisation.
+
+(ref:quant-norm) Quantile Normalisation from [Rafael Irizarry's tweet](https://twitter.com/rafalab/status/545586012219772928?ref_src=twsrc%5Etfw).
 
 ```{r quant-norm, fig.cap='(ref:quant-norm)',fig.asp=1, out.width= '80%', fig.align='center', echo=FALSE}
 knitr::include_graphics("img/quant_norm.png")

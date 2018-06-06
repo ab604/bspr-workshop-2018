@@ -56,7 +56,7 @@ Up to date version of R and Rstudio
 The following R packages:
 
 ```{r packages, eval=FALSE}
-install.packages(c("tidyverse","janitor"))
+install.packages(c("tidyverse","janitor","gplots","pheatmap"))
 ```
 
 
