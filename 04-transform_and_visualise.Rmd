@@ -1,144 +1,14 @@
-# Importing and transforming data {#transform}
+# Transformation and visualisation {#transform}
 
-## Some definitions
+Having imported our data set of observations for 7702 proteins
+from cells in three control experiments and three treatment experiments.
+Remember, the observations are signal intensity measurements from the mass spectrometer,
+and these intensities relate to the amount of protein in each experiment and under 
+each condition.
 
- + Importing means getting data into our R environment by turning into into a
- R object that we can then manipulate. The raw data file remains unchanged.
- + Inspecting means looking at the dataset to understand what it contains.
- + Tidying refers to getting data into a consistent format that makes it easy to
- use in later steps.
- 
- A note here is that we are focusing on rectangular data, the sort that comes
- in rows and columns such as in a spreadsheet. Lots of our data types exist,
- such as images, which are beyond the scope of this lesson, but can also be
- handled by R.
- 
-## Using scripts
-
-Using the console is useful, but as we build up a workflow, that is to say,
-wring code to:
-
-+ load packages 
-+ load data
-+ explore the data 
-+ and output some results
-
-Then it's much more useful to contain this in a script: a document of our code.
-
-Why? When we write and save our code in scripts, we can re-use it, share it or 
-edit it. But **most importantly a script is a record**.
-
-Cmd/Ctrl + Shift + N will open a new script file up and you should see something
-like Figure \@ref(fig:script-pane) with the script editor pane open:
-
-(ref:script-pane) Rstudio with the script editor pane open.
-
-```{r script-pane, fig.cap = '(ref:script-pane)', fig.asp=1, out.width= '80%', fig.align='center', echo=FALSE}
-knitr::include_graphics("img/rstudio_screenshot_four_panes.PNG")
-```
-
-## Running code
-
-We can run a highlighted portion of code in your script if you click the Run
-button at the top of the scripts pane as shown in Figure \@ref(fig:run-script). 
-
-(ref:run-script)
-
-```{r run-script, fig.cap= '(ref:run-script)',fig.asp=1, out.width= '80%', fig.align='center', echo=FALSE}
-knitr::include_graphics("img/run_script.PNG")
-```
-
-You can run the entire script by clicking the Source button.
-
-Or we can run chunks of code if we split our script into sections, see below.
-
-## Creating a R script
-
-We first need to create a script that will form the basis of our analysis.
-
-Go to the file menu and select New Files > R script. This should open the script
-editor pane.
-
-Now let's save the script, by going to File > Save and we should find ourselves
-prompted to save the script in our Project Directory.
-
-Following the advice about [naming things](#names) we can create a new R script
-called `01-bspr-workshop-july-2018`.
-
-This name is machine readable (no spaces or special characters), human readable,
-and works well with default ordering by beginning with `01`.
-
-## Setting up our environment
-
-At the head of our script it's common to put a title, the name of the author
-and the date, and any other useful information. This is created as comments 
-using the `#` at the start of each line.
-
-It's then usual to follow this by code to load the packages we need into our
-our R environment using the `library()` function and providing the name of the
-package we wish to load. Packages are collections of R functions.
-
-Often we break the code up into regions by adding dashes (or equals symbols) 
-to the comment line. This enables us to run chunks of the script separately from
-running the whole script when using our code.
-
-Here is a typical head for a script:
-
-```{r set-up, eval=FALSE}
-# My workshop script
-# 7th July 2018
-# Alistair Bailey
-
-# Load packages ----------------------------------------------------------------
-library(tidyverse)
-library(janitor)
-library(gplots)
-library(pheatmap)
-```
-
-### Bioconductor
-
-As an aside there are many proteomics specific R packages, these are generally
-found through [Bioconductor](https://www.bioconductor.org/) which is a project
-that was initiated in 2001 to create tools for the analysis of high-throughput 
-genomic data, but also includes other 'omics data tools [@gentleman2004,@huber2015].
-
-Exploring Bioconductor is beyond our scope here, but well worth exploring for
-manipulation and analysis of raw data formats such as mzxml files.
-
-## Importing data
-
-Assuming our data is in a flat format, we can import it into our environment
-using the tidyverse `readr` package. A flat format is a file that contains only
-text  such as `csv` or tab separated data without meta-data (extra information), 
-such as the colour of cells in an excel file. 
-
-If we our data was an excel file, we can use the tidyverse `readxl` package to 
-import the data.
-
-For the purposes of this workshop we have a `csv` (comma separated variable) file.
-
-The example data can be downloaded from [here](link) as saved to our project
-directory. Check the `Files` pane to see it's there.
-
-We then import data and assign it to an object we'll call `data` like so:
-
-```{r import-data, eval=FALSE}
-# Import example data ----------------------------------------------------------
-
-# Import the example data with read_csv from the readr package
-# Tell read_csv that missing values are the string NaN
-# Clean up the variable names with clean_names() from the janitor package
-dat <- readr::read_csv("070718-proteomics-example-data.csv",
-                na = "NaN") %>%
-                janitor::clean_names()
-```
-
-## Exploring the data
-
-The first thing to do with any data set is to actually look at it!
-
-## Calculating fold change and enrichment
+Next we will transform the data to examine the effect of
+the treatment on the cellular proteome and visualise the output using a volcano
+plot and a heatmap.
 
 ## Fold change and log-fold change
 
@@ -213,29 +83,13 @@ p2 <- ggplot(dat,aes(x_vals,y_vals, label = names)) +
   scale_x_continuous(breaks = NULL)
 
 plot_grid(p1,p2)
-
 ```
 
-# Fold change and t-test
+## Dealing with missing values and normalisation {#normalisation}
 
 1. Load the data, we need multiple replicates for each condition. To be tidy
 each protein is a set of observations (rows) of the variables, which are the
 values recorded for each replicate (columns).
-
-```{r load-data, echo=FALSE, cache=TRUE}
-# Emily's sample data set, missing values are NaN and clean up names
-dat_em <- read_csv("data/MergedFinalProt_1colPerFile_6files_filtered.csv", 
-                   na = "NaN", col_types = cols()) %>% clean_names()
-
-dat_le <- read_csv("data/Leannes data/MergedFinalProt_2colPerFile_6files_filtered.csv",
-                   na = "NaN", col_types = cols()) %>% clean_names()
-# 
-# dat_char <- read_csv("data/MergedFinalProt_2colPerFile_12files.csv",
-#                      na = "NaN", col_types = cols()) %>% clean_names()
-
-# Have a look at the dataset
-#glimpse(dat_char)
-```
 
 2. Tidy up and deal with missing values, either impute or exclude missing values
 and normalise.
@@ -272,86 +126,23 @@ knitr::include_graphics("img/quant_norm.png")
 
 ```{r tidy-data}
 # Tidy data up
-dat_tidy <- dat_em %>%
-  # Remove missing values
-  drop_na() %>% 
-  # Select and rename columns
-  select(protein_accession = protein_key_protein_accession,
-         protein_description,
-         con1 = protein_ngram_on_column_emilly_bowler_wt_rep1_001_merged_spectrum_ia_final_protein,
-         con2 = protein_ngram_on_column_emilly_bowler_wt_rep2_001_merged_spectrum_ia_final_protein,
-         con3 = protein_ngram_on_column_emilly_bowler_wt_rep3_001_merged_spectrum_ia_final_protein,
-         trt1 = protein_ngram_on_column_emilly_bowler_kogsk_rep1_001_merged_spectrum_ia_final_protein,
-         trt2 = protein_ngram_on_column_emilly_bowler_kogsk_rep2_merged_ia_final_protein,
-         trt3 = protein_ngram_on_column_emilly_bowler_kogsk_rep3_001_merged_spectrum_ia_final_protein)
-
-
-# dat_tidy <- dat_char %>%
-#   # Remove missing values
-#   drop_na() %>%
-#   # Select and rename columns
-#   select(protein_accession = protein_entry_protein_accession,
-#          protein_description,
-#          con1 = 9,
-#          con2 = 11,
-#          con3 = 13,
-#          trt1 = 21,
-#          trt2 = 23,
-#          trt3 = 25)
-
-# dat_tidy <- dat_le %>%
-#   # Remove missing values
-#   drop_na() %>%
-#   # Select and rename columns
-#   select(protein_accession = protein_accession,
-#          protein_description,
-#          con1 = 5,
-#          con2 = 7,
-#          con3 = 11,
-#          trt1 = 3,
-#          trt2 = 9,
-#          trt3 = 13)
+dat_tidy <- dat_select %>% drop_na()
 
 # Plot data
 dat_tidy %>% 
-  ggplot(aes(log2(con1))) + 
-  geom_density() +
-  geom_density(aes(log2(con2), colour = "blue")) +
-  geom_density(aes(log2(con3), colour = "red"))
-
-dat_tidy %>% 
-  ggplot(aes(log2(trt1))) + 
-  geom_density() +
-  geom_density(aes(log2(trt2), colour = "blue")) +
-  geom_density(aes(log2(trt3), colour = "red"))
-  
+  gather(experiment,value,-c(1:2)) %>% 
+  ggplot(aes(log2(value),colour = experiment)) +
+   geom_density() 
 
 # Normalise to maximum column value
-dat_norm_max <- dat_tidy %>% 
-  mutate(wt1 = con1/max(con1),
-         con2 = con2/max(con3),
-         con3 = con3/max(con3),
-         trt1 = trt1 / max(trt1),
-         trt2 = trt2 / max(trt2),
-         trt3 = trt3 / max(trt3)
+dat_norm_max <- dat_tidy %>%
+  mutate(control_1 = control_1/max(control_1),
+         control_2 = control_2/max(control_2),
+         control_3 = control_3/max(control_3),
+         treatment_1 = treatment_1 / max(treatment_1),
+         treatment_2 = treatment_2 / max(treatment_2),
+         treatment_3 = treatment_3 / max(treatment_3)
          )
-
-# Normalise 
-# dat_rank <- dat_tidy %>% select(-c(1:2,6:8)) %>% 
-#   apply(., 2, rank, ties.method="average") %>% as.data.frame()
-# 
-# dat_sort <- dat_tidy %>% select(-c(1:2,6:8)) %>% 
-#   apply(., 2, sort) %>% as.data.frame()
-# 
-# dat_mean <- dat_sort %>% apply(., 1, mean)
-# 
-# index_mean <- function(my_idx, my_mean){
-#   return(my_mean[my_idx])
-# }
-# 
-# dat_norm <- dat_rank %>% 
-#   apply(.,2,index_mean, my_mean = dat_mean) %>% 
-#   as.data.frame()
 
 # Quantile normalisation : the aim is to give different distributions the
 # same statistical properties
@@ -370,30 +161,14 @@ quantile_normalisation <- function(df){
   return(df_final)
 }
 
-#dt_con <- dat_tidy %>% select(-c(1:2,6:8))
-#dt_trt <- dat_tidy %>% select(-c(1:5))
-
-#dt_con_norm <- quantile_normalisation(dt_con)
-#dt_trt_norm <- quantile_normalisation(dt_trt)
-
 dt <- dat_tidy %>% select(-c(1:2)) %>% quantile_normalisation()
 
 dat_norm <- bind_cols(dat_tidy[,1:2],dt)
 
-#dat_norm <- bind_cols(dat_tidy[,1:2],dt_con_norm,dt_trt_norm)
-# Have a look at the median normalised data
-glimpse(dat_norm)
-
-dat_norm %>% 
-  ggplot(aes(log2(con1))) + 
-  geom_density() +
-  geom_density(aes(log2(con2), colour = "blue")) +
-  geom_density(aes(log2(con3), colour = "red")) +
-  geom_density(aes(log2(trt3), colour = "green"))
-
-# Save the median normalised data
-write_excel_csv(dat_norm,"data/example_nomralised_proteomics_data.csv")
-
+dat_norm %>%
+   gather(experiment,value,-c(1:2)) %>% 
+  ggplot(aes(log2(value),colour = experiment)) +
+   geom_density() 
 ```
 
 
@@ -432,7 +207,7 @@ hist(p_vals_max)
 # Select columns and log data
 dat_log <- dat_norm %>% 
   select(-c(protein_accession,protein_description)) %>% log2()
-dat_max_log <- dat_norm_max %>% 
+dat_max_log <- dat_norm_max %>%
   select(-c(protein_accession,protein_description)) %>% log2()
 ```
 
@@ -468,9 +243,9 @@ dat <- data.frame(prots= dat_norm$protein_accession,
                       pval = -1*log10(p_vals))
 
 dat_max <- data.frame(prots= dat_norm_max$protein_accession,
-                      logfc = dat_max_fc, 
+                      logfc = dat_max_fc,
                       pval = -1*log10(p_vals_max))
-
+ 
 dat_max %>% ggplot(aes(logfc,pval)) + geom_point()
 
 dat %>% 
@@ -545,3 +320,36 @@ gplots::heatmap.2(dat.tn,                     # Tidy, normalised data
           col = my_palette,           # Use my colour scheme
           cexRow=0.5,cexCol=0.75)     # Amend row and column label fonts
 ```
+
+## Visualising proteomics data
+
+Based on empircal research, there are some general rules on visulisations
+that are worth bearing in mind:
+
+1. Plot
+
+## Creating a volcano plot
+
+VOlcano plot is a plot of the log fold change in the observation between two
+conditions on the x-axis, for example the protein expression between treatment 
+and control conditions. And on the y-axis is the corresponding p-value for each
+observation. The p-value representing the likelihood that an observed change
+is due to the different conditions rather than arising from natural variation 
+in the fold change that might be observed if we performed many replications of 
+the experiment.
+
+The aim of a volcano plot is to enable the viewer to quickly see the effect
+(if any) of an experiment with two conditions on many species i.e. proteins
+in terms of both increased and decreased expression.
+
+Like all plots it has it's good and bad points, namely it's good that we can
+visualise a lot of complex information in one plot. However this is also it's 
+main weakness, it's rather complicated to understand in one glance.
+
+However, volcano plots are widely used in the literature, so there may be an 
+amount of [social proof](https://en.wikipedia.org/wiki/Social_proof) giving rise
+to their popularity as opposed to their utility.
+
+## Creating a heatmap
+
+A 

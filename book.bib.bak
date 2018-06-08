@@ -11,15 +11,14 @@
 }
 
 @Article{ihaka1996,
-  author        = {Ihaka, Ross and Gentleman, Robert},
-  title         = {R: a language for data analysis and graphics},
-  journal       = {Journal of computational and graphical statistics},
-  year          = {1996},
-  volume        = {5},
-  number        = {3},
-  pages         = {299--314},
-  __markedentry = {[ab604:]},
-  publisher     = {Taylor \& Francis},
+  author    = {Ihaka, Ross and Gentleman, Robert},
+  title     = {R: a language for data analysis and graphics},
+  journal   = {Journal of computational and graphical statistics},
+  year      = {1996},
+  volume    = {5},
+  number    = {3},
+  pages     = {299--314},
+  publisher = {Taylor \& Francis},
 }
 
 @Article{huber2015,
@@ -31,7 +30,7 @@
   pages           = {115--121},
   month           = feb,
   issn            = {1548-7105},
-  __markedentry   = {[ab604:6]},
+  __markedentry   = {[ab604:]},
   abstract        = {Bioconductor is an open-source, open-development software project for the analysis and comprehension of high-throughput data in genomics and molecular biology. The project aims to enable interdisciplinary research, collaboration and rapid development of scientific software. Based on the statistical programming language R, Bioconductor comprises 934 interoperable packages contributed by a large, diverse community of scientists. Packages cover a range of bioinformatic and statistical applications. They undergo formal initial review and continuous automated testing. We present an overview for prospective users and contributors. },
   citation-subset = {IM},
   completed       = {2015-04-08},
@@ -49,6 +48,40 @@
   pubmodel        = {Print},
   pubstatus       = {ppublish},
   revised         = {2018-05-15},
+}
+
+@Article{gentleman2004,
+  author          = {Gentleman, Robert C and Carey, Vincent J and Bates, Douglas M and Bolstad, Ben and Dettling, Marcel and Dudoit, Sandrine and Ellis, Byron and Gautier, Laurent and Ge, Yongchao and Gentry, Jeff and Hornik, Kurt and Hothorn, Torsten and Huber, Wolfgang and Iacus, Stefano and Irizarry, Rafael and Leisch, Friedrich and Li, Cheng and Maechler, Martin and Rossini, Anthony J and Sawitzki, Gunther and Smith, Colin and Smyth, Gordon and Tierney, Luke and Yang, Jean Y H and Zhang, Jianhua},
+  title           = {Bioconductor: open software development for computational biology and bioinformatics.},
+  journal         = {Genome biology},
+  year            = {2004},
+  volume          = {5},
+  pages           = {R80},
+  issn            = {1474-760X},
+  __markedentry   = {[ab604:6]},
+  abstract        = {The Bioconductor project is an initiative for the collaborative creation of extensible software for computational biology and bioinformatics. The goals of the project include: fostering collaborative development and widespread use of innovative software, reducing barriers to entry into interdisciplinary scientific research, and promoting the achievement of remote reproducibility of research results. We describe details of our aims and methods, identify current challenges, compare Bioconductor to other open bioinformatics projects, and provide working examples.},
+  citation-subset = {IM},
+  completed       = {2005-07-28},
+  country         = {England},
+  doi             = {10.1186/gb-2004-5-10-r80},
+  issn-linking    = {1474-7596},
+  issue           = {10},
+  keywords        = {Computational Biology, instrumentation, methods; Internet; Reproducibility of Results; Software},
+  nlm-id          = {100960660},
+  owner           = {NLM},
+  pii             = {gb-2004-5-10-r80},
+  pmc             = {PMC545600},
+  pmid            = {15461798},
+  pubmodel        = {Print-Electronic},
+  pubstatus       = {ppublish},
+  revised         = {2015-08-04},
+}
+
+@Manual{RStudio, 
+title = {RStudio: Integrated Development Environment for R}, 
+author = {{RStudio Team}}, organization = {RStudio, Inc.}, 
+address = {Boston, MA}, year = {2018}, 
+url = {http://www.rstudio.com/}, 
 }
 
 @Comment{jabref-meta: databaseType:bibtex;}

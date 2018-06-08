@@ -1,5 +1,7 @@
 # Going further
 
+## Learning `dplyr` verbs
+
 ## Getting help and joining the R community
 
 ## Communication: creating reports, presentations and websites

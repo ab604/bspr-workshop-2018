@@ -1,176 +1,4 @@
 
-[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K
-$[0K[3G[?25h[?25l$ git commit -m "create chapters"[0K[?25h[?25l$ git add .[0K[?25h[?25l$ git push origin master[0K[?25h[?25l
-[0K[?25hCounting objects: 21, done.[0K[?25l
-[0K[?25hDelta compression using up to 16 threads.[0K[?25l
-Compressing objects:  20% (4/20)[0K[1G[?25h[?25lCompressing objects:  65% (13/20)[0K[1G[?25h[?25lCompressing objects:  95% (19/20)[0K[1G[?25hCompressing objects: 100% (20/20), done.[0K[?25l
-Writing objects: 100% (21/21), 2.67 KiB | 0 bytes/s, done.[0K
-Total 21 (delta 8), reused 0 (delta 0)[0K
-[0K[?25hremote: Resolving deltas: 100% (8/8), completed with 8 local objects.[0K[?25l
-[0K[?25hTo github.com:ab604/bspr-workshop-2018.git[0K[?25l
-   f771f5f..41082af  master -> master[0K
-[0K[?25h[?25l
-[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K
-$[0K[3G[?25h[?25l$ git push origin master[0K[?25h[?25l$ git commit -m "create chapters"[0K[25G[?25h[34G[?25l$ git add .[0K[?25h[?25l
-[0K[?25hwarning: LF will be replaced by CRLF in .Rproj.user/6F98EBE9/sources/prop/234D8CAA.[0K[?25l
-The file will have its original line endings in your working directory.[0K
-warning: LF will be replaced by CRLF in .Rproj.user/6F98EBE9/sources/s-4F4FE32/7EAA5E9.[0K
-The file will have its original line endings in your working directory.[0K
-warning: LF will be replaced by CRLF in .Rproj.user/6F98EBE9/sources/s-4F4FE32/7EAA5E9-contents.[0K
-The file will have its original line endings in your working directory.[0K
-[0K[?25hwarning: LF will be replaced by CRLF in _book/libs/gitbook-2.6.7/css/plugin-bookdown.css.[0K[?25l
-The file will have its original line endings in your working directory.[0K
-warning: LF will be replaced by CRLF in _book/libs/gitbook-2.6.7/css/plugin-fontsettings.css.[0K
-The file will have its original line endings in your working directory.[0K
-warning: LF will be replaced by CRLF in _book/libs/gitbook-2.6.7/css/plugin-highlight.css.[0K
-The file will have its original line endings in your working directory.[0K
-warning: LF will be replaced by CRLF in _book/libs/gitbook-2.6.7/css/plugin-search.css.[0K
-The file will have its original line endings in your working directory.[0K
-warning: LF will be replaced by CRLF in _book/libs/gitbook-2.6.7/css/style.css.[0K
-The file will have its original line endings in your working directory.[0K[14G[?25h[?25l
-warning: LF will be replaced by CRLF in _book/libs/gitbook-2.6.7/js/app.min.js.[0K
-The file will have its original line endings in your working directory.[0K
-warning: LF will be replaced by CRLF in _book/libs/gitbook-2.6.7/js/jquery.highlight.js.[0K
-The file will have its original line endings in your working directory.[0K
-warning: LF will be replaced by CRLF in _book/libs/gitbook-2.6.7/js/lunr.js.[0K
-The file will have its original line endings in your working directory.[0K
-warning: LF will be replaced by CRLF in _book/libs/gitbook-2.6.7/js/plugin-bookdown.js.[0K
-The file will have its original line endings in your working directory.[0K
-warning: LF will be replaced by CRLF in _book/libs/gitbook-2.6.7/js/plugin-fontsettings.js.[0K
-The file will have its original line endings in your working directory.[0K
-[0K[?25hwarning: LF will be replaced by CRLF in _book/libs/gitbook-2.6.7/js/plugin-search.js.[0K[?25l
-The file will have its original line endings in your working directory.[0K
-warning: LF will be replaced by CRLF in _book/libs/gitbook-2.6.7/js/plugin-sharing.js.[0K
-The file will have its original line endings in your working directory.[0K
-warning: LF will be replaced by CRLF in _book/libs/jquery-2.2.3/jquery.min.js.[0K
-The file will have its original line endings in your working directory.[0K
-[0K[?25h[?25l
-[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K
-$[0K[3G[?25h[?25l$ git add .[0K[?25h[?25l$ git push origin master[0K[?25h[?25l$ git commit -m "create chapters"[0K[?25h[33G[?25l$ git commit -m "create chapter"[0K[32G[?25h[?25l$ git commit -m "create chapte"[0K[31G[?25h[?25l$ git commit -m "create chapt"[0K[30G[?25h[?25l$ git commit -m "create chap"[0K[29G[?25h[?25l$ git commit -m "create cha"[0K[28G[?25h[?25l$ git commit -m "create ch"[0K[27G[?25h[?25l$ git commit -m "create c"[0K[26G[?25h[?25l$ git commit -m "create "[0K[25G[?25h[?25l$ git commit -m "create"[0K[24G[?25h[?25l$ git commit -m "creat"[0K[23G[?25h[?25l$ git commit -m "crea"[0K[22G[?25h[?25l$ git commit -m "cre"[0K[21G[?25h[?25l$ git commit -m "cr"[0K[20G[?25h[?25l$ git commit -m "c"[0K[19G[?25h[?25l$ git commit -m ""[0K[18G[?25h[?25l$ git commit -m "a"[0K[19G[?25h[?25l$ git commit -m "ad"[0K[20G[?25h[?25l$ git commit -m "add"[0K[20G[?25h[21G[?25l$ git commit -m "add "[0K[22G[?25h[?25l$ git commit -m "add r"[0K[23G[?25h[?25l$ git commit -m "add re"[0K[24G[?25h[?25l$ git commit -m "add req"[0K[25G[?25h[?25l$ git commit -m "add requ"[0K[?25h[26G[?25l$ git commit -m "add requi"[0K[27G[?25h[?25l$ git commit -m "add requir"[0K[28G[?25h[?25l$ git commit -m "add require"[0K[29G[?25h[?25l$ git commit -m "add requirem"[0K[30G[?25h[?25l$ git commit -m "add requireme"[0K[31G[?25h[?25l$ git commit -m "add requiremen"[0K[32G[?25h[?25l$ git commit -m "add requirement"[0K[33G[?25h[?25l$ git commit -m "add requirements"[0K[?25h[34G[?25l
-[0K[?25h[master[0K[9G[?25l[master 6621035] add requirements[0K
-[0K[?25h 15 files changed, 1134 insertions(+), 91 deletions(-)[0K[?25l
- create mode 100644 _book/going-further.html[0K
- create mode 100644 _book/importing-and-transforming-proteomics-data.html[0K
- create mode 100644 _book/requirements.html[0K
- rewrite _book/search_index.json (85%)[0K
- create mode 100644 _book/the-tidyverse.html[0K
- create mode 100644 _book/visualising-proteomics-data.html[0K
-[0K[?25h[?25l
-[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K
-$[0K[3G[?25h[?25l[31Awarning: LF will be replaced by CRLF in _book/libs/gitbook-2.6.7/css/st[0Ky
-le.css.[0K
-The file will have its original line endings in your working directory.[0K
-warning: LF will be replaced by CRLF in _book/libs/gitbook-2.6.7/js/app[0K.
-min.js.[0K
-The file will have its original line endings in your working directory.[0K
-warning: LF will be replaced by CRLF in _book/libs/gitbook-2.6.7/js/jqu[0Ke
-ry.highlight.js.[0K
-The file will have its original line endings in your working directory.[0K
-warning: LF will be replaced by CRLF in _book/libs/gitbook-2.6.7/js/lun[0Kr
-.js.[0K
-The file will have its original line endings in your working directory.[0K
-warning: LF will be replaced by CRLF in _book/libs/gitbook-2.6.7/js/plu[0Kg
-in-bookdown.js.[0K
-The file will have its original line endings in your working directory.[0K
-warning: LF will be replaced by CRLF in _book/libs/gitbook-2.6.7/js/plu[0Kg
-in-fontsettings.js.[0K
-The file will have its original line endings in your working directory.[0K
-warning: LF will be replaced by CRLF in _book/libs/gitbook-2.6.7/js/plu[0Kg
-in-search.js.[0K
-The file will have its original line endings in your working directory.[0K
-warning: LF will be replaced by CRLF in _book/libs/gitbook-2.6.7/js/plu[0Kg
-in-sharing.js.[0K
-The file will have its original line endings in your working directory.[0K
-warning: LF will be replaced by CRLF in _book/libs/jquery-2.2.3/jquery.[0Km
-in.js.[0K
-The file will have its original line endings in your working directory.[0K
-[0K
-[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0K
-[0m$ git commit -m "add requirements"[0K
-[master 6621035] add requirements[0K
- 15 files changed, 1134 insertions(+), 91 deletions(-)[0K
- create mode 100644 _book/going-further.html[0K
- create mode 100644 _book/importing-and-transforming-proteomics-data.ht[0Km
-l[0K
- create mode 100644 _book/requirements.html[0K
- rewrite _book/search_index.json (85%)[0K
- create mode 100644 _book/the-tidyverse.html[0K
- create mode 100644 _book/visualising-proteomics-data.html[0K
-[0K
-[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0K
-[0m$[0K[3G[?25h[?25l[26Awarning: LF will be replaced by CRLF in _book/libs/gitbook[0K-
-2.6.7/js/plugin-fontsettings.js.[0K
-The file will have its original line endings in your worki[0Kn
-g directory.[0K
-warning: LF will be replaced by CRLF in _book/libs/gitbook[0K-
-2.6.7/js/plugin-search.js.[0K
-The file will have its original line endings in your worki[0Kn
-g directory.[0K
-warning: LF will be replaced by CRLF in _book/libs/gitbook[0K-
-2.6.7/js/plugin-sharing.js.[0K
-The file will have its original line endings in your worki[0Kn
-g directory.[0K
-warning: LF will be replaced by CRLF in _book/libs/jquery-[0K2
-.2.3/jquery.min.js.[0K
-The file will have its original line endings in your worki[0Kn
-g directory.[0K
-[0K
-[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0K
-[0m$ git commit -m "add requirements"[0K
-[master 6621035] add requirements[0K
- 15 files changed, 1134 insertions(+), 91 deletions(-)[0K
- create mode 100644 _book/going-further.html[0K
- create mode 100644 _book/importing-and-transforming-prote[0Ko
-mics-data.html[0K
- create mode 100644 _book/requirements.html[0K
- rewrite _book/search_index.json (85%)[0K
- create mode 100644 _book/the-tidyverse.html[0K
- create mode 100644 _book/visualising-proteomics-data.html[0K
-[0K
-[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0K
-[0m$[0K[3G[?25h[?25l[16AThe file will have its original line endings in your working directory.[0K
-[0K
-[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0K
-[0m$ git commit -m "add requirements"[0K
-[master 6621035] add requirements[0K
- 15 files changed, 1134 insertions(+), 91 deletions(-)[0K
- create mode 100644 _book/going-further.html[0K
- create mode 100644 _book/importing-and-transforming-proteomics-data.html[0K
- create mode 100644 _book/requirements.html[0K
- rewrite _book/search_index.json (85%)[0K
- create mode 100644 _book/the-tidyverse.html[0K
- create mode 100644 _book/visualising-proteomics-data.html[0K
-[0K
-[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0K
-[0m$[0K
-[0K
-[0K[2A[3G[?25h[?25l$ g[0K
-[0K
-[0K[2A[4G[?25h[?25l$ gi[0K
-[0K
-[0K[2A[5G[?25h[?25l$ git[0K
-[0K
-[0K[2A[6G[?25h[7G[?25l$ git s[0K
-[0K
-[0K[2A[8G[?25h[?25l$ git st[0K
-[0K
-[0K[2A[9G[?25h[?25l$ git sta[0K
-[0K
-[0K[2A[10G[?25h[?25l$ git stat[0K
-[0K
-[0K[2A[11G[?25h[?25l$ git statu[0K
-[0K
-[0K[2A[12G[?25h[?25l$ git status[0K
-[0K
-[0K[2A[13G[?25h[?25l
-[?25hOn branch master[0K[?25l
-[0K[?25hChanges not staged for commit:[0K[?25l
-  (use "git add <file>..." to update what will be committed)[0K
-  (use "git checkout -- <file>..." to discard changes in working directory)[0K
-[0K
-        [0;31mmodified:   .Rproj.user/6F98EBE9/console06/CAEA8888[0m[0K
-        [0;31mmodified:   03-importing-and-transforming.Rmd[0m[0K
-        [0;31mmodified:   04-visualisation.Rmd[0m[0K
 [0K
 no changes added to commit (use "git add" and/or "git commit -a")[0K
 [0K[?25h[?25l
@@ -1133,4 +961,206 @@ Untracked files:[0K
 no changes added to commit (use "git add" and/or "git commit -a")[0K
 [0K[?25h[?25l
 [0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K
-$[0K[3G[?25h[?25l$ g[0K[?25hi[0Kt[0K[7G[?25l$ git a[0K[?25hd[0Kd[0K[11G[?25l$ git add .[0K[?25h
+$[0K[3G[?25h[?25l$ g[0K[?25hi[0Kt[0K[7G[?25l$ git a[0K[?25hd[0Kd[0K[11G[?25l$ git add .[0K[?25h[?25l
+[0K[?25hwarning: LF will be replaced by CRLF in .Rproj.user/6F98EBE9/sources/prop/234D8CAA.[0K[?25l
+The file will have its original line endings in your working directory.[0K
+warning: LF will be replaced by CRLF in book.bib.[0K
+The file will have its original line endings in your working directory.[0K
+warning: LF will be replaced by CRLF in book.bib.bak.[0K
+The file will have its original line endings in your working directory.[0K
+[0K[?25hwarning: LF will be replaced by CRLF in book.bib.sav.[0K[?25l
+The file will have its original line endings in your working directory.[0K
+[0K[?25h[?25l
+[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K
+$[0K[3G[?25h[?25l$ g[0K[?25hi[0Kt[0K[7G[?25l$ git c[0K[?25ho[0Km[0Km[0Ki[0K[?25lt[0K[12G[?25h[13G[14G[?25l$ git commit -[0K[?25hm[0K[17G[?25l$ git commit -m "[0K[?25hu[0Kp[0Kd[0Ka[0Kt[0Ke[0K[25G[?25l$ git commit -m "update i[0K[?25hm[0Kp[0Ko[0Kr[0Kt[0K[32G[?25l$ git commit -m "update import c[0K[?25hh[0Ka[0K[?25lp[0K[35G[?25h[36G[?25l$ git commit -m "update import chapt[0K[?25he[0Kr[0K"[0K[?25l
+[0K[?25h[master c336185] update import chapter[0K[?25l
+ 22 files changed, 525 insertions(+), 117 deletions(-)[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/fold-change-2_a9aede4dbd3c28f7[0Kc
+350473dd5a139e3.RData[0K
+ rename _bookdown_files/bspr-workshop-2018_cache/html/{fold-change-2_d98c95f4b43580a9107f7cc420a[0K0
+fbf7.rdb => fold-change-2_a9aede4dbd3c28f7c350473dd5a139e3.rdb} (96%)[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/fold-change-2_a9aede4dbd3c28f7[0Kc
+350473dd5a139e3.rdx[0K
+ delete mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/fold-change-2_d98c95f4b43580a9[0K1
+07f7cc420a0fbf7.RData[0K
+ delete mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/fold-change-2_d98c95f4b43580a9[0K1
+07f7cc420a0fbf7.rdx[0K
+ create mode 100644 book.bib.sav[0K
+[0K[?25h[?25l
+[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K
+$[0K[3G[?25h[?25l$ g[0K[?25hi[0Kt[0K[7G[?25l$ git p[0K[?25hu[0Ks[0Kh[0K[12G[?25l$ git push o[0K[?25hr[0Ki[0Kg[0Ki[0Kn[0K[19G[?25l$ git push origin m[0K[?25ha[0Ks[0K[?25lt[0K[22G[?25h[23G[?25l$ git push origin maste[0K[?25hr[0K[?25l
+[0K[?25hCounting objects: 35, done.[0K[?25l
+Delta compression using up to 16 threads.[0K
+Compressing objects: 100% (30/30), done.[0K
+Writing objects:  68% (24/35)[0K[1G[?25h[?25lWriting objects:  85% (30/35)[0K[1G[?25hWriting objects: 100% (35/35), 117.44 KiB | 0 bytes/s, done.[0K[?25l
+Total 35 (delta 16), reused 0 (delta 0)[0K
+[0K[?25h[?25lremote: Resolving deltas:  68% (11/16)[0K[1G[?25hremote: Resolving deltas: 100% (16/16), completed with 14 local objects.[0K[?25l
+[0K[?25hTo github.com:ab604/bspr-workshop-2018.git[0K[?25l
+   611f718..c336185  master -> master[0K
+[0K[?25h[?25l
+[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K
+$[0K[3G[?25h[0m[0K]0;:/e/bspr-workshop-2018[?25l
+[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K
+[?25l[1A[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0K
+[0m$[0K[3G[?25h[?25l$ g[0K[?25hi[0Kt[0K[7G[?25l$ git s[0K[?25ht[0Ka[0Kt[0Ku[0Ks[0K[?25l
+[0K[?25hOn branch master[0K[?25l
+Changes not staged for commit:[0K
+  (use "git add/rm <file>..." to update what will be committed)[0K
+  (use "git checkout -- <file>..." to discard changes in working directory)[0K
+[0K
+        [0;31mmodified:   .Rproj.user/6F98EBE9/console06/CAEA8888[0m[0K
+        [0;31mmodified:   .Rproj.user/6F98EBE9/console06/INDEX001[0m[0K
+        [0;31mmodified:   .Rproj.user/6F98EBE9/sources/prop/234D8CAA[0m[0K
+        [0;31mmodified:   .Rproj.user/6F98EBE9/sources/prop/613BAD24[0m[0K
+        [0;31mmodified:   .Rproj.user/6F98EBE9/sources/prop/85427934[0m[0K
+        [0;31mmodified:   .Rproj.user/6F98EBE9/sources/prop/INDEX[0m[0K
+        [0;31mmodified:   .Rproj.user/shared/notebooks/8F6288BF-index/1/s/chunks.json[0m[0K
+        [0;31mmodified:   .Rproj.user/shared/notebooks/paths[0m[0K
+        [0;31mmodified:   01-intro.Rmd[0m[0K
+        [0;31mdeleted:    03-importing-and-transforming.Rmd[0m[0K
+        [0;31mdeleted:    04-visualisation.Rmd[0m[0K
+        [0;31mmodified:   05-going-further.Rmd[0m[0K
+        [0;31mmodified:   _book/bspr-workshop-2018.pdf[0m[0K
+        [0;31mmodified:   _book/bspr-workshop-2018.tex[0m[0K
+        [0;31mmodified:   _book/bspr-workshop-2018_files/figure-html/fold-change-1.png[0m[0K
+        [0;31mmodified:   _book/bspr-workshop-2018_files/figure-html/fold-change-2.png[0m[0K
+        [0;31mmodified:   _book/bspr-workshop-2018_files/figure-html/heatmap-1.png[0m[0K
+        [0;31mmodified:   _book/bspr-workshop-2018_files/figure-html/t-test-1.png[0m[0K
+        [0;31mmodified:   _book/bspr-workshop-2018_files/figure-html/t-test-2.png[0m[0K
+        [0;31mmodified:   _book/bspr-workshop-2018_files/figure-html/tidy-data-1.png[0m[0K
+        [0;31mmodified:   _book/bspr-workshop-2018_files/figure-html/tidy-data-2.png[0m[0K
+        [0;31mmodified:   _book/bspr-workshop-2018_files/figure-html/tidy-data-3.png[0m[0K
+        [0;31mmodified:   _book/bspr-workshop-2018_files/figure-html/unnamed-chunk-3-1.png[0m[0K
+        [0;31mmodified:   _book/bspr-workshop-2018_files/figure-html/unnamed-chunk-3-2.png[0m[0K
+        [0;31mmodified:   _book/bspr-workshop-2018_files/figure-html/unnamed-chunk-3-3.png[0m[0K
+        [0;31mmodified:   _book/bspr-workshop-2018_files/figure-html/vol-pot-1.png[0m[0K
+        [0;31mmodified:   _book/bspr-workshop-2018_files/figure-html/vol-pot-2.png[0m[0K
+        [0;31mmodified:   _book/going-further.html[0m[0K
+        [0;31mmodified:   _book/index.html[0m[0K
+        [0;31mmodified:   _book/intro.html[0m[0K
+        [0;31mmodified:   _book/references.html[0m[0K
+        [0;31mmodified:   _book/search_index.json[0m[0K
+        [0;31mmodified:   _book/tidyverse.html[0m[0K
+        [0;31mmodified:   _book/transform.html[0m[0K
+        [0;31mmodified:   _book/visualising-proteomics-data.html[0m[0K
+        [0;31mmodified:   _bookdown_files/bspr-workshop-2018_files/figure-html/fold-change-1.png[0m[0K
+        [0;31mmodified:   _bookdown_files/bspr-workshop-2018_files/figure-html/fold-change-2.png[0m[0K
+        [0;31mmodified:   _bookdown_files/bspr-workshop-2018_files/figure-html/heatmap-1.png[0m[0K
+        [0;31mmodified:   _bookdown_files/bspr-workshop-2018_files/figure-html/t-test-1.png[0m[0K
+        [0;31mmodified:   _bookdown_files/bspr-workshop-2018_files/figure-html/t-test-2.png[0m[0K
+        [0;31mmodified:   _bookdown_files/bspr-workshop-2018_files/figure-html/tidy-data-1.png[0m[0K
+        [0;31mmodified:   _bookdown_files/bspr-workshop-2018_files/figure-html/tidy-data-2.png[0m[0K
+        [0;31mmodified:   _bookdown_files/bspr-workshop-2018_files/figure-html/tidy-data-3.png[0m[0K
+        [0;31mmodified:   _bookdown_files/bspr-workshop-2018_files/figure-html/unnamed-chunk-3-1.png[0m[0K
+        [0;31mmodified:   _bookdown_files/bspr-workshop-2018_files/figure-html/unnamed-chunk-3-2.png[0m[0K
+        [0;31mmodified:   _bookdown_files/bspr-workshop-2018_files/figure-html/unnamed-chunk-3-3.png[0m[0K
+        [0;31mmodified:   _bookdown_files/bspr-workshop-2018_files/figure-html/vol-pot-1.png[0m[0K
+        [0;31mmodified:   _bookdown_files/bspr-workshop-2018_files/figure-html/vol-pot-2.png[0m[0K
+        [0;31mmodified:   book.bib[0m[0K
+        [0;31mmodified:   book.bib.bak[0m[0K
+        [0;31mmodified:   book.bib.sav[0m[0K
+        [0;31mdeleted:    data/example_nomralised_proteomics_data.csv[0m[0K
+        [0;31mdeleted:    data/example_proteomics_data.csv[0m[0K
+        [0;31mdeleted:    data/secretome_leanne_example.csv[0m[0K
+        [0;31mmodified:   index.Rmd[0m[0K
+[0K
+Untracked files:[0K
+  (use "git add <file>..." to include in what will be committed)[0K
+[0K
+        [0;31m03-importing.Rmd[0m[0K
+        [0;31m04-transform_and_visualise.Rmd[0m[0K
+        [0;31m_book/import.html[0m[0K
+        [0;31m_book/transformation-and-visualisation.html[0m[0K
+        [0;31m_bookdown_files/bspr-workshop-2018_cache/html/example-data_6fe6a381de2b8e10f48939f08441fef0.RData[0m[0K
+        [0;31m_bookdown_files/bspr-workshop-2018_cache/html/example-data_6fe6a381de2b8e10f48939f08441fef0.rdb[0m[0K
+        [0;31m_bookdown_files/bspr-workshop-2018_cache/html/example-data_6fe6a381de2b8e10f48939f08441fef0.rdx[0m[0K
+        [0;31m_bookdown_files/bspr-workshop-2018_cache/html/import-data_c8abe37bc6d34d93aab24cef4c48d433.RData[0m[0K
+        [0;31m_bookdown_files/bspr-workshop-2018_cache/html/import-data_c8abe37bc6d34d93aab24cef4c48d433.rdb[0m[0K
+        [0;31m_bookdown_files/bspr-workshop-2018_cache/html/import-data_c8abe37bc6d34d93aab24cef4c48d433.rdx[0m[0K
+        [0;31mdata/070718-proteomics-example-data.csv[0m[0K
+        [0;31mdata/MergedFinalProt_2colPerFile_12files_filtered_ch.csv[0m[0K
+[0K
+no changes added to commit (use "git add" and/or "git commit -a")[0K
+[0K[?25h[?25l
+[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K
+$[0K[3G[?25h[?25l$ g[0K[?25hi[0Kt[0K[7G[?25l$ git c[0K[?25ho[0K[?25lm[0K[9G[?25h[10G[?25l$ git comm[0K[?25hi[0Kt[0K[14G[?25l$ git commit -[0K[?25hm[0K[17G[?25l$ git commit -m "[0K[17G[?25h[18G[?25l$ git commit -m "u[0K[?25hp[0Kf[0K[?25l$ git commit -m "up[0K[?25hd[0Ka[0Kt[0Ke[0K[25G[?25l$ git commit -m "update c[0K[?25hh[0Ka[0Kp[0Kt[0Ke[0Kr[0Ks[0K"[0K[?25l
+[0K[?25hOn branch master[0K[?25l
+Changes not staged for commit:[0K
+        [0;31mmodified:   .Rproj.user/6F98EBE9/console06/CAEA8888[0m[0K
+        [0;31mmodified:   .Rproj.user/6F98EBE9/console06/INDEX001[0m[0K
+        [0;31mmodified:   .Rproj.user/6F98EBE9/sources/prop/234D8CAA[0m[0K
+        [0;31mmodified:   .Rproj.user/6F98EBE9/sources/prop/613BAD24[0m[0K
+        [0;31mmodified:   .Rproj.user/6F98EBE9/sources/prop/85427934[0m[0K
+        [0;31mmodified:   .Rproj.user/6F98EBE9/sources/prop/INDEX[0m[0K
+        [0;31mmodified:   .Rproj.user/shared/notebooks/8F6288BF-index/1/s/chunks.json[0m[0K
+        [0;31mmodified:   .Rproj.user/shared/notebooks/paths[0m[0K
+        [0;31mmodified:   01-intro.Rmd[0m[0K
+        [0;31mdeleted:    03-importing-and-transforming.Rmd[0m[0K
+        [0;31mdeleted:    04-visualisation.Rmd[0m[0K
+        [0;31mmodified:   05-going-further.Rmd[0m[0K
+        [0;31mmodified:   _book/bspr-workshop-2018.pdf[0m[0K
+        [0;31mmodified:   _book/bspr-workshop-2018.tex[0m[0K
+        [0;31mmodified:   _book/bspr-workshop-2018_files/figure-html/fold-change-1.png[0m[0K
+        [0;31mmodified:   _book/bspr-workshop-2018_files/figure-html/fold-change-2.png[0m[0K
+        [0;31mmodified:   _book/bspr-workshop-2018_files/figure-html/heatmap-1.png[0m[0K
+        [0;31mmodified:   _book/bspr-workshop-2018_files/figure-html/t-test-1.png[0m[0K
+        [0;31mmodified:   _book/bspr-workshop-2018_files/figure-html/t-test-2.png[0m[0K
+        [0;31mmodified:   _book/bspr-workshop-2018_files/figure-html/tidy-data-1.png[0m[0K
+        [0;31mmodified:   _book/bspr-workshop-2018_files/figure-html/tidy-data-2.png[0m[0K
+        [0;31mmodified:   _book/bspr-workshop-2018_files/figure-html/tidy-data-3.png[0m[0K[9G[?25h[?25l
+        [0;31mmodified:   _book/bspr-workshop-2018_files/figure-html/unnamed-chunk-3-1.png[0m[0K
+        [0;31mmodified:   _book/bspr-workshop-2018_files/figure-html/unnamed-chunk-3-2.png[0m[0K
+        [0;31mmodified:   _book/bspr-workshop-2018_files/figure-html/unnamed-chunk-3-3.png[0m[0K
+        [0;31mmodified:   _book/bspr-workshop-2018_files/figure-html/vol-pot-1.png[0m[0K
+        [0;31mmodified:   _book/bspr-workshop-2018_files/figure-html/vol-pot-2.png[0m[0K
+        [0;31mmodified:   _book/going-further.html[0m[0K
+        [0;31mmodified:   _book/index.html[0m[0K
+        [0;31mmodified:   _book/intro.html[0m[0K
+        [0;31mmodified:   _book/references.html[0m[0K
+        [0;31mmodified:   _book/search_index.json[0m[0K
+        [0;31mmodified:   _book/tidyverse.html[0m[0K
+        [0;31mmodified:   _book/transform.html[0m[0K
+        [0;31mmodified:   _book/visualising-proteomics-data.html[0m[0K
+        [0;31mmodified:   _bookdown_files/bspr-workshop-2018_files/figure-html/fold-change-1.png[0m[0K
+        [0;31mmodified:   _bookdown_files/bspr-workshop-2018_files/figure-html/fold-change-2.png[0m[0K
+        [0;31mmodified:   _bookdown_files/bspr-workshop-2018_files/figure-html/heatmap-1.png[0m[0K
+        [0;31mmodified:   _bookdown_files/bspr-workshop-2018_files/figure-html/t-test-1.png[0m[0K
+        [0;31mmodified:   _bookdown_files/bspr-workshop-2018_files/figure-html/t-test-2.png[0m[0K
+        [0;31mmodified:   _bookdown_files/bspr-workshop-2018_files/figure-html/tidy-data-1.png[0m[0K
+        [0;31mmodified:   _bookdown_files/bspr-workshop-2018_files/figure-html/tidy-data-2.png[0m[0K
+        [0;31mmodified:   _bookdown_files/bspr-workshop-2018_files/figure-html/tidy-data-3.png[0m[0K
+        [0;31mmodified:   _bookdown_files/bspr-workshop-2018_files/figure-html/unnamed-chunk-3-1.png[0m[0K
+        [0;31mmodified:   _bookdown_files/bspr-workshop-2018_files/figure-html/unnamed-chunk-3-2.png[0m[0K
+        [0;31mmodified:   _bookdown_files/bspr-workshop-2018_files/figure-html/unnamed-chunk-3-3.png[0m[0K
+        [0;31mmodified:   _bookdown_files/bspr-workshop-2018_files/figure-html/vol-pot-1.png[0m[0K
+        [0;31mmodified:   _bookdown_files/bspr-workshop-2018_files/figure-html/vol-pot-2.png[0m[0K
+        [0;31mmodified:   book.bib[0m[0K
+        [0;31mmodified:   book.bib.bak[0m[0K
+        [0;31mmodified:   book.bib.sav[0m[0K
+        [0;31mdeleted:    data/example_nomralised_proteomics_data.csv[0m[0K
+        [0;31mdeleted:    data/example_proteomics_data.csv[0m[0K
+        [0;31mdeleted:    data/secretome_leanne_example.csv[0m[0K
+        [0;31mmodified:   index.Rmd[0m[0K
+[0K
+Untracked files:[0K
+        [0;31m03-importing.Rmd[0m[0K
+        [0;31m04-transform_and_visualise.Rmd[0m[0K
+        [0;31m_book/import.html[0m[0K
+        [0;31m_book/transformation-and-visualisation.html[0m[0K
+        [0;31m_bookdown_files/bspr-workshop-2018_cache/html/example-data_6fe6a381de2b8e10f48939f08441fef0.RData[0m[0K
+        [0;31m_bookdown_files/bspr-workshop-2018_cache/html/example-data_6fe6a381de2b8e10f48939f08441fef0.rdb[0m[0K
+        [0;31m_bookdown_files/bspr-workshop-2018_cache/html/example-data_6fe6a381de2b8e10f48939f08441fef0.rdx[0m[0K
+        [0;31m_bookdown_files/bspr-workshop-2018_cache/html/import-data_c8abe37bc6d34d93aab24cef4c48d433.RData[0m[0K
+        [0;31m_bookdown_files/bspr-workshop-2018_cache/html/import-data_c8abe37bc6d34d93aab24cef4c48d433.rdb[0m[0K
+        [0;31m_bookdown_files/bspr-workshop-2018_cache/html/import-data_c8abe37bc6d34d93aab24cef4c48d433.rdx[0m[0K
+        [0;31mdata/070718-proteomics-example-data.csv[0m[0K
+        [0;31mdata/MergedFinalProt_2colPerFile_12files_filtered_ch.csv[0m[0K
+[0K
+no changes added to commit[0K
+[0K[?25h[?25l
+[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K
+$[0K[3G[?25h[?25l$ g[0K[?25hi[0Kt[0K[7G[?25l$ git p[0K[?25hu[0Ks[0Kh[0K[12G[?25l$ git push o[0K[?25hr[0Ki[0Kg[0Ki[0Kn[0K[19G[?25l$ git push origin m[0K[?25ha[0Ks[0Kt[0Ke[0K[?25lr[0K[24G[?25h[25G[?25l
+[0K[?25hEverything up-to-date[0K[?25l
+[0K[?25h[?25l
+[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K
+$[0K[3G[?25h[?25l$ git push origin master[0K[?25h[?25l$ git commit -m "update chapters"[0K[?25h[?25l$ git push origin master[0K[?25h[?25l$ git commit -m "update chapters"[0K[?25h[?25l$ git status[0K[?25h[?25l$ git statu[0K[?25h[?25l$ git stat[0K[?25h[?25l$ git sta[0K[?25h[?25l$ git st[0K[10G[?25h[9G[?25l$ git s[0K[9G[?25h[8G[?25l$ git[0K[7G[?25h[?25l$ git a[0K[?25hd[0Kd[0Kd[0K[12G[11G[?25l$ git add[0K[?25h[11G[?25l$ git add .[0K[?25h

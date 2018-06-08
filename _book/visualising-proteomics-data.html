@@ -31,7 +31,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="fold-change-and-t-test.html">
+<link rel="prev" href="transform.html">
 <link rel="next" href="going-further.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -140,19 +140,19 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="3.5.1" data-path="transform.html"><a href="transform.html#bioconductor"><i class="fa fa-check"></i><b>3.5.1</b> Bioconductor</a></li>
 </ul></li>
 <li class="chapter" data-level="3.6" data-path="transform.html"><a href="transform.html#importing-data"><i class="fa fa-check"></i><b>3.6</b> Importing data</a></li>
-<li class="chapter" data-level="3.7" data-path="transform.html"><a href="transform.html#calculating-fold-change-and-enrichment"><i class="fa fa-check"></i><b>3.7</b> Calculating fold change and enrichment</a></li>
-<li class="chapter" data-level="3.8" data-path="transform.html"><a href="transform.html#fold-change-and-log-fold-change"><i class="fa fa-check"></i><b>3.8</b> Fold change and log-fold change</a></li>
+<li class="chapter" data-level="3.7" data-path="transform.html"><a href="transform.html#exploring-the-data"><i class="fa fa-check"></i><b>3.7</b> Exploring the data</a></li>
+<li class="chapter" data-level="3.8" data-path="transform.html"><a href="transform.html#calculating-fold-change-and-enrichment"><i class="fa fa-check"></i><b>3.8</b> Calculating fold change and enrichment</a></li>
+<li class="chapter" data-level="3.9" data-path="transform.html"><a href="transform.html#fold-change-and-log-fold-change"><i class="fa fa-check"></i><b>3.9</b> Fold change and log-fold change</a></li>
+<li class="chapter" data-level="3.10" data-path="transform.html"><a href="transform.html#normalisation"><i class="fa fa-check"></i><b>3.10</b> Dealing with missing values and normalisation</a></li>
+<li class="chapter" data-level="3.11" data-path="transform.html"><a href="transform.html#heatmap-transformation"><i class="fa fa-check"></i><b>3.11</b> Heatmap transformation</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="fold-change-and-t-test.html"><a href="fold-change-and-t-test.html"><i class="fa fa-check"></i><b>4</b> Fold change and t-test</a><ul>
-<li class="chapter" data-level="4.1" data-path="fold-change-and-t-test.html"><a href="fold-change-and-t-test.html#heatmap-transformation"><i class="fa fa-check"></i><b>4.1</b> Heatmap transformation</a></li>
+<li class="chapter" data-level="4" data-path="visualising-proteomics-data.html"><a href="visualising-proteomics-data.html"><i class="fa fa-check"></i><b>4</b> Visualising proteomics data</a><ul>
+<li class="chapter" data-level="4.1" data-path="visualising-proteomics-data.html"><a href="visualising-proteomics-data.html#creating-a-volcano-plot"><i class="fa fa-check"></i><b>4.1</b> Creating a volcano plot</a></li>
+<li class="chapter" data-level="4.2" data-path="visualising-proteomics-data.html"><a href="visualising-proteomics-data.html#creating-a-heatmap"><i class="fa fa-check"></i><b>4.2</b> Creating a heatmap</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="visualising-proteomics-data.html"><a href="visualising-proteomics-data.html"><i class="fa fa-check"></i><b>5</b> Visualising proteomics data</a><ul>
-<li class="chapter" data-level="5.1" data-path="visualising-proteomics-data.html"><a href="visualising-proteomics-data.html#creating-a-volcano-plot"><i class="fa fa-check"></i><b>5.1</b> Creating a volcano plot</a></li>
-<li class="chapter" data-level="5.2" data-path="visualising-proteomics-data.html"><a href="visualising-proteomics-data.html#creating-a-heatmap"><i class="fa fa-check"></i><b>5.2</b> Creating a heatmap</a></li>
-</ul></li>
-<li class="chapter" data-level="6" data-path="going-further.html"><a href="going-further.html"><i class="fa fa-check"></i><b>6</b> Going further</a><ul>
-<li class="chapter" data-level="6.1" data-path="going-further.html"><a href="going-further.html#getting-help-and-joining-the-r-community"><i class="fa fa-check"></i><b>6.1</b> Getting help and joining the R community</a></li>
-<li class="chapter" data-level="6.2" data-path="going-further.html"><a href="going-further.html#communication-creating-reports-presentations-and-websites"><i class="fa fa-check"></i><b>6.2</b> Communication: creating reports, presentations and websites</a></li>
+<li class="chapter" data-level="5" data-path="going-further.html"><a href="going-further.html"><i class="fa fa-check"></i><b>5</b> Going further</a><ul>
+<li class="chapter" data-level="5.1" data-path="going-further.html"><a href="going-further.html#getting-help-and-joining-the-r-community"><i class="fa fa-check"></i><b>5.1</b> Getting help and joining the R community</a></li>
+<li class="chapter" data-level="5.2" data-path="going-further.html"><a href="going-further.html#communication-creating-reports-presentations-and-websites"><i class="fa fa-check"></i><b>5.2</b> Communication: creating reports, presentations and websites</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 </ul>
@@ -173,20 +173,20 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
             <section class="normal" id="section-">
 <div id="visualising-proteomics-data" class="section level1">
-<h1><span class="header-section-number">Chapter 5</span> Visualising proteomics data</h1>
+<h1><span class="header-section-number">Chapter 4</span> Visualising proteomics data</h1>
 <p>Based on empircal research, there are some general rules on visulisations that are worth bearing in mind:</p>
 <ol style="list-style-type: decimal">
 <li>Plot</li>
 </ol>
 <div id="creating-a-volcano-plot" class="section level2">
-<h2><span class="header-section-number">5.1</span> Creating a volcano plot</h2>
+<h2><span class="header-section-number">4.1</span> Creating a volcano plot</h2>
 <p>VOlcano plot is a plot of the log fold change in the observation between two conditions on the x-axis, for example the protein expression between treatment and control conditions. And on the y-axis is the corresponding p-value for each observation. The p-value representing the likelihood that an observed change is due to the different conditions rather than arising from natural variation in the fold change that might be observed if we performed many replications of the experiment.</p>
 <p>The aim of a volcano plot is to enable the viewer to quickly see the effect (if any) of an experiment with two conditions on many species i.e. proteins in terms of both increased and decreased expression.</p>
 <p>Like all plots it has it’s good and bad points, namely it’s good that we can visualise a lot of complex information in one plot. However this is also it’s main weakness, it’s rather complicated to understand in one glance.</p>
 <p>However, volcano plots are widely used in the literature, so there may be an amount of <a href="https://en.wikipedia.org/wiki/Social_proof">social proof</a> giving rise to their popularity as opposed to their utility.</p>
 </div>
 <div id="creating-a-heatmap" class="section level2">
-<h2><span class="header-section-number">5.2</span> Creating a heatmap</h2>
+<h2><span class="header-section-number">4.2</span> Creating a heatmap</h2>
 <p>A</p>
 
 </div>
@@ -196,7 +196,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           </div>
         </div>
       </div>
-<a href="fold-change-and-t-test.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="transform.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="going-further.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
