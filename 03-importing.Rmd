@@ -136,7 +136,7 @@ directory. Check the `Files` pane to see it's there.
 
 We then import data and assign it to an object we'll call `data` like so:
 
-```{r example-data, echo=FALSE, cache=T}
+```{r example-data, echo=FALSE, eval=F,cache=T}
 # Charlotte's data
 dat <- read_csv("data/MergedFinalProt_2colPerFile_12files_filtered_ch.csv",
                    na = "NaN", col_types = cols()) %>% clean_names()

@@ -124,16 +124,23 @@ details on this approach.
 knitr::include_graphics("img/quant_norm.png")
 ```
 
-```{r tidy-data}
+```{r missing values}
 # Tidy data up
-dat_tidy <- dat_select %>% drop_na()
+#dat_tidy <- dat_select %>% drop_na()
+dat_tidy <- dat %>% drop_na()
+```
 
+```{r unnorm-data, echo= FALSE}
 # Plot data
-dat_tidy %>% 
-  gather(experiment,value,-c(1:2)) %>% 
+d1 <- dat_tidy %>%
+  gather(experiment,value,-c(1:2)) %>%
   ggplot(aes(log2(value),colour = experiment)) +
-   geom_density() 
+   geom_density()
 
+d1
+```
+
+```{r max-norm}
 # Normalise to maximum column value
 dat_norm_max <- dat_tidy %>%
   mutate(control_1 = control_1/max(control_1),
@@ -143,11 +150,13 @@ dat_norm_max <- dat_tidy %>%
          treatment_2 = treatment_2 / max(treatment_2),
          treatment_3 = treatment_3 / max(treatment_3)
          )
+```
 
+
+```{r quant-norm-function}
 # Quantile normalisation : the aim is to give different distributions the
 # same statistical properties
 quantile_normalisation <- function(df){
-  #
   df_rank <- apply(df,2,rank,ties.method="average")
   df_sorted <- data.frame(apply(df, 2, sort))
   df_mean <- apply(df_sorted, 1, mean)
@@ -156,19 +165,27 @@ quantile_normalisation <- function(df){
     return(my_mean[my_index])
   }
    
-  df_final <- apply(df_rank, 2, index_to_mean, my_mean=df_mean) %>% as.data.frame()
-  #rownames(df_final) <- rownames(df)
+  df_final <- apply(df_rank, 2, index_to_mean, my_mean=df_mean) %>% 
+    as.tibble()
+  
   return(df_final)
 }
+```
 
-dt <- dat_tidy %>% select(-c(1:2)) %>% quantile_normalisation()
+```{r quant-norm-data}
+dat_norm <- dat_tidy %>% select(-c(1:2)) %>% 
+  quantile_normalisation() %>% 
+  bind_cols(dat_tidy[,1:2],.)
+```
 
-dat_norm <- bind_cols(dat_tidy[,1:2],dt)
-
-dat_norm %>%
-   gather(experiment,value,-c(1:2)) %>% 
+```{r compare-normalisation, echo=FALSE}
+# Plot normalised data
+d2 <- dat_norm %>%
+  gather(experiment,value,-c(1:2)) %>% 
   ggplot(aes(log2(value),colour = experiment)) +
-   geom_density() 
+   geom_density()
+
+plot_grid(d1,d2)
 ```
 
 
@@ -176,7 +193,7 @@ dat_norm %>%
 This outputs the p-values we need for each protein.
 
 
-```{r t-test}
+```{r t-test-fun}
 # T-test function for multiple experiments
 expriments_ttest <- function(dt,grp1,grp2){
   # Subset control group and convert to numeric
@@ -188,12 +205,14 @@ expriments_ttest <- function(dt,grp1,grp2){
   # Return p-values
   return(result$p.value)
 }  
+```
 
+```{r t-test-data}
 # Apply t-test function to data
 # array = dat, 1 = rows, FUN = expriments_ttest, and arguements
 # For median normalised data
 p_vals <- apply(dat_norm,1,expriments_ttest, grp1 = c(3:5), grp2 = c(6:8))
-# For maximum normalised data
+
 p_vals_max <- apply(dat_norm_max,1,expriments_ttest, grp1 = c(3:5), grp2 = c(6:8))
 
 # Plot histograms
@@ -238,11 +257,11 @@ hist(dat_max_fc)
 for plotting a volcano plot.
 
 ```{r vol-pot}
-dat <- data.frame(prots= dat_norm$protein_accession,
+dat <- tibble(prots= dat_norm$protein_accession,
                       logfc = dat_fc, 
                       pval = -1*log10(p_vals))
 
-dat_max <- data.frame(prots= dat_norm_max$protein_accession,
+dat_max <- tibble(prots= dat_norm_max$protein_accession,
                       logfc = dat_max_fc,
                       pval = -1*log10(p_vals_max))
  
