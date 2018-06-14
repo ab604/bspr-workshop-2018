@@ -202,10 +202,13 @@ Figure 4.2: Transformation of scales using log transformation.
 </div>
 <div id="normalisation" class="section level2">
 <h2><span class="header-section-number">4.2</span> Dealing with missing values and normalisation</h2>
-<ol style="list-style-type: decimal">
-<li><p>Load the data, we need multiple replicates for each condition. To be tidy each protein is a set of observations (rows) of the variables, which are the values recorded for each replicate (columns).</p></li>
-<li><p>Tidy up and deal with missing values, either impute or exclude missing values and normalise.</p></li>
-</ol>
+<!---
+1. Load the data, we need multiple replicates for each condition. To be tidy
+each protein is a set of observations (rows) of the variables, which are the
+values recorded for each replicate (columns).
+
+2. Tidy up and deal with missing values, either impute or exclude missing values
+and normalise. --->
 <p>Let’s consider our proteomics data as a distribution of values, one value for each protein in our experiment that together form a distribution. If we have replicate experiments we’ll therefore have multiple distributions.</p>
 <p>A quantile represents a region of distribution, for example the 0.95 quantile is the value such that 95% of the data lies below it. To normalise two or more distributions with each other without recourse to a reference distribution we:</p>
 <ol style="list-style-type: lower-roman">
@@ -223,15 +226,28 @@ Figure 4.2: Transformation of scales using log transformation.
 Figure 4.3: Quantile Normalisation from <a href="https://twitter.com/rafalab/status/545586012219772928?ref_src=twsrc%5Etfw">Rafael Irizarry’s tweet</a>.
 </p>
 </div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Tidy data up</span>
-dat_tidy &lt;-<span class="st"> </span>dat_select <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">drop_na</span>()
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Remove the missing values</span>
+dat_tidy &lt;-<span class="st"> </span>dat <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">drop_na</span>()
 
-<span class="co"># Plot data</span>
-dat_tidy <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">gather</span>(experiment,value,<span class="op">-</span><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="kw">glimpse</span>(dat_tidy)</code></pre></div>
+<pre><code>## Observations: 1,184
+## Variables: 8
+## $ protein_accession   &lt;chr&gt; &quot;VATA_HUMAN_P38606&quot;, &quot;RL35A_HUMAN_P18077&quot;,...
+## $ protein_description &lt;chr&gt; &quot;V-type proton ATPase catalytic subunit A ...
+## $ control_1           &lt;dbl&gt; 0.8114, 0.3672, 2.9815, 0.1424, 1.0748, 0....
+## $ control_2           &lt;dbl&gt; 0.8575, 0.3853, 4.6176, 0.2238, 0.9451, 0....
+## $ control_3           &lt;dbl&gt; 1.0381, 0.4091, 2.8709, 0.1281, 0.8032, 0....
+## $ treatment_1         &lt;dbl&gt; 0.6918, 0.3902, 3.6547, 0.0739, 0.8933, 0....
+## $ treatment_2         &lt;dbl&gt; 0.6655, 0.3976, 2.9694, 0.1405, 0.8261, 0....
+## $ treatment_3         &lt;dbl&gt; 0.5681, 0.3469, 3.5858, 0.0579, 0.6772, 0....</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Plot data</span>
+d1 &lt;-<span class="st"> </span>dat_tidy <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">gather</span>(experiment,value,<span class="op">-</span><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="kw">log2</span>(value),<span class="dt">colour =</span> experiment)) <span class="op">+</span>
-<span class="st">   </span><span class="kw">geom_density</span>() </code></pre></div>
-<p><img src="bspr-workshop-2018_files/figure-html/tidy-data-1.png" width="672" /></p>
+<span class="st">   </span><span class="kw">geom_density</span>() 
+
+d1</code></pre></div>
+<p><img src="bspr-workshop-2018_files/figure-html/data-distribution-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Normalise to maximum column value</span>
 dat_norm_max &lt;-<span class="st"> </span>dat_tidy <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">control_1 =</span> control_<span class="dv">1</span><span class="op">/</span><span class="kw">max</span>(control_<span class="dv">1</span>),
@@ -240,12 +256,10 @@ dat_norm_max &lt;-<span class="st"> </span>dat_tidy <span class="op">%&gt;%</spa
          <span class="dt">treatment_1 =</span> treatment_<span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="kw">max</span>(treatment_<span class="dv">1</span>),
          <span class="dt">treatment_2 =</span> treatment_<span class="dv">2</span> <span class="op">/</span><span class="st"> </span><span class="kw">max</span>(treatment_<span class="dv">2</span>),
          <span class="dt">treatment_3 =</span> treatment_<span class="dv">3</span> <span class="op">/</span><span class="st"> </span><span class="kw">max</span>(treatment_<span class="dv">3</span>)
-         )
-
-<span class="co"># Quantile normalisation : the aim is to give different distributions the</span>
+         )</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Quantile normalisation : the aim is to give different distributions the</span>
 <span class="co"># same statistical properties</span>
 quantile_normalisation &lt;-<span class="st"> </span><span class="cf">function</span>(df){
-  <span class="co">#</span>
   df_rank &lt;-<span class="st"> </span><span class="kw">apply</span>(df,<span class="dv">2</span>,rank,<span class="dt">ties.method=</span><span class="st">&quot;average&quot;</span>)
   df_sorted &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">apply</span>(df, <span class="dv">2</span>, sort))
   df_mean &lt;-<span class="st"> </span><span class="kw">apply</span>(df_sorted, <span class="dv">1</span>, mean)
@@ -254,17 +268,15 @@ quantile_normalisation &lt;-<span class="st"> </span><span class="cf">function</
     <span class="kw">return</span>(my_mean[my_index])
   }
    
-  df_final &lt;-<span class="st"> </span><span class="kw">apply</span>(df_rank, <span class="dv">2</span>, index_to_mean, <span class="dt">my_mean=</span>df_mean) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.data.frame</span>()
-  <span class="co">#rownames(df_final) &lt;- rownames(df)</span>
+  df_final &lt;-<span class="st"> </span><span class="kw">apply</span>(df_rank, <span class="dv">2</span>, index_to_mean, <span class="dt">my_mean=</span>df_mean) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">as.tibble</span>()
+  
   <span class="kw">return</span>(df_final)
-}
+}</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat_norm &lt;-<span class="st"> </span>dat_tidy <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="op">-</span><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">quantile_normalisation</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">bind_cols</span>(dat_tidy[,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>],.)
 
-dt &lt;-<span class="st"> </span>dat_tidy <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="op">-</span><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">quantile_normalisation</span>()
-
-dat_norm &lt;-<span class="st"> </span><span class="kw">bind_cols</span>(dat_tidy[,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>],dt)
-
-<span class="co">#dat_norm &lt;- bind_cols(dat_tidy[,1:2],dt_con_norm,dt_trt_norm)</span>
-<span class="co"># Have a look at the median normalised data</span>
 <span class="kw">glimpse</span>(dat_norm)</code></pre></div>
 <pre><code>## Observations: 1,184
 ## Variables: 8
@@ -276,13 +288,14 @@ dat_norm &lt;-<span class="st"> </span><span class="kw">bind_cols</span>(dat_tid
 ## $ treatment_1         &lt;dbl&gt; 0.7209500, 0.4096333, 3.8710000, 0.0704000...
 ## $ treatment_2         &lt;dbl&gt; 0.73306667, 0.43755000, 3.33901667, 0.1527...
 ## $ treatment_3         &lt;dbl&gt; 0.62868333, 0.39096667, 4.02466667, 0.0583...</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat_norm <span class="op">%&gt;%</span>
-<span class="st">   </span><span class="kw">gather</span>(experiment,value,<span class="op">-</span><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Plot normalised data</span>
+d2 &lt;-<span class="st"> </span>dat_norm <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">gather</span>(<span class="dt">key =</span> experiment,value,<span class="op">-</span><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="kw">log2</span>(value),<span class="dt">colour =</span> experiment)) <span class="op">+</span>
-<span class="st">   </span><span class="kw">geom_density</span>() </code></pre></div>
-<p><img src="bspr-workshop-2018_files/figure-html/tidy-data-2.png" width="672" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Save the median normalised data</span>
-<span class="co">#write_excel_csv(dat_norm,&quot;data/example_nomralised_proteomics_data.csv&quot;)</span></code></pre></div>
+<span class="st">   </span><span class="kw">geom_density</span>()
+
+<span class="kw">plot_grid</span>(d1,d2)</code></pre></div>
+<p><img src="bspr-workshop-2018_files/figure-html/compare-normalisation-1.png" width="80%" style="display: block; margin: auto;" /></p>
 <ol start="3" style="list-style-type: decimal">
 <li>Use <code>t.test</code> to perform Welch Two Sample t-test on untransformed data. This outputs the p-values we need for each protein.</li>
 </ol>
@@ -296,20 +309,19 @@ expriments_ttest &lt;-<span class="st"> </span><span class="cf">function</span>(
   result &lt;-<span class="st"> </span><span class="kw">t.test</span>(x, y)
   <span class="co"># Return p-values</span>
   <span class="kw">return</span>(result<span class="op">$</span>p.value)
-}  
-
-<span class="co"># Apply t-test function to data</span>
+} </code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Apply t-test function to data</span>
 <span class="co"># array = dat, 1 = rows, FUN = expriments_ttest, and arguements</span>
 <span class="co"># For median normalised data</span>
 p_vals &lt;-<span class="st"> </span><span class="kw">apply</span>(dat_norm,<span class="dv">1</span>,expriments_ttest, <span class="dt">grp1 =</span> <span class="kw">c</span>(<span class="dv">3</span><span class="op">:</span><span class="dv">5</span>), <span class="dt">grp2 =</span> <span class="kw">c</span>(<span class="dv">6</span><span class="op">:</span><span class="dv">8</span>))
-<span class="co"># For maximum normalised data</span>
+
 p_vals_max &lt;-<span class="st"> </span><span class="kw">apply</span>(dat_norm_max,<span class="dv">1</span>,expriments_ttest, <span class="dt">grp1 =</span> <span class="kw">c</span>(<span class="dv">3</span><span class="op">:</span><span class="dv">5</span>), <span class="dt">grp2 =</span> <span class="kw">c</span>(<span class="dv">6</span><span class="op">:</span><span class="dv">8</span>))
 
 <span class="co"># Plot histograms</span>
 <span class="kw">hist</span>(p_vals)</code></pre></div>
-<p><img src="bspr-workshop-2018_files/figure-html/t-test-1.png" width="672" /></p>
+<p><img src="bspr-workshop-2018_files/figure-html/t-tests-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(p_vals_max)</code></pre></div>
-<p><img src="bspr-workshop-2018_files/figure-html/t-test-2.png" width="672" /></p>
+<p><img src="bspr-workshop-2018_files/figure-html/t-tests-2.png" width="672" /></p>
 <ol start="4" style="list-style-type: decimal">
 <li>Perform log transformation of the observations for each protein.</li>
 </ol>
@@ -327,30 +339,32 @@ trt &lt;-<span class="st"> </span><span class="kw">apply</span>(dat_log[,<span c
 con_max &lt;-<span class="st"> </span><span class="kw">apply</span>(dat_max_log[,<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>],<span class="dv">1</span>,mean)
 trt_max &lt;-<span class="st"> </span><span class="kw">apply</span>(dat_max_log[,<span class="dv">4</span><span class="op">:</span><span class="dv">6</span>],<span class="dv">1</span>,mean)</code></pre></div>
 <ol start="6" style="list-style-type: decimal">
-<li>The log fold change is then the difference between condition 1 and condition 2. Plot a histogram to look at the distribution.</li>
+<li>The log fold change is then the difference between condition 1 and condition 2.</li>
 </ol>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Calculate fold change</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Plot a histogram to look at the distribution.</span>
+
+<span class="co"># Calculate fold change</span>
 dat_fc &lt;-<span class="st"> </span>con <span class="op">-</span><span class="st"> </span>trt
 dat_max_fc &lt;-<span class="st"> </span>con_max <span class="op">-</span><span class="st"> </span>trt_max
 
 <span class="co"># Plot histograms</span>
 <span class="kw">hist</span>(dat_fc)</code></pre></div>
-<p><img src="bspr-workshop-2018_files/figure-html/fold-change-1.png" width="672" /></p>
+<p><img src="bspr-workshop-2018_files/figure-html/log-fc-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(dat_max_fc)</code></pre></div>
-<p><img src="bspr-workshop-2018_files/figure-html/fold-change-2.png" width="672" /></p>
+<p><img src="bspr-workshop-2018_files/figure-html/log-fc-2.png" width="672" /></p>
 <ol start="7" style="list-style-type: decimal">
 <li>Create a combined table of log fold change and p-values for all the proteins for plotting a volcano plot.</li>
 </ol>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">prots=</span> dat_norm<span class="op">$</span>protein_accession,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">prots=</span> dat_norm<span class="op">$</span>protein_accession,
                       <span class="dt">logfc =</span> dat_fc, 
                       <span class="dt">pval =</span> <span class="op">-</span><span class="dv">1</span><span class="op">*</span><span class="kw">log10</span>(p_vals))
 
-dat_max &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">prots=</span> dat_norm_max<span class="op">$</span>protein_accession,
+dat_max &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">prots=</span> dat_norm_max<span class="op">$</span>protein_accession,
                       <span class="dt">logfc =</span> dat_max_fc,
                       <span class="dt">pval =</span> <span class="op">-</span><span class="dv">1</span><span class="op">*</span><span class="kw">log10</span>(p_vals_max))
- 
+
 dat_max <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(logfc,pval)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()</code></pre></div>
-<p><img src="bspr-workshop-2018_files/figure-html/vol-pot-1.png" width="672" /></p>
+<p><img src="bspr-workshop-2018_files/figure-html/volcano-plot-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">threshold =</span> <span class="kw">if_else</span>(logfc <span class="op">&gt;=</span><span class="st"> </span><span class="dv">2</span> <span class="op">&amp;</span><span class="st"> </span>pval <span class="op">&gt;=</span><span class="st"> </span><span class="fl">1.5</span> <span class="op">|</span><span class="st"> </span>
 <span class="st">                               </span>logfc <span class="op">&lt;=</span><span class="st"> </span><span class="op">-</span><span class="dv">2</span> <span class="op">&amp;</span><span class="st"> </span>pval <span class="op">&gt;=</span><span class="st"> </span><span class="fl">1.5</span>,<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
@@ -359,7 +373,7 @@ dat_max <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">
 <span class="st">  </span><span class="kw">scale_colour_manual</span>(<span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&quot;A&quot;</span>=<span class="st"> &quot;red&quot;</span>, <span class="st">&quot;B&quot;</span>=<span class="st"> &quot;black&quot;</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;log2 fold change&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;-log10 p-value&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme_minimal</span>()</code></pre></div>
-<p><img src="bspr-workshop-2018_files/figure-html/vol-pot-2.png" width="672" /></p>
+<p><img src="bspr-workshop-2018_files/figure-html/volcano-plot-2.png" width="672" /></p>
 </div>
 <div id="heatmap-transformation" class="section level2">
 <h2><span class="header-section-number">4.3</span> Heatmap transformation</h2>
@@ -382,7 +396,7 @@ dat.tn &lt;-<span class="st"> </span><span class="kw">scale</span>(<span class="
 <span class="kw">library</span>(pheatmap)
 <span class="kw">pheatmap</span>(dat.tn,<span class="dt">cutree_rows =</span> <span class="dv">2</span>,
          <span class="dt">cutree_cols =</span> <span class="dv">2</span>)</code></pre></div>
-<p><img src="bspr-workshop-2018_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p><img src="bspr-workshop-2018_files/figure-html/heatmap-2-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cal_z_score &lt;-<span class="st"> </span><span class="cf">function</span>(x){
   (x <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(x)) <span class="op">/</span><span class="st"> </span><span class="kw">sd</span>(x)
 }
@@ -390,7 +404,7 @@ dat.tn &lt;-<span class="st"> </span><span class="kw">scale</span>(<span class="
 data_subset_norm &lt;-<span class="st"> </span><span class="kw">t</span>(<span class="kw">apply</span>(dat_mut[,<span class="dv">2</span><span class="op">:</span><span class="dv">7</span>], <span class="dv">1</span>, cal_z_score))
 <span class="kw">row.names</span>(data_subset_norm) &lt;-<span class="st"> </span>dat_mut<span class="op">$</span>protein_accession
 <span class="kw">pheatmap</span>(data_subset_norm)</code></pre></div>
-<p><img src="bspr-workshop-2018_files/figure-html/unnamed-chunk-3-2.png" width="672" /></p>
+<p><img src="bspr-workshop-2018_files/figure-html/heatmap-2-2.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">d1 &lt;-<span class="st"> </span>dat.tn <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">t</span>() <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">dist</span>(.,<span class="dt">method =</span> <span class="st">&quot;euclidean&quot;</span>, <span class="dt">diag =</span> <span class="ot">FALSE</span>, <span class="dt">upper =</span> <span class="ot">FALSE</span>)
 
@@ -405,7 +419,7 @@ c2 &lt;-<span class="st"> </span><span class="kw">hclust</span>(d2, <span class=
 <span class="co"># Check clustering by plotting dendrograms</span>
 <span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">1</span>),<span class="dt">cex=</span><span class="fl">0.5</span>) <span class="co"># Make 2 rows, 1 col plot frame and shrink labels</span>
 <span class="kw">plot</span>(c1); <span class="kw">plot</span>(c2) <span class="co"># Plot both cluster dendrograms</span></code></pre></div>
-<p><img src="bspr-workshop-2018_files/figure-html/unnamed-chunk-3-3.png" width="672" /> 2. Plot the data</p>
+<p><img src="bspr-workshop-2018_files/figure-html/heatmap-2-3.png" width="672" /> 2. Plot the data</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Set colours for heatmap, 25 increments</span>
 my_palette &lt;-<span class="st"> </span><span class="kw">colorRampPalette</span>(<span class="kw">c</span>(<span class="st">&quot;blue&quot;</span>,<span class="st">&quot;white&quot;</span>,<span class="st">&quot;red&quot;</span>))(<span class="dt">n =</span> <span class="dv">25</span>)
 
@@ -418,7 +432,7 @@ gplots<span class="op">::</span><span class="kw">heatmap.2</span>(dat.tn,       
           <span class="dt">trace=</span><span class="st">&quot;none&quot;</span>,               <span class="co"># Turn of trace lines from heat map</span>
           <span class="dt">col =</span> my_palette,           <span class="co"># Use my colour scheme</span>
           <span class="dt">cexRow=</span><span class="fl">0.5</span>,<span class="dt">cexCol=</span><span class="fl">0.75</span>)     <span class="co"># Amend row and column label fonts</span></code></pre></div>
-<p><img src="bspr-workshop-2018_files/figure-html/heatmap-1.png" width="672" /></p>
+<p><img src="bspr-workshop-2018_files/figure-html/heatmap-1-1.png" width="672" /></p>
 </div>
 <div id="visualising-proteomics-data" class="section level2">
 <h2><span class="header-section-number">4.4</span> Visualising proteomics data</h2>

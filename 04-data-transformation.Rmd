@@ -64,9 +64,9 @@ y_vals <- c(rev(1/x2),1,x2)
 names <- c(paste0("1/",rev(x2)),1,x2)
 x_vals <- seq(along=y_vals)
 
-dat <- tibble(x_vals,y_vals,names)
+sim_dat <- tibble(x_vals,y_vals,names)
 
-p1 <- ggplot(dat,aes(x_vals,y_vals, label = names)) +
+p1 <- ggplot(sim_dat,aes(x_vals,y_vals, label = names)) +
   geom_text() +
   geom_hline(yintercept = 1) +
   theme_minimal() +
@@ -74,7 +74,7 @@ p1 <- ggplot(dat,aes(x_vals,y_vals, label = names)) +
   scale_x_continuous(breaks = NULL)
 
 
-p2 <- ggplot(dat,aes(x_vals,y_vals, label = names)) +
+p2 <- ggplot(sim_dat,aes(x_vals,y_vals, label = names)) +
   geom_text() +
   geom_hline(yintercept = 1) +
   scale_y_continuous(trans = "log2") +
@@ -87,12 +87,13 @@ plot_grid(p1,p2)
 
 ## Dealing with missing values and normalisation {#normalisation}
 
+<!---
 1. Load the data, we need multiple replicates for each condition. To be tidy
 each protein is a set of observations (rows) of the variables, which are the
 values recorded for each replicate (columns).
 
 2. Tidy up and deal with missing values, either impute or exclude missing values
-and normalise.
+and normalise. --->
 
 Let's consider our proteomics data as a distribution of values, one value for 
 each protein in our experiment that together form a distribution. 
@@ -116,31 +117,31 @@ second highest observations across all experiments.
 [Dave Tang's Blog:Quantile Normalisation in R](https://davetang.org/muse/2014/07/07/quantile-normalisation-in-r/) has more
 details on this approach.
 
-
-
 (ref:quant-norm) Quantile Normalisation from [Rafael Irizarry's tweet](https://twitter.com/rafalab/status/545586012219772928?ref_src=twsrc%5Etfw).
 
 ```{r quant-norm, fig.cap='(ref:quant-norm)',fig.asp=1, out.width= '80%', fig.align='center', echo=FALSE}
 knitr::include_graphics("img/quant_norm.png")
 ```
 
-```{r missing values}
-# Tidy data up
-#dat_tidy <- dat_select %>% drop_na()
+
+```{r missing values, cache=TRUE}
+# Remove the missing values
 dat_tidy <- dat %>% drop_na()
+
+glimpse(dat_tidy)
 ```
 
-```{r unnorm-data, echo= FALSE}
+```{r data-distribution, cache=TRUE}
 # Plot data
 d1 <- dat_tidy %>%
   gather(experiment,value,-c(1:2)) %>%
   ggplot(aes(log2(value),colour = experiment)) +
-   geom_density()
+   geom_density() 
 
 d1
 ```
 
-```{r max-norm}
+```{r max-normalisation, cache=TRUE}
 # Normalise to maximum column value
 dat_norm_max <- dat_tidy %>%
   mutate(control_1 = control_1/max(control_1),
@@ -150,10 +151,10 @@ dat_norm_max <- dat_tidy %>%
          treatment_2 = treatment_2 / max(treatment_2),
          treatment_3 = treatment_3 / max(treatment_3)
          )
+
 ```
 
-
-```{r quant-norm-function}
+```{r quant-normalisation, cache=TRUE}
 # Quantile normalisation : the aim is to give different distributions the
 # same statistical properties
 quantile_normalisation <- function(df){
@@ -172,28 +173,28 @@ quantile_normalisation <- function(df){
 }
 ```
 
-```{r quant-norm-data}
+```{r qnorm-data, cache=TRUE}
 dat_norm <- dat_tidy %>% select(-c(1:2)) %>% 
   quantile_normalisation() %>% 
   bind_cols(dat_tidy[,1:2],.)
+
+glimpse(dat_norm)
 ```
 
-```{r compare-normalisation, echo=FALSE}
+```{r compare-normalisation, fig.asp=0.5, out.width= '80%', fig.align='center',cache=TRUE}
 # Plot normalised data
 d2 <- dat_norm %>%
-  gather(experiment,value,-c(1:2)) %>% 
+  gather(key = experiment,value,-c(1:2)) %>% 
   ggplot(aes(log2(value),colour = experiment)) +
    geom_density()
 
 plot_grid(d1,d2)
 ```
 
-
 3. Use `t.test` to perform Welch Two Sample t-test on untransformed data. 
 This outputs the p-values we need for each protein.
 
-
-```{r t-test-fun}
+```{r t-test-function, cache=TRUE}
 # T-test function for multiple experiments
 expriments_ttest <- function(dt,grp1,grp2){
   # Subset control group and convert to numeric
@@ -204,10 +205,11 @@ expriments_ttest <- function(dt,grp1,grp2){
   result <- t.test(x, y)
   # Return p-values
   return(result$p.value)
-}  
+} 
 ```
 
-```{r t-test-data}
+
+```{r t-tests, cache=TRUE}
 # Apply t-test function to data
 # array = dat, 1 = rows, FUN = expriments_ttest, and arguements
 # For median normalised data
@@ -222,7 +224,7 @@ hist(p_vals_max)
 
 4. Perform log transformation of the observations for each protein.
 
-```{r log-data}
+```{r log-data, cache=TRUE}
 # Select columns and log data
 dat_log <- dat_norm %>% 
   select(-c(protein_accession,protein_description)) %>% log2()
@@ -232,7 +234,7 @@ dat_max_log <- dat_norm_max %>%
 
 5. Calculate the mean observation for each protein under each condition.
 
-```{r mean-log}
+```{r mean-log, cache=TRUE}
 con <- apply(dat_log[,1:3],1,mean)
 trt <- apply(dat_log[,4:6],1,mean)
 
@@ -241,9 +243,10 @@ trt_max <- apply(dat_max_log[,4:6],1,mean)
 ```
 
 6. The log fold change is then the difference between condition 1 and condition 2.
-Plot a histogram to look at the distribution.
 
-```{r fold-change}
+```{r log-fc, cache=TRUE}
+# Plot a histogram to look at the distribution.
+
 # Calculate fold change
 dat_fc <- con - trt
 dat_max_fc <- con_max - trt_max
@@ -256,7 +259,7 @@ hist(dat_max_fc)
 7. Create a combined table of log fold change and p-values for all the proteins
 for plotting a volcano plot.
 
-```{r vol-pot}
+```{r volcano-plot, cache=TRUE}
 dat <- tibble(prots= dat_norm$protein_accession,
                       logfc = dat_fc, 
                       pval = -1*log10(p_vals))
@@ -264,7 +267,7 @@ dat <- tibble(prots= dat_norm$protein_accession,
 dat_max <- tibble(prots= dat_norm_max$protein_accession,
                       logfc = dat_max_fc,
                       pval = -1*log10(p_vals_max))
- 
+
 dat_max %>% ggplot(aes(logfc,pval)) + geom_point()
 
 dat %>% 
@@ -282,7 +285,7 @@ dat %>%
 
 1. Clustering the data
 
-```{r }
+```{r heatmap-2}
 dat_mut <- dat_norm %>%
   mutate(pval = dat$pval, logfc = dat$logfc) %>%
   filter(pval >= 2 & (logfc >=2 | logfc <= 2)) %>%
@@ -325,7 +328,7 @@ plot(c1); plot(c2) # Plot both cluster dendrograms
 ```
 2. Plot the data
 
-```{r heatmap}
+```{r heatmap-1}
 # Set colours for heatmap, 25 increments
 my_palette <- colorRampPalette(c("blue","white","red"))(n = 25)
 
