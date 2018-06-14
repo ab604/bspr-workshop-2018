@@ -1119,4 +1119,177 @@ Untracked files:[0K
 no changes added to commit (use "git add" and/or "git commit -a")[0K
 [0K[?25h[?25l
 [0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K
-$[0K[3G[?25h[?25l$ g[0K[?25hi[0Kt[0K[7G[?25l$ git a[0K[?25hd[0Kd[0K[11G[?25l$ git add .[0K[?25h
+$[0K[3G[?25h[?25l$ g[0K[?25hi[0Kt[0K[7G[?25l$ git a[0K[?25hd[0Kd[0K[11G[?25l$ git add .[0K[?25h[?25l
+[0K[?25hwarning: LF will be replaced by CRLF in .Rproj.user/6F98EBE9/sources/prop/234D8CAA.[0K[?25l
+The file will have its original line endings in your working directory.[0K
+warning: LF will be replaced by CRLF in .Rproj.user/6F98EBE9/sources/prop/INDEX.[0K
+The file will have its original line endings in your working directory.[0K
+warning: LF will be replaced by CRLF in .Rproj.user/shared/notebooks/paths.[0K
+The file will have its original line endings in your working directory.[0K
+[0K[?25h[?25l
+[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K
+$[0K[3G[?25h[?25l$ g[0K[?25hi[0Kt[0K[7G[?25l$ git c[0K[?25ho[0Km[0Km[0Ki[0Kt[0K[14G[?25l$ git commit -[0K[?25hm[0K[17G[?25l$ git commit -m "[0K[?25hc[0Ko[0Kr[0Kr[0Ke[0Kc[0Kt[0K[26G[?25l$ git commit -m "correct t[0K[?25hr[0Ka[0Kn[0Ks[0Kf[0Ko[0Km[0Kr[0K[?25l$ git commit -m "correct transfom[0K[?25h[?25l$ git commit -m "correct transfo[0K[?25hr[0Km[0Ka[0Kt[0Ki[0Ko[0Kn[0K[41G[?25l$ git commit -m "correct transformation c[0K[?25hh[0Ka[0Kp[0Kt[0Ke[0Kr[0K"[0K[?25l
+[0K[?25h[master[0K[9G[?25l[master f8ff8d5] correct transformation chapter[0K
+ 78 files changed, 272 insertions(+), 1431 deletions(-)[0K
+ rewrite .Rproj.user/6F98EBE9/console06/INDEX001 (85%)[0K
+ rename 04-transform_and_visualise.Rmd => 04-data-transformation.Rmd (93%)[0K
+ create mode 100644 _book/bspr-workshop-2018_files/figure-html/compare-normalisation-1.png[0K
+ create mode 100644 _book/bspr-workshop-2018_files/figure-html/data-distribution-1.png[0K
+ create mode 100644 _book/bspr-workshop-2018_files/figure-html/heatmap-1-1.png[0K
+ create mode 100644 _book/bspr-workshop-2018_files/figure-html/heatmap-2-1.png[0K
+ create mode 100644 _book/bspr-workshop-2018_files/figure-html/heatmap-2-2.png[0K
+ create mode 100644 _book/bspr-workshop-2018_files/figure-html/heatmap-2-3.png[0K
+ create mode 100644 _book/bspr-workshop-2018_files/figure-html/log-fc-1.png[0K
+ create mode 100644 _book/bspr-workshop-2018_files/figure-html/log-fc-2.png[0K
+ create mode 100644 _book/bspr-workshop-2018_files/figure-html/t-tests-1.png[0K
+ create mode 100644 _book/bspr-workshop-2018_files/figure-html/t-tests-2.png[0K
+ create mode 100644 _book/bspr-workshop-2018_files/figure-html/volcano-plot-1.png[0K
+ create mode 100644 _book/bspr-workshop-2018_files/figure-html/volcano-plot-2.png[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/compare-normalisation_b0d25a2a75ab4eda388502b7120cd4ce.RData[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/compare-normalisation_b0d25a2a75ab4eda388502b7120cd4ce.rdb[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/compare-normalisation_b0d25a2a75ab4eda388502b7120cd4ce.rdx[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/data-distribution_ce27e19d09e9b6238bb238ffbafd0f0d.RData[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/data-distribution_ce27e19d09e9b6238bb238ffbafd0f0d.rdb[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/data-distribution_ce27e19d09e9b6238bb238ffbafd0f0d.rdx[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/fold-change-2_4a00353aec070d4fc486da47bbe025b4.RData[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/fold-change-2_4a00353aec070d4fc486da47bbe025b4.rdb[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/fold-change-2_4a00353aec070d4fc486da47bbe025b4.rdx[0K
+ delete mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/fold-change-2_69c037122492f58eae0cc3041195dacc.RData[0K
+ delete mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/fold-change-2_69c037122492f58eae0cc3041195dacc.rdb[0K
+ delete mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/fold-change-2_69c037122492f58eae0cc3041195dacc.rdx[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/log-data_4e3465a222f59b4158af3d51bf7377d1.RData[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/log-data_4e3465a222f59b4158af3d51bf7377d1.rdb[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/log-data_4e3465a222f59b4158af3d51bf7377d1.rdx[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/log-fc_a23669abbaa70b95d8bbffa04439ceab.RData[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/log-fc_a23669abbaa70b95d8bbffa04439ceab.rdb[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/log-fc_a23669abbaa70b95d8bbffa04439ceab.rdx[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/max-normalisation_9c4b1dad4163aafcc07cdf5f5fba3fc4.RData[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/max-normalisation_9c4b1dad4163aafcc07cdf5f5fba3fc4.rdb[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/max-normalisation_9c4b1dad4163aafcc07cdf5f5fba3fc4.rdx[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/mean-log_439184821a3c436677d3db4f156f7f4a.RData[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/mean-log_439184821a3c436677d3db4f156f7f4a.rdb[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/mean-log_439184821a3c436677d3db4f156f7f4a.rdx[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/missing values_0b2a5c86f216d512ddf4577f4416998d.RData[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/missing values_0b2a5c86f216d512ddf4577f4416998d.rdb[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/missing values_0b2a5c86f216d512ddf4577f4416998d.rdx[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/qnorm-data_ba6a958ff5a00c1d1ca3b15a4610e068.RData[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/qnorm-data_ba6a958ff5a00c1d1ca3b15a4610e068.rdb[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/qnorm-data_ba6a958ff5a00c1d1ca3b15a4610e068.rdx[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/quant-normalisation_c389af5e6def59da108615b0dc1e9e39.RData[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/quant-normalisation_c389af5e6def59da108615b0dc1e9e39.rdb[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/quant-normalisation_c389af5e6def59da108615b0dc1e9e39.rdx[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/t-test-function_d4ccc3d6add551292f4ca8700fa826a9.RData[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/t-test-function_d4ccc3d6add551292f4ca8700fa826a9.rdb[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/t-test-function_d4ccc3d6add551292f4ca8700fa826a9.rdx[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/t-tests_241d77eb79ef017be27c672a0835d6d1.RData[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/t-tests_241d77eb79ef017be27c672a0835d6d1.rdb[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/t-tests_241d77eb79ef017be27c672a0835d6d1.rdx[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/volcano-plot_a2fad2c03c448e71430a909c69a3479b.RData[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/volcano-plot_a2fad2c03c448e71430a909c69a3479b.rdb[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/volcano-plot_a2fad2c03c448e71430a909c69a3479b.rdx[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_files/figure-html/compare-normalisation-1.png[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_files/figure-html/data-distribution-1.png[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_files/figure-html/heatmap-1-1.png[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_files/figure-html/heatmap-2-1.png[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_files/figure-html/heatmap-2-2.png[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_files/figure-html/heatmap-2-3.png[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_files/figure-html/log-fc-1.png[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_files/figure-html/log-fc-2.png[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_files/figure-html/t-tests-1.png[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_files/figure-html/t-tests-2.png[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_files/figure-html/unnorm-data-1.png[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_files/figure-html/volcano-plot-1.png[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_files/figure-html/volcano-plot-2.png[0K
+ delete mode 100644 bspr-workshop-2018.Rmd[0K
+[0K[?25h[?25l
+[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K
+$[0K[3G[?25h[?25l$ g[0K[?25hi[0Kt[0K[7G[?25l$ git p[0K[?25hu[0Ks[0Kh[0K[12G[?25l$ git push o[0K[?25hr[0Ki[0Kg[0Ki[0Kn[0K[19G[?25l$ git push origin m[0K[?25ha[0Ks[0Kt[0Ke[0Kr[0K[?25l
+[0K[?25hCounting objects: 68, done.[0K[?25l
+[0K[?25hDelta compression using up to 16 threads.[0K[?25l
+Compressing objects:  93% (60/64)[0K[1G[?25hCompressing objects: 100% (64/64), done.[0K[?25l
+Writing objects:  39% (27/68)[0K[1G[?25h[?25lWriting objects:  48% (33/68)[0K[1G[?25h[?25lWriting objects:  60% (41/68)[0K[1G[?25h[?25lWriting objects:  66% (45/68)[0K[1G[?25hWriting objects: 100% (68/68), 980.66 KiB | 0 bytes/s, done.[0K[?25l
+Total 68 (delta 16), reused 0 (delta 0)[0K
+[0K[?25hremote: Resolving deltas: 100% (16/16), completed with 13 local objects.[0K[?25l
+[0K[?25hTo github.com:ab604/bspr-workshop-2018.git[0K[?25l
+   9aa7154..f8ff8d5  master -> master[0K
+[0K[?25h[?25l
+[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K
+$[0K[3G[?25h[?25l$ g[0K[?25hi[0Kt[0K[7G[?25l$ git s[0K[7G[?25h[8G[?25l$ git st[0K[?25ha[0Kt[0Ku[0Ks[0K[?25l
+[0K[?25hOn branch master[0K[?25l
+Changes not staged for commit:[0K
+  (use "git add/rm <file>..." to update what will be committed)[0K
+  (use "git checkout -- <file>..." to discard changes in working directory)[0K
+[0K
+        [0;31mmodified:   .Rproj.user/6F98EBE9/console06/CAEA8888[0m[0K
+        [0;31mmodified:   .Rproj.user/6F98EBE9/sources/prop/234D8CAA[0m[0K
+        [0;31mmodified:   .Rproj.user/6F98EBE9/sources/prop/85427934[0m[0K
+        [0;31mmodified:   .Rproj.user/shared/notebooks/8F6288BF-index/1/s/chunks.json[0m[0K
+        [0;31mmodified:   02-tidyverse.Rmd[0m[0K
+        [0;31mmodified:   04-data-transformation.Rmd[0m[0K
+        [0;31mmodified:   _book/bspr-workshop-2018_files/figure-html/compare-normalisation-1.png[0m[0K
+        [0;31mmodified:   _book/bspr-workshop-2018_files/figure-html/data-distribution-1.png[0m[0K
+        [0;31mmodified:   _book/going-further.html[0m[0K
+        [0;31mmodified:   _book/import.html[0m[0K
+        [0;31mmodified:   _book/index.html[0m[0K
+        [0;31mmodified:   _book/intro.html[0m[0K
+        [0;31mmodified:   _book/references.html[0m[0K
+        [0;31mmodified:   _book/search_index.json[0m[0K
+        [0;31mmodified:   _book/tidyverse.html[0m[0K
+        [0;31mmodified:   _book/transform.html[0m[0K
+        [0;31mdeleted:    _bookdown_files/bspr-workshop-2018_cache/html/compare-normalisation_b0d25a2a75ab4eda388502b7120cd4ce.RData[0m[0K
+        [0;31mdeleted:    _bookdown_files/bspr-workshop-2018_cache/html/compare-normalisation_b0d25a2a75ab4eda388502b7120cd4ce.rdb[0m[0K
+        [0;31mdeleted:    _bookdown_files/bspr-workshop-2018_cache/html/compare-normalisation_b0d25a2a75ab4eda388502b7120cd4ce.rdx[0m[0K
+        [0;31mdeleted:    _bookdown_files/bspr-workshop-2018_cache/html/data-distribution_ce27e19d09e9b6238bb238ffbafd0f0d.RData[0m[0K
+        [0;31mdeleted:    _bookdown_files/bspr-workshop-2018_cache/html/data-distribution_ce27e19d09e9b6238bb238ffbafd0f0d.rdb[0m[0K
+        [0;31mdeleted:    _bookdown_files/bspr-workshop-2018_cache/html/data-distribution_ce27e19d09e9b6238bb238ffbafd0f0d.rdx[0m[0K
+        [0;31mdeleted:    _bookdown_files/bspr-workshop-2018_cache/html/max-normalisation_9c4b1dad4163aafcc07cdf5f5fba3fc4.RData[0m[0K
+        [0;31mdeleted:    _bookdown_files/bspr-workshop-2018_cache/html/max-normalisation_9c4b1dad4163aafcc07cdf5f5fba3fc4.rdb[0m[0K
+        [0;31mdeleted:    _bookdown_files/bspr-workshop-2018_cache/html/max-normalisation_9c4b1dad4163aafcc07cdf5f5fba3fc4.rdx[0m[0K
+        [0;31mdeleted:    _bookdown_files/bspr-workshop-2018_cache/html/missing values_0b2a5c86f216d512ddf4577f4416998d.RData[0m[0K
+        [0;31mdeleted:    _bookdown_files/bspr-workshop-2018_cache/html/missing values_0b2a5c86f216d512ddf4577f4416998d.rdb[0m[0K
+        [0;31mdeleted:    _bookdown_files/bspr-workshop-2018_cache/html/missing values_0b2a5c86f216d512ddf4577f4416998d.rdx[0m[0K
+        [0;31mdeleted:    _bookdown_files/bspr-workshop-2018_cache/html/qnorm-data_ba6a958ff5a00c1d1ca3b15a4610e068.RData[0m[0K
+        [0;31mdeleted:    _bookdown_files/bspr-workshop-2018_cache/html/qnorm-data_ba6a958ff5a00c1d1ca3b15a4610e068.rdb[0m[0K
+        [0;31mdeleted:    _bookdown_files/bspr-workshop-2018_cache/html/qnorm-data_ba6a958ff5a00c1d1ca3b15a4610e068.rdx[0m[0K
+        [0;31mdeleted:    _bookdown_files/bspr-workshop-2018_cache/html/volcano-plot_a2fad2c03c448e71430a909c69a3479b.RData[0m[0K
+        [0;31mdeleted:    _bookdown_files/bspr-workshop-2018_cache/html/volcano-plot_a2fad2c03c448e71430a909c69a3479b.rdb[0m[0K
+        [0;31mdeleted:    _bookdown_files/bspr-workshop-2018_cache/html/volcano-plot_a2fad2c03c448e71430a909c69a3479b.rdx[0m[0K
+        [0;31mmodified:   _bookdown_files/bspr-workshop-2018_files/figure-html/compare-normalisation-1.png[0m[0K
+        [0;31mmodified:   _bookdown_files/bspr-workshop-2018_files/figure-html/data-distribution-1.png[0m[0K
+        [0;31mmodified:   book.bib[0m[0K
+        [0;31mmodified:   book.bib.bak[0m[0K
+        [0;31mmodified:   book.bib.sav[0m[0K
+        [0;31mmodified:   index.Rmd[0m[0K
+        [0;31mmodified:   packages.bib[0m[0K
+[0K
+Untracked files:[0K
+  (use "git add <file>..." to include in what will be committed)[0K
+[0K
+        [0;31m_book/bspr-workshop-2018_files/figure-html/data-dist-1.png[0m[0K
+        [0;31m_bookdown_files/bspr-workshop-2018_cache/html/compare-normalisation_8280a5e4ce036c976153fb2d912f1da2.RData[0m[0K
+        [0;31m_bookdown_files/bspr-workshop-2018_cache/html/compare-normalisation_8280a5e4ce036c976153fb2d912f1da2.rdb[0m[0K
+        [0;31m_bookdown_files/bspr-workshop-2018_cache/html/compare-normalisation_8280a5e4ce036c976153fb2d912f1da2.rdx[0m[0K
+        [0;31m_bookdown_files/bspr-workshop-2018_cache/html/data-dist_0e017a7cfcf24bd7c8fe08b29a69258c.RData[0m[0K
+        [0;31m_bookdown_files/bspr-workshop-2018_cache/html/data-dist_0e017a7cfcf24bd7c8fe08b29a69258c.rdb[0m[0K
+        [0;31m_bookdown_files/bspr-workshop-2018_cache/html/data-dist_0e017a7cfcf24bd7c8fe08b29a69258c.rdx[0m[0K
+        [0;31m_bookdown_files/bspr-workshop-2018_cache/html/data-distribution_d7ae6996be48bdc0ba6f3ecfd2362032.RData[0m[0K
+        [0;31m_bookdown_files/bspr-workshop-2018_cache/html/data-distribution_d7ae6996be48bdc0ba6f3ecfd2362032.rdb[0m[0K
+        [0;31m_bookdown_files/bspr-workshop-2018_cache/html/data-distribution_d7ae6996be48bdc0ba6f3ecfd2362032.rdx[0m[0K
+        [0;31m_bookdown_files/bspr-workshop-2018_cache/html/max-normalisation_fd4f9a54a33512dbd1a32631a7bbcc2c.RData[0m[0K
+        [0;31m_bookdown_files/bspr-workshop-2018_cache/html/max-normalisation_fd4f9a54a33512dbd1a32631a7bbcc2c.rdb[0m[0K
+        [0;31m_bookdown_files/bspr-workshop-2018_cache/html/max-normalisation_fd4f9a54a33512dbd1a32631a7bbcc2c.rdx[0m[0K
+        [0;31m_bookdown_files/bspr-workshop-2018_cache/html/missing values_fc285f5a8059fc635944fd0c6529a04f.RData[0m[0K
+        [0;31m_bookdown_files/bspr-workshop-2018_cache/html/missing values_fc285f5a8059fc635944fd0c6529a04f.rdb[0m[0K
+        [0;31m_bookdown_files/bspr-workshop-2018_cache/html/missing values_fc285f5a8059fc635944fd0c6529a04f.rdx[0m[0K
+        [0;31m_bookdown_files/bspr-workshop-2018_cache/html/qnorm-data_5adbf08bcc574cbce56b9877535bd120.RData[0m[0K
+        [0;31m_bookdown_files/bspr-workshop-2018_cache/html/qnorm-data_5adbf08bcc574cbce56b9877535bd120.rdb[0m[0K
+        [0;31m_bookdown_files/bspr-workshop-2018_cache/html/qnorm-data_5adbf08bcc574cbce56b9877535bd120.rdx[0m[0K
+        [0;31m_bookdown_files/bspr-workshop-2018_cache/html/volcano-plot_e55290384725371991ea96f429452d8e.RData[0m[0K
+        [0;31m_bookdown_files/bspr-workshop-2018_cache/html/volcano-plot_e55290384725371991ea96f429452d8e.rdb[0m[0K
+        [0;31m_bookdown_files/bspr-workshop-2018_cache/html/volcano-plot_e55290384725371991ea96f429452d8e.rdx[0m[0K
+        [0;31m_bookdown_files/bspr-workshop-2018_files/figure-html/data-dist-1.png[0m[0K
+[0K
+no changes added to commit (use "git add" and/or "git commit -a")[0K
+[0K[?25h[?25l
+[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K
+$[0K[3G[?25h[?25l$ g[0K[?25hi[0Kt[0K[7G[?25l$ git a[0K[7G[?25h[8G[?25l$ git ad[0K[?25h[?25ld[0K[9G[?25h[10G[11G[?25l$ git add .[0K[?25h

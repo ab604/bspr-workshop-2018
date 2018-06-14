@@ -35,7 +35,8 @@ library(cowplot)
 #library(gridExtra)
 #library(cowplot)
 # automatically create a bib database for R packages
-knitr::write_bib(c(.packages(), 'bookdown', 'knitr', 'rmarkdown'), 'packages.bib')
+knitr::write_bib(c(.packages(), 'bookdown', 'knitr', 'rmarkdown', 
+                   "tidyverse","gplots","pheatmap"), 'packages.bib')
 
 options(knitr.graphics.auto_pdf = TRUE)
 ```

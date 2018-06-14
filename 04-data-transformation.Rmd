@@ -85,7 +85,7 @@ p2 <- ggplot(sim_dat,aes(x_vals,y_vals, label = names)) +
 plot_grid(p1,p2)
 ```
 
-## Dealing with missing values and normalisation {#normalisation}
+## Dealing with missing values {#missing-values}
 
 <!---
 1. Load the data, we need multiple replicates for each condition. To be tidy
@@ -95,12 +95,71 @@ values recorded for each replicate (columns).
 2. Tidy up and deal with missing values, either impute or exclude missing values
 and normalise. --->
 
-Let's consider our proteomics data as a distribution of values, one value for 
-each protein in our experiment that together form a distribution. 
-If we have replicate experiments we'll therefore have multiple distributions.
+Unless we're really lucky, it's unlikely that we'll get observations for
+the same numbers of proteins in all replicated experiments. This means
+there will be missing values for some proteins when looking at all the 
+experiments together. This then raises the question of what to do about the
+missing values? We have two choices:
+
+1. Only analyse the proteins that we have observations for in all experiments.
+2. Impute values for the missing values from the existing observations.
+
+There are pros and cons to either approach. Here for simplicity we'll use only
+the proteins for which we have observations in all assays.
+
+We can drop the proteins with missing values by piping our data set to the
+`drop_na()` function from the `tidyr` package like so. We assign this to a new
+object called `dat_tidy`.
+
+```{r missing values, cache=TRUE}
+# Remove the missing values
+dat_tidy <- dat %>% drop_na()
+
+# Nunber of proteins in original data
+dat %>% summarise(Number_of_proteins = n())
+# Nunber of proteins without missing values
+dat_tidy %>% summarise(Number_of_proteins = n())
+```
+
+This shrinks the dataset from 7,702 proteins to 1,184 proteins, so we can see 
+why imputing the missing values might be more atrractive.
+
+One approach you might like to try is to impute the data by replacing the 
+missing values with the mean observation for each protein.
+
+## Data normalization {#normalisation}
+
+To perform statistical inference, for example whether treatment increases or
+decreases protein abundance, we need to account for the variation that occurs
+from run to run on our spectrometers and each give rise to a different 
+distribution. This is as opposed to variation arising from treatment versus
+control which we are interested in understanding. Hence normalization seeks to 
+reduce the run-to-run sources of variation.
+
+A method of normalization introduced for DNA microarray analysis is 
+quantile normalization [@bolstad2003].
+
+If we consider our proteomics data as a distribution of values, one value for 
+the concentration of each protein in our experiment that together form a 
+distribution. Figure \@ref(fig:data-dist) shows the distribution of
+protein concentrations observed for the three control and three treatment assays.
+As we can see the distributions are different for each assay.
+
+(ref:prot-dist) Protein data for six assays plotted as a distributions.
+
+```{r data-dist, fig.cap='(ref:prot-dist)',fig.asp=0.5, out.width= '80%', fig.align='center', echo=FALSE, cache=TRUE}
+# Plot data
+d1 <- dat_tidy %>%
+  gather(experiment,value,-c(1:2)) %>%
+  ggplot(aes(log2(value),colour = experiment)) +
+  geom_density() +
+  xlab("")
+
+d1
+```
 
 A quantile represents a region of distribution, for example the 0.95 quantile
-is the value such that 95% of the data lies below it. To normalise two or more
+is the value such that 95% of the data lies below it. To normalize two or more
 distributions with each other without recourse to a reference distribution we:
 
 (i) Rank the value in each experiment (represented in the columns) from 
@@ -123,36 +182,10 @@ details on this approach.
 knitr::include_graphics("img/quant_norm.png")
 ```
 
-
-```{r missing values, cache=TRUE}
-# Remove the missing values
-dat_tidy <- dat %>% drop_na()
-
-glimpse(dat_tidy)
-```
-
-```{r data-distribution, cache=TRUE}
-# Plot data
-d1 <- dat_tidy %>%
-  gather(experiment,value,-c(1:2)) %>%
-  ggplot(aes(log2(value),colour = experiment)) +
-   geom_density() 
-
-d1
-```
-
-```{r max-normalisation, cache=TRUE}
-# Normalise to maximum column value
-dat_norm_max <- dat_tidy %>%
-  mutate(control_1 = control_1/max(control_1),
-         control_2 = control_2/max(control_2),
-         control_3 = control_3/max(control_3),
-         treatment_1 = treatment_1 / max(treatment_1),
-         treatment_2 = treatment_2 / max(treatment_2),
-         treatment_3 = treatment_3 / max(treatment_3)
-         )
-
-```
+These result of quantile normalization is that our distributions become
+statisitcally identitical, which we can see by plotting the densities of the
+normalized data. As shown in Figure \@ref(fig:compare-normalisation) the distributions
+all overlay.
 
 ```{r quant-normalisation, cache=TRUE}
 # Quantile normalisation : the aim is to give different distributions the
@@ -177,18 +210,37 @@ quantile_normalisation <- function(df){
 dat_norm <- dat_tidy %>% select(-c(1:2)) %>% 
   quantile_normalisation() %>% 
   bind_cols(dat_tidy[,1:2],.)
-
-glimpse(dat_norm)
 ```
 
-```{r compare-normalisation, fig.asp=0.5, out.width= '80%', fig.align='center',cache=TRUE}
+
+```{r max-normalisation, echo=FALSE, cache=TRUE}
+# Normalise to maximum column value
+dat_norm_max <- dat_tidy %>%
+  mutate(control_1 = control_1/max(control_1),
+         control_2 = control_2/max(control_2),
+         control_3 = control_3/max(control_3),
+         treatment_1 = treatment_1 / max(treatment_1),
+         treatment_2 = treatment_2 / max(treatment_2),
+         treatment_3 = treatment_3 / max(treatment_3)
+         )
+
+```
+
+(ref:compare-qnorm) Comparison of the protein distributions before normalization (left)
+and after quantile normalization (right).
+
+```{r compare-normalisation, fig.cap='(ref:compare-qnorm)', out.width= '80%', fig.asp= 0.5, fig.align='center', echo = FALSE, cache=TRUE}
 # Plot normalised data
 d2 <- dat_norm %>%
   gather(key = experiment,value,-c(1:2)) %>% 
   ggplot(aes(log2(value),colour = experiment)) +
-   geom_density()
+  geom_density() +
+  xlab("") +
+  theme(legend.position="none")
 
-plot_grid(d1,d2)
+d1c <- d1 + theme(legend.position="none")
+
+plot_grid(d1c,d2)
 ```
 
 3. Use `t.test` to perform Welch Two Sample t-test on untransformed data. 
@@ -256,13 +308,43 @@ hist(dat_fc)
 hist(dat_max_fc)
 ```
 
-7. Create a combined table of log fold change and p-values for all the proteins
-for plotting a volcano plot.
+## Visualising data
+
+Based on empircal research, there are some general rules on visulisations
+that are worth bearing in mind:
+
+1. Plot
+
+## Creating a volcano plot
+
+<!--- 7. Create a combined table of log fold change and p-values for all the proteins
+for plotting a volcano plot. --->
+
+A volcano plot is a plot of the log fold change in the observation between two
+conditions on the x-axis, for example the protein expression between treatment 
+and control conditions. On the y-axis is the corresponding p-value for each
+observation, representing the likelihood that an observed change
+is due to the different conditions rather than arising from a natural variation 
+in the fold change that might be observed if we performed many replications of 
+the experiment.
+
+The aim of a volcano plot is to enable the viewer to quickly see the effect
+(if any) of an experiment with two conditions on many species (i.e. proteins)
+in terms of both an increase and decrease of the observed value.
+
+Like all plots it has it's good and bad points, namely it's good that we can
+visualise a lot of complex information in one plot. However this is also it's 
+main weakness, it's rather complicated to understand in one glance.
+
+However, volcano plots are widely used in the literature, so there may be an 
+amount of [social proof](https://en.wikipedia.org/wiki/Social_proof) giving rise
+to their popularity as opposed to their utility.
+
 
 ```{r volcano-plot, cache=TRUE}
-dat <- tibble(prots= dat_norm$protein_accession,
-                      logfc = dat_fc, 
-                      pval = -1*log10(p_vals))
+dat_vplot <- tibble(prots= dat_norm$protein_accession,
+                   logfc = dat_fc,
+                   pval = -1*log10(p_vals))
 
 dat_max <- tibble(prots= dat_norm_max$protein_accession,
                       logfc = dat_max_fc,
@@ -270,10 +352,10 @@ dat_max <- tibble(prots= dat_norm_max$protein_accession,
 
 dat_max %>% ggplot(aes(logfc,pval)) + geom_point()
 
-dat %>% 
-  mutate(threshold = if_else(logfc >= 2 & pval >= 1.5 | 
-                               logfc <= -2 & pval >= 1.5,"A", "B")) %>% 
-  ggplot(aes(logfc,pval, colour = threshold)) + 
+dat_vplot %>%
+  mutate(threshold = if_else(logfc >= 2 & pval >= 1.5 |
+                               logfc <= -2 & pval >= 1.5,"A", "B")) %>%
+  ggplot(aes(logfc,pval, colour = threshold)) +
   geom_point() +
   scale_colour_manual(values = c("A"= "red", "B"= "black")) +
   xlab("log2 fold change") + ylab("-log10 p-value") +
@@ -281,13 +363,13 @@ dat %>%
 ```
 
 
-## Heatmap transformation
+## Creating a heatmap plot
 
-1. Clustering the data
+<!-- 1. Clustering the data -->
 
 ```{r heatmap-2}
 dat_mut <- dat_norm %>%
-  mutate(pval = dat$pval, logfc = dat$logfc) %>%
+  mutate(pval = dat_vplot$pval, logfc = dat_vplot$logfc) %>%
   filter(pval >= 2 & (logfc >=2 | logfc <= 2)) %>%
   select(-c(2,9:10))
 
@@ -306,15 +388,15 @@ pheatmap(dat.tn,cutree_rows = 2,
 cal_z_score <- function(x){
   (x - mean(x)) / sd(x)
 }
- 
+
 data_subset_norm <- t(apply(dat_mut[,2:7], 1, cal_z_score))
 row.names(data_subset_norm) <- dat_mut$protein_accession
 pheatmap(data_subset_norm)
 
-d1 <- dat.tn %>% t() %>% 
+d1 <- dat.tn %>% t() %>%
   dist(.,method = "euclidean", diag = FALSE, upper = FALSE)
 
-d2 <- dat.tn %>% 
+d2 <- dat.tn %>%
   dist(.,method = "euclidean", diag = FALSE, upper = FALSE)
 
 # Clustering distance between experiments using Ward linkage
@@ -326,7 +408,8 @@ c2 <- hclust(d2, method = "ward.D2", members = NULL)
 par(mfrow=c(2,1),cex=0.5) # Make 2 rows, 1 col plot frame and shrink labels
 plot(c1); plot(c2) # Plot both cluster dendrograms
 ```
-2. Plot the data
+
+<!-- 2. Plot the data -->
 
 ```{r heatmap-1}
 # Set colours for heatmap, 25 increments
@@ -343,35 +426,3 @@ gplots::heatmap.2(dat.tn,                     # Tidy, normalised data
           cexRow=0.5,cexCol=0.75)     # Amend row and column label fonts
 ```
 
-## Visualising proteomics data
-
-Based on empircal research, there are some general rules on visulisations
-that are worth bearing in mind:
-
-1. Plot
-
-## Creating a volcano plot
-
-VOlcano plot is a plot of the log fold change in the observation between two
-conditions on the x-axis, for example the protein expression between treatment 
-and control conditions. And on the y-axis is the corresponding p-value for each
-observation. The p-value representing the likelihood that an observed change
-is due to the different conditions rather than arising from natural variation 
-in the fold change that might be observed if we performed many replications of 
-the experiment.
-
-The aim of a volcano plot is to enable the viewer to quickly see the effect
-(if any) of an experiment with two conditions on many species i.e. proteins
-in terms of both increased and decreased expression.
-
-Like all plots it has it's good and bad points, namely it's good that we can
-visualise a lot of complex information in one plot. However this is also it's 
-main weakness, it's rather complicated to understand in one glance.
-
-However, volcano plots are widely used in the literature, so there may be an 
-amount of [social proof](https://en.wikipedia.org/wiki/Social_proof) giving rise
-to their popularity as opposed to their utility.
-
-## Creating a heatmap
-
-A 

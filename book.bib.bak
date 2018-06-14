@@ -77,11 +77,13 @@
   revised         = {2015-08-04},
 }
 
-@Manual{RStudio, 
-title = {RStudio: Integrated Development Environment for R}, 
-author = {{RStudio Team}}, organization = {RStudio, Inc.}, 
-address = {Boston, MA}, year = {2018}, 
-url = {http://www.rstudio.com/}, 
+@Manual{rstudioteam2018,
+  title        = {RStudio: Integrated Development Environment for R},
+  author       = {{RStudio Team}},
+  organization = {RStudio, Inc.},
+  address      = {Boston, MA},
+  year         = {2018},
+  url          = {http://www.rstudio.com/},
 }
 
 @Comment{jabref-meta: databaseType:bibtex;}

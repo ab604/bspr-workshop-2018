@@ -3,7 +3,7 @@
 ## Tidy data and the tidyverse
 
 R is a programming language, and written in R is *"an opinionated collection 
-of R packages designed for data science"* called [tidyverse](https://www.tidyverse.org/). 
+of R packages designed for data science"* called [tidyverse](https://www.tidyverse.org/) [@R-tidyverse]. 
 
 Tidyverse packages *"share an underlying design philosophy, grammar, and data structures."* It's this philiosophy that makes them relatively easy to learn
 and use.

@@ -144,11 +144,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="4" data-path="transform.html"><a href="transform.html"><i class="fa fa-check"></i><b>4</b> Transformation and visualisation</a><ul>
 <li class="chapter" data-level="4.1" data-path="transform.html"><a href="transform.html#fold-change-and-log-fold-change"><i class="fa fa-check"></i><b>4.1</b> Fold change and log-fold change</a></li>
-<li class="chapter" data-level="4.2" data-path="transform.html"><a href="transform.html#normalisation"><i class="fa fa-check"></i><b>4.2</b> Dealing with missing values and normalisation</a></li>
-<li class="chapter" data-level="4.3" data-path="transform.html"><a href="transform.html#heatmap-transformation"><i class="fa fa-check"></i><b>4.3</b> Heatmap transformation</a></li>
-<li class="chapter" data-level="4.4" data-path="transform.html"><a href="transform.html#visualising-proteomics-data"><i class="fa fa-check"></i><b>4.4</b> Visualising proteomics data</a></li>
+<li class="chapter" data-level="4.2" data-path="transform.html"><a href="transform.html#missing-values"><i class="fa fa-check"></i><b>4.2</b> Dealing with missing values</a></li>
+<li class="chapter" data-level="4.3" data-path="transform.html"><a href="transform.html#normalisation"><i class="fa fa-check"></i><b>4.3</b> Data normalization</a></li>
+<li class="chapter" data-level="4.4" data-path="transform.html"><a href="transform.html#visualising-data"><i class="fa fa-check"></i><b>4.4</b> Visualising data</a></li>
 <li class="chapter" data-level="4.5" data-path="transform.html"><a href="transform.html#creating-a-volcano-plot"><i class="fa fa-check"></i><b>4.5</b> Creating a volcano plot</a></li>
-<li class="chapter" data-level="4.6" data-path="transform.html"><a href="transform.html#creating-a-heatmap"><i class="fa fa-check"></i><b>4.6</b> Creating a heatmap</a></li>
+<li class="chapter" data-level="4.6" data-path="transform.html"><a href="transform.html#creating-a-heatmap-plot"><i class="fa fa-check"></i><b>4.6</b> Creating a heatmap plot</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="going-further.html"><a href="going-further.html"><i class="fa fa-check"></i><b>5</b> Going further</a><ul>
 <li class="chapter" data-level="5.1" data-path="going-further.html"><a href="going-further.html#learning-dplyr-verbs"><i class="fa fa-check"></i><b>5.1</b> Learning <code>dplyr</code> verbs</a></li>
@@ -200,8 +200,8 @@ Figure 4.2: Transformation of scales using log transformation.
 </p>
 </div>
 </div>
-<div id="normalisation" class="section level2">
-<h2><span class="header-section-number">4.2</span> Dealing with missing values and normalisation</h2>
+<div id="missing-values" class="section level2">
+<h2><span class="header-section-number">4.2</span> Dealing with missing values</h2>
 <!---
 1. Load the data, we need multiple replicates for each condition. To be tidy
 each protein is a set of observations (rows) of the variables, which are the
@@ -209,8 +209,44 @@ values recorded for each replicate (columns).
 
 2. Tidy up and deal with missing values, either impute or exclude missing values
 and normalise. --->
-<p>Let’s consider our proteomics data as a distribution of values, one value for each protein in our experiment that together form a distribution. If we have replicate experiments we’ll therefore have multiple distributions.</p>
-<p>A quantile represents a region of distribution, for example the 0.95 quantile is the value such that 95% of the data lies below it. To normalise two or more distributions with each other without recourse to a reference distribution we:</p>
+<p>Unless we’re really lucky, it’s unlikely that we’ll get observations for the same numbers of proteins in all replicated experiments. This means there will be missing values for some proteins when looking at all the experiments together. This then raises the question of what to do about the missing values? We have two choices:</p>
+<ol style="list-style-type: decimal">
+<li>Only analyse the proteins that we have observations for in all experiments.</li>
+<li>Impute values for the missing values from the existing observations.</li>
+</ol>
+<p>There are pros and cons to either approach. Here for simplicity we’ll use only the proteins for which we have observations in all assays.</p>
+<p>We can drop the proteins with missing values by piping our data set to the <code>drop_na()</code> function from the <code>tidyr</code> package like so. We assign this to a new object called <code>dat_tidy</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Remove the missing values</span>
+dat_tidy &lt;-<span class="st"> </span>dat <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">drop_na</span>()
+
+<span class="co"># Nunber of proteins in original data</span>
+dat <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">Number_of_proteins =</span> <span class="kw">n</span>())</code></pre></div>
+<pre><code>## # A tibble: 1 x 1
+##   Number_of_proteins
+##                &lt;int&gt;
+## 1               7702</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Nunber of proteins without missing values</span>
+dat_tidy <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">Number_of_proteins =</span> <span class="kw">n</span>())</code></pre></div>
+<pre><code>## # A tibble: 1 x 1
+##   Number_of_proteins
+##                &lt;int&gt;
+## 1               1184</code></pre>
+<p>This shrinks the dataset from 7,702 proteins to 1,184 proteins, so we can see why imputing the missing values might be more atrractive.</p>
+<p>One approach you might like to try is to impute the data by replacing the missing values with the mean observation for each protein.</p>
+</div>
+<div id="normalisation" class="section level2">
+<h2><span class="header-section-number">4.3</span> Data normalization</h2>
+<p>To perform statistical inference, for example whether treatment increases or decreases protein abundance, we need to account for the variation that occurs from run to run on our spectrometers and each give rise to a different distribution. This is as opposed to variation arising from treatment versus control which we are interested in understanding. Hence normalization seeks to reduce the run-to-run sources of variation.</p>
+<p>A method of normalization introduced for DNA microarray analysis is quantile normalization <span class="citation">(B. M. Bolstad et al. <a href="#ref-bolstad2003">2003</a>)</span>.</p>
+<p>If we consider our proteomics data as a distribution of values, one value for the concentration of each protein in our experiment that together form a distribution. Figure <a href="transform.html#fig:data-dist">4.3</a> shows the distribution of protein concentrations observed for the three control and three treatment assays. As we can see the distributions are different for each assay.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:data-dist"></span>
+<img src="bspr-workshop-2018_files/figure-html/data-dist-1.png" alt="Protein data for six assays plotted as a distributions." width="80%" />
+<p class="caption">
+Figure 4.3: Protein data for six assays plotted as a distributions.
+</p>
+</div>
+<p>A quantile represents a region of distribution, for example the 0.95 quantile is the value such that 95% of the data lies below it. To normalize two or more distributions with each other without recourse to a reference distribution we:</p>
 <ol style="list-style-type: lower-roman">
 <li>Rank the value in each experiment (represented in the columns) from lowest to highest. In other words identify the quantiles.</li>
 <li>Sort each experiment (the columns) from lowest to highest value.</li>
@@ -223,40 +259,10 @@ and normalise. --->
 <div class="figure" style="text-align: center"><span id="fig:quant-norm"></span>
 <img src="img/quant_norm.png" alt="Quantile Normalisation from Rafael Irizarry’s tweet." width="80%" />
 <p class="caption">
-Figure 4.3: Quantile Normalisation from <a href="https://twitter.com/rafalab/status/545586012219772928?ref_src=twsrc%5Etfw">Rafael Irizarry’s tweet</a>.
+Figure 4.4: Quantile Normalisation from <a href="https://twitter.com/rafalab/status/545586012219772928?ref_src=twsrc%5Etfw">Rafael Irizarry’s tweet</a>.
 </p>
 </div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Remove the missing values</span>
-dat_tidy &lt;-<span class="st"> </span>dat <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">drop_na</span>()
-
-<span class="kw">glimpse</span>(dat_tidy)</code></pre></div>
-<pre><code>## Observations: 1,184
-## Variables: 8
-## $ protein_accession   &lt;chr&gt; &quot;VATA_HUMAN_P38606&quot;, &quot;RL35A_HUMAN_P18077&quot;,...
-## $ protein_description &lt;chr&gt; &quot;V-type proton ATPase catalytic subunit A ...
-## $ control_1           &lt;dbl&gt; 0.8114, 0.3672, 2.9815, 0.1424, 1.0748, 0....
-## $ control_2           &lt;dbl&gt; 0.8575, 0.3853, 4.6176, 0.2238, 0.9451, 0....
-## $ control_3           &lt;dbl&gt; 1.0381, 0.4091, 2.8709, 0.1281, 0.8032, 0....
-## $ treatment_1         &lt;dbl&gt; 0.6918, 0.3902, 3.6547, 0.0739, 0.8933, 0....
-## $ treatment_2         &lt;dbl&gt; 0.6655, 0.3976, 2.9694, 0.1405, 0.8261, 0....
-## $ treatment_3         &lt;dbl&gt; 0.5681, 0.3469, 3.5858, 0.0579, 0.6772, 0....</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Plot data</span>
-d1 &lt;-<span class="st"> </span>dat_tidy <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">gather</span>(experiment,value,<span class="op">-</span><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="kw">log2</span>(value),<span class="dt">colour =</span> experiment)) <span class="op">+</span>
-<span class="st">   </span><span class="kw">geom_density</span>() 
-
-d1</code></pre></div>
-<p><img src="bspr-workshop-2018_files/figure-html/data-distribution-1.png" width="672" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Normalise to maximum column value</span>
-dat_norm_max &lt;-<span class="st"> </span>dat_tidy <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">control_1 =</span> control_<span class="dv">1</span><span class="op">/</span><span class="kw">max</span>(control_<span class="dv">1</span>),
-         <span class="dt">control_2 =</span> control_<span class="dv">2</span><span class="op">/</span><span class="kw">max</span>(control_<span class="dv">2</span>),
-         <span class="dt">control_3 =</span> control_<span class="dv">3</span><span class="op">/</span><span class="kw">max</span>(control_<span class="dv">3</span>),
-         <span class="dt">treatment_1 =</span> treatment_<span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="kw">max</span>(treatment_<span class="dv">1</span>),
-         <span class="dt">treatment_2 =</span> treatment_<span class="dv">2</span> <span class="op">/</span><span class="st"> </span><span class="kw">max</span>(treatment_<span class="dv">2</span>),
-         <span class="dt">treatment_3 =</span> treatment_<span class="dv">3</span> <span class="op">/</span><span class="st"> </span><span class="kw">max</span>(treatment_<span class="dv">3</span>)
-         )</code></pre></div>
+<p>These result of quantile normalization is that our distributions become statisitcally identitical, which we can see by plotting the densities of the normalized data. As shown in Figure <a href="transform.html#fig:compare-normalisation">4.5</a> the distributions all overlay.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Quantile normalisation : the aim is to give different distributions the</span>
 <span class="co"># same statistical properties</span>
 quantile_normalisation &lt;-<span class="st"> </span><span class="cf">function</span>(df){
@@ -275,27 +281,14 @@ quantile_normalisation &lt;-<span class="st"> </span><span class="cf">function</
 }</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat_norm &lt;-<span class="st"> </span>dat_tidy <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="op">-</span><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">quantile_normalisation</span>() <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">bind_cols</span>(dat_tidy[,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>],.)
+<span class="st">  </span><span class="kw">bind_cols</span>(dat_tidy[,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>],.)</code></pre></div>
 
-<span class="kw">glimpse</span>(dat_norm)</code></pre></div>
-<pre><code>## Observations: 1,184
-## Variables: 8
-## $ protein_accession   &lt;chr&gt; &quot;VATA_HUMAN_P38606&quot;, &quot;RL35A_HUMAN_P18077&quot;,...
-## $ protein_description &lt;chr&gt; &quot;V-type proton ATPase catalytic subunit A ...
-## $ control_1           &lt;dbl&gt; 0.7493167, 0.3317333, 2.7887000, 0.1265000...
-## $ control_2           &lt;dbl&gt; 0.8238167, 0.3629833, 4.5552500, 0.2132000...
-## $ control_3           &lt;dbl&gt; 0.9633333, 0.3664333, 2.6274500, 0.1280167...
-## $ treatment_1         &lt;dbl&gt; 0.7209500, 0.4096333, 3.8710000, 0.0704000...
-## $ treatment_2         &lt;dbl&gt; 0.73306667, 0.43755000, 3.33901667, 0.1527...
-## $ treatment_3         &lt;dbl&gt; 0.62868333, 0.39096667, 4.02466667, 0.0583...</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Plot normalised data</span>
-d2 &lt;-<span class="st"> </span>dat_norm <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">gather</span>(<span class="dt">key =</span> experiment,value,<span class="op">-</span><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="kw">log2</span>(value),<span class="dt">colour =</span> experiment)) <span class="op">+</span>
-<span class="st">   </span><span class="kw">geom_density</span>()
-
-<span class="kw">plot_grid</span>(d1,d2)</code></pre></div>
-<p><img src="bspr-workshop-2018_files/figure-html/compare-normalisation-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<div class="figure" style="text-align: center"><span id="fig:compare-normalisation"></span>
+<img src="bspr-workshop-2018_files/figure-html/compare-normalisation-1.png" alt="Comparison of the protein distributions before normalization (left) and after quantile normalization (right)." width="80%" />
+<p class="caption">
+Figure 4.5: Comparison of the protein distributions before normalization (left) and after quantile normalization (right).
+</p>
+</div>
 <ol start="3" style="list-style-type: decimal">
 <li>Use <code>t.test</code> to perform Welch Two Sample t-test on untransformed data. This outputs the p-values we need for each protein.</li>
 </ol>
@@ -352,12 +345,25 @@ dat_max_fc &lt;-<span class="st"> </span>con_max <span class="op">-</span><span 
 <p><img src="bspr-workshop-2018_files/figure-html/log-fc-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(dat_max_fc)</code></pre></div>
 <p><img src="bspr-workshop-2018_files/figure-html/log-fc-2.png" width="672" /></p>
-<ol start="7" style="list-style-type: decimal">
-<li>Create a combined table of log fold change and p-values for all the proteins for plotting a volcano plot.</li>
+</div>
+<div id="visualising-data" class="section level2">
+<h2><span class="header-section-number">4.4</span> Visualising data</h2>
+<p>Based on empircal research, there are some general rules on visulisations that are worth bearing in mind:</p>
+<ol style="list-style-type: decimal">
+<li>Plot</li>
 </ol>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">prots=</span> dat_norm<span class="op">$</span>protein_accession,
-                      <span class="dt">logfc =</span> dat_fc, 
-                      <span class="dt">pval =</span> <span class="op">-</span><span class="dv">1</span><span class="op">*</span><span class="kw">log10</span>(p_vals))
+</div>
+<div id="creating-a-volcano-plot" class="section level2">
+<h2><span class="header-section-number">4.5</span> Creating a volcano plot</h2>
+<!--- 7. Create a combined table of log fold change and p-values for all the proteins
+for plotting a volcano plot. --->
+<p>A volcano plot is a plot of the log fold change in the observation between two conditions on the x-axis, for example the protein expression between treatment and control conditions. On the y-axis is the corresponding p-value for each observation, representing the likelihood that an observed change is due to the different conditions rather than arising from a natural variation in the fold change that might be observed if we performed many replications of the experiment.</p>
+<p>The aim of a volcano plot is to enable the viewer to quickly see the effect (if any) of an experiment with two conditions on many species (i.e. proteins) in terms of both an increase and decrease of the observed value.</p>
+<p>Like all plots it has it’s good and bad points, namely it’s good that we can visualise a lot of complex information in one plot. However this is also it’s main weakness, it’s rather complicated to understand in one glance.</p>
+<p>However, volcano plots are widely used in the literature, so there may be an amount of <a href="https://en.wikipedia.org/wiki/Social_proof">social proof</a> giving rise to their popularity as opposed to their utility.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat_vplot &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">prots=</span> dat_norm<span class="op">$</span>protein_accession,
+                   <span class="dt">logfc =</span> dat_fc,
+                   <span class="dt">pval =</span> <span class="op">-</span><span class="dv">1</span><span class="op">*</span><span class="kw">log10</span>(p_vals))
 
 dat_max &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">prots=</span> dat_norm_max<span class="op">$</span>protein_accession,
                       <span class="dt">logfc =</span> dat_max_fc,
@@ -365,23 +371,21 @@ dat_max &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class
 
 dat_max <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(logfc,pval)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()</code></pre></div>
 <p><img src="bspr-workshop-2018_files/figure-html/volcano-plot-1.png" width="672" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">threshold =</span> <span class="kw">if_else</span>(logfc <span class="op">&gt;=</span><span class="st"> </span><span class="dv">2</span> <span class="op">&amp;</span><span class="st"> </span>pval <span class="op">&gt;=</span><span class="st"> </span><span class="fl">1.5</span> <span class="op">|</span><span class="st"> </span>
-<span class="st">                               </span>logfc <span class="op">&lt;=</span><span class="st"> </span><span class="op">-</span><span class="dv">2</span> <span class="op">&amp;</span><span class="st"> </span>pval <span class="op">&gt;=</span><span class="st"> </span><span class="fl">1.5</span>,<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(logfc,pval, <span class="dt">colour =</span> threshold)) <span class="op">+</span><span class="st"> </span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat_vplot <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">threshold =</span> <span class="kw">if_else</span>(logfc <span class="op">&gt;=</span><span class="st"> </span><span class="dv">2</span> <span class="op">&amp;</span><span class="st"> </span>pval <span class="op">&gt;=</span><span class="st"> </span><span class="fl">1.5</span> <span class="op">|</span>
+<span class="st">                               </span>logfc <span class="op">&lt;=</span><span class="st"> </span><span class="op">-</span><span class="dv">2</span> <span class="op">&amp;</span><span class="st"> </span>pval <span class="op">&gt;=</span><span class="st"> </span><span class="fl">1.5</span>,<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(logfc,pval, <span class="dt">colour =</span> threshold)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">scale_colour_manual</span>(<span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&quot;A&quot;</span>=<span class="st"> &quot;red&quot;</span>, <span class="st">&quot;B&quot;</span>=<span class="st"> &quot;black&quot;</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;log2 fold change&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;-log10 p-value&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme_minimal</span>()</code></pre></div>
 <p><img src="bspr-workshop-2018_files/figure-html/volcano-plot-2.png" width="672" /></p>
 </div>
-<div id="heatmap-transformation" class="section level2">
-<h2><span class="header-section-number">4.3</span> Heatmap transformation</h2>
-<ol style="list-style-type: decimal">
-<li>Clustering the data</li>
-</ol>
+<div id="creating-a-heatmap-plot" class="section level2">
+<h2><span class="header-section-number">4.6</span> Creating a heatmap plot</h2>
+<!-- 1. Clustering the data -->
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat_mut &lt;-<span class="st"> </span>dat_norm <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">pval =</span> dat<span class="op">$</span>pval, <span class="dt">logfc =</span> dat<span class="op">$</span>logfc) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">pval =</span> dat_vplot<span class="op">$</span>pval, <span class="dt">logfc =</span> dat_vplot<span class="op">$</span>logfc) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">filter</span>(pval <span class="op">&gt;=</span><span class="st"> </span><span class="dv">2</span> <span class="op">&amp;</span><span class="st"> </span>(logfc <span class="op">&gt;=</span><span class="dv">2</span> <span class="op">|</span><span class="st"> </span>logfc <span class="op">&lt;=</span><span class="st"> </span><span class="dv">2</span>)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">select</span>(<span class="op">-</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">9</span><span class="op">:</span><span class="dv">10</span>))
 
@@ -400,15 +404,15 @@ dat.tn &lt;-<span class="st"> </span><span class="kw">scale</span>(<span class="
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cal_z_score &lt;-<span class="st"> </span><span class="cf">function</span>(x){
   (x <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(x)) <span class="op">/</span><span class="st"> </span><span class="kw">sd</span>(x)
 }
- 
+
 data_subset_norm &lt;-<span class="st"> </span><span class="kw">t</span>(<span class="kw">apply</span>(dat_mut[,<span class="dv">2</span><span class="op">:</span><span class="dv">7</span>], <span class="dv">1</span>, cal_z_score))
 <span class="kw">row.names</span>(data_subset_norm) &lt;-<span class="st"> </span>dat_mut<span class="op">$</span>protein_accession
 <span class="kw">pheatmap</span>(data_subset_norm)</code></pre></div>
 <p><img src="bspr-workshop-2018_files/figure-html/heatmap-2-2.png" width="672" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">d1 &lt;-<span class="st"> </span>dat.tn <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">t</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">d1 &lt;-<span class="st"> </span>dat.tn <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">t</span>() <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">dist</span>(.,<span class="dt">method =</span> <span class="st">&quot;euclidean&quot;</span>, <span class="dt">diag =</span> <span class="ot">FALSE</span>, <span class="dt">upper =</span> <span class="ot">FALSE</span>)
 
-d2 &lt;-<span class="st"> </span>dat.tn <span class="op">%&gt;%</span><span class="st"> </span>
+d2 &lt;-<span class="st"> </span>dat.tn <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">dist</span>(.,<span class="dt">method =</span> <span class="st">&quot;euclidean&quot;</span>, <span class="dt">diag =</span> <span class="ot">FALSE</span>, <span class="dt">upper =</span> <span class="ot">FALSE</span>)
 
 <span class="co"># Clustering distance between experiments using Ward linkage</span>
@@ -419,7 +423,8 @@ c2 &lt;-<span class="st"> </span><span class="kw">hclust</span>(d2, <span class=
 <span class="co"># Check clustering by plotting dendrograms</span>
 <span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">1</span>),<span class="dt">cex=</span><span class="fl">0.5</span>) <span class="co"># Make 2 rows, 1 col plot frame and shrink labels</span>
 <span class="kw">plot</span>(c1); <span class="kw">plot</span>(c2) <span class="co"># Plot both cluster dendrograms</span></code></pre></div>
-<p><img src="bspr-workshop-2018_files/figure-html/heatmap-2-3.png" width="672" /> 2. Plot the data</p>
+<p><img src="bspr-workshop-2018_files/figure-html/heatmap-2-3.png" width="672" /></p>
+<!-- 2. Plot the data -->
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Set colours for heatmap, 25 increments</span>
 my_palette &lt;-<span class="st"> </span><span class="kw">colorRampPalette</span>(<span class="kw">c</span>(<span class="st">&quot;blue&quot;</span>,<span class="st">&quot;white&quot;</span>,<span class="st">&quot;red&quot;</span>))(<span class="dt">n =</span> <span class="dv">25</span>)
 
@@ -433,25 +438,13 @@ gplots<span class="op">::</span><span class="kw">heatmap.2</span>(dat.tn,       
           <span class="dt">col =</span> my_palette,           <span class="co"># Use my colour scheme</span>
           <span class="dt">cexRow=</span><span class="fl">0.5</span>,<span class="dt">cexCol=</span><span class="fl">0.75</span>)     <span class="co"># Amend row and column label fonts</span></code></pre></div>
 <p><img src="bspr-workshop-2018_files/figure-html/heatmap-1-1.png" width="672" /></p>
-</div>
-<div id="visualising-proteomics-data" class="section level2">
-<h2><span class="header-section-number">4.4</span> Visualising proteomics data</h2>
-<p>Based on empircal research, there are some general rules on visulisations that are worth bearing in mind:</p>
-<ol style="list-style-type: decimal">
-<li>Plot</li>
-</ol>
-</div>
-<div id="creating-a-volcano-plot" class="section level2">
-<h2><span class="header-section-number">4.5</span> Creating a volcano plot</h2>
-<p>VOlcano plot is a plot of the log fold change in the observation between two conditions on the x-axis, for example the protein expression between treatment and control conditions. And on the y-axis is the corresponding p-value for each observation. The p-value representing the likelihood that an observed change is due to the different conditions rather than arising from natural variation in the fold change that might be observed if we performed many replications of the experiment.</p>
-<p>The aim of a volcano plot is to enable the viewer to quickly see the effect (if any) of an experiment with two conditions on many species i.e. proteins in terms of both increased and decreased expression.</p>
-<p>Like all plots it has it’s good and bad points, namely it’s good that we can visualise a lot of complex information in one plot. However this is also it’s main weakness, it’s rather complicated to understand in one glance.</p>
-<p>However, volcano plots are widely used in the literature, so there may be an amount of <a href="https://en.wikipedia.org/wiki/Social_proof">social proof</a> giving rise to their popularity as opposed to their utility.</p>
-</div>
-<div id="creating-a-heatmap" class="section level2">
-<h2><span class="header-section-number">4.6</span> Creating a heatmap</h2>
-<p>A</p>
 
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-bolstad2003">
+<p>Bolstad, B M, R A Irizarry, M Astrand, and T P Speed. 2003. “A Comparison of Normalization Methods for High Density Oligonucleotide Array Data Based on Variance and Bias.” <em>Bioinformatics (Oxford, England)</em> 19 (2): 185–93.</p>
 </div>
 </div>
             </section>
