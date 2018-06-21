@@ -230,7 +230,7 @@ dat_tidy <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"
 <pre><code>## # A tibble: 1 x 1
 ##   Number_of_proteins
 ##                &lt;int&gt;
-## 1               1184</code></pre>
+## 1               1145</code></pre>
 <p>This shrinks the dataset from 7,702 proteins to 1,184 proteins, so we can see why imputing the missing values might be more atrractive.</p>
 <p>One approach you might like to try is to impute the data by replacing the missing values with the mean observation for each protein.</p>
 </div>
@@ -372,14 +372,38 @@ dat_max &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class
 dat_max <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(logfc,pval)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()</code></pre></div>
 <p><img src="bspr-workshop-2018_files/figure-html/volcano-plot-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat_vplot <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># Add a threhold for significant observations</span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">threshold =</span> <span class="kw">if_else</span>(logfc <span class="op">&gt;=</span><span class="st"> </span><span class="dv">2</span> <span class="op">&amp;</span><span class="st"> </span>pval <span class="op">&gt;=</span><span class="st"> </span><span class="fl">1.5</span> <span class="op">|</span>
 <span class="st">                               </span>logfc <span class="op">&lt;=</span><span class="st"> </span><span class="op">-</span><span class="dv">2</span> <span class="op">&amp;</span><span class="st"> </span>pval <span class="op">&gt;=</span><span class="st"> </span><span class="fl">1.5</span>,<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># Plot with points coloured according to the threshold</span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(logfc,pval, <span class="dt">colour =</span> threshold)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span><span class="st"> </span><span class="co"># Alpha sets the transparency of the points</span>
+<span class="st">  </span><span class="co"># Add dotted lines to indicate the threshold, semi-transparent</span>
+<span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="fl">1.5</span>, <span class="dt">linetype =</span> <span class="dv">2</span>, <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="dv">2</span>, <span class="dt">linetype =</span> <span class="dv">2</span>, <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="op">-</span><span class="dv">2</span>, <span class="dt">linetype =</span> <span class="dv">2</span>, <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span>
+<span class="st">  </span><span class="co"># Set the colour of the points</span>
 <span class="st">  </span><span class="kw">scale_colour_manual</span>(<span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&quot;A&quot;</span>=<span class="st"> &quot;red&quot;</span>, <span class="st">&quot;B&quot;</span>=<span class="st"> &quot;black&quot;</span>)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;log2 fold change&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;-log10 p-value&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">theme_minimal</span>()</code></pre></div>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;log2 fold change&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;-log10 p-value&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="co"># Relabel the axes</span>
+<span class="st">  </span><span class="kw">theme_minimal</span>() <span class="op">+</span><span class="st"> </span><span class="co"># Set the theme</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position=</span><span class="st">&quot;none&quot;</span>) <span class="co"># Hide the legend</span></code></pre></div>
 <p><img src="bspr-workshop-2018_files/figure-html/volcano-plot-2.png" width="672" /></p>
+<p>But which proteins are the significant observations?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat_vplot <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># Add a threhold for significant observations</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">threshold =</span> <span class="kw">if_else</span>(logfc <span class="op">&gt;=</span><span class="st"> </span><span class="dv">2</span> <span class="op">&amp;</span><span class="st"> </span>pval <span class="op">&gt;=</span><span class="st"> </span><span class="fl">1.5</span> <span class="op">|</span>
+<span class="st">                               </span>logfc <span class="op">&lt;=</span><span class="st"> </span><span class="op">-</span><span class="dv">2</span> <span class="op">&amp;</span><span class="st"> </span>pval <span class="op">&gt;=</span><span class="st"> </span><span class="fl">1.5</span>,<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>),
+         <span class="dt">prot_id =</span> <span class="kw">str_extract</span>(prots,<span class="st">&quot;.{6}$&quot;</span>)) <span class="op">%&gt;%</span><span class="st">  </span><span class="co"># Get last six characters</span>
+<span class="st">  </span><span class="co"># Filter observations above the threshold</span>
+<span class="st">  </span><span class="kw">filter</span>(threshold <span class="op">==</span><span class="st"> &quot;A&quot;</span>)</code></pre></div>
+<pre><code>## # A tibble: 5 x 5
+##   prots               logfc  pval threshold prot_id
+##   &lt;chr&gt;               &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;  
+## 1 AKA12_HUMAN_Q02952  -2.29  1.52 A         Q02952 
+## 2 GFPT2_HUMAN_O94808  -3.09  2.45 A         O94808 
+## 3 H7BYV1_HUMAN_H7BYV1  2.05  2.46 A         H7BYV1 
+## 4 ITAV_HUMAN_P06756   -2.22  2.62 A         P06756 
+## 5 CHD5_HUMAN_Q8TDI0    5.04  1.60 A         Q8TDI0</code></pre>
 </div>
 <div id="creating-a-heatmap-plot" class="section level2">
 <h2><span class="header-section-number">4.6</span> Creating a heatmap plot</h2>

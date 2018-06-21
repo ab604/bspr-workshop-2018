@@ -149,15 +149,15 @@ dat_select <- dat %>%
          control_1 = c1,
          control_2 = c2,
          control_3 = c3,
-         treatment_1 = t1,
-         treatment_2 = t2,
-         treatment_3 = t3)
+         treatment_1 = rt1,
+         treatment_2 = rt2,
+         treatment_3 = rt3)
 
 # Write out the example data
 write_csv(dat_select,"data/070718-proteomics-example-data.csv")
 ```
 
-```{r import-data, eval=TRUE, cache=TRUE}
+```{r import-data, eval=TRUE, cache=F}
 # Import example data ----------------------------------------------------------
 # Import the example data with read_csv from the readr package
 dat <- readr::read_csv("data/070718-proteomics-example-data.csv")
