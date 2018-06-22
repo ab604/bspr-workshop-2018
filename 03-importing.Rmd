@@ -3,8 +3,8 @@
 Our analysis is of an example data set of observations for 7702 proteins
 from cells in three control experiments and three treatment experiments.
 The observations are signal intensity measurements from the mass spectrometer.
-These intensities relate to the amount of protein in each experiment and under 
-each condition.
+These intensities relate the concentration of protein observed in each experiment 
+and under each condition.
 
 We consider raw data as the data as we receive it. This doesn't mean it hasn't be
 processed in some way, it just means it hasn't been processed by us.
@@ -15,8 +15,8 @@ So let's understand how to import some data.
 
 ## Some definitions
 
- + Importing means getting data into our R environment by turning into into a
- R object that we can then manipulate. The raw data file remains unchanged.
+ + Importing means getting data into our R environment by creating an object 
+ that we can then manipulate. The raw data file remains unchanged.
  + Inspecting means looking at the dataset to understand what it contains.
  + Tidying refers to getting data into a consistent format that makes it easy to
  use in later steps.
@@ -29,7 +29,7 @@ So let's understand how to import some data.
 ## Using scripts
 
 Using the console is useful, but as we build up a workflow, that is to say,
-wring code to:
+writing code to:
 
 + load packages 
 + load data
@@ -55,7 +55,7 @@ knitr::include_graphics("img/rstudio_screenshot_four_panes.PNG")
 We can run a highlighted portion of code in your script if you click the Run
 button at the top of the scripts pane as shown in Figure \@ref(fig:run-script). 
 
-(ref:run-script)
+(ref:run-script) Scripts can be run by clicking the Source button.
 
 ```{r run-script, fig.cap= '(ref:run-script)',fig.asp=1, out.width= '80%', fig.align='center', echo=FALSE}
 knitr::include_graphics("img/run_script.PNG")

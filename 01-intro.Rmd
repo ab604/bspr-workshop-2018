@@ -1,11 +1,16 @@
 # Introduction {#intro}
 
-There are many resources for learning R on the web, but much of this material 
-derives from a [Data Carpentry lesson](http://www.datacarpentry.org/lessons/) 
-using ecological data that I have previously 
-[reworked](https://southampton-rsg.github.io/2017-08-01-southampton-dc/novice/R-ecology-lesson/index.html), 
+There are many resources for learning R on the web. Much of Chapters \@ref(intro) 
+\@ref(tidyverse) and \@ref(import) derive from 
+a [Data Carpentry lesson](http://www.datacarpentry.org/lessons/) using 
+ecological data that I have previously [reworked](https://southampton-rsg.github.io/2017-08-01-southampton-dc/novice/R-ecology-lesson/index.html), 
 which in turn takes a lot from [Hadley Wickham's R for Data Science](http://r4ds.had.co.nz/). 
 Follow the links to access those materials.
+
+Chapter \@ref(transform) deals with some statistical transformations and 
+visualisation methods in the context of proteomics data. Whilst finally in 
+Chapter \@ref(going-further) there is some advice about how to build upon the 
+materials covered here.
 
 In terms of philosophy:
 
@@ -132,12 +137,12 @@ but not so easily create a script from an enivronment.
 
 To support this notion of thinking in terms of our scripts as real, we recommend
 turning off the preservation of workspaces between sessions by setting the 
-Tools > Global Options menu in R studio as shown in Figure @\ref(fig:turn-off):
+Tools > Global Options menu in R studio as shown in Figure \@ref(fig:workspace):
 
-(ref:turn-off) Don't save your workspace!
+(ref:turn-off) Don't save your workspace, save your script instead.
 
 
-```{r workspace,fig.cap='(ref:turn-off)',fig.asp=1, out.width= '80%', fig.align='center', echo=FALSE}
+```{r workspace, fig.cap='(ref:turn-off)',fig.asp=1, out.width= '80%', fig.align='center', echo=FALSE}
 knitr::include_graphics("img/rdata_turn_off.png")
 ```
 
@@ -183,9 +188,9 @@ its location (allowing you to quickly navigate to it) and optionally preserves
 custom settings and open files to make it easier to resume work after a
 break. 
 
-(ref:r-projects)
+(ref:r-project) Creating a R project
 
-```{r r-projects,fig.cap='(ref:r-projects)',fig.asp=1, out.width= '80%', fig.align='center', echo=FALSE}
+```{r r-projects,fig.cap='(ref:r-project)',fig.asp=1, out.width= '80%', fig.align='center', echo=FALSE}
 knitr::include_graphics("img/rstudio_create_project.PNG")
 ```
 

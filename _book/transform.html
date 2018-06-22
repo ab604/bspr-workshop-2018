@@ -117,11 +117,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="tidyverse.html"><a href="tidyverse.html"><i class="fa fa-check"></i><b>2</b> Getting started in R and the tidyverse</a><ul>
-<li class="chapter" data-level="2.1" data-path="tidyverse.html"><a href="tidyverse.html#tidy-data-and-the-tidyverse"><i class="fa fa-check"></i><b>2.1</b> Tidy data and the tidyverse</a></li>
+<li class="chapter" data-level="2.1" data-path="tidyverse.html"><a href="tidyverse.html#the-tidyverse-and-tidy-data"><i class="fa fa-check"></i><b>2.1</b> The tidyverse and tidy data</a></li>
 <li class="chapter" data-level="2.2" data-path="tidyverse.html"><a href="tidyverse.html#data-visualisation"><i class="fa fa-check"></i><b>2.2</b> Data visualisation</a></li>
 <li class="chapter" data-level="2.3" data-path="tidyverse.html"><a href="tidyverse.html#workflow-basics"><i class="fa fa-check"></i><b>2.3</b> Workflow basics</a><ul>
 <li class="chapter" data-level="2.3.1" data-path="tidyverse.html"><a href="tidyverse.html#assigning-objects"><i class="fa fa-check"></i><b>2.3.1</b> Assigning objects</a></li>
-<li class="chapter" data-level="2.3.2" data-path="tidyverse.html"><a href="tidyverse.html#calling-functions"><i class="fa fa-check"></i><b>2.3.2</b> Calling functions</a></li>
+<li class="chapter" data-level="2.3.2" data-path="tidyverse.html"><a href="tidyverse.html#function-anatomy"><i class="fa fa-check"></i><b>2.3.2</b> Function anatomy</a></li>
 <li class="chapter" data-level="2.3.3" data-path="tidyverse.html"><a href="tidyverse.html#atomic-vectors"><i class="fa fa-check"></i><b>2.3.3</b> Atomic vectors</a></li>
 <li class="chapter" data-level="2.3.4" data-path="tidyverse.html"><a href="tidyverse.html#attributes"><i class="fa fa-check"></i><b>2.3.4</b> Attributes</a></li>
 <li class="chapter" data-level="2.3.5" data-path="tidyverse.html"><a href="tidyverse.html#factors"><i class="fa fa-check"></i><b>2.3.5</b> Factors</a></li>
@@ -145,7 +145,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4" data-path="transform.html"><a href="transform.html"><i class="fa fa-check"></i><b>4</b> Transformation and visualisation</a><ul>
 <li class="chapter" data-level="4.1" data-path="transform.html"><a href="transform.html#fold-change-and-log-fold-change"><i class="fa fa-check"></i><b>4.1</b> Fold change and log-fold change</a></li>
 <li class="chapter" data-level="4.2" data-path="transform.html"><a href="transform.html#missing-values"><i class="fa fa-check"></i><b>4.2</b> Dealing with missing values</a></li>
-<li class="chapter" data-level="4.3" data-path="transform.html"><a href="transform.html#normalisation"><i class="fa fa-check"></i><b>4.3</b> Data normalization</a></li>
+<li class="chapter" data-level="4.3" data-path="transform.html"><a href="transform.html#normalisation"><i class="fa fa-check"></i><b>4.3</b> Data normalization</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="transform.html"><a href="transform.html#t-test"><i class="fa fa-check"></i><b>4.3.1</b> T-test</a></li>
+</ul></li>
 <li class="chapter" data-level="4.4" data-path="transform.html"><a href="transform.html#visualising-data"><i class="fa fa-check"></i><b>4.4</b> Visualising data</a></li>
 <li class="chapter" data-level="4.5" data-path="transform.html"><a href="transform.html#creating-a-volcano-plot"><i class="fa fa-check"></i><b>4.5</b> Creating a volcano plot</a></li>
 <li class="chapter" data-level="4.6" data-path="transform.html"><a href="transform.html#creating-a-heatmap-plot"><i class="fa fa-check"></i><b>4.6</b> Creating a heatmap plot</a></li>
@@ -231,8 +233,8 @@ dat_tidy <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"
 ##   Number_of_proteins
 ##                &lt;int&gt;
 ## 1               1145</code></pre>
-<p>This shrinks the dataset from 7,702 proteins to 1,184 proteins, so we can see why imputing the missing values might be more atrractive.</p>
-<p>One approach you might like to try is to impute the data by replacing the missing values with the mean observation for each protein.</p>
+<p>This shrinks the dataset from 7,702 proteins to 1,145 proteins, so we can see why imputing the missing values might be more atrractive.</p>
+<p>One approach you might like to try is to impute the data by replacing the missing values with the mean observation for each protein under each condition.</p>
 </div>
 <div id="normalisation" class="section level2">
 <h2><span class="header-section-number">4.3</span> Data normalization</h2>
@@ -248,12 +250,12 @@ Figure 4.3: Protein data for six assays plotted as a distributions.
 </div>
 <p>A quantile represents a region of distribution, for example the 0.95 quantile is the value such that 95% of the data lies below it. To normalize two or more distributions with each other without recourse to a reference distribution we:</p>
 <ol style="list-style-type: lower-roman">
-<li>Rank the value in each experiment (represented in the columns) from lowest to highest. In other words identify the quantiles.</li>
+<li>Rank the value in each experiment (represented in the columns) from lowest to highest. In other words identify the quantiles for each protein in each experiment.</li>
 <li>Sort each experiment (the columns) from lowest to highest value.</li>
 <li>Calculate the mean across the rows for the sorted values.</li>
 <li>Then substitute these mean values back according to rank for each experiment to restore the original order.</li>
 </ol>
-<p>This results in the highest ranking observation in each experiment becoming the mean of the highest observations across all experiments, the second ranking observation in each experiment becoming the mean of the second highest observations across all experiments.</p>
+<p>This results in the highest ranking observation in each experiment becoming the mean of the highest observations across all experiments, the second ranking observation in each experiment becoming the mean of the second highest observations across all experiments. Therefore the distributions for each each experiment are now the same.</p>
 <p><a href="https://davetang.org/muse/2014/07/07/quantile-normalisation-in-r/">Dave Tang’s Blog:Quantile Normalisation in R</a> has more details on this approach.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:quant-norm"></span>
@@ -289,9 +291,24 @@ quantile_normalisation &lt;-<span class="st"> </span><span class="cf">function</
 Figure 4.5: Comparison of the protein distributions before normalization (left) and after quantile normalization (right).
 </p>
 </div>
-<ol start="3" style="list-style-type: decimal">
-<li>Use <code>t.test</code> to perform Welch Two Sample t-test on untransformed data. This outputs the p-values we need for each protein.</li>
+<div id="t-test" class="section level3">
+<h3><span class="header-section-number">4.3.1</span> T-test</h3>
+<p>Things we need to consider in performing our t-test:</p>
+<ol style="list-style-type: decimal">
+<li>We are perfoming a test for each protein for between three control and treatment experiments and assume unequal variances between the control and treatment for each protein. A look at a single protein supports this assumption:</li>
 </ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Variance of first control protein observations</span>
+<span class="kw">var</span>(<span class="kw">c</span>(dat_norm<span class="op">$</span>control_<span class="dv">1</span>[<span class="dv">1</span>], dat_norm<span class="op">$</span>control_<span class="dv">2</span>[<span class="dv">1</span>], dat_norm<span class="op">$</span>control_<span class="dv">3</span>[<span class="dv">1</span>]))</code></pre></div>
+<pre><code>## [1] 0.01473403</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Variance of first treatment protein observations</span>
+<span class="kw">var</span>(<span class="kw">c</span>(dat_norm<span class="op">$</span>treatment_<span class="dv">1</span>[<span class="dv">1</span>], dat_norm<span class="op">$</span>treatment_<span class="dv">2</span>[<span class="dv">1</span>], dat_norm<span class="op">$</span>treatment_<span class="dv">3</span>[<span class="dv">1</span>]))</code></pre></div>
+<pre><code>## [1] 0.002110211</code></pre>
+<p>Hence we will perform a Welch’s t-test for unequal variances.</p>
+<ol start="2" style="list-style-type: decimal">
+<li><p>We don’t know whether the effect of the treatment is to increase or decrease the concentration of the protein, hence we will perform a two-sided t-test.</p></li>
+<li><p>The observations for the proteins are for proteins of the same type but from independent experiments, rather than observations of the same individuals before and after treatment. Hence we test the observations as unpaired samples.</p></li>
+</ol>
+<p>Use <code>t.test</code> to perform Welch Two Sample t-test on untransformed data. This outputs the p-values we need for each protein.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># T-test function for multiple experiments</span>
 expriments_ttest &lt;-<span class="st"> </span><span class="cf">function</span>(dt,grp1,grp2){
   <span class="co"># Subset control group and convert to numeric</span>
@@ -346,6 +363,7 @@ dat_max_fc &lt;-<span class="st"> </span>con_max <span class="op">-</span><span 
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(dat_max_fc)</code></pre></div>
 <p><img src="bspr-workshop-2018_files/figure-html/log-fc-2.png" width="672" /></p>
 </div>
+</div>
 <div id="visualising-data" class="section level2">
 <h2><span class="header-section-number">4.4</span> Visualising data</h2>
 <p>Based on empircal research, there are some general rules on visulisations that are worth bearing in mind:</p>
@@ -369,7 +387,11 @@ dat_max &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class
                       <span class="dt">logfc =</span> dat_max_fc,
                       <span class="dt">pval =</span> <span class="op">-</span><span class="dv">1</span><span class="op">*</span><span class="kw">log10</span>(p_vals_max))
 
-dat_max <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(logfc,pval)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()</code></pre></div>
+dat_max <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(logfc,pval)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="co"># Add dotted lines to indicate the threshold, semi-transparent</span>
+<span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="fl">1.5</span>, <span class="dt">linetype =</span> <span class="dv">2</span>, <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="dv">2</span>, <span class="dt">linetype =</span> <span class="dv">2</span>, <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="op">-</span><span class="dv">2</span>, <span class="dt">linetype =</span> <span class="dv">2</span>, <span class="dt">alpha =</span> <span class="fl">0.5</span>) </code></pre></div>
 <p><img src="bspr-workshop-2018_files/figure-html/volcano-plot-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat_vplot <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="co"># Add a threhold for significant observations</span>

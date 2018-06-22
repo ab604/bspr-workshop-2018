@@ -46,22 +46,23 @@ options(knitr.graphics.auto_pdf = TRUE)
 These lessons cover:
 
 1. An introduction to R and RStudio
-2. An introduction to the tidyverse
+2. An introduction to tidyverse and base R
 3. Importing and transforming proteomics data
 4. Visualisation of proteomics analysis
 
 The analysis is of an example data set of observations for 7702 proteins
 from cells in three control experiments and three treatment experiments.
 The observations are signal intensity measurements from the mass spectrometer.
-These intensities relate to the amount of protein in each experiment and under 
-each condition. The analysis transforms the data to examine the effect of
+These intensities relate the concentration of protein observed in each experiment 
+and under each condition. The analysis transforms the data to examine the effect of
 treatment on the cellular proteome and visualise the output using a volcano
 plot and a heatmap. 
 <a href="https://raw.githubusercontent.com/ab604/ab604.github.io/master/docs/070718-proteomics-example-data.csv" download>Click here to download the csv file.</a>
 
 ## Requirements {-}
 
-Up to date version of R [@R-base] and Rstudio [@rstudioteam2018]
+An up to date version of R [@R-base] and Rstudio [@rstudioteam2018]. These
+materials were generated using R version 3.5.0.
 
 The following R packages:
 

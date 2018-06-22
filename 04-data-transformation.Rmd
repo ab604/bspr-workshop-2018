@@ -121,11 +121,11 @@ dat %>% summarise(Number_of_proteins = n())
 dat_tidy %>% summarise(Number_of_proteins = n())
 ```
 
-This shrinks the dataset from 7,702 proteins to 1,184 proteins, so we can see 
+This shrinks the dataset from 7,702 proteins to 1,145 proteins, so we can see 
 why imputing the missing values might be more atrractive.
 
 One approach you might like to try is to impute the data by replacing the 
-missing values with the mean observation for each protein.
+missing values with the mean observation for each protein under each condition.
 
 ## Data normalization {#normalisation}
 
@@ -163,15 +163,18 @@ is the value such that 95% of the data lies below it. To normalize two or more
 distributions with each other without recourse to a reference distribution we:
 
 (i) Rank the value in each experiment (represented in the columns) from 
-lowest to highest. In other words identify the quantiles.
+lowest to highest. In other words identify the quantiles for each protein 
+in each experiment.
 (ii) Sort each experiment (the columns) from lowest to highest value.
 (iii) Calculate the mean across the rows for the sorted values.
-(iv) Then substitute these mean values back according to rank for each experiment to restore the original order.
+(iv) Then substitute these mean values back according to rank for each experiment 
+to restore the original order.
 
 This results in the highest ranking observation in each experiment
 becoming the mean of the highest observations across all experiments, the
 second ranking observation in each experiment becoming the mean of the 
-second highest observations across all experiments.
+second highest observations across all experiments. Therefore the 
+distributions for each each experiment are now the same.
 
 [Dave Tang's Blog:Quantile Normalisation in R](https://davetang.org/muse/2014/07/07/quantile-normalisation-in-r/) has more
 details on this approach.
@@ -223,7 +226,6 @@ dat_norm_max <- dat_tidy %>%
          treatment_2 = treatment_2 / max(treatment_2),
          treatment_3 = treatment_3 / max(treatment_3)
          )
-
 ```
 
 (ref:compare-qnorm) Comparison of the protein distributions before normalization (left)
@@ -243,7 +245,31 @@ d1c <- d1 + theme(legend.position="none")
 plot_grid(d1c,d2)
 ```
 
-3. Use `t.test` to perform Welch Two Sample t-test on untransformed data. 
+### T-test
+
+Things we need to consider in performing our t-test:
+
+1. We are perfoming a test for each protein for between three control and 
+treatment experiments and assume unequal variances between the control and 
+treatment for each protein. A look at a single protein supports this assumption:
+
+```{r uneqal-variances}
+# Variance of first control protein observations
+var(c(dat_norm$control_1[1], dat_norm$control_2[1], dat_norm$control_3[1]))
+# Variance of first treatment protein observations
+var(c(dat_norm$treatment_1[1], dat_norm$treatment_2[1], dat_norm$treatment_3[1]))
+```
+
+Hence we will perform a Welch's t-test for unequal variances.
+
+2. We don't know whether the effect of the treatment is to increase or decrease
+the concentration of the protein, hence we will perform a two-sided t-test.
+
+3. The observations for the proteins are for proteins of the same type but from 
+independent experiments, rather than observations of the same individuals
+before and after treatment. Hence we test the observations as unpaired samples.
+
+Use `t.test` to perform Welch Two Sample t-test on untransformed data. 
 This outputs the p-values we need for each protein.
 
 ```{r t-test-function, cache=TRUE}
@@ -350,8 +376,12 @@ dat_max <- tibble(prots= dat_norm_max$protein_accession,
                       logfc = dat_max_fc,
                       pval = -1*log10(p_vals_max))
 
-dat_max %>% ggplot(aes(logfc,pval)) + geom_point()
-
+dat_max %>% ggplot(aes(logfc,pval)) + 
+  geom_point() + # Add dotted lines to indicate the threshold, semi-transparent
+  geom_hline(yintercept = 1.5, linetype = 2, alpha = 0.5) + 
+  geom_vline(xintercept = 2, linetype = 2, alpha = 0.5) +
+  geom_vline(xintercept = -2, linetype = 2, alpha = 0.5) 
+ 
 dat_vplot %>%
   # Add a threhold for significant observations
   mutate(threshold = if_else(logfc >= 2 & pval >= 1.5 |

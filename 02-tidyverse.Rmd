@@ -1,15 +1,21 @@
 # Getting started in R and the tidyverse {#tidyverse}
 
-## Tidy data and the tidyverse
+Functions are a way to automate common tasks and R comes with a set of functions 
+called the `base` package. We will be using some `base` functions in 
+Chapter \@ref(transform), but to introduce the concept of using [functions](#function-anatomy)
+we'll begin with the `tidyverse`.
 
-R is a programming language, and written in R is *"an opinionated collection 
-of R packages designed for data science"* called [tidyverse](https://www.tidyverse.org/) [@R-tidyverse]. 
+## The tidyverse and tidy data
 
-Tidyverse packages *"share an underlying design philosophy, grammar, and data structures."* It's this philiosophy that makes them relatively easy to learn
-and use.
+The [tidyverse](https://www.tidyverse.org/) [@R-tidyverse] is *"an opinionated 
+collection of R packages designed for data science"* . 
 
-The principals of tidy data for tabular data as proposed in the Tidy Data 
-paper http://www.jstatsoft.org/v59/i10/paper are:
+Tidyverse packages contain functions that *"share an underlying design 
+philosophy, grammar, and data structures."* It's this philiosophy that makes 
+tidyverse functions and packages relatively easy to learn and use.
+
+Tidy data follows three principals for tabular data as proposed in the Tidy Data 
+paper http://www.jstatsoft.org/v59/i10/paper :
 
 1. Every variable has its own column.
 2. Every observation has its own row.
@@ -17,7 +23,8 @@ paper http://www.jstatsoft.org/v59/i10/paper are:
 
 If our table was proteomics data then, we might have a set of variables such 
 as the peptide sequence, mass or length observed for a number of peptides.
-Therefore each peptide would have a row with columns for peptide sequence, mass and length with the value for each variable in separate cells, as
+Therefore each peptide would have a row with columns for peptide sequence, mass 
+and length with the value for each variable in separate cells, as
 seen in Figure \@ref(fig:tidy-prot).
 
 (ref:tidy-prot) An example of tidy proteomics data
@@ -25,6 +32,8 @@ seen in Figure \@ref(fig:tidy-prot).
 ```{r tidy-prot, fig.cap='(ref:tidy-prot)',fig.asp=1, out.width= '80%', fig.align='center', echo=FALSE}
 knitr::include_graphics("img/tidy_prot_data.PNG")
 ```
+
+Often much of the work in any data analysis is getting our data into a tidy form.
 
 We can't do everything in the tidyverse, and everything we can do in the 
 tidyverse can be done in what is called base R or other packages, but the 
@@ -40,14 +49,15 @@ Taking our cue from [R4DS](http://r4ds.had.co.nz/) let's try an example.
 
 ## Data visualisation
 
-Let's begin with visualisation of some data using the `ggplot2` package,
-which implements the *grammer of graphics*, for describing
+The `ggplot2` package implements the *grammer of graphics*, for describing
 and building graphs.
 
-The motivation here is twofold: to begin to grasp the grammar of graphics
-approach to creating plots, and most importantly to demonstrate how 
-plotting is often the most useful thing we can do when trying to understand
-what is going on.
+The motivation here is twofold: 
+
+1. To begin to grasp the grammar of graphics approach to creating plots. This will
+be our first example of automating a task using a function.
+2. To demonstrate how plotting is often the most useful thing we can do when 
+trying to understand our data.
 
 We'll use the `mpg` dataset that comes with the tidyverse to examine
 the question *do cars with big engines use more fuel than cars with small engines?*
@@ -60,10 +70,12 @@ Try `?mpg` to learn more about the data.
 To create a plot of engine size `displ` (x-axis) against fuel efficiency `hwy` (y-axis)  we do the following:
 
 1. Use the `ggplot()` function to create an empty graph.
-2. We give ggplot a first argument of the data (here `mpg`). 
+2. Provide ggplot with a first input or **argument** of the data (here `mpg`). 
 3. Then we follow the ggplot function with a `+` sign to indicate
-we are going to add more coed, followed by a `geom_point()` function to add a layer of points mapping some aesthetics for the x and y axes.
-4. Mapping is always paired to aesthetics `aes()`. An aesthetic is a visual property of the objects in your plot, such a point size, shape or point colour.
+we are going to add more code, followed by a `geom_point()` function to add a 
+layer of points mapping some aesthetics for the x and y axes.
+4. Mapping is always paired to aesthetics `aes()`. An aesthetic is a visual 
+property of the objects in your plot, such a point size, shape or point colour.
 
 Therefore to plot engine size (x-axis) against fuel efficiency (y-axis) we 
 use the following code:
@@ -105,8 +117,8 @@ Concretely, in our first example `<DATA>` was `mpg`, the `<GEOM_FUNCTION>`
 was `geom_point()` and the arguments we supplies to map our aesthetics 
 `<MAPPINGS>` were `x = displ, y = hwy`.
 
-Hopefully you are beginning to see how a single line of code can do a lot with
-tidy data.
+As we can use this code for any tidy data set, hopefully you are beginning to 
+see how a small amount of code can do a lot.
 
 ## Workflow basics
 
@@ -125,12 +137,22 @@ Read this as *"mass_kg gets value 55"* in your head.
 Using `<-` can be annoying to type, so use RStudio’s keyboard short cut: 
 Alt + - (the minus sign) to make life easier. 
 
+Many people ask why we use this assignment operator when we can use `=` instead?
+
+[Colin Fay had a Twitter thread on this subject](https://twitter.com/_colinfay/status/1006139974377443328),
+but the reason I favour most is that it provides clarity. The arrow points in 
+the direction of the assigment (it is actually possible to assign in the other
+direction too) and it distinguishes between creating an object in the workspace 
+and assigning a value inside a function.
+
 Object name style is a matter of choice, but must start with a letter and can 
 only contain letters, numbers, `_` and `.`. We recommend using descriptive names
 and using `_` between words. Some special symbols cannot be used in variable 
 names, so watch out for those.
 
-So here we've used the name to indicate its value represents a mass in kilograms. Look in your environment pane and you'll see the `mass_kg` object containing the (data) value 55.
+So here we've used the name to indicate its value represents a mass in kilograms. 
+Look in your environment pane and you'll see the `mass_kg` object 
+containing the (data) value 55.
 
 We can inspect an object by typing it's name:
 
@@ -148,12 +170,18 @@ mass_KG
 This error illustrates that typos matter, everything must be precise and `mass_KG`
 is not the same as `mass_kg`. `mass_KG` doesn't exist, hence the error.
 
-### Calling functions
+### Function anatomy {#function-anatomy}
 
-Functions in R are objects followed by parentheses, such as `library()`. 
+Functions in R are objects followed by parentheses, such as `library()`.
+
 Functions have the form:
 
 `function_name(arg1 = val, arg2 = val2, ...)`
+
+The use of arguements or inputs allows us to generalise. That is to say not
+just do something in a specific case, but in many cases. For example not just
+make a scatter plot for the `mpg` dataset, but for any dataset of observations
+that can be plotted pairwise.
 
 Let's use `seq()` to create a **seq**uence of numbers, and at the same time practice tab completion.
 

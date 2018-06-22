@@ -117,11 +117,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="tidyverse.html"><a href="tidyverse.html"><i class="fa fa-check"></i><b>2</b> Getting started in R and the tidyverse</a><ul>
-<li class="chapter" data-level="2.1" data-path="tidyverse.html"><a href="tidyverse.html#tidy-data-and-the-tidyverse"><i class="fa fa-check"></i><b>2.1</b> Tidy data and the tidyverse</a></li>
+<li class="chapter" data-level="2.1" data-path="tidyverse.html"><a href="tidyverse.html#the-tidyverse-and-tidy-data"><i class="fa fa-check"></i><b>2.1</b> The tidyverse and tidy data</a></li>
 <li class="chapter" data-level="2.2" data-path="tidyverse.html"><a href="tidyverse.html#data-visualisation"><i class="fa fa-check"></i><b>2.2</b> Data visualisation</a></li>
 <li class="chapter" data-level="2.3" data-path="tidyverse.html"><a href="tidyverse.html#workflow-basics"><i class="fa fa-check"></i><b>2.3</b> Workflow basics</a><ul>
 <li class="chapter" data-level="2.3.1" data-path="tidyverse.html"><a href="tidyverse.html#assigning-objects"><i class="fa fa-check"></i><b>2.3.1</b> Assigning objects</a></li>
-<li class="chapter" data-level="2.3.2" data-path="tidyverse.html"><a href="tidyverse.html#calling-functions"><i class="fa fa-check"></i><b>2.3.2</b> Calling functions</a></li>
+<li class="chapter" data-level="2.3.2" data-path="tidyverse.html"><a href="tidyverse.html#function-anatomy"><i class="fa fa-check"></i><b>2.3.2</b> Function anatomy</a></li>
 <li class="chapter" data-level="2.3.3" data-path="tidyverse.html"><a href="tidyverse.html#atomic-vectors"><i class="fa fa-check"></i><b>2.3.3</b> Atomic vectors</a></li>
 <li class="chapter" data-level="2.3.4" data-path="tidyverse.html"><a href="tidyverse.html#attributes"><i class="fa fa-check"></i><b>2.3.4</b> Attributes</a></li>
 <li class="chapter" data-level="2.3.5" data-path="tidyverse.html"><a href="tidyverse.html#factors"><i class="fa fa-check"></i><b>2.3.5</b> Factors</a></li>
@@ -145,7 +145,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4" data-path="transform.html"><a href="transform.html"><i class="fa fa-check"></i><b>4</b> Transformation and visualisation</a><ul>
 <li class="chapter" data-level="4.1" data-path="transform.html"><a href="transform.html#fold-change-and-log-fold-change"><i class="fa fa-check"></i><b>4.1</b> Fold change and log-fold change</a></li>
 <li class="chapter" data-level="4.2" data-path="transform.html"><a href="transform.html#missing-values"><i class="fa fa-check"></i><b>4.2</b> Dealing with missing values</a></li>
-<li class="chapter" data-level="4.3" data-path="transform.html"><a href="transform.html#normalisation"><i class="fa fa-check"></i><b>4.3</b> Data normalization</a></li>
+<li class="chapter" data-level="4.3" data-path="transform.html"><a href="transform.html#normalisation"><i class="fa fa-check"></i><b>4.3</b> Data normalization</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="transform.html"><a href="transform.html#t-test"><i class="fa fa-check"></i><b>4.3.1</b> T-test</a></li>
+</ul></li>
 <li class="chapter" data-level="4.4" data-path="transform.html"><a href="transform.html#visualising-data"><i class="fa fa-check"></i><b>4.4</b> Visualising data</a></li>
 <li class="chapter" data-level="4.5" data-path="transform.html"><a href="transform.html#creating-a-volcano-plot"><i class="fa fa-check"></i><b>4.5</b> Creating a volcano plot</a></li>
 <li class="chapter" data-level="4.6" data-path="transform.html"><a href="transform.html#creating-a-heatmap-plot"><i class="fa fa-check"></i><b>4.6</b> Creating a heatmap plot</a></li>
@@ -175,11 +177,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="tidyverse" class="section level1">
 <h1><span class="header-section-number">Chapter 2</span> Getting started in R and the tidyverse</h1>
-<div id="tidy-data-and-the-tidyverse" class="section level2">
-<h2><span class="header-section-number">2.1</span> Tidy data and the tidyverse</h2>
-<p>R is a programming language, and written in R is <em>“an opinionated collection of R packages designed for data science”</em> called <a href="https://www.tidyverse.org/">tidyverse</a> <span class="citation">(Wickham <a href="#ref-R-tidyverse">2017</a>)</span>.</p>
-<p>Tidyverse packages <em>“share an underlying design philosophy, grammar, and data structures.”</em> It’s this philiosophy that makes them relatively easy to learn and use.</p>
-<p>The principals of tidy data for tabular data as proposed in the Tidy Data paper <a href="http://www.jstatsoft.org/v59/i10/paper" class="uri">http://www.jstatsoft.org/v59/i10/paper</a> are:</p>
+<p>Functions are a way to automate common tasks and R comes with a set of functions called the <code>base</code> package. We will be using some <code>base</code> functions in Chapter <a href="transform.html#transform">4</a>, but to introduce the concept of using <a href="tidyverse.html#function-anatomy">functions</a> we’ll begin with the <code>tidyverse</code>.</p>
+<div id="the-tidyverse-and-tidy-data" class="section level2">
+<h2><span class="header-section-number">2.1</span> The tidyverse and tidy data</h2>
+<p>The <a href="https://www.tidyverse.org/">tidyverse</a> <span class="citation">(Wickham <a href="#ref-R-tidyverse">2017</a>)</span> is <em>“an opinionated collection of R packages designed for data science”</em> .</p>
+<p>Tidyverse packages contain functions that <em>“share an underlying design philosophy, grammar, and data structures.”</em> It’s this philiosophy that makes tidyverse functions and packages relatively easy to learn and use.</p>
+<p>Tidy data follows three principals for tabular data as proposed in the Tidy Data paper <a href="http://www.jstatsoft.org/v59/i10/paper" class="uri">http://www.jstatsoft.org/v59/i10/paper</a> :</p>
 <ol style="list-style-type: decimal">
 <li>Every variable has its own column.</li>
 <li>Every observation has its own row.</li>
@@ -193,6 +196,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 Figure 2.1: An example of tidy proteomics data
 </p>
 </div>
+<p>Often much of the work in any data analysis is getting our data into a tidy form.</p>
 <p>We can’t do everything in the tidyverse, and everything we can do in the tidyverse can be done in what is called base R or other packages, but the motivation behind the tidyverse is to ease the pain of data manipulation.</p>
 <p>With this in mind, the two tasks we are most likely to want to do in data science are:</p>
 <ol style="list-style-type: decimal">
@@ -203,8 +207,12 @@ Figure 2.1: An example of tidy proteomics data
 </div>
 <div id="data-visualisation" class="section level2">
 <h2><span class="header-section-number">2.2</span> Data visualisation</h2>
-<p>Let’s begin with visualisation of some data using the <code>ggplot2</code> package, which implements the <em>grammer of graphics</em>, for describing and building graphs.</p>
-<p>The motivation here is twofold: to begin to grasp the grammar of graphics approach to creating plots, and most importantly to demonstrate how plotting is often the most useful thing we can do when trying to understand what is going on.</p>
+<p>The <code>ggplot2</code> package implements the <em>grammer of graphics</em>, for describing and building graphs.</p>
+<p>The motivation here is twofold:</p>
+<ol style="list-style-type: decimal">
+<li>To begin to grasp the grammar of graphics approach to creating plots. This will be our first example of automating a task using a function.</li>
+<li>To demonstrate how plotting is often the most useful thing we can do when trying to understand our data.</li>
+</ol>
 <p>We’ll use the <code>mpg</code> dataset that comes with the tidyverse to examine the question <em>do cars with big engines use more fuel than cars with small engines?</em></p>
 <p>Try <code>?mpg</code> to learn more about the data.</p>
 <ol style="list-style-type: decimal">
@@ -214,8 +222,8 @@ Figure 2.1: An example of tidy proteomics data
 <p>To create a plot of engine size <code>displ</code> (x-axis) against fuel efficiency <code>hwy</code> (y-axis) we do the following:</p>
 <ol style="list-style-type: decimal">
 <li>Use the <code>ggplot()</code> function to create an empty graph.</li>
-<li>We give ggplot a first argument of the data (here <code>mpg</code>).</li>
-<li>Then we follow the ggplot function with a <code>+</code> sign to indicate we are going to add more coed, followed by a <code>geom_point()</code> function to add a layer of points mapping some aesthetics for the x and y axes.</li>
+<li>Provide ggplot with a first input or <strong>argument</strong> of the data (here <code>mpg</code>).</li>
+<li>Then we follow the ggplot function with a <code>+</code> sign to indicate we are going to add more code, followed by a <code>geom_point()</code> function to add a layer of points mapping some aesthetics for the x and y axes.</li>
 <li>Mapping is always paired to aesthetics <code>aes()</code>. An aesthetic is a visual property of the objects in your plot, such a point size, shape or point colour.</li>
 </ol>
 <p>Therefore to plot engine size (x-axis) against fuel efficiency (y-axis) we use the following code:</p>
@@ -233,7 +241,7 @@ Figure 2.1: An example of tidy proteomics data
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> <span class="op">&lt;</span>DATA<span class="op">&gt;</span>) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="er">&lt;</span>GEOM_FUNCTION<span class="op">&gt;</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="op">&lt;</span>MAPPINGS<span class="op">&gt;</span>))</code></pre></div>
 <p>Concretely, in our first example <code>&lt;DATA&gt;</code> was <code>mpg</code>, the <code>&lt;GEOM_FUNCTION&gt;</code> was <code>geom_point()</code> and the arguments we supplies to map our aesthetics <code>&lt;MAPPINGS&gt;</code> were <code>x = displ, y = hwy</code>.</p>
-<p>Hopefully you are beginning to see how a single line of code can do a lot with tidy data.</p>
+<p>As we can use this code for any tidy data set, hopefully you are beginning to see how a small amount of code can do a lot.</p>
 </div>
 <div id="workflow-basics" class="section level2">
 <h2><span class="header-section-number">2.3</span> Workflow basics</h2>
@@ -244,6 +252,8 @@ Figure 2.1: An example of tidy proteomics data
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mass_kg &lt;-<span class="st"> </span><span class="dv">55</span></code></pre></div>
 <p>Read this as <em>“mass_kg gets value 55”</em> in your head.</p>
 <p>Using <code>&lt;-</code> can be annoying to type, so use RStudio’s keyboard short cut: Alt + - (the minus sign) to make life easier.</p>
+<p>Many people ask why we use this assignment operator when we can use <code>=</code> instead?</p>
+<p><a href="https://twitter.com/_colinfay/status/1006139974377443328">Colin Fay had a Twitter thread on this subject</a>, but the reason I favour most is that it provides clarity. The arrow points in the direction of the assigment (it is actually possible to assign in the other direction too) and it distinguishes between creating an object in the workspace and assigning a value inside a function.</p>
 <p>Object name style is a matter of choice, but must start with a letter and can only contain letters, numbers, <code>_</code> and <code>.</code>. We recommend using descriptive names and using <code>_</code> between words. Some special symbols cannot be used in variable names, so watch out for those.</p>
 <p>So here we’ve used the name to indicate its value represents a mass in kilograms. Look in your environment pane and you’ll see the <code>mass_kg</code> object containing the (data) value 55.</p>
 <p>We can inspect an object by typing it’s name:</p>
@@ -254,10 +264,12 @@ Figure 2.1: An example of tidy proteomics data
 <p><code>Error: object 'mass_KG' not found</code></p>
 <p>This error illustrates that typos matter, everything must be precise and <code>mass_KG</code> is not the same as <code>mass_kg</code>. <code>mass_KG</code> doesn’t exist, hence the error.</p>
 </div>
-<div id="calling-functions" class="section level3">
-<h3><span class="header-section-number">2.3.2</span> Calling functions</h3>
-<p>Functions in R are objects followed by parentheses, such as <code>library()</code>. Functions have the form:</p>
+<div id="function-anatomy" class="section level3">
+<h3><span class="header-section-number">2.3.2</span> Function anatomy</h3>
+<p>Functions in R are objects followed by parentheses, such as <code>library()</code>.</p>
+<p>Functions have the form:</p>
 <p><code>function_name(arg1 = val, arg2 = val2, ...)</code></p>
+<p>The use of arguements or inputs allows us to generalise. That is to say not just do something in a specific case, but in many cases. For example not just make a scatter plot for the <code>mpg</code> dataset, but for any dataset of observations that can be plotted pairwise.</p>
 <p>Let’s use <code>seq()</code> to create a <strong>seq</strong>uence of numbers, and at the same time practice tab completion.</p>
 <p>Start typing <code>se</code> in the console and you should see a list of functions appear, add <code>q</code> to shorten the list, then use the up and down arrow to highlight the function of interest <code>seq()</code> and hit Tab to select.</p>
 <p>RStudio puts the cursor between the parentheses to prompt us to enter some arguments. Here we’ll use 1 as the start and 10 as the end:</p>
