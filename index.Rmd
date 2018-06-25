@@ -31,9 +31,8 @@ description: "Lessons for the BSPR 2018 Data Science Workshop"
 library(tidyverse)
 library(janitor)
 library(cowplot)
-#library(VennDiagram)
-#library(gridExtra)
-#library(cowplot)
+library(gplots)
+library(pheatmap)
 # automatically create a bib database for R packages
 knitr::write_bib(c(.packages(), 'bookdown', 'knitr', 'rmarkdown', 
                    "tidyverse","gplots","pheatmap"), 'packages.bib')

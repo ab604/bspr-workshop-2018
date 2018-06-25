@@ -215,19 +215,6 @@ dat_norm <- dat_tidy %>% select(-c(1:2)) %>%
   bind_cols(dat_tidy[,1:2],.)
 ```
 
-
-```{r max-normalisation, echo=FALSE, cache=F}
-# Normalise to maximum column value
-dat_norm_max <- dat_tidy %>%
-  mutate(control_1 = control_1/max(control_1),
-         control_2 = control_2/max(control_2),
-         control_3 = control_3/max(control_3),
-         treatment_1 = treatment_1 / max(treatment_1),
-         treatment_2 = treatment_2 / max(treatment_2),
-         treatment_3 = treatment_3 / max(treatment_3)
-         )
-```
-
 (ref:compare-qnorm) Comparison of the protein distributions before normalization (left)
 and after quantile normalization (right).
 
@@ -270,7 +257,10 @@ independent experiments, rather than observations of the same individuals
 before and after treatment. Hence we test the observations as unpaired samples.
 
 Use `t.test` to perform Welch Two Sample t-test on untransformed data. 
-This outputs the p-values we need for each protein.
+This outputs the p-values we need for each protein. I couldn't figure out a tidy
+way to do this, so I am using the base R apply function here.
+
+What's going on in the code below is the following,
 
 ```{r t-test-function, cache=TRUE}
 # T-test function for multiple experiments
@@ -279,25 +269,25 @@ expriments_ttest <- function(dt,grp1,grp2){
   x <- dt[grp1] %>% unlist %>% as.numeric()
   # Subset treatment group and convert to numeric
   y <- dt[grp2] %>% unlist %>% as.numeric()
-  # Perform t-test
+  # Perform t-test using the mean of x and y
   result <- t.test(x, y)
   # Return p-values
   return(result$p.value)
 } 
 ```
 
-
 ```{r t-tests, cache=F}
 # Apply t-test function to data
 # array = dat, 1 = rows, FUN = expriments_ttest, and arguements
-# For median normalised data
 p_vals <- apply(dat_norm,1,expriments_ttest, grp1 = c(3:5), grp2 = c(6:8))
 
-p_vals_max <- apply(dat_norm_max,1,expriments_ttest, grp1 = c(3:5), grp2 = c(6:8))
+# Calculate the p-value for the first protein and compare with function
+paste0(round(p_vals[1],4)," ", 
+       round(t.test(as.numeric(dat_norm[1,3:5]),
+                    as.numeric(dat_norm[1,6:8]))$p.value,4))
 
 # Plot histograms
 hist(p_vals)
-hist(p_vals_max)
 ```
 
 4. Perform log transformation of the observations for each protein.
@@ -306,8 +296,6 @@ hist(p_vals_max)
 # Select columns and log data
 dat_log <- dat_norm %>% 
   select(-c(protein_accession,protein_description)) %>% log2()
-dat_max_log <- dat_norm_max %>%
-  select(-c(protein_accession,protein_description)) %>% log2()
 ```
 
 5. Calculate the mean observation for each protein under each condition.
@@ -315,23 +303,16 @@ dat_max_log <- dat_norm_max %>%
 ```{r mean-log, cache=F}
 con <- apply(dat_log[,1:3],1,mean)
 trt <- apply(dat_log[,4:6],1,mean)
-
-con_max <- apply(dat_max_log[,1:3],1,mean)
-trt_max <- apply(dat_max_log[,4:6],1,mean)
 ```
 
 6. The log fold change is then the difference between condition 1 and condition 2.
 
 ```{r log-fc, cache=F}
 # Plot a histogram to look at the distribution.
-
 # Calculate fold change
 dat_fc <- con - trt
-dat_max_fc <- con_max - trt_max
-
 # Plot histograms
 hist(dat_fc)
-hist(dat_max_fc)
 ```
 
 ## Visualising data
@@ -364,30 +345,26 @@ main weakness, it's rather complicated to understand in one glance.
 
 However, volcano plots are widely used in the literature, so there may be an 
 amount of [social proof](https://en.wikipedia.org/wiki/Social_proof) giving rise
-to their popularity as opposed to their utility.
+to their popularity as much as their utility.
 
 
 ```{r volcano-plot, cache=F}
 dat_vplot <- tibble(prots= dat_norm$protein_accession,
                    logfc = dat_fc,
-                   pval = -1*log10(p_vals))
+                   logpval = -1*log10(p_vals))
 
-dat_max <- tibble(prots= dat_norm_max$protein_accession,
-                      logfc = dat_max_fc,
-                      pval = -1*log10(p_vals_max))
+dat_vplot %>% ggplot(aes(logfc,logpval)) + geom_point()
+```
 
-dat_max %>% ggplot(aes(logfc,pval)) + 
-  geom_point() + # Add dotted lines to indicate the threshold, semi-transparent
-  geom_hline(yintercept = 1.5, linetype = 2, alpha = 0.5) + 
-  geom_vline(xintercept = 2, linetype = 2, alpha = 0.5) +
-  geom_vline(xintercept = -2, linetype = 2, alpha = 0.5) 
- 
+However it would be much more useful with some extra formatting...
+
+```{r nice-vplot}
 dat_vplot %>%
   # Add a threhold for significant observations
-  mutate(threshold = if_else(logfc >= 2 & pval >= 1.5 |
-                               logfc <= -2 & pval >= 1.5,"A", "B")) %>%
+  mutate(threshold = if_else(logfc >= 2 & logpval >= 1.5 |
+                               logfc <= -2 & logpval >= 1.5,"A", "B")) %>%
   # Plot with points coloured according to the threshold
-  ggplot(aes(logfc,pval, colour = threshold)) +
+  ggplot(aes(logfc,logpval, colour = threshold)) +
   geom_point(alpha = 0.5) + # Alpha sets the transparency of the points
   # Add dotted lines to indicate the threshold, semi-transparent
   geom_hline(yintercept = 1.5, linetype = 2, alpha = 0.5) + 
@@ -405,8 +382,8 @@ But which proteins are the significant observations?
 ```{r sig-obs}
 dat_vplot %>%
   # Add a threhold for significant observations
-  mutate(threshold = if_else(logfc >= 2 & pval >= 1.5 |
-                               logfc <= -2 & pval >= 1.5,"A", "B"),
+  mutate(threshold = if_else(logfc >= 2 & logpval >= 1.5 |
+                               logfc <= -2 & logpval >= 1.5,"A", "B"),
          prot_id = str_extract(prots,".{6}$")) %>%  # Get last six characters
   # Filter observations above the threshold
   filter(threshold == "A")
@@ -417,9 +394,11 @@ dat_vplot %>%
 <!-- 1. Clustering the data -->
 
 ```{r heatmap-2}
+# Keep the same p-val cut-off, but relax the logfc to 1 which represents a 
+# doubling
 dat_mut <- dat_norm %>%
-  mutate(pval = dat_vplot$pval, logfc = dat_vplot$logfc) %>%
-  filter(pval >= 2 & (logfc >=2 | logfc <= 2)) %>%
+  mutate(logpval = dat_vplot$logpval, logfc = dat_vplot$logfc) %>%
+  filter(logpval >= 1.5 & (logfc >= 1 | logfc <= -1)) %>%
   select(-c(2,9:10))
 
 dat_sel <- as.matrix.data.frame(dat_mut[,2:7]) %>% log2()
@@ -430,17 +409,25 @@ dat.tn <- scale(t(dat_sel)) %>% t()
 #dat.tn <- dat_sel
 
 #gplots::heatmap.2(dat.tn, scale = 'row',trace="none")
-library(pheatmap)
+
 pheatmap(dat.tn,cutree_rows = 2,
-         cutree_cols = 2)
+         cutree_cols = 2,
+         fontsize_row = 6)
 
 cal_z_score <- function(x){
   (x - mean(x)) / sd(x)
 }
 
 data_subset_norm <- t(apply(dat_mut[,2:7], 1, cal_z_score))
-row.names(data_subset_norm) <- dat_mut$protein_accession
-pheatmap(data_subset_norm)
+
+data_subset_norm %>% 
+  magrittr::set_colnames(c("Ctl 1", "Ctl 2", "Ctl 3",
+                                    "Trt 1", "Trt 2", "Trt 3")) %>% 
+  magrittr::set_rownames(dat_mut$protein_accession) %>% 
+  pheatmap(.,
+           fontsize = 6,
+           cutree_rows = 2,
+           cutree_cols = 2)
 
 d1 <- dat.tn %>% t() %>%
   dist(.,method = "euclidean", diag = FALSE, upper = FALSE)
@@ -466,12 +453,16 @@ my_palette <- colorRampPalette(c("blue","white","red"))(n = 25)
 
 # Plot heatmap with heatmap.2
 par(cex.main=0.75) # Shrink title fonts on plot
-gplots::heatmap.2(dat.tn,                     # Tidy, normalised data
+dat.tn %>% 
+  magrittr::set_colnames(c("Ctl 1", "Ctl 2", "Ctl 3",
+                                    "Trt 1", "Trt 2", "Trt 3")) %>% 
+  magrittr::set_rownames(dat_mut$protein_accession) %>% 
+  gplots::heatmap.2(.,                     # Tidy, normalised data
           Colv=as.dendrogram(c1),     # Experiments clusters in cols
           Rowv=as.dendrogram(c2),     # Protein clusters in rows
           density.info="histogram",   # Plot histogram of data and colour key
           trace="none",               # Turn of trace lines from heat map
           col = my_palette,           # Use my colour scheme
-          cexRow=0.5,cexCol=0.75)     # Amend row and column label fonts
+          cexRow=0.3,cexCol=0.75)     # Amend row and column label fonts
 ```
 

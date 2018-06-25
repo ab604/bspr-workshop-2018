@@ -308,60 +308,51 @@ Figure 4.5: Comparison of the protein distributions before normalization (left) 
 <li><p>We don’t know whether the effect of the treatment is to increase or decrease the concentration of the protein, hence we will perform a two-sided t-test.</p></li>
 <li><p>The observations for the proteins are for proteins of the same type but from independent experiments, rather than observations of the same individuals before and after treatment. Hence we test the observations as unpaired samples.</p></li>
 </ol>
-<p>Use <code>t.test</code> to perform Welch Two Sample t-test on untransformed data. This outputs the p-values we need for each protein.</p>
+<p>Use <code>t.test</code> to perform Welch Two Sample t-test on untransformed data. This outputs the p-values we need for each protein. I couldn’t figure out a tidy way to do this, so I am using the base R apply function here.</p>
+<p>What’s going on in the code below is the following,</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># T-test function for multiple experiments</span>
 expriments_ttest &lt;-<span class="st"> </span><span class="cf">function</span>(dt,grp1,grp2){
   <span class="co"># Subset control group and convert to numeric</span>
   x &lt;-<span class="st"> </span>dt[grp1] <span class="op">%&gt;%</span><span class="st"> </span>unlist <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.numeric</span>()
   <span class="co"># Subset treatment group and convert to numeric</span>
   y &lt;-<span class="st"> </span>dt[grp2] <span class="op">%&gt;%</span><span class="st"> </span>unlist <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.numeric</span>()
-  <span class="co"># Perform t-test</span>
+  <span class="co"># Perform t-test using the mean of x and y</span>
   result &lt;-<span class="st"> </span><span class="kw">t.test</span>(x, y)
   <span class="co"># Return p-values</span>
   <span class="kw">return</span>(result<span class="op">$</span>p.value)
 } </code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Apply t-test function to data</span>
 <span class="co"># array = dat, 1 = rows, FUN = expriments_ttest, and arguements</span>
-<span class="co"># For median normalised data</span>
 p_vals &lt;-<span class="st"> </span><span class="kw">apply</span>(dat_norm,<span class="dv">1</span>,expriments_ttest, <span class="dt">grp1 =</span> <span class="kw">c</span>(<span class="dv">3</span><span class="op">:</span><span class="dv">5</span>), <span class="dt">grp2 =</span> <span class="kw">c</span>(<span class="dv">6</span><span class="op">:</span><span class="dv">8</span>))
 
-p_vals_max &lt;-<span class="st"> </span><span class="kw">apply</span>(dat_norm_max,<span class="dv">1</span>,expriments_ttest, <span class="dt">grp1 =</span> <span class="kw">c</span>(<span class="dv">3</span><span class="op">:</span><span class="dv">5</span>), <span class="dt">grp2 =</span> <span class="kw">c</span>(<span class="dv">6</span><span class="op">:</span><span class="dv">8</span>))
-
-<span class="co"># Plot histograms</span>
+<span class="co"># Calculate the p-value for the first protein and compare with function</span>
+<span class="kw">paste0</span>(<span class="kw">round</span>(p_vals[<span class="dv">1</span>],<span class="dv">4</span>),<span class="st">&quot; &quot;</span>, 
+       <span class="kw">round</span>(<span class="kw">t.test</span>(<span class="kw">as.numeric</span>(dat_norm[<span class="dv">1</span>,<span class="dv">3</span><span class="op">:</span><span class="dv">5</span>]),
+                    <span class="kw">as.numeric</span>(dat_norm[<span class="dv">1</span>,<span class="dv">6</span><span class="op">:</span><span class="dv">8</span>]))<span class="op">$</span>p.value,<span class="dv">4</span>))</code></pre></div>
+<pre><code>## [1] &quot;0.0927 0.0927&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Plot histograms</span>
 <span class="kw">hist</span>(p_vals)</code></pre></div>
 <p><img src="bspr-workshop-2018_files/figure-html/t-tests-1.png" width="672" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(p_vals_max)</code></pre></div>
-<p><img src="bspr-workshop-2018_files/figure-html/t-tests-2.png" width="672" /></p>
 <ol start="4" style="list-style-type: decimal">
 <li>Perform log transformation of the observations for each protein.</li>
 </ol>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Select columns and log data</span>
 dat_log &lt;-<span class="st"> </span>dat_norm <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span><span class="kw">c</span>(protein_accession,protein_description)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">log2</span>()
-dat_max_log &lt;-<span class="st"> </span>dat_norm_max <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">select</span>(<span class="op">-</span><span class="kw">c</span>(protein_accession,protein_description)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">log2</span>()</code></pre></div>
 <ol start="5" style="list-style-type: decimal">
 <li>Calculate the mean observation for each protein under each condition.</li>
 </ol>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">con &lt;-<span class="st"> </span><span class="kw">apply</span>(dat_log[,<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>],<span class="dv">1</span>,mean)
-trt &lt;-<span class="st"> </span><span class="kw">apply</span>(dat_log[,<span class="dv">4</span><span class="op">:</span><span class="dv">6</span>],<span class="dv">1</span>,mean)
-
-con_max &lt;-<span class="st"> </span><span class="kw">apply</span>(dat_max_log[,<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>],<span class="dv">1</span>,mean)
-trt_max &lt;-<span class="st"> </span><span class="kw">apply</span>(dat_max_log[,<span class="dv">4</span><span class="op">:</span><span class="dv">6</span>],<span class="dv">1</span>,mean)</code></pre></div>
+trt &lt;-<span class="st"> </span><span class="kw">apply</span>(dat_log[,<span class="dv">4</span><span class="op">:</span><span class="dv">6</span>],<span class="dv">1</span>,mean)</code></pre></div>
 <ol start="6" style="list-style-type: decimal">
 <li>The log fold change is then the difference between condition 1 and condition 2.</li>
 </ol>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Plot a histogram to look at the distribution.</span>
-
 <span class="co"># Calculate fold change</span>
 dat_fc &lt;-<span class="st"> </span>con <span class="op">-</span><span class="st"> </span>trt
-dat_max_fc &lt;-<span class="st"> </span>con_max <span class="op">-</span><span class="st"> </span>trt_max
-
 <span class="co"># Plot histograms</span>
 <span class="kw">hist</span>(dat_fc)</code></pre></div>
 <p><img src="bspr-workshop-2018_files/figure-html/log-fc-1.png" width="672" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(dat_max_fc)</code></pre></div>
-<p><img src="bspr-workshop-2018_files/figure-html/log-fc-2.png" width="672" /></p>
 </div>
 </div>
 <div id="visualising-data" class="section level2">
@@ -378,27 +369,20 @@ for plotting a volcano plot. --->
 <p>A volcano plot is a plot of the log fold change in the observation between two conditions on the x-axis, for example the protein expression between treatment and control conditions. On the y-axis is the corresponding p-value for each observation, representing the likelihood that an observed change is due to the different conditions rather than arising from a natural variation in the fold change that might be observed if we performed many replications of the experiment.</p>
 <p>The aim of a volcano plot is to enable the viewer to quickly see the effect (if any) of an experiment with two conditions on many species (i.e. proteins) in terms of both an increase and decrease of the observed value.</p>
 <p>Like all plots it has it’s good and bad points, namely it’s good that we can visualise a lot of complex information in one plot. However this is also it’s main weakness, it’s rather complicated to understand in one glance.</p>
-<p>However, volcano plots are widely used in the literature, so there may be an amount of <a href="https://en.wikipedia.org/wiki/Social_proof">social proof</a> giving rise to their popularity as opposed to their utility.</p>
+<p>However, volcano plots are widely used in the literature, so there may be an amount of <a href="https://en.wikipedia.org/wiki/Social_proof">social proof</a> giving rise to their popularity as much as their utility.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat_vplot &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">prots=</span> dat_norm<span class="op">$</span>protein_accession,
                    <span class="dt">logfc =</span> dat_fc,
-                   <span class="dt">pval =</span> <span class="op">-</span><span class="dv">1</span><span class="op">*</span><span class="kw">log10</span>(p_vals))
+                   <span class="dt">logpval =</span> <span class="op">-</span><span class="dv">1</span><span class="op">*</span><span class="kw">log10</span>(p_vals))
 
-dat_max &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">prots=</span> dat_norm_max<span class="op">$</span>protein_accession,
-                      <span class="dt">logfc =</span> dat_max_fc,
-                      <span class="dt">pval =</span> <span class="op">-</span><span class="dv">1</span><span class="op">*</span><span class="kw">log10</span>(p_vals_max))
-
-dat_max <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(logfc,pval)) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="co"># Add dotted lines to indicate the threshold, semi-transparent</span>
-<span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="fl">1.5</span>, <span class="dt">linetype =</span> <span class="dv">2</span>, <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="dv">2</span>, <span class="dt">linetype =</span> <span class="dv">2</span>, <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="op">-</span><span class="dv">2</span>, <span class="dt">linetype =</span> <span class="dv">2</span>, <span class="dt">alpha =</span> <span class="fl">0.5</span>) </code></pre></div>
+dat_vplot <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(logfc,logpval)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()</code></pre></div>
 <p><img src="bspr-workshop-2018_files/figure-html/volcano-plot-1.png" width="672" /></p>
+<p>However it would be much more useful with some extra formatting…</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat_vplot <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="co"># Add a threhold for significant observations</span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">threshold =</span> <span class="kw">if_else</span>(logfc <span class="op">&gt;=</span><span class="st"> </span><span class="dv">2</span> <span class="op">&amp;</span><span class="st"> </span>pval <span class="op">&gt;=</span><span class="st"> </span><span class="fl">1.5</span> <span class="op">|</span>
-<span class="st">                               </span>logfc <span class="op">&lt;=</span><span class="st"> </span><span class="op">-</span><span class="dv">2</span> <span class="op">&amp;</span><span class="st"> </span>pval <span class="op">&gt;=</span><span class="st"> </span><span class="fl">1.5</span>,<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">threshold =</span> <span class="kw">if_else</span>(logfc <span class="op">&gt;=</span><span class="st"> </span><span class="dv">2</span> <span class="op">&amp;</span><span class="st"> </span>logpval <span class="op">&gt;=</span><span class="st"> </span><span class="fl">1.5</span> <span class="op">|</span>
+<span class="st">                               </span>logfc <span class="op">&lt;=</span><span class="st"> </span><span class="op">-</span><span class="dv">2</span> <span class="op">&amp;</span><span class="st"> </span>logpval <span class="op">&gt;=</span><span class="st"> </span><span class="fl">1.5</span>,<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="co"># Plot with points coloured according to the threshold</span>
-<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(logfc,pval, <span class="dt">colour =</span> threshold)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(logfc,logpval, <span class="dt">colour =</span> threshold)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span><span class="st"> </span><span class="co"># Alpha sets the transparency of the points</span>
 <span class="st">  </span><span class="co"># Add dotted lines to indicate the threshold, semi-transparent</span>
 <span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="fl">1.5</span>, <span class="dt">linetype =</span> <span class="dv">2</span>, <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span><span class="st"> </span>
@@ -409,30 +393,32 @@ dat_max <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">
 <span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;log2 fold change&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;-log10 p-value&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="co"># Relabel the axes</span>
 <span class="st">  </span><span class="kw">theme_minimal</span>() <span class="op">+</span><span class="st"> </span><span class="co"># Set the theme</span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position=</span><span class="st">&quot;none&quot;</span>) <span class="co"># Hide the legend</span></code></pre></div>
-<p><img src="bspr-workshop-2018_files/figure-html/volcano-plot-2.png" width="672" /></p>
+<p><img src="bspr-workshop-2018_files/figure-html/nice-vplot-1.png" width="672" /></p>
 <p>But which proteins are the significant observations?</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat_vplot <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="co"># Add a threhold for significant observations</span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">threshold =</span> <span class="kw">if_else</span>(logfc <span class="op">&gt;=</span><span class="st"> </span><span class="dv">2</span> <span class="op">&amp;</span><span class="st"> </span>pval <span class="op">&gt;=</span><span class="st"> </span><span class="fl">1.5</span> <span class="op">|</span>
-<span class="st">                               </span>logfc <span class="op">&lt;=</span><span class="st"> </span><span class="op">-</span><span class="dv">2</span> <span class="op">&amp;</span><span class="st"> </span>pval <span class="op">&gt;=</span><span class="st"> </span><span class="fl">1.5</span>,<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>),
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">threshold =</span> <span class="kw">if_else</span>(logfc <span class="op">&gt;=</span><span class="st"> </span><span class="dv">2</span> <span class="op">&amp;</span><span class="st"> </span>logpval <span class="op">&gt;=</span><span class="st"> </span><span class="fl">1.5</span> <span class="op">|</span>
+<span class="st">                               </span>logfc <span class="op">&lt;=</span><span class="st"> </span><span class="op">-</span><span class="dv">2</span> <span class="op">&amp;</span><span class="st"> </span>logpval <span class="op">&gt;=</span><span class="st"> </span><span class="fl">1.5</span>,<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>),
          <span class="dt">prot_id =</span> <span class="kw">str_extract</span>(prots,<span class="st">&quot;.{6}$&quot;</span>)) <span class="op">%&gt;%</span><span class="st">  </span><span class="co"># Get last six characters</span>
 <span class="st">  </span><span class="co"># Filter observations above the threshold</span>
 <span class="st">  </span><span class="kw">filter</span>(threshold <span class="op">==</span><span class="st"> &quot;A&quot;</span>)</code></pre></div>
 <pre><code>## # A tibble: 5 x 5
-##   prots               logfc  pval threshold prot_id
-##   &lt;chr&gt;               &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;  
-## 1 AKA12_HUMAN_Q02952  -2.29  1.52 A         Q02952 
-## 2 GFPT2_HUMAN_O94808  -3.09  2.45 A         O94808 
-## 3 H7BYV1_HUMAN_H7BYV1  2.05  2.46 A         H7BYV1 
-## 4 ITAV_HUMAN_P06756   -2.22  2.62 A         P06756 
-## 5 CHD5_HUMAN_Q8TDI0    5.04  1.60 A         Q8TDI0</code></pre>
+##   prots               logfc logpval threshold prot_id
+##   &lt;chr&gt;               &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;  
+## 1 AKA12_HUMAN_Q02952  -2.29    1.52 A         Q02952 
+## 2 GFPT2_HUMAN_O94808  -3.09    2.45 A         O94808 
+## 3 H7BYV1_HUMAN_H7BYV1  2.05    2.46 A         H7BYV1 
+## 4 ITAV_HUMAN_P06756   -2.22    2.62 A         P06756 
+## 5 CHD5_HUMAN_Q8TDI0    5.04    1.60 A         Q8TDI0</code></pre>
 </div>
 <div id="creating-a-heatmap-plot" class="section level2">
 <h2><span class="header-section-number">4.6</span> Creating a heatmap plot</h2>
 <!-- 1. Clustering the data -->
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat_mut &lt;-<span class="st"> </span>dat_norm <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">pval =</span> dat_vplot<span class="op">$</span>pval, <span class="dt">logfc =</span> dat_vplot<span class="op">$</span>logfc) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">filter</span>(pval <span class="op">&gt;=</span><span class="st"> </span><span class="dv">2</span> <span class="op">&amp;</span><span class="st"> </span>(logfc <span class="op">&gt;=</span><span class="dv">2</span> <span class="op">|</span><span class="st"> </span>logfc <span class="op">&lt;=</span><span class="st"> </span><span class="dv">2</span>)) <span class="op">%&gt;%</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Keep the same p-val cut-off, but relax the logfc to 1 which represents a </span>
+<span class="co"># doubling</span>
+dat_mut &lt;-<span class="st"> </span>dat_norm <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">logpval =</span> dat_vplot<span class="op">$</span>logpval, <span class="dt">logfc =</span> dat_vplot<span class="op">$</span>logfc) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(logpval <span class="op">&gt;=</span><span class="st"> </span><span class="fl">1.5</span> <span class="op">&amp;</span><span class="st"> </span>(logfc <span class="op">&gt;=</span><span class="st"> </span><span class="dv">1</span> <span class="op">|</span><span class="st"> </span>logfc <span class="op">&lt;=</span><span class="st"> </span><span class="op">-</span><span class="dv">1</span>)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">select</span>(<span class="op">-</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">9</span><span class="op">:</span><span class="dv">10</span>))
 
 dat_sel &lt;-<span class="st"> </span><span class="kw">as.matrix.data.frame</span>(dat_mut[,<span class="dv">2</span><span class="op">:</span><span class="dv">7</span>]) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">log2</span>()
@@ -443,17 +429,25 @@ dat.tn &lt;-<span class="st"> </span><span class="kw">scale</span>(<span class="
 <span class="co">#dat.tn &lt;- dat_sel</span>
 
 <span class="co">#gplots::heatmap.2(dat.tn, scale = &#39;row&#39;,trace=&quot;none&quot;)</span>
-<span class="kw">library</span>(pheatmap)
+
 <span class="kw">pheatmap</span>(dat.tn,<span class="dt">cutree_rows =</span> <span class="dv">2</span>,
-         <span class="dt">cutree_cols =</span> <span class="dv">2</span>)</code></pre></div>
+         <span class="dt">cutree_cols =</span> <span class="dv">2</span>,
+         <span class="dt">fontsize_row =</span> <span class="dv">6</span>)</code></pre></div>
 <p><img src="bspr-workshop-2018_files/figure-html/heatmap-2-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cal_z_score &lt;-<span class="st"> </span><span class="cf">function</span>(x){
   (x <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(x)) <span class="op">/</span><span class="st"> </span><span class="kw">sd</span>(x)
 }
 
 data_subset_norm &lt;-<span class="st"> </span><span class="kw">t</span>(<span class="kw">apply</span>(dat_mut[,<span class="dv">2</span><span class="op">:</span><span class="dv">7</span>], <span class="dv">1</span>, cal_z_score))
-<span class="kw">row.names</span>(data_subset_norm) &lt;-<span class="st"> </span>dat_mut<span class="op">$</span>protein_accession
-<span class="kw">pheatmap</span>(data_subset_norm)</code></pre></div>
+
+data_subset_norm <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>magrittr<span class="op">::</span><span class="kw">set_colnames</span>(<span class="kw">c</span>(<span class="st">&quot;Ctl 1&quot;</span>, <span class="st">&quot;Ctl 2&quot;</span>, <span class="st">&quot;Ctl 3&quot;</span>,
+                                    <span class="st">&quot;Trt 1&quot;</span>, <span class="st">&quot;Trt 2&quot;</span>, <span class="st">&quot;Trt 3&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>magrittr<span class="op">::</span><span class="kw">set_rownames</span>(dat_mut<span class="op">$</span>protein_accession) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">pheatmap</span>(.,
+           <span class="dt">fontsize =</span> <span class="dv">6</span>,
+           <span class="dt">cutree_rows =</span> <span class="dv">2</span>,
+           <span class="dt">cutree_cols =</span> <span class="dv">2</span>)</code></pre></div>
 <p><img src="bspr-workshop-2018_files/figure-html/heatmap-2-2.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">d1 &lt;-<span class="st"> </span>dat.tn <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">t</span>() <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">dist</span>(.,<span class="dt">method =</span> <span class="st">&quot;euclidean&quot;</span>, <span class="dt">diag =</span> <span class="ot">FALSE</span>, <span class="dt">upper =</span> <span class="ot">FALSE</span>)
@@ -476,13 +470,17 @@ my_palette &lt;-<span class="st"> </span><span class="kw">colorRampPalette</span
 
 <span class="co"># Plot heatmap with heatmap.2</span>
 <span class="kw">par</span>(<span class="dt">cex.main=</span><span class="fl">0.75</span>) <span class="co"># Shrink title fonts on plot</span>
-gplots<span class="op">::</span><span class="kw">heatmap.2</span>(dat.tn,                     <span class="co"># Tidy, normalised data</span>
+dat.tn <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>magrittr<span class="op">::</span><span class="kw">set_colnames</span>(<span class="kw">c</span>(<span class="st">&quot;Ctl 1&quot;</span>, <span class="st">&quot;Ctl 2&quot;</span>, <span class="st">&quot;Ctl 3&quot;</span>,
+                                    <span class="st">&quot;Trt 1&quot;</span>, <span class="st">&quot;Trt 2&quot;</span>, <span class="st">&quot;Trt 3&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>magrittr<span class="op">::</span><span class="kw">set_rownames</span>(dat_mut<span class="op">$</span>protein_accession) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>gplots<span class="op">::</span><span class="kw">heatmap.2</span>(.,                     <span class="co"># Tidy, normalised data</span>
           <span class="dt">Colv=</span><span class="kw">as.dendrogram</span>(c1),     <span class="co"># Experiments clusters in cols</span>
           <span class="dt">Rowv=</span><span class="kw">as.dendrogram</span>(c2),     <span class="co"># Protein clusters in rows</span>
           <span class="dt">density.info=</span><span class="st">&quot;histogram&quot;</span>,   <span class="co"># Plot histogram of data and colour key</span>
           <span class="dt">trace=</span><span class="st">&quot;none&quot;</span>,               <span class="co"># Turn of trace lines from heat map</span>
           <span class="dt">col =</span> my_palette,           <span class="co"># Use my colour scheme</span>
-          <span class="dt">cexRow=</span><span class="fl">0.5</span>,<span class="dt">cexCol=</span><span class="fl">0.75</span>)     <span class="co"># Amend row and column label fonts</span></code></pre></div>
+          <span class="dt">cexRow=</span><span class="fl">0.3</span>,<span class="dt">cexCol=</span><span class="fl">0.75</span>)     <span class="co"># Amend row and column label fonts</span></code></pre></div>
 <p><img src="bspr-workshop-2018_files/figure-html/heatmap-1-1.png" width="672" /></p>
 
 </div>
