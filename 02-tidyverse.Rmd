@@ -231,7 +231,7 @@ And returning multiple elements uses a colon `:`, like so
 my_sequence[5:8]
 ```
 
-### Atomic vectors
+### Atomic vectors {#atomics]}
 
 We actually made an atomic vector already when we made `my_sequence`. We made a
 a one dimensional group of numbers, in a sequence from two to twenty.

@@ -1,84 +1,4 @@
 
-no changes added to commit (use "git add" and/or "git commit -a")[0K
-[0K[?25h[?25l
-[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K
-$[0K[3G[?25h[?25l$ g[0K[?25hi[0Kt[0K[7G[?25l$ git a[0K[?25hd[0Kd[0K[11G[?25l$ git add .[0K[?25h[?25l
-[0K[?25hwarning: LF will be replaced by CRLF in .Rproj.user/6F98EBE9/sources/prop/234D8CAA.[0K[?25l
-The file will have its original line endings in your working directory.[0K
-warning: LF will be replaced by CRLF in book.bib.[0K
-The file will have its original line endings in your working directory.[0K
-warning: LF will be replaced by CRLF in book.bib.bak.[0K
-The file will have its original line endings in your working directory.[0K
-[0K[?25hwarning: LF will be replaced by CRLF in book.bib.sav.[0K[?25l
-The file will have its original line endings in your working directory.[0K
-[0K[?25h[?25l
-[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K
-$[0K[3G[?25h[?25l$ g[0K[?25hi[0Kt[0K[7G[?25l$ git c[0K[?25ho[0Km[0Km[0Ki[0K[?25lt[0K[12G[?25h[13G[14G[?25l$ git commit -[0K[?25hm[0K[17G[?25l$ git commit -m "[0K[?25hu[0Kp[0Kd[0Ka[0Kt[0Ke[0K[25G[?25l$ git commit -m "update i[0K[?25hm[0Kp[0Ko[0Kr[0Kt[0K[32G[?25l$ git commit -m "update import c[0K[?25hh[0Ka[0K[?25lp[0K[35G[?25h[36G[?25l$ git commit -m "update import chapt[0K[?25he[0Kr[0K"[0K[?25l
-[0K[?25h[master c336185] update import chapter[0K[?25l
- 22 files changed, 525 insertions(+), 117 deletions(-)[0K
- create mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/fold-change-2_a9aede4dbd3c28f7[0Kc
-350473dd5a139e3.RData[0K
- rename _bookdown_files/bspr-workshop-2018_cache/html/{fold-change-2_d98c95f4b43580a9107f7cc420a[0K0
-fbf7.rdb => fold-change-2_a9aede4dbd3c28f7c350473dd5a139e3.rdb} (96%)[0K
- create mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/fold-change-2_a9aede4dbd3c28f7[0Kc
-350473dd5a139e3.rdx[0K
- delete mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/fold-change-2_d98c95f4b43580a9[0K1
-07f7cc420a0fbf7.RData[0K
- delete mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/fold-change-2_d98c95f4b43580a9[0K1
-07f7cc420a0fbf7.rdx[0K
- create mode 100644 book.bib.sav[0K
-[0K[?25h[?25l
-[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K
-$[0K[3G[?25h[?25l$ g[0K[?25hi[0Kt[0K[7G[?25l$ git p[0K[?25hu[0Ks[0Kh[0K[12G[?25l$ git push o[0K[?25hr[0Ki[0Kg[0Ki[0Kn[0K[19G[?25l$ git push origin m[0K[?25ha[0Ks[0K[?25lt[0K[22G[?25h[23G[?25l$ git push origin maste[0K[?25hr[0K[?25l
-[0K[?25hCounting objects: 35, done.[0K[?25l
-Delta compression using up to 16 threads.[0K
-Compressing objects: 100% (30/30), done.[0K
-Writing objects:  68% (24/35)[0K[1G[?25h[?25lWriting objects:  85% (30/35)[0K[1G[?25hWriting objects: 100% (35/35), 117.44 KiB | 0 bytes/s, done.[0K[?25l
-Total 35 (delta 16), reused 0 (delta 0)[0K
-[0K[?25h[?25lremote: Resolving deltas:  68% (11/16)[0K[1G[?25hremote: Resolving deltas: 100% (16/16), completed with 14 local objects.[0K[?25l
-[0K[?25hTo github.com:ab604/bspr-workshop-2018.git[0K[?25l
-   611f718..c336185  master -> master[0K
-[0K[?25h[?25l
-[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K
-$[0K[3G[?25h[0m[0K]0;:/e/bspr-workshop-2018[?25l
-[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K
-[?25l[1A[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0K
-[0m$[0K[3G[?25h[?25l$ g[0K[?25hi[0Kt[0K[7G[?25l$ git s[0K[?25ht[0Ka[0Kt[0Ku[0Ks[0K[?25l
-[0K[?25hOn branch master[0K[?25l
-Changes not staged for commit:[0K
-  (use "git add/rm <file>..." to update what will be committed)[0K
-  (use "git checkout -- <file>..." to discard changes in working directory)[0K
-[0K
-        [0;31mmodified:   .Rproj.user/6F98EBE9/console06/CAEA8888[0m[0K
-        [0;31mmodified:   .Rproj.user/6F98EBE9/console06/INDEX001[0m[0K
-        [0;31mmodified:   .Rproj.user/6F98EBE9/sources/prop/234D8CAA[0m[0K
-        [0;31mmodified:   .Rproj.user/6F98EBE9/sources/prop/613BAD24[0m[0K
-        [0;31mmodified:   .Rproj.user/6F98EBE9/sources/prop/85427934[0m[0K
-        [0;31mmodified:   .Rproj.user/6F98EBE9/sources/prop/INDEX[0m[0K
-        [0;31mmodified:   .Rproj.user/shared/notebooks/8F6288BF-index/1/s/chunks.json[0m[0K
-        [0;31mmodified:   .Rproj.user/shared/notebooks/paths[0m[0K
-        [0;31mmodified:   01-intro.Rmd[0m[0K
-        [0;31mdeleted:    03-importing-and-transforming.Rmd[0m[0K
-        [0;31mdeleted:    04-visualisation.Rmd[0m[0K
-        [0;31mmodified:   05-going-further.Rmd[0m[0K
-        [0;31mmodified:   _book/bspr-workshop-2018.pdf[0m[0K
-        [0;31mmodified:   _book/bspr-workshop-2018.tex[0m[0K
-        [0;31mmodified:   _book/bspr-workshop-2018_files/figure-html/fold-change-1.png[0m[0K
-        [0;31mmodified:   _book/bspr-workshop-2018_files/figure-html/fold-change-2.png[0m[0K
-        [0;31mmodified:   _book/bspr-workshop-2018_files/figure-html/heatmap-1.png[0m[0K
-        [0;31mmodified:   _book/bspr-workshop-2018_files/figure-html/t-test-1.png[0m[0K
-        [0;31mmodified:   _book/bspr-workshop-2018_files/figure-html/t-test-2.png[0m[0K
-        [0;31mmodified:   _book/bspr-workshop-2018_files/figure-html/tidy-data-1.png[0m[0K
-        [0;31mmodified:   _book/bspr-workshop-2018_files/figure-html/tidy-data-2.png[0m[0K
-        [0;31mmodified:   _book/bspr-workshop-2018_files/figure-html/tidy-data-3.png[0m[0K
-        [0;31mmodified:   _book/bspr-workshop-2018_files/figure-html/unnamed-chunk-3-1.png[0m[0K
-        [0;31mmodified:   _book/bspr-workshop-2018_files/figure-html/unnamed-chunk-3-2.png[0m[0K
-        [0;31mmodified:   _book/bspr-workshop-2018_files/figure-html/unnamed-chunk-3-3.png[0m[0K
-        [0;31mmodified:   _book/bspr-workshop-2018_files/figure-html/vol-pot-1.png[0m[0K
-        [0;31mmodified:   _book/bspr-workshop-2018_files/figure-html/vol-pot-2.png[0m[0K
-        [0;31mmodified:   _book/going-further.html[0m[0K
-        [0;31mmodified:   _book/index.html[0m[0K
-        [0;31mmodified:   _book/intro.html[0m[0K
         [0;31mmodified:   _book/references.html[0m[0K
         [0;31mmodified:   _book/search_index.json[0m[0K
         [0;31mmodified:   _book/tidyverse.html[0m[0K
@@ -1041,4 +961,45 @@ Untracked files:[0K
 no changes added to commit (use "git add" and/or "git commit -a")[0K
 [0K[?25h[?25l
 [0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K
-$[0K[3G[?25h[?25l$ g[0K[?25hi[0Kt[0K[7G[?25l$ git a[0K[?25hd[0Kd[0K[11G[?25l$ git add .[0K[?25h
+$[0K[3G[?25h[?25l$ g[0K[?25hi[0Kt[0K[7G[?25l$ git a[0K[?25hd[0Kd[0K[11G[?25l$ git add .[0K[?25h[?25l
+[0K[?25h[?25l
+[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K
+$[0K[3G[?25h[?25l$ g[0K[?25hi[0Kt[0K[7G[?25l$ git c[0K[?25ho[0Km[0Km[0Ki[0Kt[0K[14G[?25l$ git commit -[0K[14G[?25h[15G[?25l$ git commit -m[0K[?25h[17G[?25l$ git commit -m "[0K[?25hu[0Kp[0Kd[0Ka[0Kt[0Ke[0K[25G[?25l$ git commit -m "update b[0K[?25ho[0Ko[0Kk[0K"[0K[?25l
+[0K[?25h[master[0K[9G[?25l[master 55be68d] update book[0K
+ 26 files changed, 167 insertions(+), 145 deletions(-)[0K
+ rewrite .Rproj.user/6F98EBE9/console06/INDEX001 (73%)[0K
+ rewrite _book/bspr-workshop-2018_files/figure-html/heatmap-1-1.png (99%)[0K
+ rewrite _book/bspr-workshop-2018_files/figure-html/heatmap-2-1.png (99%)[0K
+ rewrite _book/bspr-workshop-2018_files/figure-html/heatmap-2-2.png (99%)[0K
+ rewrite _book/bspr-workshop-2018_files/figure-html/heatmap-2-3.png (99%)[0K
+ create mode 100644 _book/bspr-workshop-2018_files/figure-html/nice-vplot-1.png[0K
+ rewrite _book/bspr-workshop-2018_files/figure-html/volcano-plot-1.png (99%)[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/t-test-function_17192fbbd9ea3a8e677d3f0a5c48409f.RData[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/t-test-function_17192fbbd9ea3a8e677d3f0a5c48409f.rdb[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/t-test-function_17192fbbd9ea3a8e677d3f0a5c48409f.rdx[0K
+ delete mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/t-test-function_d4ccc3d6add551292f4ca8700fa826a9.RData[0K
+ delete mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/t-test-function_d4ccc3d6add551292f4ca8700fa826a9.rdb[0K
+ delete mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/t-test-function_d4ccc3d6add551292f4ca8700fa826a9.rdx[0K
+ rewrite _bookdown_files/bspr-workshop-2018_files/figure-html/heatmap-1-1.png (99%)[0K
+ rewrite _bookdown_files/bspr-workshop-2018_files/figure-html/heatmap-2-1.png (99%)[0K
+ rewrite _bookdown_files/bspr-workshop-2018_files/figure-html/heatmap-2-2.png (99%)[0K
+ rewrite _bookdown_files/bspr-workshop-2018_files/figure-html/heatmap-2-3.png (99%)[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_files/figure-html/nice-vplot-1.png[0K
+ rewrite _bookdown_files/bspr-workshop-2018_files/figure-html/volcano-plot-1.png (99%)[0K
+[0K[?25h[?25l
+[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K
+$[0K[3G[?25h[?25l$ g[0K[?25hi[0Kt[0K[7G[?25l$ git p[0K[?25hu[0Ks[0Kh[0K[12G[?25l$ git push o[0K[?25h[?25lr[0K[13G[?25h[14G[?25l$ git push ori[0K[?25hg[0Ki[0Kn[0K[19G[?25l$ git push origin a[0K[?25h[?25l$ git push origin[0K[19G[?25h[?25l$ git push origin m[0K[?25ha[0Ks[0Kte[0Kr[0K[?25l
+[0K[?25hCounting objects: 29, done.[0K[?25l
+Delta compression using up to 16 threads.[0K
+Compressing objects: 100% (28/28), done.[0K
+Writing objects:  24% (7/29)[0K[1G[?25h[?25lWriting objects:  48% (14/29)[0K[1G[?25h[?25lWriting objects:  55% (16/29)[0K[1G[?25hWriting objects: 100% (29/29), 100.29 KiB | 0 bytes/s, done.[0K[?25l
+Total 29 (delta 13), reused 0 (delta 0)[0K
+[0K[?25hremote: Resolving deltas:  61% (8/13)[0K[41G[?25lremote: Resolving deltas:  76% (10/13)[0K[1G[?25hremote: Resolving deltas: 100% (13/13), completed with 12 local objects.[0K[?25l
+[0K[?25hTo github.com:ab604/bspr-workshop-2018.git[0K[?25l
+   e09baa4..55be68d  master -> master[0K
+[0K[?25h[?25l
+[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K
+$[0K[3G[?25h[0m[0K]0;:/e/bspr-workshop-2018[?25l
+[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K
+$[0K[3G[?25h[?25l[1A[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0K
+[?25l$ g[0K[?25hi[0Kt[0K[7G[?25l$ git a[0K[?25hd[0K[?25ld[0K[9G[?25h[10G[11G[?25l$ git add .[0K[?25h

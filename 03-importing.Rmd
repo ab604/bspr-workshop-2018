@@ -15,16 +15,32 @@ So let's understand how to import some data.
 
 ## Some definitions
 
- + Importing means getting data into our R environment by creating an object 
+ + **Importing** means getting data into our R environment by creating an object 
  that we can then manipulate. The raw data file remains unchanged.
- + Inspecting means looking at the dataset to understand what it contains.
- + Tidying refers to getting data into a consistent format that makes it easy to
- use in later steps.
+ + **Inspecting** means looking at the dataset to understand what it contains.
+ + **Tidying** refers to getting data into a consistent format that makes it easy 
+ to use in later steps.
+
+### Rectangular data and flat formats {#file-formats}
+
+Two further things to note:
  
- A note here is that we are focusing on rectangular data, the sort that comes
+ 1.  Here we are only considering **rectangular data**, the sort that comes
  in rows and columns such as in a spreadsheet. Lots of our data types exist,
- such as images, which are beyond the scope of this lesson, but can also be
- handled by R.
+ such as images, but can also be
+ handled by R. As mentioned in \@ref(biocondutor) genomic data in particular has 
+ led to a project called [Bioconductor](http://bioconductor.org/) for the 
+ development of analysis tools primarily in R, many of which deal with 
+ non-rectangular data, but this is beyond the scope here.
+ 
+ 2. **Flat formats** are files that only contain plain text, with each line
+ representing a set of observations and the variables separated by delimiters
+ such as tabs, commas or spaces. Therefore there aren't multiple tables such
+ as we'd get in an Excel file, or meta-data such as the colour highlighting of
+ a cell in an Excel file. The advantages of flat files is that they can be
+ opened and used by many different computing languages or programs. 
+ So unless there is a good reason not to use a flat format, and there are good 
+ reasons, they are the best way to store data in many situations.
  
 ## Using scripts
 
@@ -103,12 +119,13 @@ Here is a typical head for a script:
 # Alistair Bailey
 
 # Load packages ----------------------------------------------------------------
+library(plyr)
 library(tidyverse)
 library(gplots)
 library(pheatmap)
 ```
 
-### Bioconductor
+### Bioconductor {#biocondutor}
 
 As an aside there are many proteomics specific R packages, these are generally
 found through [Bioconductor](https://www.bioconductor.org/) which is a project
@@ -120,13 +137,12 @@ manipulation and analysis of raw data formats such as mzxml files.
 
 ## Importing data
 
-Assuming our data is in a flat format, we can import it into our environment
-using the tidyverse `readr` package. A flat format is a file that contains only
-text  such as `csv` or tab separated data without meta-data (extra information), 
-such as the colour of cells in an excel file. 
+Assuming our data is in a [flat format](#file-formats), we can import it into our 
+environment using the tidyverse `readr` package. 
 
-If we our data was an excel file, we can use the tidyverse `readxl` package to 
-import the data.
+If our data was an excel file, we can use the tidyverse `readxl` package to 
+import the data, but it will remove any meta-data and each table in the excel
+file will become a separate R object as per tidy data principles.
 
 For the purposes of this workshop we have a `csv` (comma separated variable) file.
 
@@ -165,8 +181,26 @@ dat <- readr::read_csv("data/070718-proteomics-example-data.csv")
 
 ## Exploring the data
 
+### `glimpse`, `head` and `str`
+
 The first thing to do with any data set is to actually look at it. Here are
-three ways to have look in the `Console`: 
+four ways to have look at the data in the `Console`: calling the object directly, 
+`glimpse`, `head` and `str`.
+
+1. We can just call the object and return it to the `Console`, which may or may
+not be useful depending on the size and type of object we call.
+
+2 .`glimpse` is a tidyverse function that tries to show us as much data in
+a data.frame or tibble as possible, telling us the [atomic types](#atomics) of 
+data in the table, the number of observations and the number of variables, and 
+importantly shows all the column variable names by transposing the table.
+
+3. `head` is a base function that shows us the 6 lines of a R object by default.
+
+4. `str` is a base function that show the structure of a R object, so it provides
+a lot of information, but is not so easy to read.
+
+The outputs for these four functions is shown below:
 
 ```{r examine-data}
 # call object
@@ -188,4 +222,16 @@ clicking on `dat`.
 
 Although this provides us with some useful information, such as the number of
 observations and variables, to understand more plotting the data will be
-helpful as we'll see in Section [#normalisation].
+helpful as we'll see in Section \@ref(normalisation).
+
+### Summary statisitics
+
+Another useful way to quickly get a sense of the data is to use the `summary`
+function, which will return summary of the spread of the data and importantly
+if there are missing values. We can see immediately below that the experimental
+replicates have different distributions, and missing values that we need to 
+deal with in Chapter \@ref(transform).
+
+```{r summary-stats}
+summary(dat)
+```
