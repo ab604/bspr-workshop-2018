@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="going-further.html">
-
+<link rel="prev" href="import.html">
+<link rel="next" href="transform.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -189,31 +189,139 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="references" class="section level1 unnumbered">
-<h1>References</h1>
+<div id="dplyr" class="section level1">
+<h1><span class="header-section-number">Chapter 4</span> <code>dplyr</code> verbs and piping</h1>
+<p>A core package in the tidyverse is <code>dplyr</code> for transforming data, which is often used in conjunction with the <code>magrittr</code> package that allows us to pipe multiple operations together.</p>
+<p>The R4DS dplyr chapter is <a href="http://r4ds.had.co.nz/transform.html">here</a> and for magrittr <a href="http://r4ds.had.co.nz/pipes.html">here</a>.</p>
+<p>The figures in this chapter we made for use with an ecological dataset on rodent surveys, but the principles they illustrate are generic and show the use of each function with or without the use of a pipe.</p>
+<p>From R4DS:</p>
+<p>“<em>All <code>dplyr</code> verbs work similarly:</em></p>
+<p><em>1. The first argument is a data frame.</em></p>
+<p><em>2. The subsequent arguments describe what to do with the data frame, using the variable names (without quotes).</em></p>
+<p><em>3. The result is a new data frame.</em></p>
+<p><em>Together these properties make it easy to chain together multiple simple steps to achieve a complex result.</em>&quot;</p>
+<div id="pipes" class="section level2">
+<h2><span class="header-section-number">4.1</span> Pipes</h2>
+<p>A pipe in R looks like this <code>%&gt;%</code> and allows us to send the output of one operation into another. This saves time and space, and can make our code easier to read.</p>
+<p>For example we can pipe the output of calling the <code>dat</code> object into the <code>glimpse</code> function like so:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">glimpse</span>()</code></pre></div>
+<pre><code>## Observations: 7,702
+## Variables: 8
+## $ protein_accession   &lt;chr&gt; &quot;VATA_HUMAN_P38606&quot;, &quot;RL35A_HUMAN_P18077&quot;,...
+## $ protein_description &lt;chr&gt; &quot;V-type proton ATPase catalytic subunit A ...
+## $ control_1           &lt;dbl&gt; 0.8114, 0.3672, 2.9815, 0.1424, 1.0748, 0....
+## $ control_2           &lt;dbl&gt; 0.8575, 0.3853, 4.6176, 0.2238, 0.9451, 0....
+## $ control_3           &lt;dbl&gt; 1.0381, 0.4091, 2.8709, 0.1281, 0.8032, 0....
+## $ treatment_1         &lt;dbl&gt; 0.6448, 0.4109, 7.1670, 0.1643, 0.7884, 0....
+## $ treatment_2         &lt;dbl&gt; 0.7190, 0.4634, 2.0052, 0.2466, 0.8798, 1....
+## $ treatment_3         &lt;dbl&gt; 0.4805, 0.3561, 0.8995, 0.1268, 0.7631, 0....</code></pre>
+<p>This becomes even more useful when we combine pipes with <code>dplyr</code> functions.</p>
+</div>
+<div id="filter" class="section level2">
+<h2><span class="header-section-number">4.2</span> Filter rows</h2>
+<p>The <code>filter</code> function enables us to filter the rows of a data frame according to a logical test (one that is <code>TRUE</code> or <code>FALSE</code>). Here it filters rows in the surveys data where the year variable is greater or equal to 1985.</p>
+<p><img src="img/dplyr_filter.png" width="80%" style="display: block; margin: auto;" /></p>
+<p>Let’s try this with <code>dat</code> to filter the rows for proteins in <code>control_1</code> and <code>control_2</code> experiments where the observations are greater than 20:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(control_<span class="dv">1</span> <span class="op">&gt;</span><span class="st"> </span><span class="dv">20</span>, control_<span class="dv">2</span> <span class="op">&gt;</span><span class="st"> </span><span class="dv">20</span>)</code></pre></div>
+<pre><code>## # A tibble: 2 x 8
+##   protein_accession   protein_description    control_1 control_2 control_3
+##   &lt;chr&gt;               &lt;chr&gt;                      &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+## 1 MYH9_HUMAN_P35579   Myosin-9 OS=Homo sapi~      29.2      31.7      24.6
+## 2 A0A087WWY3_HUMAN_A~ Filamin-A OS=Homo sap~      31.9      27.8      31.3
+## # ... with 3 more variables: treatment_1 &lt;dbl&gt;, treatment_2 &lt;dbl&gt;,
+## #   treatment_3 &lt;dbl&gt;</code></pre>
+<p>Filtering is done with the following operators <code>&gt;</code>,<code>&lt;</code>,<code>&gt;=</code>,<code>&lt;=</code>,<code>!=</code> (not equal) and <code>==</code> for equal. Not the double equal sign.</p>
+</div>
+<div id="arrange-rows" class="section level2">
+<h2><span class="header-section-number">4.3</span> Arrange rows</h2>
+<p>Arranging is similar to filter except that it changes the row order according to the columns in ascending order. If you provide more than one column name, each additional column will be used to break ties in the values of preceding columns.</p>
+<p>Here we arrange the surveys data according to the record identification number.</p>
+<p><img src="img/dplyr_arrange.png" width="80%" style="display: block; margin: auto;" /></p>
+<p>To try that with <code>dat</code> let’s arrange the data according to <code>control_1</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">arrange</span>(control_<span class="dv">1</span>)</code></pre></div>
+<pre><code>## # A tibble: 7,702 x 8
+##    protein_accession protein_description     control_1 control_2 control_3
+##    &lt;chr&gt;             &lt;chr&gt;                       &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+##  1 PAL4G_HUMAN_P0DN~ Peptidyl-prolyl cis-tr~   0.001      0.0177    NA    
+##  2 E5RGV5_HUMAN_E5R~ Nucleolysin TIA-1 isof~   0.0011    NA          0.093
+##  3 E5RJP4_HUMAN_E5R~ Glutamine--fructose-6-~   0.002     NA         NA    
+##  4 I3L3U1_HUMAN_I3L~ Myosin light chain 4 O~   0.00240   NA         NA    
+##  5 ENPLL_HUMAN_Q58F~ Putative endoplasmin-l~   0.0026    NA         NA    
+##  6 K1C15_HUMAN_P190~ Keratin_ type I cytosk~   0.00290    0.0615     0.122
+##  7 B5ME44_HUMAN_B5M~ Outer dense fiber prot~   0.00290   NA         NA    
+##  8 PANK3_HUMAN_Q9H9~ Pantothenate kinase 3 ~   0.0033    NA         NA    
+##  9 RRS1_HUMAN_Q15050 Ribosome biogenesis re~   0.0035    NA         NA    
+## 10 NFL_HUMAN_P07196  Neurofilament light po~   0.0035     0.315      0.564
+## # ... with 7,692 more rows, and 3 more variables: treatment_1 &lt;dbl&gt;,
+## #   treatment_2 &lt;dbl&gt;, treatment_3 &lt;dbl&gt;</code></pre>
+</div>
+<div id="select-columns" class="section level2">
+<h2><span class="header-section-number">4.4</span> Select columns</h2>
+<p>Selecting is the verb we use to select columns of interest in the data. Here we select only the <code>year</code> and <code>plot_type</code> columns and discard the rest.</p>
+<p><img src="img/dplyr_select.png" width="80%" style="display: block; margin: auto;" /></p>
+<p>Let’s use select with <code>dat</code> to drop the protein description and control experiments using negative indexing and keep everything else:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="op">-</span>protein_description,<span class="op">-</span>(control_<span class="dv">1</span><span class="op">:</span>control_<span class="dv">3</span>))</code></pre></div>
+<pre><code>## # A tibble: 7,702 x 4
+##    protein_accession  treatment_1 treatment_2 treatment_3
+##    &lt;chr&gt;                    &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;
+##  1 VATA_HUMAN_P38606        0.645       0.719       0.480
+##  2 RL35A_HUMAN_P18077       0.411       0.463       0.356
+##  3 MYH10_HUMAN_P35580       7.17        2.01        0.900
+##  4 RHOG_HUMAN_P84095        0.164       0.247       0.127
+##  5 PSA1_HUMAN_P25786        0.788       0.880       0.763
+##  6 PRDX5_HUMAN_P30044       0.545       1.69        0.821
+##  7 ACLY_HUMAN_P53396        4.67        5.01        3.57 
+##  8 VDAC2_HUMAN_P45880       1.01        1.04        0.904
+##  9 LRC47_HUMAN_Q8N1G4       1.22        1.01        0.593
+## 10 CH60_HUMAN_P10809        8.31        8.31        5.73 
+## # ... with 7,692 more rows</code></pre>
+</div>
+<div id="mutate" class="section level2">
+<h2><span class="header-section-number">4.5</span> Create new variables</h2>
+<p>Creating new variables uses the <code>mutate</code> verb. Here I am creating a new variable called <code>rodent_type</code> that will create a new column containing the type of rodent observed in each row.</p>
+<p><img src="img/dplyr_mutate.png" width="80%" style="display: block; margin: auto;" /></p>
+<p>Let’s create a new variable for <code>dat</code> called <code>prot_id</code> that use the <code>str_extract</code> function from the <code>stringr</code> package to take the last 6 characters of the <code>protein_accession</code> variable, the <code>&quot;.{6}$&quot;</code> part is called a regular expression, to keep just the UNIPROT id part of the string.</p>
+<p>We’ll use select to drop the other variables except the protein accession afterwards via another pipe.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(protein_accession) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">prot_id =</span> <span class="kw">str_extract</span>(protein_accession,<span class="st">&quot;.{6}$&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(protein_accession, prot_id)</code></pre></div>
+<pre><code>## # A tibble: 7,702 x 2
+## # Groups:   protein_accession [7,702]
+##    protein_accession  prot_id
+##    &lt;chr&gt;              &lt;chr&gt;  
+##  1 VATA_HUMAN_P38606  P38606 
+##  2 RL35A_HUMAN_P18077 P18077 
+##  3 MYH10_HUMAN_P35580 P35580 
+##  4 RHOG_HUMAN_P84095  P84095 
+##  5 PSA1_HUMAN_P25786  P25786 
+##  6 PRDX5_HUMAN_P30044 P30044 
+##  7 ACLY_HUMAN_P53396  P53396 
+##  8 VDAC2_HUMAN_P45880 P45880 
+##  9 LRC47_HUMAN_Q8N1G4 Q8N1G4 
+## 10 CH60_HUMAN_P10809  P10809 
+## # ... with 7,692 more rows</code></pre>
+</div>
+<div id="create-grouped-summaries" class="section level2">
+<h2><span class="header-section-number">4.6</span> Create grouped summaries</h2>
+<p>The last key verb is <code>summarise</code> which collapses a data frame into a single row.</p>
+<p>For example, we could use it to find the average weight of all the animals surveyed in the surveys data using <code>mean()</code>. (Here the <code>na.rm = TRUE</code> argument is given to remove missing values from the data, otherwise R would return <code>NA</code> when trying to average.)</p>
+<p><img src="img/dplyr_summarise.png" width="80%" style="display: block; margin: auto;" /></p>
+<p><code>summarise</code> is most useful when paired with <code>group_by</code> which defines the variables upon which we operate upon.</p>
+<p>Here if we group by <code>species_id</code> and <code>rodent_type</code> together and then used <code>summarise</code> without any arguments we return these two variables only.</p>
+<p><img src="img/dplyr_group_by.png" width="80%" style="display: block; margin: auto;" /></p>
+<p>We’ll use the <code>mtcars</code> dataset again to illustrate a grouped summary. Here I’ll group according gearbox type <code>am</code> where 0 is automatic and 1 is manual. Then using summarise to calculate the mean miles per gallon, the tables is collapsed to two rows, one for each gearbox type.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># mtcars, am is gearbox, 0 = automatic, 1 = manual </span>
+mtcars <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(am) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean_mpg =</span> <span class="kw">mean</span>(mpg, <span class="dt">na.rm =</span> T))</code></pre></div>
+<pre><code>## # A tibble: 2 x 2
+##      am mean_mpg
+##   &lt;dbl&gt;    &lt;dbl&gt;
+## 1     0     17.1
+## 2     1     24.4</code></pre>
+<p>We’ll use <code>dplyr</code> and pipes in Chapter <a href="transform.html#transform">5</a>.</p>
 
-<div id="refs" class="references">
-<div>
-<p>Bolstad, B M, R A Irizarry, M Astrand, and T P Speed. 2003. “A Comparison of Normalization Methods for High Density Oligonucleotide Array Data Based on Variance and Bias.” <em>Bioinformatics (Oxford, England)</em> 19 (2): 185–93.</p>
-</div>
-<div>
-<p>Gentleman, Robert C, Vincent J Carey, Douglas M Bates, Ben Bolstad, Marcel Dettling, Sandrine Dudoit, Byron Ellis, et al. 2004. “Bioconductor: Open Software Development for Computational Biology and Bioinformatics.” <em>Genome Biology</em> 5 (10): R80. doi:<a href="https://doi.org/10.1186/gb-2004-5-10-r80">10.1186/gb-2004-5-10-r80</a>.</p>
-</div>
-<div>
-<p>Huber, Wolfgang, Vincent J Carey, Robert Gentleman, Simon Anders, Marc Carlson, Benilton S Carvalho, Hector Corrada Bravo, et al. 2015. “Orchestrating High-Throughput Genomic Analysis with Bioconductor.” <em>Nature Methods</em> 12 (2): 115–21. doi:<a href="https://doi.org/10.1038/nmeth.3252">10.1038/nmeth.3252</a>.</p>
-</div>
-<div>
-<p>Ihaka, Ross, and Robert Gentleman. 1996. “R: A Language for Data Analysis and Graphics.” <em>Journal of Computational and Graphical Statistics</em> 5 (3). Taylor &amp; Francis: 299–314.</p>
-</div>
-<div>
-<p>R Core Team. 2018. <em>R: A Language and Environment for Statistical Computing</em>. Vienna, Austria: R Foundation for Statistical Computing. <a href="https://www.R-project.org/" class="uri">https://www.R-project.org/</a>.</p>
-</div>
-<div>
-<p>RStudio Team. 2018. <em>RStudio: Integrated Development Environment for R</em>. Boston, MA: RStudio, Inc. <a href="http://www.rstudio.com/" class="uri">http://www.rstudio.com/</a>.</p>
-</div>
-<div>
-<p>Wickham, Hadley. 2017. <em>Tidyverse: Easily Install and Load the ’Tidyverse’</em>. <a href="https://CRAN.R-project.org/package=tidyverse" class="uri">https://CRAN.R-project.org/package=tidyverse</a>.</p>
-</div>
 </div>
 </div>
             </section>
@@ -221,8 +329,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           </div>
         </div>
       </div>
-<a href="going-further.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="import.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="transform.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

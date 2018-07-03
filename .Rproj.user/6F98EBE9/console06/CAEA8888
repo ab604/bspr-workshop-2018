@@ -1002,4 +1002,233 @@ Total 29 (delta 13), reused 0 (delta 0)[0K
 $[0K[3G[?25h[0m[0K]0;:/e/bspr-workshop-2018[?25l
 [0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K
 $[0K[3G[?25h[?25l[1A[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0K
-[?25l$ g[0K[?25hi[0Kt[0K[7G[?25l$ git a[0K[?25hd[0K[?25ld[0K[9G[?25h[10G[11G[?25l$ git add .[0K[?25h
+[?25l$ g[0K[?25hi[0Kt[0K[7G[?25l$ git a[0K[?25hd[0K[?25ld[0K[9G[?25h[10G[11G[?25l$ git add .[0K[?25h[?25l
+[0K[?25h[?25l
+[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K[1G[?25h[?25l
+$[0K[3G[?25h[?25l$ g[0K[?25hi[0Kt[0K[7G[?25l$ git c[0K[?25ho[0Km[0Km[0K[?25li[0K[11G[?25h[12G[?25l$ git commit[0K[?25h[14G[?25l$ git commit -[0K[?25hm[0K[17G[?25l$ git commit -m "[0K[?25hu[0Kp[0Kd[0Ka[0Kt[0Ke[0K[25G[?25l$ git commit -m "update t[0K[?25hr[0Ka[0Kn[0Ks[0Kf[0Ko[0K[?25lr[0K[32G[?25h[33G[?25l$ git commit -m "update transform[0K[?25ha[0Kt[0Ki[0Ko[0Kn[0K3[0K[?25l$ git commit -m "update transformation[0K[?25hs[0K"[0K[?25l
+[0K[?25h[master[0K[9G[?25l[master b437b2c] update transformations[0K
+ 64 files changed, 914 insertions(+), 2201 deletions(-)[0K
+ rewrite .Rproj.user/6F98EBE9/console06/INDEX001 (73%)[0K
+ rewrite _book/bspr-workshop-2018.pdf (98%)[0K
+ rewrite _book/bspr-workshop-2018.tex (87%)[0K
+ rewrite _book/bspr-workshop-2018_files/figure-html/compare-normalisation-1.png (99%)[0K
+ rewrite _book/bspr-workshop-2018_files/figure-html/data-dist-1.png (99%)[0K
+ rewrite _book/bspr-workshop-2018_files/figure-html/heatmap-1-1.png (92%)[0K
+ rewrite _book/bspr-workshop-2018_files/figure-html/heatmap-2-1.png (94%)[0K
+ rewrite _book/bspr-workshop-2018_files/figure-html/heatmap-2-2.png (62%)[0K
+ rewrite _book/bspr-workshop-2018_files/figure-html/log-fc-1.png (99%)[0K
+ rewrite _book/bspr-workshop-2018_files/figure-html/log-fc-2.png (99%)[0K
+ rewrite _book/bspr-workshop-2018_files/figure-html/nice-vplot-1.png (85%)[0K
+ create mode 100644 _book/bspr-workshop-2018_files/figure-html/p-val-plot-1.png[0K
+ rewrite _book/bspr-workshop-2018_files/figure-html/volcano-plot-1.png (93%)[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/data-dist_002446d8c06601fb847b[0K4
+57840a13bb8.RData[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/data-dist_002446d8c06601fb847b[0K4
+57840a13bb8.rdb[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/data-dist_002446d8c06601fb847b[0K4
+57840a13bb8.rdx[0K
+ delete mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/data-dist_0e017a7cfcf24bd7c8fe[0K0
+8b29a69258c.RData[0K
+ delete mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/data-dist_0e017a7cfcf24bd7c8fe[0K0
+8b29a69258c.rdb[0K
+ delete mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/data-dist_0e017a7cfcf24bd7c8fe[0K0
+8b29a69258c.rdx[0K
+ delete mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/quant-normalisation_c389af5e6d[0Ke
+f59da108615b0dc1e9e39.RData[0K
+ delete mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/quant-normalisation_c389af5e6d[0Ke
+f59da108615b0dc1e9e39.rdb[0K
+ delete mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/quant-normalisation_c389af5e6d[0Ke
+f59da108615b0dc1e9e39.rdx[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/quant-normalisation_d57a32139c[0K5
+939eebf93979cb8d464d3.RData[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/quant-normalisation_d57a32139c[0K5
+939eebf93979cb8d464d3.rdb[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/quant-normalisation_d57a32139c[0K5
+939eebf93979cb8d464d3.rdx[0K
+ delete mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/t-test-function_17192fbbd9ea3a[0K8
+e677d3f0a5c48409f.RData[0K
+ delete mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/t-test-function_17192fbbd9ea3a[0K8
+e677d3f0a5c48409f.rdb[0K
+ delete mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/t-test-function_17192fbbd9ea3a[0K8
+e677d3f0a5c48409f.rdx[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/t-test-function_daf909aec15dfa[0K1
+933beac3fbb756783.RData[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/t-test-function_daf909aec15dfa[0K1
+933beac3fbb756783.rdb[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/t-test-function_daf909aec15dfa[0K1
+933beac3fbb756783.rdx[0K
+ rewrite _bookdown_files/bspr-workshop-2018_files/figure-html/compare-normalisation-1.png (99%)[0K
+ rewrite _bookdown_files/bspr-workshop-2018_files/figure-html/data-dist-1.png (99%)[0K
+ rewrite _bookdown_files/bspr-workshop-2018_files/figure-html/heatmap-1-1.png (92%)[0K
+ rewrite _bookdown_files/bspr-workshop-2018_files/figure-html/heatmap-2-1.png (94%)[0K
+ rewrite _bookdown_files/bspr-workshop-2018_files/figure-html/heatmap-2-2.png (62%)[0K
+ rewrite _bookdown_files/bspr-workshop-2018_files/figure-html/log-fc-1.png (99%)[0K
+ rewrite _bookdown_files/bspr-workshop-2018_files/figure-html/log-fc-2.png (99%)[0K
+ rewrite _bookdown_files/bspr-workshop-2018_files/figure-html/nice-vplot-1.png (85%)[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_files/figure-html/p-val plot-1.png[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_files/figure-html/p-val-plot-1.png[0K
+ rewrite _bookdown_files/bspr-workshop-2018_files/figure-html/volcano-plot-1.png (93%)[0K
+[0K[?25h[?25l
+[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K
+$[0K[3G[?25h[?25l$ g[0K[?25hi[0Kt[0K[7G[?25l$ git p[0K[?25hu[0Ks[0Kh[0K[12G[?25l$ git push o[0K[?25hr[0Kio[0Kg[0K[?25l$ git push orio[0K[?25h[?25l$ git push ori[0K[?25hg[0Ki[0Kn[0K[19G[?25l$ git push origin m[0K[?25ha[0Ks[0Kt[0Ke[0Kr[0K[?25l
+[0K[?25hCounting objects: 52, done.[0K[?25l
+Delta compression using up to 16 threads.[0K
+Compressing objects: 100% (51/51), done.[0K
+Writing objects:  17% (9/52)[0K[1G[?25h[?25lWriting objects:  36% (19/52)[0K[1G[?25h[?25lWriting objects: 100% (52/52), 544.47 KiB | 0 bytes/s, done.[0K[1G[?25h[?25l
+Total 52 (delta 26), reused 0 (delta 0)[0K
+[0K[?25h[?25lremote: Resolving deltas:  34% (9/26)[0K[1G[?25hremote: Resolving deltas: 100% (26/26), completed with 24 local objects.[0K[?25l
+[0K[?25hTo github.com:ab604/bspr-workshop-2018.git[0K[?25l
+   55be68d..b437b2c  master -> master[0K
+[0K[?25h[?25l
+[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K
+$[0K[3G[?25h[?25l[24A rewrite _bookdown_files/bspr-workshop-2018_files/figure-html/compare-normalisat[0Ki
+on-1.png (99%)[0K
+ rewrite _bookdown_files/bspr-workshop-2018_files/figure-html/data-dist-1.png (9[0K9
+%)[0K
+ rewrite _bookdown_files/bspr-workshop-2018_files/figure-html/heatmap-1-1.png (9[0K2
+%)[0K
+ rewrite _bookdown_files/bspr-workshop-2018_files/figure-html/heatmap-2-1.png (9[0K4
+%)[0K
+ rewrite _bookdown_files/bspr-workshop-2018_files/figure-html/heatmap-2-2.png (6[0K2
+%)[0K
+ rewrite _bookdown_files/bspr-workshop-2018_files/figure-html/log-fc-1.png (99%)[0K
+ rewrite _bookdown_files/bspr-workshop-2018_files/figure-html/log-fc-2.png (99%)[0K
+ rewrite _bookdown_files/bspr-workshop-2018_files/figure-html/nice-vplot-1.png ([0K8
+5%)[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_files/figure-html/p-val p[0Kl
+ot-1.png[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_files/figure-html/p-val-p[0Kl
+ot-1.png[0K
+ rewrite _bookdown_files/bspr-workshop-2018_files/figure-html/volcano-plot-1.png[0K
+(93%)[0K
+[0K
+[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0K
+[0m$ git push origin master[0K
+Counting objects: 52, done.[0K
+Delta compression using up to 16 threads.[0K
+Compressing objects: 100% (51/51), done.[0K
+Writing objects: 100% (52/52), 544.47 KiB | 0 bytes/s, done.[0K
+Total 52 (delta 26), reused 0 (delta 0)[0K
+remote: Resolving deltas: 100% (26/26), completed with 24 local objects.[0K
+To github.com:ab604/bspr-workshop-2018.git[0K
+   55be68d..b437b2c  master -> master[0K
+[0K
+[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0K
+[0m$[0K[3G[?25h[?25l[24A%)[0K
+ rewrite _bookdown_files/bspr-workshop-2018_files/figure-html/log-fc-1.png (99%)[0K
+ rewrite _bookdown_files/bspr-workshop-2018_files/figure-html/log-fc-2.png (99%)[0K
+ rewrite _bookdown_files/bspr-workshop-2018_files/figure-html/nice-vplot-1.png (85%)[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_files/figure-html/p-val plot-1[0K.
+png[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_files/figure-html/p-val-plot-1[0K.
+png[0K
+ rewrite _bookdown_files/bspr-workshop-2018_files/figure-html/volcano-plot-1.png (93%[0K)
+[0K
+[0K
+[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0K
+[0m$ git push origin master[0K
+Counting objects: 52, done.[0K
+Delta compression using up to 16 threads.[0K
+Compressing objects: 100% (51/51), done.[0K
+Writing objects: 100% (52/52), 544.47 KiB | 0 bytes/s, done.[0K
+Total 52 (delta 26), reused 0 (delta 0)[0K
+remote: Resolving deltas: 100% (26/26), completed with 24 local objects.[0K
+To github.com:ab604/bspr-workshop-2018.git[0K
+   55be68d..b437b2c  master -> master[0K
+[0K
+[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0K
+[0m$[0K
+[0K[1A[3G[?25h[?25l[23A%)[0K
+ rewrite _bookdown_files/bspr-workshop-2018_files/figure-html/log-fc-1.png (99%)[0K
+ rewrite _bookdown_files/bspr-workshop-2018_files/figure-html/log-fc-2.png (99%)[0K
+ rewrite _bookdown_files/bspr-workshop-2018_files/figure-html/nice-vplot-1.png (85%)[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_files/figure-html/p-val plot-1.[0Kp
+ng[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_files/figure-html/p-val-plot-1.[0Kp
+ng[0K
+ rewrite _bookdown_files/bspr-workshop-2018_files/figure-html/volcano-plot-1.png (93%)[0K
+[0K
+[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0K
+[0m$ git push origin master[0K
+Counting objects: 52, done.[0K
+Delta compression using up to 16 threads.[0K
+Compressing objects: 100% (51/51), done.[0K
+Writing objects: 100% (52/52), 544.47 KiB | 0 bytes/s, done.[0K
+Total 52 (delta 26), reused 0 (delta 0)[0K
+remote: Resolving deltas: 100% (26/26), completed with 24 local objects.[0K
+To github.com:ab604/bspr-workshop-2018.git[0K
+   55be68d..b437b2c  master -> master[0K
+[0K
+[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0K
+[0m$[0K
+[0K
+[0K[2A[3G[?25h[?25l$ r[0K
+[0K
+[0K[2A[4G[?25h[?25l$[0K
+[0K
+[0K[2A[3G[?25h[?25l$ t[0K
+[0K
+[0K[2A[4G[?25h[?25l$ to[0K
+[0K
+[0K[2A[5G[?25h[?25l$ tou[0K
+[0K
+[0K[2A[6G[?25h[?25l$ touc[0K
+[0K
+[0K[2A[6G[?25h[7G[?25l$ touch[0K
+[0K
+[0K[2A[8G[?25h[9G[?25l$ touch d[0K
+[0K
+[0K[2A[10G[?25h[?25l$ touch dp[0K
+[0K
+[0K[2A[11G[?25h[?25l$ touch dpy[0K
+[0K
+[0K[2A[12G[?25h[?25l$ touch dp[0K
+[0K
+[0K[2A[12G[?25h[11G[?25l$ touch dpl[0K
+[0K
+[0K[2A[12G[?25h[?25l$ touch dply[0K
+[0K
+[0K[2A[13G[?25h[?25l$ touch dplyr[0K
+[0K
+[0K[2A[14G[?25h[?25l$ touch dplyr.[0K
+[0K
+[0K[2A[15G[?25h[?25l$ touch dplyr.R[0K
+[0K
+[0K[2A[16G[?25h[?25l$ touch dplyr.Rm[0K
+[0K
+[0K[2A[17G[?25h[?25l$ touch dplyr.Rmd[0K
+[0K
+[0K[2A[18G[?25h[?25l
+[?25h[?25l
+[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K
+$[0K[3G[?25h[?25l$ l[0K[?25hs[0K[?25l
+[0K[?25h01-intro.Rmd                README.md        book.bib.bak              packages.bib[0K[?25l
+02-tidyverse.Rmd            _book            bspr-workshop-2018.Rproj  preamble.tex[0K
+03-importing.Rmd            _bookdown.yml    data                      style.css[0K
+04-data-transformation.Rmd  _bookdown_files  dplyr.Rmd                 texput.log[0K
+05-going-further.Rmd        _output.yml      img[0K
+06-references.Rmd           book.bib         index.Rmd[0K
+[0K[?25h[?25l
+[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K
+$[0K[3G[?25h[?25l$ m[0K[?25hv[0K[6G[?25l$ mv 0[0K[?25h6[0K-references.Rmd[0K[24G[25G[24G[?25l$ mv 06-references.Rmd 0[0K[?25h6[0K-references.Rmd[0K[42G[41G[40G[39G[38G[37G[36G[35G[33G[32G[31G[30G[29G[28G[27G[26G[?25l$ mv 06-references.Rmd 0-references.Rmd[0K[26G[?25h[25G[?25l$ mv 06-references.Rmd 07-references.Rmd[0K[26G[?25h[?25l
+[0K[?25h[?25l
+[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K
+$[0K[3G[?25h[?25l$ m[0K[?25hv[0K[6G[?25l$ mv 0[0K[?25h5[0K-going-further.Rmd[0K[27G[?25l$ mv 05-going-further.Rmd 0[0K[?25h5[0K-going-further.Rmd[0K[48G[47G[46G[45G[44G[43G[42G[41G[40G[39G[38G[37G[36G[35G[34G[33G[32G[31G[30G[29G[?25l$ mv 05-going-further.Rmd 0-going-further.Rmd[0K[28G[?25h[?25l$ mv 05-going-further.Rmd 06-going-further.Rmd[0K[29G[?25h[?25l
+[0K[?25h[?25l
+[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K
+$[0K[3G[?25h[?25l$ m[0K[?25hv[0K[6G[?25l$ mv 0[0K[?25h4[0K-data-transformation.Rmd[0K[33G[?25l$ mv 04-data-transformation.Rmd 0[0K[?25h4[0K-data-transformation.Rmd[0K[60G[59G[58G[57G[56G[55G[54G[53G[52G[51G[50G[49G[48G[47G[46G[45G[44G[43G[42G[41G[40G[39G[38G[37G[36G[35G[?25l$ mv 04-data-transformation.Rmd 0-data-transformation.Rmd[0K[34G[?25h[?25l$ mv 04-data-transformation.Rmd 05-data-transformation.Rmd[0K[35G[?25h[?25l
+[0K[?25h[?25l
+[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K
+$[0K[3G[?25h[?25l$ m[0K[?25hv[0K[6G[?25l$ mv 0[0K[?25h4[0K[?25l$ mv 0[0K[?25h3[0K-importing.Rmd[0K[23G[?25l$ mv 03-importing.Rmd 0[0K[?25h3[0K-importing.Rmd[0K[40G[39G[38G[37G[36G[35G[33G[32G[31G[30G[29G[28G[27G[26G[25G[?25l$ mv 03-importing.Rmd 0-importing.Rmd[0K[24G[?25h[?25l$ mv 03-importing.Rmd 04-importing.Rmd[0K[25G[?25h[?25l
+[0K[?25h[?25l
+[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K
+$[0K[3G[?25h[?25l$ mv 03-importing.Rmd 04-importing.Rmd[0K[40G[?25h[39G[?25l$ mv 03-importing.Rmd 04-importing.Rm[0K[?25h[?25l$ mv 03-importing.Rmd 04-importing.R[0K[?25h[?25l$ mv 03-importing.Rmd 04-importing.[0K[?25h[?25l$ mv 03-importing.Rmd 04-importing[0K[?25h[?25l$ mv 03-importing.Rmd 04-importin[0K[?25h[?25l$ mv 03-importing.Rmd 04-importi[0K[?25h[?25l$ mv 03-importing.Rmd 04-import[0K[?25h[?25l$ mv 03-importing.Rmd 04-impor[0K[?25h[?25l$ mv 03-importing.Rmd 04-impo[0K[?25h[?25l$ mv 03-importing.Rmd 04-imp[0K[?25h[?25l$ mv 03-importing.Rmd 04-im[0K[?25h[?25l$ mv 03-importing.Rmd 04-i[0K[?25h[?25l$ mv 03-importing.Rmd 04-[0K[?25h[?25l$ mv 03-importing.Rmd 04[0K[?25h[?25l$ mv 03-importing.Rmd 0[0K[25G[?25h[?25l$ mv 03-importing.Rmd[0K[24G[?25h[23G[?25l$ mv 03-importing.Rm[0K[?25h[?25l$ mv 03-importing.R[0K[?25h[?25l$ mv 03-importing.[0K[?25h[?25l$ mv 03-importing[0K[?25h[?25l$ mv 03-importin[0K[?25h[?25l$ mv 03-importi[0K[?25h[?25l$ mv 03-import[0K[?25h[?25l$ mv 03-impor[0K[?25h[?25l$ mv 03-impo[0K[?25h[?25l$ mv 03-imp[0K[?25h[?25l$ mv 03-im[0K[?25h[?25l$ mv 03-i[0K[?25h[?25l$ mv 03-[0K[?25h[?25l$ mv 03[0K[?25h[?25l$ mv 0[0K[?25h[?25l$ mv[0K[6G[?25h[?25l$ mv d[0K[?25hp[0Klyr.Rmd[0K[16G[?25l$ mv dplyr.Rmd d[0K[?25hp[0Klyr.Rmd[0K[24G[23G[22G[21G[20G[19G[18G[17G[16G[?25l$ mv dplyr.Rmd 0dplyr.Rmd[0K[17G[?25h[?25l$ mv dplyr.Rmd 03dplyr.Rmd[0K[18G[?25h[?25l$ mv dplyr.Rmd 03-dplyr.Rmd[0K[19G[?25h[?25l
+[0K[?25h[?25l
+[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K
+$[0K[3G[?25h[?25l$ mv dplyr.Rmd 03-dplyr.Rmd[0K[29G[?25h[?25l$[0K[3G[?25h[?25l$ mv dplyr.Rmd 03-dplyr.Rmd[0K[29G[?25h[28G[27G[26G[25G[24G[23G[22G[21G[20G[19G[18G[17G[16G[15G[?25l$ mv dplyr.Rm 03-dplyr.Rmd[0K[15G[?25h[14G[?25l$ mv dplyr.R 03-dplyr.Rmd[0K[14G[?25h[?25l$ mv dplyr. 03-dplyr.Rmd[0K[13G[?25h[?25l$ mv dplyr 03-dplyr.Rmd[0K[12G[?25h[11G[?25l$ mv dply 03-dplyr.Rmd[0K[10G[?25h[?25l$ mv dpl 03-dplyr.Rmd[0K[9G[?25h[?25l$ mv dp 03-dplyr.Rmd[0K[8G[?25h[?25l$ mv d 03-dplyr.Rmd[0K[7G[?25h[?25l$ mv  03-dplyr.Rmd[0K[6G[?25h[7G[8G[9G[10G[11G[12G[13G[14G[15G[16G[17G[18G[19G[20G[?25l$ mv  03-dplyr.Rmd 0[0K[?25h3[0K-dplyr.Rmd[0K[31G[30G[29G[28G[27G[26G[25G[24G[23G[22G[?25l$ mv  03-dplyr.Rmd 0-dplyr.Rmd[0K[21G[?25h[?25l$ mv  03-dplyr.Rmd 04-dplyr.Rmd[0K[22G[?25h[?25l
+[0K[?25h[?25l
+[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K
+$[0K[3G[?25h[?25l$ mv  03-dplyr.Rmd 04-dplyr.Rmd[0K[33G[?25h[32G[?25l$ mv  03-dplyr.Rmd 04-dplyr.Rm[0K[?25h[?25l$ mv  03-dplyr.Rmd 04-dplyr.R[0K[?25h[?25l$ mv  03-dplyr.Rmd 04-dplyr.[0K[30G[?25h[?25l$ mv  03-dplyr.Rmd 04-dplyr[0K[?25h[?25l$ mv  03-dplyr.Rmd 04-dply[0K[?25h[?25l$ mv  03-dplyr.Rmd 04-dpl[0K[?25h[?25l$ mv  03-dplyr.Rmd 04-dp[0K[?25h[?25l$ mv  03-dplyr.Rmd 04-d[0K[?25h[?25l$ mv  03-dplyr.Rmd 04-[0K[?25h[?25l$ mv  03-dplyr.Rmd 04[0K[?25h[?25l$ mv  03-dplyr.Rmd 0[0K[?25h[?25l$ mv  03-dplyr.Rmd[0K[20G[?25h[19G[?25l$ mv  03-dplyr.Rm[0K[?25h[?25l$ mv  03-dplyr.R[0K[?25h[?25l$ mv  03-dplyr.[0K[?25h[?25l$ mv  03-dplyr[0K[?25h[?25l$ mv  03-dply[0K[?25h[?25l$ mv  03-dpl[0K[?25h[?25l$ mv  03-dp[0K[?25h[?25l$ mv  03-d[0K[?25h[?25l$ mv  03-[0K[11G[?25h[?25l$ mv  03[0K[10G[?25h[9G[?25l$ mv  0[0K[9G[?25h[8G[?25l$ mv  04[0K[?25h-[0Ki[0Kmporting.Rmd[0K[24G[?25l$ mv  04-importing.Rmd 0[0K[?25h4[0K-[0Ki[0Kmporting.Rmd[0K[41G[40G[39G[38G[37G[36G[35G[34G[33G[32G[31G[30G[29G[28G[27G[26G[25G[26G[?25l$ mv  04-importing.Rmd 0-importing.Rmd[0K[26G[?25h[25G[?25l$ mv  04-importing.Rmd 03-importing.Rmd[0K[26G[?25h[?25l
+[0K[?25h[?25l
+[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K
+$[0K[3G[?25h[?25l$ g[0K[?25hi[0Kt[0K[7G[?25l$ git a[0K[?25hd[0Kd[0K[11G[?25l$ git add .[0K[?25h

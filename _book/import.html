@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="tidyverse.html">
-<link rel="next" href="transform.html">
+<link rel="next" href="dplyr.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -122,7 +122,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.3" data-path="tidyverse.html"><a href="tidyverse.html#workflow-basics"><i class="fa fa-check"></i><b>2.3</b> Workflow basics</a><ul>
 <li class="chapter" data-level="2.3.1" data-path="tidyverse.html"><a href="tidyverse.html#assigning-objects"><i class="fa fa-check"></i><b>2.3.1</b> Assigning objects</a></li>
 <li class="chapter" data-level="2.3.2" data-path="tidyverse.html"><a href="tidyverse.html#function-anatomy"><i class="fa fa-check"></i><b>2.3.2</b> Function anatomy</a></li>
-<li class="chapter" data-level="2.3.3" data-path="tidyverse.html"><a href="tidyverse.html#atomic-vectors-atomics"><i class="fa fa-check"></i><b>2.3.3</b> Atomic vectors {#atomics]}</a></li>
+<li class="chapter" data-level="2.3.3" data-path="tidyverse.html"><a href="tidyverse.html#atomics"><i class="fa fa-check"></i><b>2.3.3</b> Atomic vectors</a></li>
 <li class="chapter" data-level="2.3.4" data-path="tidyverse.html"><a href="tidyverse.html#attributes"><i class="fa fa-check"></i><b>2.3.4</b> Attributes</a></li>
 <li class="chapter" data-level="2.3.5" data-path="tidyverse.html"><a href="tidyverse.html#factors"><i class="fa fa-check"></i><b>2.3.5</b> Factors</a></li>
 <li class="chapter" data-level="2.3.6" data-path="tidyverse.html"><a href="tidyverse.html#lists"><i class="fa fa-check"></i><b>2.3.6</b> Lists</a></li>
@@ -147,20 +147,29 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="3.7.2" data-path="import.html"><a href="import.html#summary-statisitics"><i class="fa fa-check"></i><b>3.7.2</b> Summary statisitics</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="transform.html"><a href="transform.html"><i class="fa fa-check"></i><b>4</b> Transformation and visualisation</a><ul>
-<li class="chapter" data-level="4.1" data-path="transform.html"><a href="transform.html#fold-change-and-log-fold-change"><i class="fa fa-check"></i><b>4.1</b> Fold change and log-fold change</a></li>
-<li class="chapter" data-level="4.2" data-path="transform.html"><a href="transform.html#missing-values"><i class="fa fa-check"></i><b>4.2</b> Dealing with missing values</a></li>
-<li class="chapter" data-level="4.3" data-path="transform.html"><a href="transform.html#normalisation"><i class="fa fa-check"></i><b>4.3</b> Data normalization</a><ul>
-<li class="chapter" data-level="4.3.1" data-path="transform.html"><a href="transform.html#t-test"><i class="fa fa-check"></i><b>4.3.1</b> T-test</a></li>
+<li class="chapter" data-level="4" data-path="dplyr.html"><a href="dplyr.html"><i class="fa fa-check"></i><b>4</b> <code>dplyr</code> verbs and piping</a><ul>
+<li class="chapter" data-level="4.1" data-path="dplyr.html"><a href="dplyr.html#pipes"><i class="fa fa-check"></i><b>4.1</b> Pipes</a></li>
+<li class="chapter" data-level="4.2" data-path="dplyr.html"><a href="dplyr.html#filter"><i class="fa fa-check"></i><b>4.2</b> Filter rows</a></li>
+<li class="chapter" data-level="4.3" data-path="dplyr.html"><a href="dplyr.html#arrange-rows"><i class="fa fa-check"></i><b>4.3</b> Arrange rows</a></li>
+<li class="chapter" data-level="4.4" data-path="dplyr.html"><a href="dplyr.html#select-columns"><i class="fa fa-check"></i><b>4.4</b> Select columns</a></li>
+<li class="chapter" data-level="4.5" data-path="dplyr.html"><a href="dplyr.html#mutate"><i class="fa fa-check"></i><b>4.5</b> Create new variables</a></li>
+<li class="chapter" data-level="4.6" data-path="dplyr.html"><a href="dplyr.html#create-grouped-summaries"><i class="fa fa-check"></i><b>4.6</b> Create grouped summaries</a></li>
 </ul></li>
-<li class="chapter" data-level="4.4" data-path="transform.html"><a href="transform.html#visualising-data"><i class="fa fa-check"></i><b>4.4</b> Visualising data</a></li>
-<li class="chapter" data-level="4.5" data-path="transform.html"><a href="transform.html#creating-a-volcano-plot"><i class="fa fa-check"></i><b>4.5</b> Creating a volcano plot</a></li>
-<li class="chapter" data-level="4.6" data-path="transform.html"><a href="transform.html#creating-a-heatmap-plot"><i class="fa fa-check"></i><b>4.6</b> Creating a heatmap plot</a></li>
+<li class="chapter" data-level="5" data-path="transform.html"><a href="transform.html"><i class="fa fa-check"></i><b>5</b> Transforming and visualising proteomics data</a><ul>
+<li class="chapter" data-level="5.1" data-path="transform.html"><a href="transform.html#fold-change-and-log-fold-change"><i class="fa fa-check"></i><b>5.1</b> Fold change and log-fold change</a></li>
+<li class="chapter" data-level="5.2" data-path="transform.html"><a href="transform.html#missing-values"><i class="fa fa-check"></i><b>5.2</b> Dealing with missing values</a></li>
+<li class="chapter" data-level="5.3" data-path="transform.html"><a href="transform.html#normalisation"><i class="fa fa-check"></i><b>5.3</b> Data normalization</a></li>
+<li class="chapter" data-level="5.4" data-path="transform.html"><a href="transform.html#hypothesis-testing-with-the-t-test"><i class="fa fa-check"></i><b>5.4</b> Hypothesis testing with the t-test</a></li>
+<li class="chapter" data-level="5.5" data-path="transform.html"><a href="transform.html#calculating-fold-change"><i class="fa fa-check"></i><b>5.5</b> Calculating fold change</a></li>
+<li class="chapter" data-level="5.6" data-path="transform.html"><a href="transform.html#visualising-the-transformed-data"><i class="fa fa-check"></i><b>5.6</b> Visualising the transformed data</a><ul>
+<li class="chapter" data-level="5.6.1" data-path="transform.html"><a href="transform.html#volcano-plot"><i class="fa fa-check"></i><b>5.6.1</b> Volcano plot</a></li>
+<li class="chapter" data-level="5.6.2" data-path="transform.html"><a href="transform.html#but-which-proteins-are-the-significant-observations"><i class="fa fa-check"></i><b>5.6.2</b> But which proteins are the significant observations?</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="going-further.html"><a href="going-further.html"><i class="fa fa-check"></i><b>5</b> Going further</a><ul>
-<li class="chapter" data-level="5.1" data-path="going-further.html"><a href="going-further.html#learning-dplyr-verbs"><i class="fa fa-check"></i><b>5.1</b> Learning <code>dplyr</code> verbs</a></li>
-<li class="chapter" data-level="5.2" data-path="going-further.html"><a href="going-further.html#getting-help-and-joining-the-r-community"><i class="fa fa-check"></i><b>5.2</b> Getting help and joining the R community</a></li>
-<li class="chapter" data-level="5.3" data-path="going-further.html"><a href="going-further.html#communication-creating-reports-presentations-and-websites"><i class="fa fa-check"></i><b>5.3</b> Communication: creating reports, presentations and websites</a></li>
+<li class="chapter" data-level="5.7" data-path="transform.html"><a href="transform.html#creating-a-heatmap"><i class="fa fa-check"></i><b>5.7</b> Creating a heatmap</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="going-further.html"><a href="going-further.html"><i class="fa fa-check"></i><b>6</b> Going further</a><ul>
+<li class="chapter" data-level="6.1" data-path="going-further.html"><a href="going-further.html#getting-help-and-joining-the-r-community"><i class="fa fa-check"></i><b>6.1</b> Getting help and joining the R community</a></li>
+<li class="chapter" data-level="6.2" data-path="going-further.html"><a href="going-further.html#communication-creating-reports-presentations-and-websites"><i class="fa fa-check"></i><b>6.2</b> Communication: creating reports, presentations and websites</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 </ul>
@@ -293,7 +302,7 @@ dat &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw
 <ol style="list-style-type: decimal">
 <li>We can just call the object and return it to the <code>Console</code>, which may or may not be useful depending on the size and type of object we call.</li>
 </ol>
-<p>2 .<code>glimpse</code> is a tidyverse function that tries to show us as much data in a data.frame or tibble as possible, telling us the <a href="#atomics">atomic types</a> of data in the table, the number of observations and the number of variables, and importantly shows all the column variable names by transposing the table.</p>
+<p>2 .<code>glimpse</code> is a tidyverse function that tries to show us as much data in a data.frame or tibble as possible, telling us the <a href="tidyverse.html#atomics">atomic types</a> of data in the table, the number of observations and the number of variables, and importantly shows all the column variable names by transposing the table.</p>
 <ol start="3" style="list-style-type: decimal">
 <li><p><code>head</code> is a base function that shows us the 6 lines of a R object by default.</p></li>
 <li><p><code>str</code> is a base function that show the structure of a R object, so it provides a lot of information, but is not so easy to read.</p></li>
@@ -374,11 +383,11 @@ dat</code></pre></div>
 ##   .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_guess&quot; &quot;collector&quot;
 ##   ..- attr(*, &quot;class&quot;)= chr &quot;col_spec&quot;</code></pre>
 <p>To see the data in a <em>spreadsheet</em> fashion use <code>View(dat)</code>, note the capital V and a new tab will open. This can also be launched from the <code>Environment</code> tab by clicking on <code>dat</code>.</p>
-<p>Although this provides us with some useful information, such as the number of observations and variables, to understand more plotting the data will be helpful as we’ll see in Section <a href="transform.html#normalisation">4.3</a>.</p>
+<p>Although this provides us with some useful information, such as the number of observations and variables, to understand more plotting the data will be helpful as we’ll see in Section <a href="transform.html#normalisation">5.3</a>.</p>
 </div>
 <div id="summary-statisitics" class="section level3">
 <h3><span class="header-section-number">3.7.2</span> Summary statisitics</h3>
-<p>Another useful way to quickly get a sense of the data is to use the <code>summary</code> function, which will return summary of the spread of the data and importantly if there are missing values. We can see immediately below that the experimental replicates have different distributions, and missing values that we need to deal with in Chapter <a href="transform.html#transform">4</a>.</p>
+<p>Another useful way to quickly get a sense of the data is to use the <code>summary</code> function, which will return summary of the spread of the data and importantly if there are missing values. We can see immediately below that the experimental replicates have different distributions, and missing values that we need to deal with in Chapter <a href="transform.html#transform">5</a>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(dat)</code></pre></div>
 <pre><code>##  protein_accession  protein_description   control_1        control_2     
 ##  Length:7702        Length:7702         Min.   : 0.001   Min.   : 0.000  
@@ -415,7 +424,7 @@ dat</code></pre></div>
         </div>
       </div>
 <a href="tidyverse.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="transform.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="dplyr.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -456,6 +465,19 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>
