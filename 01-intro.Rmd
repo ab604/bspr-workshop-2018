@@ -1,14 +1,16 @@
 # Introduction {#intro}
 
-There are many resources for learning R on the web. Much of Chapters \@ref(intro) 
-\@ref(tidyverse) and \@ref(import) derive from 
+There are many resources for learning R on the web. Much of Chapters \@ref(intro), 
+\@ref(tidyverse), \@ref(import) and \@ref(dplyr) derive from 
 a [Data Carpentry lesson](http://www.datacarpentry.org/lessons/) using 
 ecological data that I have previously [reworked](https://southampton-rsg.github.io/2017-08-01-southampton-dc/novice/R-ecology-lesson/index.html), 
-which in turn takes a lot from [Hadley Wickham's R for Data Science](http://r4ds.had.co.nz/). 
+which in turn takes a lot from [Hadley Wickham's R for Data Science](http://r4ds.had.co.nz/) aka **R4DS**. 
 Follow the links to access those materials.
 
 Chapter \@ref(transform) deals with some statistical transformations and 
-visualisation methods in the context of proteomics data. Whilst finally in 
+visualisation methods in the context of proteomics data. 
+
+Whilst finally in 
 Chapter \@ref(going-further) there is some advice about how to build upon the 
 materials covered here.
 

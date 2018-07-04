@@ -173,10 +173,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="going-further.html"><a href="going-further.html"><i class="fa fa-check"></i><b>6</b> Going further</a><ul>
-<li class="chapter" data-level="6.1" data-path="going-further.html"><a href="going-further.html#exporting-data-and-figures"><i class="fa fa-check"></i><b>6.1</b> Exporting data and figures</a></li>
-<li class="chapter" data-level="6.2" data-path="going-further.html"><a href="going-further.html#joining-the-r-community"><i class="fa fa-check"></i><b>6.2</b> Joining the R community</a></li>
-<li class="chapter" data-level="6.3" data-path="going-further.html"><a href="going-further.html#communication-creating-reports-presentations-and-websites"><i class="fa fa-check"></i><b>6.3</b> Communication: creating reports, presentations and websites</a></li>
-<li class="chapter" data-level="6.4" data-path="going-further.html"><a href="going-further.html#machine-learning"><i class="fa fa-check"></i><b>6.4</b> Machine Learning</a></li>
+<li class="chapter" data-level="6.1" data-path="going-further.html"><a href="going-further.html#exporting-figures"><i class="fa fa-check"></i><b>6.1</b> Exporting figures</a></li>
+<li class="chapter" data-level="6.2" data-path="going-further.html"><a href="going-further.html#exporting-data"><i class="fa fa-check"></i><b>6.2</b> Exporting data</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="going-further.html"><a href="going-further.html#writing-to-a-file"><i class="fa fa-check"></i><b>6.2.1</b> Writing to a file</a></li>
+<li class="chapter" data-level="6.2.2" data-path="going-further.html"><a href="going-further.html#for-r"><i class="fa fa-check"></i><b>6.2.2</b> For R</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="going-further.html"><a href="going-further.html#joining-the-r-community"><i class="fa fa-check"></i><b>6.3</b> Joining the R community</a></li>
+<li class="chapter" data-level="6.4" data-path="going-further.html"><a href="going-further.html#communication-creating-reports-presentations-and-websites"><i class="fa fa-check"></i><b>6.4</b> Communication: creating reports, presentations and websites</a></li>
+<li class="chapter" data-level="6.5" data-path="going-further.html"><a href="going-further.html#machine-learning"><i class="fa fa-check"></i><b>6.5</b> Machine Learning</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 </ul>
@@ -199,8 +203,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="going-further" class="section level1">
 <h1><span class="header-section-number">Chapter 6</span> Going further</h1>
 <p>Here are a few links and suggestions about what else you might like to do with R.</p>
-<div id="exporting-data-and-figures" class="section level2">
-<h2><span class="header-section-number">6.1</span> Exporting data and figures</h2>
+<div id="exporting-figures" class="section level2">
+<h2><span class="header-section-number">6.1</span> Exporting figures</h2>
 <p>Exporting figures is best done using the following structure:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Open up a blank plot file, pdf,jpeg etc.</span>
 <span class="op">&lt;</span><span class="kw">plot_function</span>(<span class="st">&quot;file&quot;</span>,...)<span class="op">&gt;</span>
@@ -234,20 +238,38 @@ dat_tf <span class="op">%&gt;%</span>
 <span class="kw">dev.off</span>()</code></pre></div>
 <p>If I had saved the plot to an object called <code>vplot</code> I would call that object instead of making the plot using <code>dat_tf</code> as shown here.</p>
 <p><a href="https://www.stat.berkeley.edu/classes/s133/saving.html">Here</a> is a general guide to the various formats you can export to.</p>
+<p>Alternatively, if you are working in <code>ggplot</code> you can use the <code>ggsave</code> function as described in <a href="http://r4ds.had.co.nz/graphics-for-communication.html#saving-your-plots">R4DS 28.7</a>.</p>
+</div>
+<div id="exporting-data" class="section level2">
+<h2><span class="header-section-number">6.2</span> Exporting data</h2>
+<p>There is a <a href="https://cran.r-project.org/doc/manuals/r-release/R-data.html">full manual for the import and export of data</a> in R. However here are few pointers:</p>
+<div id="writing-to-a-file" class="section level3">
+<h3><span class="header-section-number">6.2.1</span> Writing to a file</h3>
+<p>One of the most portables way to share data is by writing to a csv file. These files can be opened in many programs. The tidyverse package contains two functions for csv files, <code>write_csv</code> and for Excel <code>write_excel_csv</code>. The latter form adds a bit of metadata that tells Excel about the file encoding. See <a href="http://r4ds.had.co.nz/data-import.html#writing-to-a-file">R4DS writing to a file</a></p>
+<p>For example to write a csv file of <code>dat_tf</code> to a file called <code>04072018_transformed_data.csv</code> to our working directory for sharing with a colleague using excel, the code is of the form <code>&lt;function&gt;(&lt;r-object&gt;,&quot;filename&quot;)</code> like so:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">write_excel_csv</span>(dat_tf,<span class="st">&quot;04072018_transformed_data.csv&quot;</span>)</code></pre></div>
+<p>Note that the file name is a string and is in quotes.</p>
+</div>
+<div id="for-r" class="section level3">
+<h3><span class="header-section-number">6.2.2</span> For R</h3>
+<p>If you are exporting data to use yourself in R, the custom <code>.rds</code> format is a good choice and preserves the R structure.</p>
+<p>In the tidyverse <code>write_rds</code> follows the same structure as <code>write_csv</code>.</p>
+<p>You can read back in using <code>read_rds</code>.</p>
+</div>
 </div>
 <div id="joining-the-r-community" class="section level2">
-<h2><span class="header-section-number">6.2</span> Joining the R community</h2>
+<h2><span class="header-section-number">6.3</span> Joining the R community</h2>
 <p>It’s worth joining the <a href="https://community.rstudio.com/">RStudio Community</a> and following community members on Twitter such as <a href="https://twitter.com/JennyBryan">Jenny Bryan</a>, <a href="https://twitter.com/hadleywickham">Hadley Wickham</a>, <a href="https://twitter.com/xieyihui">Yihui Xie</a>, <a href="https://twitter.com/dataandme">Mara Averick</a>, <a href="https://twitter.com/drob">David Robinson</a> and <a href="https://twitter.com/juliasilge">Julia Silge</a>.</p>
 <p>If you can afford <a href="https://www.datacamp.com">DataCamp</a> then this is my preferred learning platform.</p>
 <p>And if you can’t, then <a href="https://swirlstats.com/">swirl</a> is free.</p>
 </div>
 <div id="communication-creating-reports-presentations-and-websites" class="section level2">
-<h2><span class="header-section-number">6.3</span> Communication: creating reports, presentations and websites</h2>
-<p><a href="https://rmarkdown.rstudio.com/lesson-1.html">R Markdown</a> enables us to do <a href="https://en.wikipedia.org/wiki/Literate_programming">literate programming</a>, saving time as we can create analysis, reports, dashboards or web apps at the same time as writing code. R Markdown can use multiple programming languages.</p>
+<h2><span class="header-section-number">6.4</span> Communication: creating reports, presentations and websites</h2>
+<p><a href="https://rmarkdown.rstudio.com/lesson-1.html">R Markdown</a> enables us to do <a href="https://en.wikipedia.org/wiki/Literate_programming">literate programming</a>, saving time as we can create analysis, reports, dashboards or web apps at the same time as writing code. R Markdown can use multiple programming languages. See also <a href="http://r4ds.had.co.nz/r-markdown.html">R4DS R Markdown</a> and <a href="http://r4ds.had.co.nz/r-markdown-formats.html">R4DS R Markdown formats</a>.</p>
 <p>You can use <a href="https://bookdown.org/yihui/blogdown/">blogdown</a> to build websites. I created s guide to <a href="http://ab604.github.io/docs/website_bookdown/">buidling an academic website with blogdown</a>.</p>
 </div>
 <div id="machine-learning" class="section level2">
-<h2><span class="header-section-number">6.4</span> Machine Learning</h2>
+<h2><span class="header-section-number">6.5</span> Machine Learning</h2>
 <p>If you are interested in machine learning, then <a href="https://tensorflow.rstudio.com/">TensorFlow</a> is a good place to start, for example Leon Eyrich Jessen’s <a href="https://tensorflow.rstudio.com/blog/dl-for-cancer-immunotherapy.html">Deep Learning for Cancer Immunotherapy</a> tutorial.</p>
 
 </div>

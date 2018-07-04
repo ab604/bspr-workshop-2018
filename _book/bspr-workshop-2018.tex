@@ -225,18 +225,19 @@ press \texttt{Enter} to install these three packages.
 \chapter{Introduction}\label{intro}
 
 There are many resources for learning R on the web. Much of Chapters
-\ref{intro} \ref{tidyverse} and \ref{import} derive from a
+\ref{intro}, \ref{tidyverse}, \ref{import} and \ref{dplyr} derive from a
 \href{http://www.datacarpentry.org/lessons/}{Data Carpentry lesson}
 using ecological data that I have previously
 \href{https://southampton-rsg.github.io/2017-08-01-southampton-dc/novice/R-ecology-lesson/index.html}{reworked},
 which in turn takes a lot from \href{http://r4ds.had.co.nz/}{Hadley
-Wickham's R for Data Science}. Follow the links to access those
-materials.
+Wickham's R for Data Science} aka \textbf{R4DS}. Follow the links to
+access those materials.
 
 Chapter \ref{transform} deals with some statistical transformations and
-visualisation methods in the context of proteomics data. Whilst finally
-in Chapter \ref{going-further} there is some advice about how to build
-upon the materials covered here.
+visualisation methods in the context of proteomics data.
+
+Whilst finally in Chapter \ref{going-further} there is some advice about
+how to build upon the materials covered here.
 
 In terms of philosophy:
 
@@ -2715,7 +2716,7 @@ highlight clusters.}\label{fig:pheatmap}
 Here are a few links and suggestions about what else you might like to
 do with R.
 
-\section{Exporting data and figures}\label{exporting-data-and-figures}
+\section{Exporting figures}\label{exporting-figures}
 
 Exporting figures is best done using the following structure:
 
@@ -2768,6 +2769,52 @@ here.
 \href{https://www.stat.berkeley.edu/classes/s133/saving.html}{Here} is a
 general guide to the various formats you can export to.
 
+Alternatively, if you are working in \texttt{ggplot} you can use the
+\texttt{ggsave} function as described in
+\href{http://r4ds.had.co.nz/graphics-for-communication.html\#saving-your-plots}{R4DS
+28.7}.
+
+\section{Exporting data}\label{exporting-data}
+
+There is a
+\href{https://cran.r-project.org/doc/manuals/r-release/R-data.html}{full
+manual for the import and export of data} in R. However here are few
+pointers:
+
+\subsection{Writing to a file}\label{writing-to-a-file}
+
+One of the most portables way to share data is by writing to a csv file.
+These files can be opened in many programs. The tidyverse package
+contains two functions for csv files, \texttt{write\_csv} and for Excel
+\texttt{write\_excel\_csv}. The latter form adds a bit of metadata that
+tells Excel about the file encoding. See
+\href{http://r4ds.had.co.nz/data-import.html\#writing-to-a-file}{R4DS
+writing to a file}
+
+For example to write a csv file of \texttt{dat\_tf} to a file called
+\texttt{04072018\_transformed\_data.csv} to our working directory for
+sharing with a colleague using excel, the code is of the form
+\texttt{\textless{}function\textgreater{}(\textless{}r-object\textgreater{},"filename")}
+like so:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{write_excel_csv}\NormalTok{(dat_tf,}\StringTok{"04072018_transformed_data.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Note that the file name is a string and is in quotes.
+
+\subsection{For R}\label{for-r}
+
+If you are exporting data to use yourself in R, the custom \texttt{.rds}
+format is a good choice and preserves the R structure.
+
+In the tidyverse \texttt{write\_rds} follows the same structure as
+\texttt{write\_csv}.
+
+You can read back in using \texttt{read\_rds}.
+
 \section{Joining the R community}\label{joining-the-r-community}
 
 It's worth joining the \href{https://community.rstudio.com/}{RStudio
@@ -2792,7 +2839,10 @@ us to do
 \href{https://en.wikipedia.org/wiki/Literate_programming}{literate
 programming}, saving time as we can create analysis, reports, dashboards
 or web apps at the same time as writing code. R Markdown can use
-multiple programming languages.
+multiple programming languages. See also
+\href{http://r4ds.had.co.nz/r-markdown.html}{R4DS R Markdown} and
+\href{http://r4ds.had.co.nz/r-markdown-formats.html}{R4DS R Markdown
+formats}.
 
 You can use \href{https://bookdown.org/yihui/blogdown/}{blogdown} to
 build websites. I created s guide to

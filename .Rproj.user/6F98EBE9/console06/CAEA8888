@@ -1322,4 +1322,148 @@ Total 53 (delta 23), reused 0 (delta 0)[0K
    b437b2c..b87da6e  master -> master[0K
 [0K[?25h[?25l
 [0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K
-$[0K[3G[?25h[?25l$ git push origin master[0K[3G[?25h[25G[?25l$ git commit -m "update transformation and create dplyr chapter"[0K[?25h[?25l$ git add .[0K[?25h
+$[0K[3G[?25h[?25l$ git push origin master[0K[3G[?25h[25G[?25l$ git commit -m "update transformation and create dplyr chapter"[0K[?25h[?25l$ git add .[0K[?25hwarning: LF will be replaced by CRLF in .Rproj.user/6F98EBE9/build_options.[0K[?25l
+The file will have its original line endings in your working directory.[0K
+[0K[?25h[?25l
+[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K
+$[0K[3G[?25h[?25l$ git add .[0K[?25h[?25l$ git push origin master[0K[?25h[?25l$ git commit -m "update transformation and create dplyr chapter"[0K[25G[?25h[65G[64G[?25l$ git commit -m "update transformation and create dplyr chapte"[0K[63G[?25h[?25l$ git commit -m "update transformation and create dplyr chapt"[0K[?25h[62G[?25l$ git commit -m "update transformation and create dplyr chap"[0K[61G[?25h[?25l$ git commit -m "update transformation and create dplyr cha"[0K[60G[?25h[?25l$ git commit -m "update transformation and create dplyr ch"[0K[59G[?25h[?25l$ git commit -m "update transformation and create dplyr c"[0K[58G[?25h[?25l$ git commit -m "update transformation and create dplyr "[0K[57G[?25h[?25l$ git commit -m "update transformation and create dplyr"[0K[56G[?25h[?25l$ git commit -m "update transformation and create dply"[0K[55G[?25h[?25l$ git commit -m "update transformation and create dpl"[0K[54G[?25h[?25l$ git commit -m "update transformation and create dp"[0K[53G[?25h[?25l$ git commit -m "update transformation and create d"[0K[52G[?25h[?25l$ git commit -m "update transformation and create "[0K[51G[?25h[?25l$ git commit -m "update transformation and create"[0K[50G[?25h[?25l$ git commit -m "update transformation and creat"[0K[49G[?25h[?25l$ git commit -m "update transformation and crea"[0K[48G[?25h[?25l$ git commit -m "update transformation and cre"[0K[?25h[?25l$ git commit -m "update transformation and cr"[0K[?25h[?25l$ git commit -m "update transformation and c"[0K[45G[?25h[?25l$ git commit -m "update transformation and "[0K[44G[?25h[?25l$ git commit -m "update transformation and"[0K[43G[?25h[?25l$ git commit -m "update transformation an"[0K[42G[?25h[?25l$ git commit -m "update transformation a"[0K[41G[?25h[?25l$ git commit -m "update transformation "[0K[40G[?25h[?25l$ git commit -m "update transformation"[0K[39G[?25h[?25l$ git commit -m "update transformatio"[0K[38G[?25h[?25l$ git commit -m "update transformati"[0K[37G[?25h[?25l$ git commit -m "update transformat"[0K[36G[?25h[?25l$ git commit -m "update transforma"[0K[35G[?25h[?25l$ git commit -m "update transform"[0K[34G[?25h[?25l$ git commit -m "update transfor"[0K[33G[?25h[?25l$ git commit -m "update transfo"[0K[?25h[?25l$ git commit -m "update transf"[0K[31G[?25h[?25l$ git commit -m "update tran"[0K[29G[?25h[?25l$ git commit -m "update tra"[0K[28G[?25h[?25l$ git commit -m "update tr"[0K[27G[?25h[?25l$ git commit -m "update t"[0K[?25h[26G[?25l$ git commit -m "update "[0K[25G[?25h[?25l$ git commit -m "update"[0K[24G[?25h[?25l$ git commit -m "updat"[0K[23G[?25h[?25l$ git commit -m "upda"[0K[22G[?25h[?25l$ git commit -m "upd"[0K[21G[?25h[?25l$ git commit -m "up"[0K[20G[?25h[?25l$ git commit -m "u"[0K[19G[?25h[?25l$ git commit -m ""[0K[?25h[18G[?25l$ git commit -m "f"[0K[19G[?25h[?25l$ git commit -m "fi"[0K[20G[?25h[?25l$ git commit -m "fin"[0K[21G[?25h[?25l$ git commit -m "fina"[0K[22G[?25h[?25l$ git commit -m "final"[0K[23G[?25h[?25l$ git commit -m "final "[0K[24G[?25h[?25l$ git commit -m "final d"[0K[25G[?25h[?25l$ git commit -m "final dr"[0K[26G[?25h[?25l$ git commit -m "final dra"[0K[27G[?25h[?25l$ git commit -m "final draf"[0K[28G[?25h[?25l$ git commit -m "final draft"[0K[29G[?25h[?25l
+[0K[?25h[master[0K[9G[?25l[master 86efaf4] final draft[0K
+[0K[?25h 93 files changed, 2969 insertions(+), 133 deletions(-)[0K[?25l
+ rewrite _book/bspr-workshop-2018.pdf (75%)[0K
+ rewrite _book/bspr-workshop-2018_files/figure-html/heatmap2-1.png (98%)[0K
+ rewrite _book/bspr-workshop-2018_files/figure-html/pheatmap-1.png (99%)[0K
+ delete mode 100644 _bookdown_files/bspr-workshop-2018_cache/epub3/data-dist_3ff3de9f5[0K4
+b14536cdcb6bb4c9c4e520.RData[0K
+ delete mode 100644 _bookdown_files/bspr-workshop-2018_cache/epub3/data-dist_3ff3de9f5[0K4
+b14536cdcb6bb4c9c4e520.rdb[0K
+ delete mode 100644 _bookdown_files/bspr-workshop-2018_cache/epub3/data-dist_3ff3de9f5[0K4
+b14536cdcb6bb4c9c4e520.rdx[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/epub3/data-dist_fe7c418bf[0K9
+4f7294aa9366332a8aeacc.RData[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/epub3/data-dist_fe7c418bf[0K9
+4f7294aa9366332a8aeacc.rdb[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/epub3/data-dist_fe7c418bf[0K9
+4f7294aa9366332a8aeacc.rdx[0K
+ delete mode 100644 _bookdown_files/bspr-workshop-2018_cache/epub3/fold-change-1_a8a27[0K5
+41cf2db0c91135de9197773269.RData[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/epub3/fold-change-1_bdd84[0K7
+254bed096d52f0216b838795cd.RData[0K
+ rename _bookdown_files/bspr-workshop-2018_cache/epub3/{fold-change-1_a8a27541cf2db0c9[0K1
+135de9197773269.rdb => fold-change-1_bdd847254bed096d52f0216b838795cd.rdb} (100%)[0K
+ rename _bookdown_files/bspr-workshop-2018_cache/epub3/{fold-change-1_a8a27541cf2db0c9[0K1
+135de9197773269.rdx => fold-change-1_bdd847254bed096d52f0216b838795cd.rdx} (100%)[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/epub3/quant-normalisation[0K_
+c5faa2b293bf290375f462ca281ab3c7.RData[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/epub3/quant-normalisation[0K_
+c5faa2b293bf290375f462ca281ab3c7.rdb[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/epub3/quant-normalisation[0K_
+c5faa2b293bf290375f462ca281ab3c7.rdx[0K
+ delete mode 100644 _bookdown_files/bspr-workshop-2018_cache/epub3/quant-normalisation[0K_
+eb683c8dc461c76f37fe6db997e3ca07.RData[0K
+ delete mode 100644 _bookdown_files/bspr-workshop-2018_cache/epub3/quant-normalisation[0K_
+eb683c8dc461c76f37fe6db997e3ca07.rdb[0K
+ delete mode 100644 _bookdown_files/bspr-workshop-2018_cache/epub3/quant-normalisation[0K_
+eb683c8dc461c76f37fe6db997e3ca07.rdx[0K
+ delete mode 100644 _bookdown_files/bspr-workshop-2018_cache/epub3/t-test-function_381[0Kf
+1d18f7eed4cfc358fa0d51dffc0d.RData[0K
+ delete mode 100644 _bookdown_files/bspr-workshop-2018_cache/epub3/t-test-function_381[0Kf
+1d18f7eed4cfc358fa0d51dffc0d.rdb[0K
+ delete mode 100644 _bookdown_files/bspr-workshop-2018_cache/epub3/t-test-function_381[0Kf
+1d18f7eed4cfc358fa0d51dffc0d.rdx[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/epub3/t-test-function_f53[0K4
+562ca74a74ae718dfeebce585bbf.RData[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/epub3/t-test-function_f53[0K4
+562ca74a74ae718dfeebce585bbf.rdb[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/epub3/t-test-function_f53[0K4
+562ca74a74ae718dfeebce585bbf.rdx[0K
+ rename _bookdown_files/bspr-workshop-2018_cache/latex/{data-dist_fd0e476db8835c8b357c[0Ka
+972b2d51a05.RData => data-dist_13f72c75f3217bc58db54a94a5aec8b3.RData} (92%)[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/latex/data-dist_13f72c75f[0K3
+217bc58db54a94a5aec8b3.rdb[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/latex/data-dist_13f72c75f[0K3
+217bc58db54a94a5aec8b3.rdx[0K
+ delete mode 100644 _bookdown_files/bspr-workshop-2018_cache/latex/data-dist_fd0e476db[0K8
+835c8b357ca972b2d51a05.rdb[0K
+ delete mode 100644 _bookdown_files/bspr-workshop-2018_cache/latex/data-dist_fd0e476db[0K8
+835c8b357ca972b2d51a05.rdx[0K
+ delete mode 100644 _bookdown_files/bspr-workshop-2018_cache/latex/fold-change-1_2416b[0Kb
+6356129164b42f2d1e5e301a37.RData[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/latex/fold-change-1_e8b0e[0Ka
+31796b3d66ac3e8d29aea129c3.RData[0K
+ rename _bookdown_files/bspr-workshop-2018_cache/latex/{fold-change-1_2416bb6356129164[0Kb
+42f2d1e5e301a37.rdb => fold-change-1_e8b0ea31796b3d66ac3e8d29aea129c3.rdb} (100%)[0K
+ rename _bookdown_files/bspr-workshop-2018_cache/latex/{fold-change-1_2416bb6356129164[0Kb
+42f2d1e5e301a37.rdx => fold-change-1_e8b0ea31796b3d66ac3e8d29aea129c3.rdx} (100%)[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/latex/quant-normalisation[0K_
+83fbdeb41efd9846f6053270f6c3aedd.RData[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/latex/quant-normalisation[0K_
+83fbdeb41efd9846f6053270f6c3aedd.rdb[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/latex/quant-normalisation[0K_
+83fbdeb41efd9846f6053270f6c3aedd.rdx[0K
+ delete mode 100644 _bookdown_files/bspr-workshop-2018_cache/latex/quant-normalisation[0K_
+9b55ed168d651ac0edd89df12bd1b5fd.RData[0K
+ delete mode 100644 _bookdown_files/bspr-workshop-2018_cache/latex/quant-normalisation[0K_
+9b55ed168d651ac0edd89df12bd1b5fd.rdb[0K
+ delete mode 100644 _bookdown_files/bspr-workshop-2018_cache/latex/quant-normalisation[0K_
+9b55ed168d651ac0edd89df12bd1b5fd.rdx[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/latex/t-test-function_3f0[0K5
+63b4c10cd5e98ff931cfc32e40b4.RData[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/latex/t-test-function_3f0[0K5
+63b4c10cd5e98ff931cfc32e40b4.rdb[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/latex/t-test-function_3f0[0K5
+63b4c10cd5e98ff931cfc32e40b4.rdx[0K
+ delete mode 100644 _bookdown_files/bspr-workshop-2018_cache/latex/t-test-function_530[0K5
+741ac9c2ac691560b0a0ed909b97.RData[0K
+ delete mode 100644 _bookdown_files/bspr-workshop-2018_cache/latex/t-test-function_530[0K5
+741ac9c2ac691560b0a0ed909b97.rdb[0K
+ delete mode 100644 _bookdown_files/bspr-workshop-2018_cache/latex/t-test-function_530[0K5
+741ac9c2ac691560b0a0ed909b97.rdx[0K
+ rewrite _bookdown_files/bspr-workshop-2018_files/figure-epub3/compare-normalisation-1[0K.
+png (99%)[0K
+ rewrite _bookdown_files/bspr-workshop-2018_files/figure-epub3/data-dist-1.png (99%)[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_files/figure-epub3/dendrograms-[0K1
+.png[0K
+ rewrite _bookdown_files/bspr-workshop-2018_files/figure-epub3/fold-change-1-1.png (99[0K%
+)[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_files/figure-epub3/heatmap2-1.p[0Kn
+g[0K
+ rewrite _bookdown_files/bspr-workshop-2018_files/figure-epub3/log-fc-1.png (99%)[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_files/figure-epub3/nice-vplot-1[0K.
+png[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_files/figure-epub3/p-val-plot-1[0K.
+png[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_files/figure-epub3/pheatmap-1.p[0Kn
+g[0K
+ rewrite _bookdown_files/bspr-workshop-2018_files/figure-epub3/volcano-plot-1.png (99%[0K)
+[0K
+ rewrite _bookdown_files/bspr-workshop-2018_files/figure-html/heatmap2-1.png (98%)[0K
+ rewrite _bookdown_files/bspr-workshop-2018_files/figure-html/pheatmap-1.png (99%)[0K
+ rewrite _bookdown_files/bspr-workshop-2018_files/figure-latex/compare-normalisation-1[0K.
+pdf (87%)[0K
+ rewrite _bookdown_files/bspr-workshop-2018_files/figure-latex/data-dist-1.pdf (83%)[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_files/figure-latex/dendrograms-[0K1
+.pdf[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_files/figure-latex/heatmap2-1.p[0Kd
+f[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_files/figure-latex/nice-vplot-1[0K.
+pdf[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_files/figure-latex/p-val-plot-1[0K.
+pdf[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_files/figure-latex/pheatmap-1.p[0Kd
+f[0K
+ rewrite _bookdown_files/bspr-workshop-2018_files/figure-latex/volcano-plot-1.pdf (94%[0K)
+[0K
+[0K[?25h[?25l
+[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K
+$[0K[3G[?25h[?25l$ git commit -m "final draft"[0K[?25h[?25l$ git add .[0K[?25h[?25l$ git push origin master[0K[?25h[?25l
+[0K[?25hCounting objects: 77, done.[0K[?25l
+[0K[?25hDelta compression using up to 16 threads.[0K[?25l
+Compressing objects:  93% (70/75)[0K[1G[?25hCompressing objects: 100% (75/75), done.[0K[?25l
+Writing objects:  15% (12/77)[0K[1G[?25h[?25lWriting objects:  16% (13/77)[0K[1G[?25h[?25lWriting objects:  66% (51/77), 1.71 MiB | 3.41 MiB/s[0K[1G[?25h[?25lWriting objects:  81% (63/77), 1.71 MiB | 3.41 MiB/s[0K[1G[?25h[?25lWriting objects:  92% (71/77), 1.71 MiB | 3.41 MiB/s[0K[1G[?25hWriting objects: 100% (77/77), 1.92 MiB | 3.41 MiB/s, done.[0K[?25l
+Total 77 (delta 34), reused 0 (delta 0)[0K
+[0K[?25h[?25lremote: Resolving deltas:  88% (30/34)[0K[1G[?25hremote: Resolving deltas: 100% (34/34), completed with 25 local objects.[0K[?25l
+[0K[?25hTo github.com:ab604/bspr-workshop-2018.git[0K[?25l
+   b87da6e..86efaf4  master -> master[0K
+[0K[?25h[?25l
+[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K
+$[0K[3G[?25h[?25l$ w[0K[?25hr[0Ki[0Kt[0Ke[0K_[0Kr[0K[?25ld[0K[10G[?25h[11G[?25l$ write_rds[0K[?25h[11G[10G[9G[8G[7G[6G[5G[4G[3G[4G[6G[7G[8G[9G[10G[11G[12G[?25l$ write_rd[0K[12G[?25h[11G[?25l$ write_[0K[?25h[?25l$ write[0K[?25h[?25l$ writ[0K[?25h[?25l$ wri[0K[?25h[?25l$ wr[0K[?25h[?25l$ w[0K[?25h[?25l$[0K[3G[?25h[?25l$ git push origin master[0K[?25h[?25l$ git commit -m "final draft"[0K[?25h[?25l$ git add .[0K[30G[?25h[12G

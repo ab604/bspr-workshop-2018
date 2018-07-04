@@ -3,7 +3,7 @@
 Here are a few links and suggestions about what else you might like to do with
 R.
 
-## Exporting data and figures
+## Exporting figures
 
 Exporting figures is best done using the following structure:
 
@@ -50,6 +50,43 @@ instead of making the plot using `dat_tf` as shown here.
 [Here](https://www.stat.berkeley.edu/classes/s133/saving.html) is a general
 guide to the various formats you can export to.
 
+Alternatively, if you are working in `ggplot` you can use the `ggsave` function
+as described in [R4DS 28.7](http://r4ds.had.co.nz/graphics-for-communication.html#saving-your-plots).
+
+
+## Exporting data
+
+There is a [full manual for the import and export of data](https://cran.r-project.org/doc/manuals/r-release/R-data.html) in R.
+However here are few pointers:
+
+### Writing to a file
+
+One of the most portables way to share data is by writing to a csv file. These
+files can be opened in many programs. The tidyverse package contains two
+functions for csv files, `write_csv` and for Excel `write_excel_csv`. The
+latter form adds a bit of metadata that tells Excel about the file encoding.
+See [R4DS writing to a file](http://r4ds.had.co.nz/data-import.html#writing-to-a-file)
+
+For example to write a csv file of `dat_tf` to a file called
+`04072018_transformed_data.csv` to our working directory for sharing
+with a colleague using excel, the code is of the form 
+`<function>(<r-object>,"filename")` like so:
+
+```{r write-file, eval=FALSE}
+write_excel_csv(dat_tf,"04072018_transformed_data.csv")
+```
+
+Note that the file name is a string and is in quotes.
+
+### For R
+
+If you are exporting data to use yourself in R, the custom `.rds` format is a 
+good choice and preserves the R structure.
+
+In the tidyverse `write_rds` follows the same structure as `write_csv`.
+
+You can read back in using `read_rds`.
+
 ## Joining the R community
 
 It's worth joining the [RStudio Community](https://community.rstudio.com/) and
@@ -67,6 +104,8 @@ following community members on Twitter such as [Jenny Bryan](https://twitter.com
 [R Markdown](https://rmarkdown.rstudio.com/lesson-1.html) enables us to do
 [literate programming](https://en.wikipedia.org/wiki/Literate_programming), saving time as we can create analysis, reports, dashboards or web apps at the same time
 as writing code. R Markdown can use multiple programming languages. 
+See also [R4DS R Markdown](http://r4ds.had.co.nz/r-markdown.html) and
+[R4DS R Markdown formats](http://r4ds.had.co.nz/r-markdown-formats.html).
 
 You can use [blogdown](https://bookdown.org/yihui/blogdown/) to build websites.
 I created s guide to [buidling an academic website with blogdown](http://ab604.github.io/docs/website_bookdown/).
