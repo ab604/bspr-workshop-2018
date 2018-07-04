@@ -1466,4 +1466,23 @@ Total 77 (delta 34), reused 0 (delta 0)[0K
    b87da6e..86efaf4  master -> master[0K
 [0K[?25h[?25l
 [0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K
-$[0K[3G[?25h[?25l$ w[0K[?25hr[0Ki[0Kt[0Ke[0K_[0Kr[0K[?25ld[0K[10G[?25h[11G[?25l$ write_rds[0K[?25h[11G[10G[9G[8G[7G[6G[5G[4G[3G[4G[6G[7G[8G[9G[10G[11G[12G[?25l$ write_rd[0K[12G[?25h[11G[?25l$ write_[0K[?25h[?25l$ write[0K[?25h[?25l$ writ[0K[?25h[?25l$ wri[0K[?25h[?25l$ wr[0K[?25h[?25l$ w[0K[?25h[?25l$[0K[3G[?25h[?25l$ git push origin master[0K[?25h[?25l$ git commit -m "final draft"[0K[?25h[?25l$ git add .[0K[30G[?25h[12G
+$[0K[3G[?25h[?25l$ w[0K[?25hr[0Ki[0Kt[0Ke[0K_[0Kr[0K[?25ld[0K[10G[?25h[11G[?25l$ write_rds[0K[?25h[11G[10G[9G[8G[7G[6G[5G[4G[3G[4G[6G[7G[8G[9G[10G[11G[12G[?25l$ write_rd[0K[12G[?25h[11G[?25l$ write_[0K[?25h[?25l$ write[0K[?25h[?25l$ writ[0K[?25h[?25l$ wri[0K[?25h[?25l$ wr[0K[?25h[?25l$ w[0K[?25h[?25l$[0K[3G[?25h[?25l$ git push origin master[0K[?25h[?25l$ git commit -m "final draft"[0K[?25h[?25l$ git add .[0K[30G[?25h[12G[?25l
+[0K[?25h[?25l
+[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K
+$[0K[3G[?25h[?25l$ git add .[0K[?25h[?25l$ git push origin master[0K[?25h[?25l$ git commit -m "final draft"[0K[25G[?25h[30G[29G[28G[27G[26G[25G[24G[23G[24G[25G[24G[23G[22G[21G[20G[19G[18G[?25l$ git commit -m "ufinal draft"[0K[19G[?25h[?25l$ git commit -m "udfinal draft"[0K[19G[?25h[20G[?25l$ git commit -m "udpfinal draft"[0K[21G[?25h[?25l$ git commit -m "udpafinal draft"[0K[22G[?25h[?25l$ git commit -m "udpatfinal draft"[0K[23G[?25h[?25l$ git commit -m "udpatefinal draft"[0K[24G[?25h[?25l$ git commit -m "udpate final draft"[0K[25G[?25h[26G[27G[28G[29G[30G[31G[32G[33G[34G[35G[36G[?25l$ git commit -m "udpate final draf"[0K[35G[?25h[?25l$ git commit -m "udpate final dra"[0K[?25h[34G[?25l$ git commit -m "udpate final dr"[0K[?25h[33G[?25l$ git commit -m "udpate final d"[0K[32G[?25h[?25l$ git commit -m "udpate final "[0K[31G[?25h[?25l$ git commit -m "udpate final"[0K[30G[?25h[?25l$ git commit -m "udpate fina"[0K[29G[?25h[?25l$ git commit -m "udpate fin"[0K[28G[?25h[?25l$ git commit -m "udpate fi"[0K[27G[?25h[?25l$ git commit -m "udpate f"[0K[26G[?25h[?25l$ git commit -m "udpate "[0K[25G[?25h[?25l$ git commit -m "udpate c"[0K[26G[?25h[?25l$ git commit -m "udpate ch"[0K[27G[?25h[?25l$ git commit -m "udpate cha"[0K[28G[?25h[?25l$ git commit -m "udpate chap"[0K[29G[?25h[?25l$ git commit -m "udpate chape"[0K[30G[?25h[?25l$ git commit -m "udpate chapet"[0K[31G[?25h[?25l$ git commit -m "udpate chape"[0K[30G[?25h[?25l$ git commit -m "udpate chap"[0K[29G[?25h[?25l$ git commit -m "udpate chapt"[0K[?25h[30G[?25l$ git commit -m "udpate chapte"[0K[31G[?25h[?25l$ git commit -m "udpate chapter"[0K[32G[?25h[?25l$ git commit -m "udpate chapter "[0K[33G[?25h[?25l$ git commit -m "udpate chapter 6"[0K[34G[?25h[?25l
+[0K[?25h[master[0K[9G[?25l[master 1760c0c] udpate chapter 6[0K
+ 25 files changed, 342 insertions(+), 56 deletions(-)[0K
+[0K[?25h[?25l
+[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K
+$[0K[3G[?25h[?25l$ git commit -m "udpate chapter 6"[0K[?25h[?25l$ git add .[0K[?25h[?25l$ git push origin master[0K[?25h[?25l
+[0K[?25hCounting objects: 34, done.[0K[?25l
+Delta compression using up to 16 threads.[0K
+Compressing objects:  67% (23/34)[0K[1G[?25hCompressing objects: 100% (34/34), done.[0K[?25l
+Writing objects:  29% (10/34)[0K[1G[?25hWriting objects: 100% (34/34), 107.55 KiB | 0 bytes/s, done.[0K[?25l
+Total 34 (delta 30), reused 0 (delta 0)[0K
+[0K[?25h[?25lremote: Resolving deltas:  16% (5/30)[0K[1G[?25h[?25lremote: Resolving deltas:  20% (6/30)[0K[1G[?25hremote: Resolving deltas:  43% (13/30)[0K[42G[?25lremote: Resolving deltas:  63% (19/30)[0K[1G[?25hremote: Resolving deltas: 100% (30/30), completed with 30 local objects.[0K[?25l
+[0K[?25hTo github.com:ab604/bspr-workshop-2018.git[0K[?25l
+   86efaf4..1760c0c  master -> master[0K
+[0K[?25h[?25l
+[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K
+$[0K[3G[?25h[?25l$ git push origin master[0K[?25h[?25l$ git commit -m "udpate chapter 6"[0K[25G[?25h[35G[?25l$ git add .[0K[?25h

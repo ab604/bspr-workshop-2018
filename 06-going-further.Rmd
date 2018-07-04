@@ -65,7 +65,7 @@ One of the most portables way to share data is by writing to a csv file. These
 files can be opened in many programs. The tidyverse package contains two
 functions for csv files, `write_csv` and for Excel `write_excel_csv`. The
 latter form adds a bit of metadata that tells Excel about the file encoding.
-See [R4DS writing to a file](http://r4ds.had.co.nz/data-import.html#writing-to-a-file)
+See [R4DS writing to a file](http://r4ds.had.co.nz/data-import.html#writing-to-a-file).
 
 For example to write a csv file of `dat_tf` to a file called
 `04072018_transformed_data.csv` to our working directory for sharing
@@ -108,7 +108,7 @@ See also [R4DS R Markdown](http://r4ds.had.co.nz/r-markdown.html) and
 [R4DS R Markdown formats](http://r4ds.had.co.nz/r-markdown-formats.html).
 
 You can use [blogdown](https://bookdown.org/yihui/blogdown/) to build websites.
-I created s guide to [buidling an academic website with blogdown](http://ab604.github.io/docs/website_bookdown/).
+I created this guide to [buidling an academic website with blogdown](http://ab604.github.io/docs/website_bookdown/).
 
 ## Machine Learning
 

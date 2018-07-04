@@ -245,7 +245,7 @@ dat_tf <span class="op">%&gt;%</span>
 <p>There is a <a href="https://cran.r-project.org/doc/manuals/r-release/R-data.html">full manual for the import and export of data</a> in R. However here are few pointers:</p>
 <div id="writing-to-a-file" class="section level3">
 <h3><span class="header-section-number">6.2.1</span> Writing to a file</h3>
-<p>One of the most portables way to share data is by writing to a csv file. These files can be opened in many programs. The tidyverse package contains two functions for csv files, <code>write_csv</code> and for Excel <code>write_excel_csv</code>. The latter form adds a bit of metadata that tells Excel about the file encoding. See <a href="http://r4ds.had.co.nz/data-import.html#writing-to-a-file">R4DS writing to a file</a></p>
+<p>One of the most portables way to share data is by writing to a csv file. These files can be opened in many programs. The tidyverse package contains two functions for csv files, <code>write_csv</code> and for Excel <code>write_excel_csv</code>. The latter form adds a bit of metadata that tells Excel about the file encoding. See <a href="http://r4ds.had.co.nz/data-import.html#writing-to-a-file">R4DS writing to a file</a>.</p>
 <p>For example to write a csv file of <code>dat_tf</code> to a file called <code>04072018_transformed_data.csv</code> to our working directory for sharing with a colleague using excel, the code is of the form <code>&lt;function&gt;(&lt;r-object&gt;,&quot;filename&quot;)</code> like so:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">write_excel_csv</span>(dat_tf,<span class="st">&quot;04072018_transformed_data.csv&quot;</span>)</code></pre></div>
 <p>Note that the file name is a string and is in quotes.</p>
@@ -266,7 +266,7 @@ dat_tf <span class="op">%&gt;%</span>
 <div id="communication-creating-reports-presentations-and-websites" class="section level2">
 <h2><span class="header-section-number">6.4</span> Communication: creating reports, presentations and websites</h2>
 <p><a href="https://rmarkdown.rstudio.com/lesson-1.html">R Markdown</a> enables us to do <a href="https://en.wikipedia.org/wiki/Literate_programming">literate programming</a>, saving time as we can create analysis, reports, dashboards or web apps at the same time as writing code. R Markdown can use multiple programming languages. See also <a href="http://r4ds.had.co.nz/r-markdown.html">R4DS R Markdown</a> and <a href="http://r4ds.had.co.nz/r-markdown-formats.html">R4DS R Markdown formats</a>.</p>
-<p>You can use <a href="https://bookdown.org/yihui/blogdown/">blogdown</a> to build websites. I created s guide to <a href="http://ab604.github.io/docs/website_bookdown/">buidling an academic website with blogdown</a>.</p>
+<p>You can use <a href="https://bookdown.org/yihui/blogdown/">blogdown</a> to build websites. I created this guide to <a href="http://ab604.github.io/docs/website_bookdown/">buidling an academic website with blogdown</a>.</p>
 </div>
 <div id="machine-learning" class="section level2">
 <h2><span class="header-section-number">6.5</span> Machine Learning</h2>
