@@ -120,6 +120,11 @@ was `geom_point()` and the arguments we supplies to map our aesthetics
 As we can use this code for any tidy data set, hopefully you are beginning to 
 see how a small amount of code can do a lot.
 
+### Visualisations 
+
+Claus Wilke has written a very nice guide to visualising data using R called
+[Fundamentals of Data Visualization](http://serialmentor.com/dataviz/index.html).
+
 ## Workflow basics
 
 Let's run through the basics of working in R to conclude this chapter.

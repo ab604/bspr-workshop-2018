@@ -493,7 +493,7 @@ However, we don't know if these fold changes are dueto chance or not, which is
 why we calculated the p-values. A volcano plot will include the p-value 
 information.
 
-### Volcano plot
+## Volcano plot
 
 <!--- 7. Create a combined table of log fold change and p-values for all the proteins
 for plotting a volcano plot. --->
@@ -598,6 +598,8 @@ row.names(dat_matrix) <- dat_filt$prot_id
 dat_scaled <- scale(t(dat_matrix)) %>% t()
 ```
 
+### Calculating similarity and clustering
+
 At this point we could just plot the data, but to understand what the heatmap
 functions do to cluster the data, let's step through the process.
 
@@ -678,16 +680,38 @@ cluster respectively.
 
 <!-- 2. Plot the data -->
 
-```{r heatmap2}
+### Plotting the heatmap
+
+The `heatmap.2` function from the `gplots` package will automatically perform
+the distance calculation and clustering we performed, and it can also do
+the scaling we did. It only requires the matrix as an input by default. It will
+use a different clustering method by default.
+
+However, as we've performed scaling and calculated the clusters, we can pass
+them to heatmap function. 
+
+I'll leave it to the reader to explore all the options here, but the concept in 
+the code below to create Figure \@ref(fig:heatmap2) is:
+
++ Create  a 25 increment blue/white/red colour pallette
++ Pipe `dat_scaled` to a function that renames the colums
++ Pipe this to the `heatmap.2` function
++ Pass the clusters `c1` and `c2` to the plot
++ Change some aesthetics such as the colours, and the font sizes
+
+(ref:heatmap2) Heatmap created with `heatmap.2` using the clusters calculated.
+
+```{r heatmap2,fig.cap='(ref:heatmap2)',fig.asp=1, out.width= '80%', fig.align='center'}
 # Set colours for heatmap, 25 increments
 my_palette <- colorRampPalette(c("blue","white","red"))(n = 25)
 
 # Plot heatmap with heatmap.2
 par(cex.main=0.75) # Shrink title fonts on plot
 dat_scaled %>% 
+  # Rename the comlums
   magrittr::set_colnames(c("Ctl 1", "Ctl 2", "Ctl 3",
                                     "Trt 1", "Trt 2", "Trt 3")) %>% 
-  #magrittr::set_rownames(dat_filt$protein_accession) %>% 
+  # Plot heatmap
   gplots::heatmap.2(.,                     # Tidy, normalised data
           Colv=as.dendrogram(c1),     # Experiments clusters in cols
           Rowv=as.dendrogram(c2),     # Protein clusters in rows
@@ -698,14 +722,29 @@ dat_scaled %>%
           cexRow=0.6,cexCol=0.75)     # Amend row and column label fonts
 ```
 
-```{r pheatmap}
+An alternative and more `ggplot` style is to use the `pheatmap` package and
+function.
+
+In Figure \@ref(fig:pheatmap) `dat_scaled` is piped to `set_columns` again to 
+rename the experiments for aesthetic reasons. The output is the piped to 
+`pheatmap` which performs the distance and clustering automatically. The only 
+additional arguements used here are to change the fontsize and create some 
+breaks in the plot to highlight the clustering.
+
+There is lots more that `pheatmap` can do in terms of aesthetics, so do explore.
+
+(ref:pheatmap) Heatmap created using `pheatmap` with breaks to highlight clusters.
+
+```{r pheatmap, fig.cap='(ref:pheatmap)',fig.asp=1, out.width= '80%', fig.align='center'}
 dat_scaled %>% 
+  # Rename the comlums
   magrittr::set_colnames(c("Ctl 1", "Ctl 2", "Ctl 3",
                                     "Trt 1", "Trt 2", "Trt 3")) %>% 
+  # Plot heatmap
   pheatmap(.,
-           fontsize = 6,
-           cutree_rows = 2,
-           cutree_cols = 2)
+           fontsize = 7,
+           cutree_rows = 2, # Create breaks in heatmap
+           cutree_cols = 2) # Create breaks in heatmap
 ```
 
 

@@ -5,7 +5,6 @@ author: "Alistair Bailey"
 date: "`r format(Sys.Date(),format='%B %d %Y')`"
 output: 
   bookdown::gitbook: default
-  bookdown::epub_book: default
   bookdown::pdf_book:
     includes:
       in_header: preamble.tex
@@ -81,7 +80,7 @@ Open RStudio and put the code below into the `Console`
 window and press `Enter` to install these three packages.
 
 ```{r packages, eval=FALSE}
-install.packages(c("tidyverse","gplots","pheatmap"))
+install.packages(c("plyr","tidyverse","gplots","pheatmap"))
 ```
 
 

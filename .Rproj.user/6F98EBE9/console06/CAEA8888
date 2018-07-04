@@ -1231,4 +1231,95 @@ $[0K[3G[?25h[?25l$ mv dplyr.Rmd 03-dplyr.Rmd[0K[29G[?25h[?25l$[0K[3G
 $[0K[3G[?25h[?25l$ mv  03-dplyr.Rmd 04-dplyr.Rmd[0K[33G[?25h[32G[?25l$ mv  03-dplyr.Rmd 04-dplyr.Rm[0K[?25h[?25l$ mv  03-dplyr.Rmd 04-dplyr.R[0K[?25h[?25l$ mv  03-dplyr.Rmd 04-dplyr.[0K[30G[?25h[?25l$ mv  03-dplyr.Rmd 04-dplyr[0K[?25h[?25l$ mv  03-dplyr.Rmd 04-dply[0K[?25h[?25l$ mv  03-dplyr.Rmd 04-dpl[0K[?25h[?25l$ mv  03-dplyr.Rmd 04-dp[0K[?25h[?25l$ mv  03-dplyr.Rmd 04-d[0K[?25h[?25l$ mv  03-dplyr.Rmd 04-[0K[?25h[?25l$ mv  03-dplyr.Rmd 04[0K[?25h[?25l$ mv  03-dplyr.Rmd 0[0K[?25h[?25l$ mv  03-dplyr.Rmd[0K[20G[?25h[19G[?25l$ mv  03-dplyr.Rm[0K[?25h[?25l$ mv  03-dplyr.R[0K[?25h[?25l$ mv  03-dplyr.[0K[?25h[?25l$ mv  03-dplyr[0K[?25h[?25l$ mv  03-dply[0K[?25h[?25l$ mv  03-dpl[0K[?25h[?25l$ mv  03-dp[0K[?25h[?25l$ mv  03-d[0K[?25h[?25l$ mv  03-[0K[11G[?25h[?25l$ mv  03[0K[10G[?25h[9G[?25l$ mv  0[0K[9G[?25h[8G[?25l$ mv  04[0K[?25h-[0Ki[0Kmporting.Rmd[0K[24G[?25l$ mv  04-importing.Rmd 0[0K[?25h4[0K-[0Ki[0Kmporting.Rmd[0K[41G[40G[39G[38G[37G[36G[35G[34G[33G[32G[31G[30G[29G[28G[27G[26G[25G[26G[?25l$ mv  04-importing.Rmd 0-importing.Rmd[0K[26G[?25h[25G[?25l$ mv  04-importing.Rmd 03-importing.Rmd[0K[26G[?25h[?25l
 [0K[?25h[?25l
 [0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K
-$[0K[3G[?25h[?25l$ g[0K[?25hi[0Kt[0K[7G[?25l$ git a[0K[?25hd[0Kd[0K[11G[?25l$ git add .[0K[?25h
+$[0K[3G[?25h[?25l$ g[0K[?25hi[0Kt[0K[7G[?25l$ git a[0K[?25hd[0Kd[0K[11G[?25l$ git add .[0K[?25h[?25l
+[0K[?25hwarning: LF will be replaced by CRLF in .Rproj.user/6F98EBE9/sources/prop/INDEX.[0K[?25l
+The file will have its original line endings in your working directory.[0K
+warning: LF will be replaced by CRLF in .Rproj.user/shared/notebooks/paths.[0K
+The file will have its original line endings in your working directory.[0K
+[0K[?25hwarning: LF will be replaced by CRLF in 07-references.Rmd.[0K[?25l
+The file will have its original line endings in your working directory.[0K
+[0K[?25h[?25l
+[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K
+$[0K[3G[?25h[?25l$ g[0K[?25hi[0Kt[0K[7G[?25l$ git c[0K[?25h[?25lo[0K[8G[?25h[9G[?25l$ git com[0K[?25hm[0Ki[0Kt[0K[14G[?25l$ git commit -[0K[?25hm[0K[17G[?25l$ git commit -m "[0K[?25hu[0Kp[0Kd[0Ka[0Kt[0Ke[0K[25G[?25l$ git commit -m "update t[0K[25G[?25h[26G[?25l$ git commit -m "update tr[0K[?25h[?25la[0K[27G[?25h[28G[?25l$ git commit -m "update tran[0K[?25hs[0Ko[0Kf[0Kr[0K[?25l$ git commit -m "update transof[0K[?25h[?25l$ git commit -m "update transo[0K[?25h[?25l$ git commit -m "update trans[0K[?25hf[0Ko[0Kr[0Km[0Ka[0Kti[0Ko[0Kn[0K[40G[?25l$ git commit -m "update transformation a[0K[?25hn[0Kd[0K[44G[?25l$ git commit -m "update transformation and c[0K[?25hr[0Ke[0Ka[0Kt[0Ke[0K[51G[?25l$ git commit -m "update transformation and create d[0K[?25hy[0Kp[0K[?25l$ git commit -m "update transformation and create dy[0K[?25h[?25l$ git commit -m "update transformation and create d[0K[?25hp[0Kl[0Ky[0Ke[0K[57G[?25l$ git commit -m "update transformation and create dplye c[0K[?25h[?25l$ git commit -m "update transformation and create dplye[0K[57G[?25h[56G[?25l$ git commit -m "update transformation and create dply[0K[56G[?25h[55G[?25l$ git commit -m "update transformation and create dplyr[0K[?25h[57G[?25l$ git commit -m "update transformation and create dplyr c[0K[?25hh[0Ka[0Kp[0Kt[0K[?25le[0K[62G[?25h[63G[?25l$ git commit -m "update transformation and create dplyr chaptet[0K[?25h[?25l$ git commit -m "update transformation and create dplyr chapte[0K[?25hr[0K[?25l"[0K[64G[?25h[65G[?25l
+[0K[?25h[master[0K[9G[?25l[master b87da6e] update transformation and create dplyr chapter[0K
+[0K[?25h 61 files changed, 1545 insertions(+), 440 deletions(-)[0K[?25l
+ create mode 100644 04-dplyr.Rmd[0K
+ rename 04-data-transformation.Rmd => 05-data-transformation.Rmd (50%)[0K
+ rename 05-going-further.Rmd => 06-going-further.Rmd (84%)[0K
+ rename 06-references.Rmd => 07-references.Rmd (100%)[0K
+ create mode 100644 _book/bspr-workshop-2018_files/figure-html/clustering-1.png[0K
+ rewrite _book/bspr-workshop-2018_files/figure-html/compare-normalisation-1.png (97%)[0K
+ create mode 100644 _book/bspr-workshop-2018_files/figure-html/dendrograms-1.png[0K
+ rewrite _book/bspr-workshop-2018_files/figure-html/fold-change-1-1.png (99%)[0K
+ rewrite _book/bspr-workshop-2018_files/figure-html/heatmap-1-1.png (98%)[0K
+ rewrite _book/bspr-workshop-2018_files/figure-html/heatmap-2-1.png (97%)[0K
+ rewrite _book/bspr-workshop-2018_files/figure-html/heatmap-2-2.png (97%)[0K
+ rewrite _book/bspr-workshop-2018_files/figure-html/heatmap-2-3.png (98%)[0K
+ create mode 100644 _book/bspr-workshop-2018_files/figure-html/heatmap2-1.png[0K
+ rewrite _book/bspr-workshop-2018_files/figure-html/log-fc-1.png (97%)[0K
+ rewrite _book/bspr-workshop-2018_files/figure-html/nice-vplot-1.png (98%)[0K
+ create mode 100644 _book/bspr-workshop-2018_files/figure-html/pheatmap-1.png[0K
+ create mode 100644 _book/dplyr.html[0K
+ create mode 100644 _book/img/dplyr_arrange.png[0K
+ create mode 100644 _book/img/dplyr_filter.png[0K
+ create mode 100644 _book/img/dplyr_group_by.png[0K
+ create mode 100644 _book/img/dplyr_mutate.png[0K
+ create mode 100644 _book/img/dplyr_select.png[0K
+ create mode 100644 _book/img/dplyr_summarise.png[0K
+ delete mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/data-dist_002446d8c0[0K6
+601fb847b457840a13bb8.RData[0K
+ delete mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/data-dist_002446d8c0[0K6
+601fb847b457840a13bb8.rdb[0K
+ delete mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/data-dist_002446d8c0[0K6
+601fb847b457840a13bb8.rdx[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/data-dist_14d02bfb07[0K8
+9d0edbea1a0d99946ecb5.RData[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/data-dist_14d02bfb07[0K8
+9d0edbea1a0d99946ecb5.rdb[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/data-dist_14d02bfb07[0K8
+9d0edbea1a0d99946ecb5.rdx[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/fold-change-1_597569[0K9
+e3136c6be0610fe0610a1a500.RData[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/fold-change-1_597569[0K9
+e3136c6be0610fe0610a1a500.rdb[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/fold-change-1_597569[0K9
+e3136c6be0610fe0610a1a500.rdx[0K
+ delete mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/fold-change-1_83916b[0Ke
+c2e6bf24ae99bb9d0d6155902.RData[0K
+ delete mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/fold-change-1_83916b[0Ke
+c2e6bf24ae99bb9d0d6155902.rdb[0K
+ delete mode 100644 _bookdown_files/bspr-workshop-2018_cache/html/fold-change-1_83916b[0Ke
+c2e6bf24ae99bb9d0d6155902.rdx[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_files/figure-html/clustering-1.[0Kp
+ng[0K
+ rewrite _bookdown_files/bspr-workshop-2018_files/figure-html/compare-normalisation-1.[0Kp
+ng (97%)[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_files/figure-html/dendrograms-1[0K.
+png[0K
+ rewrite _bookdown_files/bspr-workshop-2018_files/figure-html/fold-change-1-1.png (99%[0K)
+[0K
+ rewrite _bookdown_files/bspr-workshop-2018_files/figure-html/heatmap-1-1.png (98%)[0K
+ rewrite _bookdown_files/bspr-workshop-2018_files/figure-html/heatmap-2-1.png (97%)[0K
+ rewrite _bookdown_files/bspr-workshop-2018_files/figure-html/heatmap-2-2.png (97%)[0K
+ rewrite _bookdown_files/bspr-workshop-2018_files/figure-html/heatmap-2-3.png (98%)[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_files/figure-html/heatmap2-1.pn[0Kg
+[0K
+ rewrite _bookdown_files/bspr-workshop-2018_files/figure-html/log-fc-1.png (97%)[0K
+ rewrite _bookdown_files/bspr-workshop-2018_files/figure-html/nice-vplot-1.png (98%)[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_files/figure-html/pheatmap-1.pn[0Kg
+[0K
+ create mode 100644 img/dplyr_arrange.png[0K
+[0K[?25h[?25l
+[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K
+$[0K[3G[?25h[?25l$ g[0K[?25hi[0Kt[0K[7G[?25l$ git p[0K[?25hu[0Ks[0Kh[0K[12G[?25l$ git push o[0K[?25h[?25l$ git push[0K[12G[?25h[?25l$ git push o[0K[?25h[?25lr[0K[13G[?25h[14G[?25l$ git push ori[0K[?25hg[0Ki[0Kn[0K[19G[?25l$ git push origin m[0K[?25h[?25la[0K[20G[?25h[21G[?25l$ git push origin mas[0K[?25ht[0Ke[0Kr[0K[?25l
+[0K[?25hCounting objects: 53, done.[0K[?25l
+Delta compression using up to 16 threads.[0K
+Compressing objects:  78% (39/50)[0K[1G[?25hCompressing objects: 100% (50/50), done.[0K[?25l
+Writing objects:  45% (24/53)[0K[1G[?25hWriting objects: 100% (53/53), 433.63 KiB | 0 bytes/s, done.[0K[?25l
+Total 53 (delta 23), reused 0 (delta 0)[0K
+[0K[?25h[?25lremote: Resolving deltas:  47% (11/23)[0K[1G[?25hremote: Resolving deltas: 100% (23/23), completed with 19 local objects.[0K[?25l
+[0K[?25hTo github.com:ab604/bspr-workshop-2018.git[0K[?25l
+   b437b2c..b87da6e  master -> master[0K
+[0K[?25h[?25l
+[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K
+$[0K[3G[?25h[?25l$ git push origin master[0K[3G[?25h[25G[?25l$ git commit -m "update transformation and create dplyr chapter"[0K[?25h[?25l$ git add .[0K[?25h

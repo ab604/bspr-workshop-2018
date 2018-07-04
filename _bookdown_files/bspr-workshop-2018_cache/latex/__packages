@@ -13,3 +13,5 @@ forcats
 janitor
 cowplot
 bindrcpp
+gplots
+pheatmap

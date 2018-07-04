@@ -1,5 +1,77 @@
 # Going further {#going-further}
 
-## Getting help and joining the R community
+Here are a few links and suggestions about what else you might like to do with
+R.
+
+## Exporting data and figures
+
+Exporting figures is best done using the following structure:
+
+```{r export-plots, eval=FALSE}
+# Open up a blank plot file, pdf,jpeg etc.
+<plot_function("file",...)>
+# Write the plot to the file
+<plot_object>
+# Close the file
+dev.off()
+```
+
+For example to export the volcano plot from Figure \@ref(fig:nice-vplot) to a pdf, we do:
+
+```{r export-pdf, eval=FALSE}
+# Open up a blank plot file, pdf,jpeg etc.
+pdf("volcano_plot.pdf")
+
+# Write the plot to the file
+dat_tf %>%
+  # Add a threhold for significant observations
+  mutate(threshold = if_else(log_fc >= 2 & log_pval >= 1.3 |
+                               log_fc <= -2 & log_pval >= 1.3,"A", "B")) %>%
+  # Plot with points coloured according to the threshold
+  ggplot(aes(log_fc,log_pval, colour = threshold)) +
+  geom_point(alpha = 0.5) + # Alpha sets the transparency of the points
+  # Add dotted lines to indicate the threshold, semi-transparent
+  geom_hline(yintercept = 1.3, linetype = 2, alpha = 0.5) + 
+  geom_vline(xintercept = 2, linetype = 2, alpha = 0.5) +
+  geom_vline(xintercept = -2, linetype = 2, alpha = 0.5) +
+  # Set the colour of the points
+  scale_colour_manual(values = c("A"= "red", "B"= "black")) +
+  xlab("log2 fold change") + ylab("-log10 p-value") + # Relabel the axes
+  theme_minimal() + # Set the theme
+  theme(legend.position="none") # Hide the legend
+
+# Close the file
+dev.off()
+```
+
+If I had saved the plot to an object called `vplot` I would call that object
+instead of making the plot using `dat_tf` as shown here.
+
+[Here](https://www.stat.berkeley.edu/classes/s133/saving.html) is a general
+guide to the various formats you can export to.
+
+## Joining the R community
+
+It's worth joining the [RStudio Community](https://community.rstudio.com/) and
+following community members on Twitter such as [Jenny Bryan](https://twitter.com/JennyBryan), [Hadley Wickham](https://twitter.com/hadleywickham), [Yihui Xie](https://twitter.com/xieyihui), [Mara Averick](https://twitter.com/dataandme),
+[David Robinson](https://twitter.com/drob)
+ and [Julia Silge](https://twitter.com/juliasilge).
+ 
+ If you can afford [DataCamp](https://www.datacamp.com) then this is my preferred
+ learning platform.
+ 
+ And if you can't, then [swirl](https://swirlstats.com/) is free.
 
 ## Communication: creating reports, presentations and websites
+
+[R Markdown](https://rmarkdown.rstudio.com/lesson-1.html) enables us to do
+[literate programming](https://en.wikipedia.org/wiki/Literate_programming), saving time as we can create analysis, reports, dashboards or web apps at the same time
+as writing code. R Markdown can use multiple programming languages. 
+
+You can use [blogdown](https://bookdown.org/yihui/blogdown/) to build websites.
+I created s guide to [buidling an academic website with blogdown](http://ab604.github.io/docs/website_bookdown/).
+
+## Machine Learning
+
+If you are interested in machine learning, then [TensorFlow](https://tensorflow.rstudio.com/) is a good place to start, for 
+example Leon Eyrich Jessen's [Deep Learning for Cancer Immunotherapy](https://tensorflow.rstudio.com/blog/dl-for-cancer-immunotherapy.html) tutorial.
