@@ -113,7 +113,6 @@ protein accession afterwards via another pipe.
 
 ```{r dat-mutate}
 dat %>% 
-  group_by(protein_accession) %>% 
   mutate(prot_id = str_extract(protein_accession,".{6}$")) %>% 
   select(protein_accession, prot_id)
 ```

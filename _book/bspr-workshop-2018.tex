@@ -128,7 +128,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{July 04 2018}
+    \date{July 09 2018}
 
 \usepackage{booktabs}
 
@@ -1715,7 +1715,6 @@ accession afterwards via another pipe.
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{dat }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{group_by}\NormalTok{(protein_accession) }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{prot_id =} \KeywordTok{str_extract}\NormalTok{(protein_accession,}\StringTok{".\{6\}$"}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{select}\NormalTok{(protein_accession, prot_id)}
 \end{Highlighting}
@@ -1723,7 +1722,6 @@ accession afterwards via another pipe.
 
 \begin{verbatim}
 ## # A tibble: 7,702 x 2
-## # Groups:   protein_accession [7,702]
 ##    protein_accession  prot_id
 ##    <chr>              <chr>  
 ##  1 VATA_HUMAN_P38606  P38606 
