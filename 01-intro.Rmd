@@ -152,7 +152,7 @@ knitr::include_graphics("img/rdata_turn_off.png")
 
 R studio tells you where you are in terms of directory address like so:
 
-(ref:working-dir)
+(ref:working-dir) Your working directory
 
 ```{r working-directory,fig.cap='(ref:working-dir)',fig.asp=1, out.width= '80%', fig.align='center', echo=FALSE}
 knitr::include_graphics("img/rstudio_working_directory.png")

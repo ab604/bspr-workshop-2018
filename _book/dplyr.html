@@ -171,6 +171,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="5.8.1" data-path="transform.html"><a href="transform.html#calculating-similarity-and-clustering"><i class="fa fa-check"></i><b>5.8.1</b> Calculating similarity and clustering</a></li>
 <li class="chapter" data-level="5.8.2" data-path="transform.html"><a href="transform.html#plotting-the-heatmap"><i class="fa fa-check"></i><b>5.8.2</b> Plotting the heatmap</a></li>
 </ul></li>
+<li class="chapter" data-level="5.9" data-path="transform.html"><a href="transform.html#venn-diagram"><i class="fa fa-check"></i><b>5.9</b> Venn diagram</a></li>
+<li class="chapter" data-level="5.10" data-path="transform.html"><a href="transform.html#peptide-sequence-logos"><i class="fa fa-check"></i><b>5.10</b> Peptide sequence logos</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="going-further.html"><a href="going-further.html"><i class="fa fa-check"></i><b>6</b> Going further</a><ul>
 <li class="chapter" data-level="6.1" data-path="going-further.html"><a href="going-further.html#exporting-figures"><i class="fa fa-check"></i><b>6.1</b> Exporting figures</a></li>
@@ -179,7 +181,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="6.2.2" data-path="going-further.html"><a href="going-further.html#for-r"><i class="fa fa-check"></i><b>6.2.2</b> For R</a></li>
 </ul></li>
 <li class="chapter" data-level="6.3" data-path="going-further.html"><a href="going-further.html#joining-the-r-community"><i class="fa fa-check"></i><b>6.3</b> Joining the R community</a></li>
-<li class="chapter" data-level="6.4" data-path="going-further.html"><a href="going-further.html#communication-creating-reports-presentations-and-websites"><i class="fa fa-check"></i><b>6.4</b> Communication: creating reports, presentations and websites</a></li>
+<li class="chapter" data-level="6.4" data-path="going-further.html"><a href="going-further.html#communication-creating-reports-presentations-and-websites"><i class="fa fa-check"></i><b>6.4</b> Communication: creating reports, presentations and websites</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="going-further.html"><a href="going-further.html#using-bookdown-to-write-a-thesis-dissertaion"><i class="fa fa-check"></i><b>6.4.1</b> Using bookdown to write a thesis dissertaion</a></li>
+</ul></li>
 <li class="chapter" data-level="6.5" data-path="going-further.html"><a href="going-further.html#machine-learning"><i class="fa fa-check"></i><b>6.5</b> Machine Learning</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
@@ -294,11 +298,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Let’s create a new variable for <code>dat</code> called <code>prot_id</code> that use the <code>str_extract</code> function from the <code>stringr</code> package to take the last 6 characters of the <code>protein_accession</code> variable, the <code>&quot;.{6}$&quot;</code> part is called a regular expression, to keep just the UNIPROT id part of the string.</p>
 <p>We’ll use select to drop the other variables except the protein accession afterwards via another pipe.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">group_by</span>(protein_accession) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">prot_id =</span> <span class="kw">str_extract</span>(protein_accession,<span class="st">&quot;.{6}$&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">select</span>(protein_accession, prot_id)</code></pre></div>
 <pre><code>## # A tibble: 7,702 x 2
-## # Groups:   protein_accession [7,702]
 ##    protein_accession  prot_id
 ##    &lt;chr&gt;              &lt;chr&gt;  
 ##  1 VATA_HUMAN_P38606  P38606 
@@ -321,16 +323,22 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p><code>summarise</code> is most useful when paired with <code>group_by</code> which defines the variables upon which we operate upon.</p>
 <p>Here if we group by <code>species_id</code> and <code>rodent_type</code> together and then used <code>summarise</code> without any arguments we return these two variables only.</p>
 <p><img src="img/dplyr_group_by.png" width="80%" style="display: block; margin: auto;" /></p>
-<p>We’ll use the <code>mtcars</code> dataset again to illustrate a grouped summary. Here I’ll group according gearbox type <code>am</code> where 0 is automatic and 1 is manual. Then using summarise to calculate the mean miles per gallon, the tables is collapsed to two rows, one for each gearbox type.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># mtcars, am is gearbox, 0 = automatic, 1 = manual </span>
-mtcars <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">group_by</span>(am) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean_mpg =</span> <span class="kw">mean</span>(mpg, <span class="dt">na.rm =</span> T))</code></pre></div>
-<pre><code>## # A tibble: 2 x 2
-##      am mean_mpg
-##   &lt;dbl&gt;    &lt;dbl&gt;
-## 1     0     17.1
-## 2     1     24.4</code></pre>
+<p>We’ll use the <code>mpg</code> dataset again to illustrate a grouped summary. Here I’ll group according fuel type <code>fl</code>, c = compressed natural gas ,d = diesel, e = ethanol, p = premium and r = regular. Then using summarise to calculate the mean highway (<code>hwy</code>) miles per gallon, and the mean urban (<code>cty</code>) miles per gallon,the tables is collapsed from 234 to five rows, one for each fuel type and two columns for the mean mpg;s. This illustrates how grouped summaries provide a very concise way of exploring data as we can immediately see the relative fuel efficiences of each fuel type under two conditions.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># fl is fuel type. c = compressed natural gas ,d = diesel, </span>
+<span class="co"># e = ethanol, p = premium and r = regular.</span>
+mpg <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(fl) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="co"># Create summaries mean_hwy and mean_cty using the mean function, </span>
+<span class="st">  </span><span class="co"># dropping any missing variables.</span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean_hwy =</span> <span class="kw">mean</span>(hwy, <span class="dt">na.rm =</span> T), <span class="dt">mean_cty =</span> <span class="kw">mean</span>(cty, <span class="dt">na.rm =</span> T))</code></pre></div>
+<pre><code>## # A tibble: 5 x 3
+##   fl    mean_hwy mean_cty
+##   &lt;chr&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+## 1 c         36      24   
+## 2 d         33.6    25.6 
+## 3 e         13.2     9.75
+## 4 p         25.2    17.4 
+## 5 r         23.0    16.7</code></pre>
 <p>We’ll use <code>dplyr</code> and pipes in Chapter <a href="transform.html#transform">5</a>.</p>
 
 </div>

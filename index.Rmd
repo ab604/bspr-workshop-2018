@@ -32,9 +32,14 @@ library(janitor)
 library(cowplot)
 library(gplots)
 library(pheatmap)
+library(gridExtra)
+library(VennDiagram)
+library(ggseqlogo)
 # automatically create a bib database for R packages
 knitr::write_bib(c(.packages(), 'bookdown', 'knitr', 'rmarkdown', 
-                   "tidyverse","gplots","pheatmap"), 'packages.bib')
+                   "tidyverse","gplots","pheatmap", 'VennDiagram','gridExtra',
+                   'ggseqlogo'), 
+                 'packages.bib')
 
 options(knitr.graphics.auto_pdf = TRUE)
 ```
@@ -54,7 +59,7 @@ The observations are signal intensity measurements from the mass spectrometer.
 These intensities relate the concentration of protein observed in each experiment 
 and under each condition. The analysis transforms the data to examine the effect of
 treatment on the cellular proteome and visualise the output using a volcano
-plot and a heatmap. 
+plot , a heatmap, a Venn diagram and peptide sequence logos. 
 <a href="https://raw.githubusercontent.com/ab604/ab604.github.io/master/docs/070718-proteomics-example-data.csv" download>Click here to download the csv file.</a>
 
 ## Requirements {-}
@@ -80,7 +85,8 @@ Open RStudio and put the code below into the `Console`
 window and press `Enter` to install these three packages.
 
 ```{r packages, eval=FALSE}
-install.packages(c("plyr","tidyverse","gplots","pheatmap"))
+install.packages(c("plyr","tidyverse","gplots","pheatmap",
+                   "gridExtra","VennDiagram","ggseqlogo"))
 ```
 
 

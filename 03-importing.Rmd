@@ -123,6 +123,9 @@ library(plyr)
 library(tidyverse)
 library(gplots)
 library(pheatmap)
+library(gridExtra)
+library(VennDiagram)
+library(ggseqlogo)
 ```
 
 ### Bioconductor {#biocondutor}
