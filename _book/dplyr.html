@@ -294,11 +294,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Let’s create a new variable for <code>dat</code> called <code>prot_id</code> that use the <code>str_extract</code> function from the <code>stringr</code> package to take the last 6 characters of the <code>protein_accession</code> variable, the <code>&quot;.{6}$&quot;</code> part is called a regular expression, to keep just the UNIPROT id part of the string.</p>
 <p>We’ll use select to drop the other variables except the protein accession afterwards via another pipe.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">group_by</span>(protein_accession) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">prot_id =</span> <span class="kw">str_extract</span>(protein_accession,<span class="st">&quot;.{6}$&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">select</span>(protein_accession, prot_id)</code></pre></div>
 <pre><code>## # A tibble: 7,702 x 2
-## # Groups:   protein_accession [7,702]
 ##    protein_accession  prot_id
 ##    &lt;chr&gt;              &lt;chr&gt;  
 ##  1 VATA_HUMAN_P38606  P38606 

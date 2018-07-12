@@ -94,7 +94,7 @@ generate. R Studio can also be used for other things (e.g., version control,
 developing packages, writing Shiny apps) that we don't have time to cover during
 this workshop.
 
-R Studio is divided into "Panes", see Figure \@ref(fig:rstudio). 
+R Studio is divided into "Panes", see Figure \@ref(fig:rstudio).
 
 When you first open it, there are three panes,the console where you type 
 commands, your environment/history (top-right), and your
@@ -108,7 +108,6 @@ The output pane can be used to view any plots you have created.
 Not opened at first start up is the fourth default pane: the script editor pane, 
 but this will open as soon as we create/edit a R script (or many other document types). 
 *The script editor is where will be typing much of the time.*
-
 
 (ref:rstudio) The Rstudio Integrated Development Environment (IDE).
 
@@ -142,7 +141,6 @@ turning off the preservation of workspaces between sessions by setting the
 Tools > Global Options menu in R studio as shown in Figure \@ref(fig:workspace):
 
 (ref:turn-off) Don't save your workspace, save your script instead.
-
 
 ```{r workspace, fig.cap='(ref:turn-off)',fig.asp=1, out.width= '80%', fig.align='center', echo=FALSE}
 knitr::include_graphics("img/rdata_turn_off.png")
