@@ -723,7 +723,7 @@ dat_scaled %>%
 ```
 
 An alternative and more `ggplot` style is to use the `pheatmap` package and
-function.
+function [@R-pheatmap].
 
 In Figure \@ref(fig:pheatmap) `dat_scaled` is piped to `set_columns` again to 
 rename the experiments for aesthetic reasons. The output is the piped to 
@@ -747,6 +747,91 @@ dat_scaled %>%
            cutree_cols = 2) # Create breaks in heatmap
 ```
 
+## Venn diagram
+
+Another common plot used in proteomics is the Venn diagram. For these I use
+the `VennDiagram` package [@R-VennDiagram].
+
+For example if we wanted to compare the protein identifications found in the
+control and treatment sets of our data we could compare the protein accessions found
+in each condition. To do this we need to transform the data for example using
+the following steps:
+
+1. 
+
+```{r transform-venn}
+# Transform data for Venn diagram to create long table with three columns 
+venn_dat <- dat %>%
+  # Drop protein description
+  select(-protein_description) %>% 
+  # Gather columns according to experiment type to create exp_type 
+  # and concentration variables. Don't use the protein accession.
+               gather(key = exp_type, value = concentration, -protein_accession)
+
+venn_dat
+```
+
+```{r plot-venn}
+venn_cntl_1 <- venn_dat %>% 
+  filter(exp_type == "control_1" & !is.na(concentration)) %>% 
+  pull(prot_id)
+
+venn_cntl_2 <- venn_dat %>% 
+  filter(exp_type == "control_2" & !is.na(concentration)) %>% 
+  pull(prot_id)
+
+venn_cntl_3 <- venn_dat %>% 
+  filter(exp_type == "control_3" & !is.na(concentration)) %>% 
+  pull(prot_id)
+
+venn_list <- list("Control 1" = venn_cntl_1,
+                  "Control 2" = venn_cntl_2,
+                  "Control 3" = venn_cntl_3)
+
+futile.logger::flog.threshold(futile.logger::ERROR, name = "VennDiagramLogger")
+
+prot_venn <- venn.diagram(venn_list,NULL, 
+               #height = 1000,
+               #width = 1000,
+               col = "transparent",
+               fill = c("cornflowerblue", "green", "yellow"),
+               alpha = 0.50,
+               cex = 0.8,
+               fontfamily = "sans",
+               fontface = "bold",
+               cat.col = c("darkblue", "darkgreen", "orange"),
+               cat.cex = 0.8,
+               #cat.pos = 0,
+               #cat.dist = 0.07,
+               cat.fontfamily = "sans",
+               #rotation.degree = 270,
+               margin = 0.2,
+               main = "Proteins identified in control experiments",
+               main.fontfamily = "sans",
+               print.mode = c("raw","percent"),
+               main.pos = c(0.5,0.9)
+  )
+
+grid.arrange(gTree(children = prot_venn))
+```
 
 
 
+## Peptide sequence logos
+
+Finally, creating sequence logos from peptides is another common task, especially
+if you are doing immunopeptidomics and would like to explore the fequency of
+amino acid types at each position in a set of peptide sequences. The
+`ggseqlogo` package enables us to do this `ggplot` style [@R-ggseqlogo].
+
+Here using sample data that comes with the ggseqlogo package and illusrated
+in the [ggseqlogo tutorial](https://omarwagih.github.io/ggseqlogo/).
+
+As with the venn diagram, we need a list to contain our groups of 
+peptides as they
+
+```{r ggseqlogo}
+data(ggseqlogo_sample)
+
+ggseqlogo(seqs_aa, method='p')
+```

@@ -171,6 +171,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="5.8.1" data-path="transform.html"><a href="transform.html#calculating-similarity-and-clustering"><i class="fa fa-check"></i><b>5.8.1</b> Calculating similarity and clustering</a></li>
 <li class="chapter" data-level="5.8.2" data-path="transform.html"><a href="transform.html#plotting-the-heatmap"><i class="fa fa-check"></i><b>5.8.2</b> Plotting the heatmap</a></li>
 </ul></li>
+<li class="chapter" data-level="5.9" data-path="transform.html"><a href="transform.html#venn-diagram"><i class="fa fa-check"></i><b>5.9</b> Venn diagram</a></li>
+<li class="chapter" data-level="5.10" data-path="transform.html"><a href="transform.html#peptide-sequence-logos"><i class="fa fa-check"></i><b>5.10</b> Peptide sequence logos</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="going-further.html"><a href="going-further.html"><i class="fa fa-check"></i><b>6</b> Going further</a><ul>
 <li class="chapter" data-level="6.1" data-path="going-further.html"><a href="going-further.html#exporting-figures"><i class="fa fa-check"></i><b>6.1</b> Exporting figures</a></li>
@@ -179,7 +181,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="6.2.2" data-path="going-further.html"><a href="going-further.html#for-r"><i class="fa fa-check"></i><b>6.2.2</b> For R</a></li>
 </ul></li>
 <li class="chapter" data-level="6.3" data-path="going-further.html"><a href="going-further.html#joining-the-r-community"><i class="fa fa-check"></i><b>6.3</b> Joining the R community</a></li>
-<li class="chapter" data-level="6.4" data-path="going-further.html"><a href="going-further.html#communication-creating-reports-presentations-and-websites"><i class="fa fa-check"></i><b>6.4</b> Communication: creating reports, presentations and websites</a></li>
+<li class="chapter" data-level="6.4" data-path="going-further.html"><a href="going-further.html#communication-creating-reports-presentations-and-websites"><i class="fa fa-check"></i><b>6.4</b> Communication: creating reports, presentations and websites</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="going-further.html"><a href="going-further.html#using-bookdown-to-write-a-thesis-dissertaion"><i class="fa fa-check"></i><b>6.4.1</b> Using bookdown to write a thesis dissertaion</a></li>
+</ul></li>
 <li class="chapter" data-level="6.5" data-path="going-further.html"><a href="going-further.html#machine-learning"><i class="fa fa-check"></i><b>6.5</b> Machine Learning</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
@@ -656,7 +660,7 @@ dat_scaled <span class="op">%&gt;%</span><span class="st"> </span>
 Figure 5.9: Heatmap created with <code>heatmap.2</code> using the clusters calculated.
 </p>
 </div>
-<p>An alternative and more <code>ggplot</code> style is to use the <code>pheatmap</code> package and function.</p>
+<p>An alternative and more <code>ggplot</code> style is to use the <code>pheatmap</code> package and function <span class="citation">(Kolde <a href="#ref-R-pheatmap">2018</a>)</span>.</p>
 <p>In Figure <a href="transform.html#fig:pheatmap">5.10</a> <code>dat_scaled</code> is piped to <code>set_columns</code> again to rename the experiments for aesthetic reasons. The output is the piped to <code>pheatmap</code> which performs the distance and clustering automatically. The only additional arguements used here are to change the fontsize and create some breaks in the plot to highlight the clustering.</p>
 <p>There is lots more that <code>pheatmap</code> can do in terms of aesthetics, so do explore.</p>
 
@@ -675,14 +679,28 @@ Figure 5.9: Heatmap created with <code>heatmap.2</code> using the clusters calcu
 Figure 5.10: Heatmap created using <code>pheatmap</code> with breaks to highlight clusters.
 </p>
 </div>
-
 </div>
+</div>
+<div id="venn-diagram" class="section level2">
+<h2><span class="header-section-number">5.9</span> Venn diagram</h2>
+<p>Another common plot used in proteomics is the Venn diagram. For these I use the <code>VennDiagram</code> package <span class="citation">(Chen <a href="#ref-R-VennDiagram">2018</a>)</span></p>
+</div>
+<div id="peptide-sequence-logos" class="section level2">
+<h2><span class="header-section-number">5.10</span> Peptide sequence logos</h2>
+<p>Finally, creating sequence logos from peptides is another common task, especially if you are doing immunopeptidomics and would like to explore the fequency of amino acid types at each position in a set of peptide sequences.</p>
+
 </div>
 </div>
 <h3>References</h3>
 <div id="refs" class="references">
 <div id="ref-bolstad2003">
 <p>Bolstad, B M, R A Irizarry, M Astrand, and T P Speed. 2003. “A Comparison of Normalization Methods for High Density Oligonucleotide Array Data Based on Variance and Bias.” <em>Bioinformatics (Oxford, England)</em> 19 (2): 185–93.</p>
+</div>
+<div id="ref-R-pheatmap">
+<p>Kolde, Raivo. 2018. <em>Pheatmap: Pretty Heatmaps</em>. <a href="https://CRAN.R-project.org/package=pheatmap" class="uri">https://CRAN.R-project.org/package=pheatmap</a>.</p>
+</div>
+<div id="ref-R-VennDiagram">
+<p>Chen, Hanbo. 2018. <em>VennDiagram: Generate High-Resolution Venn and Euler Plots</em>. <a href="https://CRAN.R-project.org/package=VennDiagram" class="uri">https://CRAN.R-project.org/package=VennDiagram</a>.</p>
 </div>
 </div>
             </section>

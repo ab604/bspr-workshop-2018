@@ -171,6 +171,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="5.8.1" data-path="transform.html"><a href="transform.html#calculating-similarity-and-clustering"><i class="fa fa-check"></i><b>5.8.1</b> Calculating similarity and clustering</a></li>
 <li class="chapter" data-level="5.8.2" data-path="transform.html"><a href="transform.html#plotting-the-heatmap"><i class="fa fa-check"></i><b>5.8.2</b> Plotting the heatmap</a></li>
 </ul></li>
+<li class="chapter" data-level="5.9" data-path="transform.html"><a href="transform.html#venn-diagram"><i class="fa fa-check"></i><b>5.9</b> Venn diagram</a></li>
+<li class="chapter" data-level="5.10" data-path="transform.html"><a href="transform.html#peptide-sequence-logos"><i class="fa fa-check"></i><b>5.10</b> Peptide sequence logos</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="going-further.html"><a href="going-further.html"><i class="fa fa-check"></i><b>6</b> Going further</a><ul>
 <li class="chapter" data-level="6.1" data-path="going-further.html"><a href="going-further.html#exporting-figures"><i class="fa fa-check"></i><b>6.1</b> Exporting figures</a></li>
@@ -179,7 +181,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="6.2.2" data-path="going-further.html"><a href="going-further.html#for-r"><i class="fa fa-check"></i><b>6.2.2</b> For R</a></li>
 </ul></li>
 <li class="chapter" data-level="6.3" data-path="going-further.html"><a href="going-further.html#joining-the-r-community"><i class="fa fa-check"></i><b>6.3</b> Joining the R community</a></li>
-<li class="chapter" data-level="6.4" data-path="going-further.html"><a href="going-further.html#communication-creating-reports-presentations-and-websites"><i class="fa fa-check"></i><b>6.4</b> Communication: creating reports, presentations and websites</a></li>
+<li class="chapter" data-level="6.4" data-path="going-further.html"><a href="going-further.html#communication-creating-reports-presentations-and-websites"><i class="fa fa-check"></i><b>6.4</b> Communication: creating reports, presentations and websites</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="going-further.html"><a href="going-further.html#using-bookdown-to-write-a-thesis-dissertaion"><i class="fa fa-check"></i><b>6.4.1</b> Using bookdown to write a thesis dissertaion</a></li>
+</ul></li>
 <li class="chapter" data-level="6.5" data-path="going-further.html"><a href="going-further.html#machine-learning"><i class="fa fa-check"></i><b>6.5</b> Machine Learning</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
@@ -276,7 +280,9 @@ Figure 3.2: Scripts can be run by clicking the Source button.
 <span class="kw">library</span>(plyr)
 <span class="kw">library</span>(tidyverse)
 <span class="kw">library</span>(gplots)
-<span class="kw">library</span>(pheatmap)</code></pre></div>
+<span class="kw">library</span>(pheatmap)
+<span class="kw">library</span>(VennDiagram)
+<span class="kw">library</span>(ggseqlogo)</code></pre></div>
 <div id="biocondutor" class="section level3">
 <h3><span class="header-section-number">3.5.1</span> Bioconductor</h3>
 <p>As an aside there are many proteomics specific R packages, these are generally found through <a href="https://www.bioconductor.org/">Bioconductor</a> which is a project that was initiated in 2001 to create tools for the analysis of high-throughput genomic data, but also includes other ’omics data tools <span class="citation">(R. C. Gentleman et al. <a href="#ref-gentleman2004">2004</a>,<span class="citation">Huber et al. (<a href="#ref-huber2015">2015</a>)</span>)</span>.</p>

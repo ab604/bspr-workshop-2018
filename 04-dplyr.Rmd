@@ -141,16 +141,24 @@ Here if we group by `species_id` and `rodent_type` together and then used
 knitr::include_graphics("img/dplyr_group_by.png")
 ```
 
-We'll use the `mtcars` dataset again to illustrate a grouped summary. Here
-I'll group according gearbox type `am` where 0 is automatic and 1 is manual.
-Then using summarise to calculate the mean miles per gallon, the tables is
-collapsed to two rows, one for each gearbox type.
+We'll use the `mpg` dataset again to illustrate a grouped summary. Here
+I'll group according fuel type `fl`, c = compressed natural gas ,d = diesel, 
+e = ethanol, p = premium and r = regular.
+Then using summarise to calculate the mean highway (`hwy`) miles per gallon,
+and the mean urban (`cty`) miles per gallon,the tables is collapsed from 234 to 
+five rows, one for each fuel type and two columns for the mean mpg;s. This
+illustrates how grouped summaries provide a very concise way of exploring data
+as we can immediately see the relative fuel efficiences of  each fuel type under
+two conditions.
 
 ```{r dat-group_mean}
-# mtcars, am is gearbox, 0 = automatic, 1 = manual 
-mtcars %>% 
-  group_by(am) %>% 
-  summarise(mean_mpg = mean(mpg, na.rm = T))
+# fl is fuel type. c = compressed natural gas ,d = diesel, 
+# e = ethanol, p = premium and r = regular.
+mpg %>% 
+  group_by(fl) %>% 
+  # Create summaries mean_hwy and mean_cty using the mean function, 
+  # dropping any missing variables.
+  summarise(mean_hwy = mean(hwy, na.rm = T), mean_cty = mean(cty, na.rm = T))
 ```
 
 We'll use `dplyr` and pipes in Chapter \@ref(transform).
