@@ -128,7 +128,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{July 09 2018}
+    \date{July 12 2018}
 
 \usepackage{booktabs}
 
@@ -188,8 +188,9 @@ The observations are signal intensity measurements from the mass
 spectrometer. These intensities relate the concentration of protein
 observed in each experiment and under each condition. The analysis
 transforms the data to examine the effect of treatment on the cellular
-proteome and visualise the output using a volcano plot and a heatmap.
-Click here to download the csv file.
+proteome and visualise the output using a volcano plot , a heatmap, a
+Venn diagram and peptide sequence logos. Click here to download the csv
+file.
 
 \section*{Requirements}\label{requirements}
 \addcontentsline{toc}{section}{Requirements}
@@ -218,7 +219,8 @@ press \texttt{Enter} to install these three packages.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{install.packages}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\StringTok{"plyr"}\NormalTok{,}\StringTok{"tidyverse"}\NormalTok{,}\StringTok{"gplots"}\NormalTok{,}\StringTok{"pheatmap"}\NormalTok{))}
+\KeywordTok{install.packages}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\StringTok{"plyr"}\NormalTok{,}\StringTok{"tidyverse"}\NormalTok{,}\StringTok{"gplots"}\NormalTok{,}\StringTok{"pheatmap"}\NormalTok{,}
+                   \StringTok{"gridExtra"}\NormalTok{,}\StringTok{"VennDiagram"}\NormalTok{,}\StringTok{"ggseqlogo"}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -412,7 +414,7 @@ shown in Figure \ref{fig:workspace}:
 
 R studio tells you where you are in terms of directory address like so:
 
-(ref:working-dir)
+
 
 \begin{figure}
 
@@ -420,7 +422,7 @@ R studio tells you where you are in terms of directory address like so:
 
 }
 
-\caption{(ref:working-dir)}\label{fig:working-directory}
+\caption{Your working directory}\label{fig:working-directory}
 \end{figure}
 
 If you are unfamiliar with how computers structure folders and files,
@@ -1285,6 +1287,9 @@ Here is a typical head for a script:
 \KeywordTok{library}\NormalTok{(tidyverse)}
 \KeywordTok{library}\NormalTok{(gplots)}
 \KeywordTok{library}\NormalTok{(pheatmap)}
+\KeywordTok{library}\NormalTok{(gridExtra)}
+\KeywordTok{library}\NormalTok{(VennDiagram)}
+\KeywordTok{library}\NormalTok{(ggseqlogo)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1758,27 +1763,37 @@ return these two variables only.
 
 \begin{center}\includegraphics[width=0.8\linewidth]{img/dplyr_group_by} \end{center}
 
-We'll use the \texttt{mtcars} dataset again to illustrate a grouped
-summary. Here I'll group according gearbox type \texttt{am} where 0 is
-automatic and 1 is manual. Then using summarise to calculate the mean
-miles per gallon, the tables is collapsed to two rows, one for each
-gearbox type.
+We'll use the \texttt{mpg} dataset again to illustrate a grouped
+summary. Here I'll group according fuel type \texttt{fl}, c = compressed
+natural gas ,d = diesel, e = ethanol, p = premium and r = regular. Then
+using summarise to calculate the mean highway (\texttt{hwy}) miles per
+gallon, and the mean urban (\texttt{cty}) miles per gallon,the tables is
+collapsed from 234 to five rows, one for each fuel type and two columns
+for the mean mpg;s. This illustrates how grouped summaries provide a
+very concise way of exploring data as we can immediately see the
+relative fuel efficiences of each fuel type under two conditions.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# mtcars, am is gearbox, 0 = automatic, 1 = manual }
-\NormalTok{mtcars }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{group_by}\NormalTok{(am) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{mean_mpg =} \KeywordTok{mean}\NormalTok{(mpg, }\DataTypeTok{na.rm =}\NormalTok{ T))}
+\CommentTok{# fl is fuel type. c = compressed natural gas ,d = diesel, }
+\CommentTok{# e = ethanol, p = premium and r = regular.}
+\NormalTok{mpg }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(fl) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\CommentTok{# Create summaries mean_hwy and mean_cty using the mean function, }
+\StringTok{  }\CommentTok{# dropping any missing variables.}
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{mean_hwy =} \KeywordTok{mean}\NormalTok{(hwy, }\DataTypeTok{na.rm =}\NormalTok{ T), }\DataTypeTok{mean_cty =} \KeywordTok{mean}\NormalTok{(cty, }\DataTypeTok{na.rm =}\NormalTok{ T))}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## # A tibble: 2 x 2
-##      am mean_mpg
-##   <dbl>    <dbl>
-## 1     0     17.1
-## 2     1     24.4
+## # A tibble: 5 x 3
+##   fl    mean_hwy mean_cty
+##   <chr>    <dbl>    <dbl>
+## 1 c         36      24   
+## 2 d         33.6    25.6 
+## 3 e         13.2     9.75
+## 4 p         25.2    17.4 
+## 5 r         23.0    16.7
 \end{verbatim}
 
 We'll use \texttt{dplyr} and pipes in Chapter \ref{transform}.
@@ -2670,7 +2685,7 @@ clusters calculated.}\label{fig:heatmap2}
 \end{figure}
 
 An alternative and more \texttt{ggplot} style is to use the
-\texttt{pheatmap} package and function.
+\texttt{pheatmap} package and function \citep{R-pheatmap}.
 
 In Figure \ref{fig:pheatmap} \texttt{dat\_scaled} is piped to
 \texttt{set\_columns} again to rename the experiments for aesthetic
@@ -2708,6 +2723,133 @@ so do explore.
 \caption{Heatmap created using \texttt{pheatmap} with breaks to
 highlight clusters.}\label{fig:pheatmap}
 \end{figure}
+
+\section{Venn diagram}\label{venn-diagram}
+
+Another common plot used in proteomics is the Venn diagram. For these I
+use the \texttt{VennDiagram} package \citep{R-VennDiagram}.
+
+For example if we wanted to compare the protein identifications found in
+the control and treatment sets of our data we could compare the protein
+accessions found in each condition. To do this we need to transform the
+data for example using the following steps:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Transform data for Venn diagram to create long table with three columns }
+\NormalTok{venn_dat <-}\StringTok{ }\NormalTok{dat }\OperatorTok{%>%}
+\StringTok{  }\CommentTok{# Drop protein description}
+\StringTok{  }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\NormalTok{protein_description) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\CommentTok{# Gather columns according to experiment type to create exp_type }
+\StringTok{  }\CommentTok{# and concentration variables. Don't use the protein accession.}
+\StringTok{               }\KeywordTok{gather}\NormalTok{(}\DataTypeTok{key =}\NormalTok{ exp_type, }\DataTypeTok{value =}\NormalTok{ concentration, }\OperatorTok{-}\NormalTok{protein_accession)}
+
+\NormalTok{venn_dat}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 46,212 x 3
+##    protein_accession  exp_type  concentration
+##    <chr>              <chr>             <dbl>
+##  1 VATA_HUMAN_P38606  control_1         0.811
+##  2 RL35A_HUMAN_P18077 control_1         0.367
+##  3 MYH10_HUMAN_P35580 control_1         2.98 
+##  4 RHOG_HUMAN_P84095  control_1         0.142
+##  5 PSA1_HUMAN_P25786  control_1         1.07 
+##  6 PRDX5_HUMAN_P30044 control_1         0.566
+##  7 ACLY_HUMAN_P53396  control_1         5.00 
+##  8 VDAC2_HUMAN_P45880 control_1         1.35 
+##  9 LRC47_HUMAN_Q8N1G4 control_1         0.927
+## 10 CH60_HUMAN_P10809  control_1         9.45 
+## # ... with 46,202 more rows
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{venn_cntl_}\DecValTok{1}\NormalTok{ <-}\StringTok{ }\NormalTok{venn_dat }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(exp_type }\OperatorTok{==}\StringTok{ "control_1"} \OperatorTok{&}\StringTok{ }\OperatorTok{!}\KeywordTok{is.na}\NormalTok{(concentration)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{pull}\NormalTok{(protein_accession)}
+
+\NormalTok{venn_cntl_}\DecValTok{2}\NormalTok{ <-}\StringTok{ }\NormalTok{venn_dat }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(exp_type }\OperatorTok{==}\StringTok{ "control_2"} \OperatorTok{&}\StringTok{ }\OperatorTok{!}\KeywordTok{is.na}\NormalTok{(concentration)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{pull}\NormalTok{(protein_accession)}
+
+\NormalTok{venn_cntl_}\DecValTok{3}\NormalTok{ <-}\StringTok{ }\NormalTok{venn_dat }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(exp_type }\OperatorTok{==}\StringTok{ "control_3"} \OperatorTok{&}\StringTok{ }\OperatorTok{!}\KeywordTok{is.na}\NormalTok{(concentration)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{pull}\NormalTok{(protein_accession)}
+
+\NormalTok{venn_list <-}\StringTok{ }\KeywordTok{list}\NormalTok{(}\StringTok{"Control 1"}\NormalTok{ =}\StringTok{ }\NormalTok{venn_cntl_}\DecValTok{1}\NormalTok{,}
+                  \StringTok{"Control 2"}\NormalTok{ =}\StringTok{ }\NormalTok{venn_cntl_}\DecValTok{2}\NormalTok{,}
+                  \StringTok{"Control 3"}\NormalTok{ =}\StringTok{ }\NormalTok{venn_cntl_}\DecValTok{3}\NormalTok{)}
+
+\NormalTok{futile.logger}\OperatorTok{::}\KeywordTok{flog.threshold}\NormalTok{(futile.logger}\OperatorTok{::}\NormalTok{ERROR, }\DataTypeTok{name =} \StringTok{"VennDiagramLogger"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## NULL
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{prot_venn <-}\StringTok{ }\KeywordTok{venn.diagram}\NormalTok{(venn_list,}\OtherTok{NULL}\NormalTok{, }
+               \CommentTok{#height = 1000,}
+               \CommentTok{#width = 1000,}
+               \DataTypeTok{col =} \StringTok{"transparent"}\NormalTok{,}
+               \DataTypeTok{fill =} \KeywordTok{c}\NormalTok{(}\StringTok{"cornflowerblue"}\NormalTok{, }\StringTok{"green"}\NormalTok{, }\StringTok{"yellow"}\NormalTok{),}
+               \DataTypeTok{alpha =} \FloatTok{0.50}\NormalTok{,}
+               \DataTypeTok{cex =} \FloatTok{0.8}\NormalTok{,}
+               \DataTypeTok{fontfamily =} \StringTok{"sans"}\NormalTok{,}
+               \DataTypeTok{fontface =} \StringTok{"bold"}\NormalTok{,}
+               \DataTypeTok{cat.col =} \KeywordTok{c}\NormalTok{(}\StringTok{"darkblue"}\NormalTok{, }\StringTok{"darkgreen"}\NormalTok{, }\StringTok{"orange"}\NormalTok{),}
+               \DataTypeTok{cat.cex =} \FloatTok{0.8}\NormalTok{,}
+               \CommentTok{#cat.pos = 0,}
+               \CommentTok{#cat.dist = 0.07,}
+               \DataTypeTok{cat.fontfamily =} \StringTok{"sans"}\NormalTok{,}
+               \CommentTok{#rotation.degree = 270,}
+               \DataTypeTok{margin =} \FloatTok{0.2}\NormalTok{,}
+               \DataTypeTok{main =} \StringTok{"Proteins identified in control experiments"}\NormalTok{,}
+               \DataTypeTok{main.fontfamily =} \StringTok{"sans"}\NormalTok{,}
+               \DataTypeTok{print.mode =} \KeywordTok{c}\NormalTok{(}\StringTok{"raw"}\NormalTok{,}\StringTok{"percent"}\NormalTok{),}
+               \DataTypeTok{main.pos =} \KeywordTok{c}\NormalTok{(}\FloatTok{0.5}\NormalTok{,}\FloatTok{0.9}\NormalTok{)}
+\NormalTok{  )}
+
+\KeywordTok{grid.arrange}\NormalTok{(}\KeywordTok{gTree}\NormalTok{(}\DataTypeTok{children =}\NormalTok{ prot_venn))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bspr-workshop-2018_files/figure-latex/plot-venn-1.pdf}
+
+\section{Peptide sequence logos}\label{peptide-sequence-logos}
+
+Finally, creating sequence logos from peptides is another common task,
+especially if you are doing immunopeptidomics and would like to explore
+the fequency of amino acid types at each position in a set of peptide
+sequences. The \texttt{ggseqlogo} package enables us to do this
+\texttt{ggplot} style \citep{R-ggseqlogo}.
+
+Here using sample data that comes with the ggseqlogo package and
+illusrated in the
+\href{https://omarwagih.github.io/ggseqlogo/}{ggseqlogo tutorial}.
+
+As with the venn diagram, we need a list to contain our groups of
+peptides as they
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{data}\NormalTok{(ggseqlogo_sample)}
+
+\KeywordTok{ggseqlogo}\NormalTok{(seqs_aa, }\DataTypeTok{method=}\StringTok{'p'}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bspr-workshop-2018_files/figure-latex/ggseqlogo-1.pdf}
 
 \chapter{Going further}\label{going-further}
 
@@ -2832,8 +2974,8 @@ And if you can't, then \href{https://swirlstats.com/}{swirl} is free.
 \section{Communication: creating reports, presentations and
 websites}\label{communication-creating-reports-presentations-and-websites}
 
-\href{https://rmarkdown.rstudio.com/lesson-1.html}{R Markdown} enables
-us to do
+\href{https://rmarkdown.rstudio.com/lesson-1.html}{R Markdown}
+\citep{R-rmarkdown} enables us to do
 \href{https://en.wikipedia.org/wiki/Literate_programming}{literate
 programming}, saving time as we can create analysis, reports, dashboards
 or web apps at the same time as writing code. R Markdown can use
@@ -2847,6 +2989,15 @@ build websites. I created this guide to
 \href{http://ab604.github.io/docs/website_bookdown/}{buidling an
 academic website with blogdown}.
 
+\subsection{Using bookdown to write a thesis
+dissertaion}\label{using-bookdown-to-write-a-thesis-dissertaion}
+
+I used the bookdown package to create these materials \citep{R-bookdown}
+and you can use it to write a thesis dissertaion, as detailed very
+nicely in this blog by
+\href{https://eddjberry.netlify.com/post/writing-your-thesis-with-bookdown/}{Edd
+Berry}.
+
 \section{Machine Learning}\label{machine-learning}
 
 If you are interested in machine learning, then
@@ -2854,6 +3005,8 @@ If you are interested in machine learning, then
 start, for example Leon Eyrich Jessen's
 \href{https://tensorflow.rstudio.com/blog/dl-for-cancer-immunotherapy.html}{Deep
 Learning for Cancer Immunotherapy} tutorial.
+
+\section{Version control}\label{version-control}
 
 \bibliography{packages.bib,book.bib}
 

@@ -759,7 +759,7 @@ the following steps:
 
 1. 
 
-```{r transform-venn}
+```{r transform-venn, fig.asp=1}
 # Transform data for Venn diagram to create long table with three columns 
 venn_dat <- dat %>%
   # Drop protein description
@@ -774,15 +774,15 @@ venn_dat
 ```{r plot-venn}
 venn_cntl_1 <- venn_dat %>% 
   filter(exp_type == "control_1" & !is.na(concentration)) %>% 
-  pull(prot_id)
+  pull(protein_accession)
 
 venn_cntl_2 <- venn_dat %>% 
   filter(exp_type == "control_2" & !is.na(concentration)) %>% 
-  pull(prot_id)
+  pull(protein_accession)
 
 venn_cntl_3 <- venn_dat %>% 
   filter(exp_type == "control_3" & !is.na(concentration)) %>% 
-  pull(prot_id)
+  pull(protein_accession)
 
 venn_list <- list("Control 1" = venn_cntl_1,
                   "Control 2" = venn_cntl_2,

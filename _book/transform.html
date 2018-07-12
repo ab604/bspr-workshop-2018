@@ -185,6 +185,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="6.4.1" data-path="going-further.html"><a href="going-further.html#using-bookdown-to-write-a-thesis-dissertaion"><i class="fa fa-check"></i><b>6.4.1</b> Using bookdown to write a thesis dissertaion</a></li>
 </ul></li>
 <li class="chapter" data-level="6.5" data-path="going-further.html"><a href="going-further.html#machine-learning"><i class="fa fa-check"></i><b>6.5</b> Machine Learning</a></li>
+<li class="chapter" data-level="6.6" data-path="going-further.html"><a href="going-further.html#version-control"><i class="fa fa-check"></i><b>6.6</b> Version control</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 </ul>
@@ -683,11 +684,86 @@ Figure 5.10: Heatmap created using <code>pheatmap</code> with breaks to highligh
 </div>
 <div id="venn-diagram" class="section level2">
 <h2><span class="header-section-number">5.9</span> Venn diagram</h2>
-<p>Another common plot used in proteomics is the Venn diagram. For these I use the <code>VennDiagram</code> package <span class="citation">(Chen <a href="#ref-R-VennDiagram">2018</a>)</span></p>
+<p>Another common plot used in proteomics is the Venn diagram. For these I use the <code>VennDiagram</code> package <span class="citation">(Chen <a href="#ref-R-VennDiagram">2018</a>)</span>.</p>
+<p>For example if we wanted to compare the protein identifications found in the control and treatment sets of our data we could compare the protein accessions found in each condition. To do this we need to transform the data for example using the following steps:</p>
+<ol style="list-style-type: decimal">
+<li></li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Transform data for Venn diagram to create long table with three columns </span>
+venn_dat &lt;-<span class="st"> </span>dat <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># Drop protein description</span>
+<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>protein_description) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="co"># Gather columns according to experiment type to create exp_type </span>
+<span class="st">  </span><span class="co"># and concentration variables. Don&#39;t use the protein accession.</span>
+<span class="st">               </span><span class="kw">gather</span>(<span class="dt">key =</span> exp_type, <span class="dt">value =</span> concentration, <span class="op">-</span>protein_accession)
+
+venn_dat</code></pre></div>
+<pre><code>## # A tibble: 46,212 x 3
+##    protein_accession  exp_type  concentration
+##    &lt;chr&gt;              &lt;chr&gt;             &lt;dbl&gt;
+##  1 VATA_HUMAN_P38606  control_1         0.811
+##  2 RL35A_HUMAN_P18077 control_1         0.367
+##  3 MYH10_HUMAN_P35580 control_1         2.98 
+##  4 RHOG_HUMAN_P84095  control_1         0.142
+##  5 PSA1_HUMAN_P25786  control_1         1.07 
+##  6 PRDX5_HUMAN_P30044 control_1         0.566
+##  7 ACLY_HUMAN_P53396  control_1         5.00 
+##  8 VDAC2_HUMAN_P45880 control_1         1.35 
+##  9 LRC47_HUMAN_Q8N1G4 control_1         0.927
+## 10 CH60_HUMAN_P10809  control_1         9.45 
+## # ... with 46,202 more rows</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">venn_cntl_<span class="dv">1</span> &lt;-<span class="st"> </span>venn_dat <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(exp_type <span class="op">==</span><span class="st"> &quot;control_1&quot;</span> <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span><span class="kw">is.na</span>(concentration)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">pull</span>(protein_accession)
+
+venn_cntl_<span class="dv">2</span> &lt;-<span class="st"> </span>venn_dat <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(exp_type <span class="op">==</span><span class="st"> &quot;control_2&quot;</span> <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span><span class="kw">is.na</span>(concentration)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">pull</span>(protein_accession)
+
+venn_cntl_<span class="dv">3</span> &lt;-<span class="st"> </span>venn_dat <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(exp_type <span class="op">==</span><span class="st"> &quot;control_3&quot;</span> <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span><span class="kw">is.na</span>(concentration)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">pull</span>(protein_accession)
+
+venn_list &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="st">&quot;Control 1&quot;</span> =<span class="st"> </span>venn_cntl_<span class="dv">1</span>,
+                  <span class="st">&quot;Control 2&quot;</span> =<span class="st"> </span>venn_cntl_<span class="dv">2</span>,
+                  <span class="st">&quot;Control 3&quot;</span> =<span class="st"> </span>venn_cntl_<span class="dv">3</span>)
+
+futile.logger<span class="op">::</span><span class="kw">flog.threshold</span>(futile.logger<span class="op">::</span>ERROR, <span class="dt">name =</span> <span class="st">&quot;VennDiagramLogger&quot;</span>)</code></pre></div>
+<pre><code>## NULL</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">prot_venn &lt;-<span class="st"> </span><span class="kw">venn.diagram</span>(venn_list,<span class="ot">NULL</span>, 
+               <span class="co">#height = 1000,</span>
+               <span class="co">#width = 1000,</span>
+               <span class="dt">col =</span> <span class="st">&quot;transparent&quot;</span>,
+               <span class="dt">fill =</span> <span class="kw">c</span>(<span class="st">&quot;cornflowerblue&quot;</span>, <span class="st">&quot;green&quot;</span>, <span class="st">&quot;yellow&quot;</span>),
+               <span class="dt">alpha =</span> <span class="fl">0.50</span>,
+               <span class="dt">cex =</span> <span class="fl">0.8</span>,
+               <span class="dt">fontfamily =</span> <span class="st">&quot;sans&quot;</span>,
+               <span class="dt">fontface =</span> <span class="st">&quot;bold&quot;</span>,
+               <span class="dt">cat.col =</span> <span class="kw">c</span>(<span class="st">&quot;darkblue&quot;</span>, <span class="st">&quot;darkgreen&quot;</span>, <span class="st">&quot;orange&quot;</span>),
+               <span class="dt">cat.cex =</span> <span class="fl">0.8</span>,
+               <span class="co">#cat.pos = 0,</span>
+               <span class="co">#cat.dist = 0.07,</span>
+               <span class="dt">cat.fontfamily =</span> <span class="st">&quot;sans&quot;</span>,
+               <span class="co">#rotation.degree = 270,</span>
+               <span class="dt">margin =</span> <span class="fl">0.2</span>,
+               <span class="dt">main =</span> <span class="st">&quot;Proteins identified in control experiments&quot;</span>,
+               <span class="dt">main.fontfamily =</span> <span class="st">&quot;sans&quot;</span>,
+               <span class="dt">print.mode =</span> <span class="kw">c</span>(<span class="st">&quot;raw&quot;</span>,<span class="st">&quot;percent&quot;</span>),
+               <span class="dt">main.pos =</span> <span class="kw">c</span>(<span class="fl">0.5</span>,<span class="fl">0.9</span>)
+  )
+
+<span class="kw">grid.arrange</span>(<span class="kw">gTree</span>(<span class="dt">children =</span> prot_venn))</code></pre></div>
+<p><img src="bspr-workshop-2018_files/figure-html/plot-venn-1.png" width="672" /></p>
 </div>
 <div id="peptide-sequence-logos" class="section level2">
 <h2><span class="header-section-number">5.10</span> Peptide sequence logos</h2>
-<p>Finally, creating sequence logos from peptides is another common task, especially if you are doing immunopeptidomics and would like to explore the fequency of amino acid types at each position in a set of peptide sequences.</p>
+<p>Finally, creating sequence logos from peptides is another common task, especially if you are doing immunopeptidomics and would like to explore the fequency of amino acid types at each position in a set of peptide sequences. The <code>ggseqlogo</code> package enables us to do this <code>ggplot</code> style <span class="citation">(Wagih <a href="#ref-R-ggseqlogo">2017</a>)</span>.</p>
+<p>Here using sample data that comes with the ggseqlogo package and illusrated in the <a href="https://omarwagih.github.io/ggseqlogo/">ggseqlogo tutorial</a>.</p>
+<p>As with the venn diagram, we need a list to contain our groups of peptides as they</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(ggseqlogo_sample)
+
+<span class="kw">ggseqlogo</span>(seqs_aa, <span class="dt">method=</span><span class="st">&#39;p&#39;</span>)</code></pre></div>
+<p><img src="bspr-workshop-2018_files/figure-html/ggseqlogo-1.png" width="672" /></p>
 
 </div>
 </div>
@@ -701,6 +777,9 @@ Figure 5.10: Heatmap created using <code>pheatmap</code> with breaks to highligh
 </div>
 <div id="ref-R-VennDiagram">
 <p>Chen, Hanbo. 2018. <em>VennDiagram: Generate High-Resolution Venn and Euler Plots</em>. <a href="https://CRAN.R-project.org/package=VennDiagram" class="uri">https://CRAN.R-project.org/package=VennDiagram</a>.</p>
+</div>
+<div id="ref-R-ggseqlogo">
+<p>Wagih, Omar. 2017. <em>Ggseqlogo: A ’Ggplot2’ Extension for Drawing Publication-Ready Sequence Logos</em>. <a href="https://CRAN.R-project.org/package=ggseqlogo" class="uri">https://CRAN.R-project.org/package=ggseqlogo</a>.</p>
 </div>
 </div>
             </section>
