@@ -1107,4 +1107,153 @@ no changes added to commit (use "git add" and/or "git commit -a")[0K
 [0K
 [0K[2A[10G[?25h[11G[?25l$ git add .[0K
 [0K
-[0K[2A[12G[?25h
+[0K[2A[12G[?25h[?25l
+[?25hwarning: LF will be replaced by CRLF in .Rproj.user/shared/notebooks/paths.[0K[?25l
+The file will have its original line endings in your working directory.[0K
+[0K[?25h[?25l
+[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K
+$[0K[3G[?25h[?25l$ g[0K[?25h[?25li[0K[4G[?25h[5G[?25l$ git[0K[?25h[7G[?25l$ git c[0K[?25ho[0Km[0Km[0Kiu[0Kt[0K[?25l$ git commiu[0K[?25h[?25l$ git commi[0K[?25ht[0K[14G[?25l$ git commit -[0K[?25h[?25lm[0K[15G[?25h[16G[17G[?25l$ git commit -m "[0K[?25hu[0Kp[0Kd[0Ka[0Kt[0Ke[0K[?25l$ git commit -m "updat[0K[?25h[?25l$ git commit -m "upda[0K[?25h[?25l$ git commit -m "upd[0K[?25ha[0Kt[0Ke[0K[25G[?25l$ git commit -m "update a[0K[?25hm[0Kt[0Ke[0K[?25l$ git commit -m "update amt[0K[?25h[?25l$ git commit -m "update am[0K[?25h[?25l$ git commit -m "update a[0K[?25h[?25l$ git commit -m "update[0K[25G[?25h[?25l$ git commit -m "update m[0K[?25he[0K[?25l$ git commit -m "update m[0K[?25ha[0Kt[0Ke[0Kr[0Ki[0Ka[0Kl[0Ks[0K"[0K[?25l
+[0K[?25h[master[0K[9G[?25l[master f5ad3c8] update materials[0K
+ 44 files changed, 2521 insertions(+), 575 deletions(-)[0K
+ rewrite .Rproj.user/6F98EBE9/console06/INDEX001 (75%)[0K
+ rewrite _book/bspr-workshop-2018_files/figure-html/compare-normalisation-1.png (97%)[0K
+ rewrite _book/bspr-workshop-2018_files/figure-html/log-fc-1.png (98%)[0K
+ rewrite _book/bspr-workshop-2018_files/figure-html/mpg-plot-1,mpg_point_plot-1.png (70%)[0K
+ rewrite _book/bspr-workshop-2018_files/figure-html/mpg-plot-2-1.png (89%)[0K
+ rewrite _book/bspr-workshop-2018_files/figure-html/nice-vplot-1.png (98%)[0K
+ rewrite _book/bspr-workshop-2018_files/figure-html/p-val-plot-1.png (97%)[0K
+ rewrite _book/bspr-workshop-2018_files/figure-html/volcano-plot-1.png (97%)[0K
+ rewrite _bookdown_files/bspr-workshop-2018_files/figure-html/compare-normalisation-1.png (97%)[0K
+ rewrite _bookdown_files/bspr-workshop-2018_files/figure-html/log-fc-1.png (98%)[0K
+ rewrite _bookdown_files/bspr-workshop-2018_files/figure-html/mpg-plot-1,mpg_point_plot-1.png (70%)[0K
+ rewrite _bookdown_files/bspr-workshop-2018_files/figure-html/mpg-plot-2-1.png (89%)[0K
+ rewrite _bookdown_files/bspr-workshop-2018_files/figure-html/nice-vplot-1.png (98%)[0K
+ rewrite _bookdown_files/bspr-workshop-2018_files/figure-html/p-val-plot-1.png (97%)[0K
+ rewrite _bookdown_files/bspr-workshop-2018_files/figure-html/volcano-plot-1.png (97%)[0K
+ rewrite _bookdown_files/bspr-workshop-2018_files/figure-latex/compare-normalisation-1.pdf (87%)[0K
+ rewrite _bookdown_files/bspr-workshop-2018_files/figure-latex/mpg-plot-1,mpg_point_plot-1.pdf (68%)[0K
+ rewrite _bookdown_files/bspr-workshop-2018_files/figure-latex/mpg-plot-2-1.pdf (70%)[0K
+ rewrite _bookdown_files/bspr-workshop-2018_files/figure-latex/nice-vplot-1.pdf (93%)[0K
+ rewrite _bookdown_files/bspr-workshop-2018_files/figure-latex/volcano-plot-1.pdf (94%)[0K
+ create mode 100644 bspr-workshop-2018.Rmd[0K
+[0K[?25h[?25l
+[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K
+$[0K[3G[?25h[?25l$ g[0K[?25hi[0Kt[0K[7G[?25l$ git p[0K[?25hu[0Ks[0K[?25lh[0K[10G[?25h[11G[12G[?25l$ git push o[0K[?25hr[0Ki[0Kg[0Ki[0Kn[0K[19G[?25l$ git push origin m[0K[?25ha[0Ks[0Kt[0Ke[0Kr[0K[?25l
+[0K[?25hTo github.com:ab604/bspr-workshop-2018.git[0K[?25l
+ ! [rejected]        master -> master (fetch first)[0K
+error: failed to push some refs to 'git@github.com:ab604/bspr-workshop-2018.git'[0K
+hint: Updates were rejected because the remote contains work that you do[0K
+hint: not have locally. This is usually caused by another repository pushing[0K
+hint: to the same ref. You may want to first integrate the remote changes[0K
+hint: (e.g., 'git pull ...') before pushing again.[0K
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.[0K
+[0K[?25h[?25l
+[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K
+$[0K[3G[?25h[?25l$ g[0K[?25hi[0Kt[0K[7G[?25l$ git o[0K[?25h[?25lu[0K[8G[?25h[9G[?25l$ git oul[0K[?25hl[0K[?25l$ git oul[0K[?25h[?25l$ git ou[0K[?25h[?25l$ git o[0K[?25h[?25l$ git[0K[7G[?25h[?25l$ git p[0K[?25hu[0Kl[0Kl[0K[?25l
+[0K[?25hremote: Counting objects: 25, done.[0K[?25l
+remote: Compressing objects:  50% (5/10)[0K[1G[?25h[?25lremote: Compressing objects:  60% (6/10)[0K[1G[?25hremote: Compressing objects: 100% (10/10), done.[0K[?25l
+Unpacking objects:  32% (8/25)[0K[1G[?25h[?25lUnpacking objects:  72% (18/25)[0K[1G[?25hremote: Total 25 (delta 14), reused 25 (delta 14), pack-reused 0[0K[?25l
+Unpacking objects:  96% (24/25)[0K[1G[?25hUnpacking objects: 100% (25/25), done.[0K[?25l
+[0K[?25hFrom github.com:ab604/bspr-workshop-2018[0K[?25l
+   d5b673b..7ef6401  master     -> origin/master[0K
+[0K[?25hThere is no tracking information for the current branch.[0K[?25l
+Please specify which branch you want to merge with.[0K
+See git-pull(1) for details.[0K
+[0K
+    git pull <remote> <branch>[0K
+[0K
+If you wish to set tracking information for this branch you can do so with:[0K
+[0K
+    git branch --set-upstream-to=origin/<branch> master[0K
+[0K
+[0K[?25h[?25l
+[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K
+$[0K[3G[?25h[?25l$ git pull[0K[?25h[?25l$ git push origin master[0K[?25h[?25l$ git commit -m "update materials"[0K[?25h[?25l$ git push origin master[0K[?25h[?25l$ git pull[0K[?25h[12G[?25l$ git pull o[0K[?25hr[0Ki[0Kg[0Ki[0Kn[0K[19G[20G[?25l$ git pull origin  m[0K[?25ha[0K[?25l$ git pull origin  m[0K[?25h[?25l$ git pull origin[0K[20G[?25h[19G[?25l$ git pull origin m[0K[?25ha[0Ks[0Kt[0Ke[0Kr[0K[?25l
+[0K[?25hFrom github.com:ab604/bspr-workshop-2018[0K[?25l
+ * branch            master     -> FETCH_HEAD[0K
+[0K[?25hwarning: Cannot merge binary files: _bookdown_files/bspr-workshop-2018_files/figure-latex/volcano-plot-1.pdf (HEAD vs. 7ef640177088ebebaeeb423d300b0f2b571b1a29)[0K[?25l
+warning: Cannot merge binary files: _bookdown_files/bspr-workshop-2018_files/figure-latex/pheatmap-1.pdf (HEAD vs. 7ef640177088ebebaeeb423d300b0f2b571b1a29)[0K
+warning: Cannot merge binary files: _bookdown_files/bspr-workshop-2018_files/figure-latex/p-val-plot-1.pdf (HEAD vs. 7ef640177088ebebaeeb423d300b0f2b571b1a29)[0K
+warning: Cannot merge binary files: _bookdown_files/bspr-workshop-2018_files/figure-latex/nice-vplot-1.pdf (HEAD vs. 7ef640177088ebebaeeb423d300b0f2b571b1a29)[0K
+warning: Cannot merge binary files: _bookdown_files/bspr-workshop-2018_files/figure-latex/mpg-plot-2-1.pdf (HEAD vs. 7ef640177088ebebaeeb423d300b0f2b571b1a29)[0K
+warning: Cannot merge binary files: _bookdown_files/bspr-workshop-2018_files/figure-latex/mpg-plot-1,mpg_point_plot-1.pdf (HEAD vs. 7ef640177088ebebaeeb423d300b0f2b571b1a29)[0K
+warning: Cannot merge binary files: _bookdown_files/bspr-workshop-2018_files/figure-latex/log-fc-1.pdf (HEAD vs. 7ef640177088ebebaeeb423d300b0f2b571b1a29)[0K
+warning: Cannot merge binary files: _bookdown_files/bspr-workshop-2018_files/figure-latex/heatmap2-1.pdf (HEAD vs. 7ef640177088ebebaeeb423d300b0f2b571b1a29)[0K
+warning: Cannot merge binary files: _bookdown_files/bspr-workshop-2018_files/figure-latex/dendrograms-1.pdf (HEAD vs. 7ef640177088ebebaeeb423d300b0f2b571b1a29)[0K
+warning: Cannot merge binary files: _bookdown_files/bspr-workshop-2018_files/figure-latex/compare-normalisation-1.pdf (HEAD vs. 7ef640177088ebebaeeb423d300b0f2b571b1a29)[0K
+Auto-merging packages.bib[0K
+CONFLICT (content): Merge conflict in packages.bib[0K
+Auto-merging _bookdown_files/bspr-workshop-2018_files/figure-latex/volcano-plot-1.pdf[0K
+CONFLICT (content): Merge conflict in _bookdown_files/bspr-workshop-2018_files/figure-latex/volcano-plot-1.pdf[0K
+Auto-merging _bookdown_files/bspr-workshop-2018_files/figure-latex/pheatmap-1.pdf[0K
+CONFLICT (content): Merge conflict in _bookdown_files/bspr-workshop-2018_files/figure-latex/pheatmap-1.pdf[0K
+Auto-merging _bookdown_files/bspr-workshop-2018_files/figure-latex/p-val-plot-1.pdf[0K
+CONFLICT (content): Merge conflict in _bookdown_files/bspr-workshop-2018_files/figure-latex/p-val-plot-1.pdf[0K
+Auto-merging _bookdown_files/bspr-workshop-2018_files/figure-latex/nice-vplot-1.pdf[0K
+CONFLICT (content): Merge conflict in _bookdown_files/bspr-workshop-2018_files/figure-latex/nice-vplot-1.pdf[0K
+Auto-merging _bookdown_files/bspr-workshop-2018_files/figure-latex/mpg-plot-2-1.pdf[0K
+CONFLICT (content): Merge conflict in _bookdown_files/bspr-workshop-2018_files/figure-latex/mpg-plot-2-1.pdf[0K
+Auto-merging _bookdown_files/bspr-workshop-2018_files/figure-latex/mpg-plot-1,mpg_point_plot-1.pdf[0K
+CONFLICT (content): Merge conflict in _bookdown_files/bspr-workshop-2018_files/figure-latex/mpg-plot-1,mpg_point_plot-1.pdf[0K
+Auto-merging _bookdown_files/bspr-workshop-2018_files/figure-latex/log-fc-1.pdf[0K
+CONFLICT (content): Merge conflict in _bookdown_files/bspr-workshop-2018_files/figure-latex/log-fc-1.pdf[0K
+Auto-merging _bookdown_files/bspr-workshop-2018_files/figure-latex/heatmap2-1.pdf[0K
+CONFLICT (content): Merge conflict in _bookdown_files/bspr-workshop-2018_files/figure-latex/heatmap2-1.pdf[0K
+Auto-merging _bookdown_files/bspr-workshop-2018_files/figure-latex/dendrograms-1.pdf[0K
+CONFLICT (content): Merge conflict in _bookdown_files/bspr-workshop-2018_files/figure-latex/dendrograms-1.pdf[0K
+Auto-merging _bookdown_files/bspr-workshop-2018_files/figure-latex/compare-normalisation-1.pdf[0K
+CONFLICT (content): Merge conflict in _bookdown_files/bspr-workshop-2018_files/figure-latex/compare-normalisation-1.pdf[0K
+Auto-merging .Rproj.user/shared/notebooks/paths[0K
+CONFLICT (content): Merge conflict in .Rproj.user/shared/notebooks/paths[0K
+[0K[?25hAutomatic merge failed; fix conflicts and then commit the result.[0K[?25l
+[0K[?25h[?25l
+[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master|MERGING)[0m[0K
+$[0K[3G[?25h[?25l$ git pull origin master[0K[?25h[?25l$ git pull[0K[?25h[?25l$ git push origin master[0K[?25h[?25l$ git commit -m "update materials"[0K[25G[?25h[35G[?25l$ git add .[0K[?25h[?25l$ git status[0K[?25h[?25l$ jupyter notebook[0K[?25h[?25l$ git status[0K[?25h[?25l$ git add .[0K[?25h[?25l$ git commit -m "update materials"[0K[?25h[?25l$ git push origin master[0K[?25h[24G[22G[21G[20G[19G[18G[17G[16G[15G[14G[13G[12G[11G[?25l$ git push  origin master[0K[12G[?25h[?25l$ git push - origin master[0K[13G[?25h[?25l$ git push -f origin master[0K[14G[?25h[?25l
+[0K[?25hCounting objects: 51, done.[0K[?25l
+Delta compression using up to 16 threads.[0K
+Compressing objects:  59% (29/49)[0K[1G[?25hCompressing objects: 100% (49/49), done.[0K[?25l
+Writing objects:  45% (23/51)[0K[1G[?25h[?25lWriting objects:  96% (49/51)[0K[1G[?25hWriting objects: 100% (51/51), 314.37 KiB | 0 bytes/s, done.[0K[?25l
+Total 51 (delta 32), reused 0 (delta 0)[0K
+[0K[?25h[?25lremote: Resolving deltas:  28% (9/32)[0K[1G[?25hremote: Resolving deltas: 100% (32/32), completed with 30 local objects.[0K[?25l
+[0K[?25hTo github.com:ab604/bspr-workshop-2018.git[0K[?25l
+ + 7ef6401...f5ad3c8 master -> master (forced update)[0K
+[0K[?25h[?25l
+[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master|MERGING)[0m[0K
+$[0K[3G[?25h[?25l$ Quotation number : 21773009[0K[?25h[?25l$ Quotation number : 2177300[0K[?25h[?25l$ Quotation number : 217730[0K[?25h[?25l$ Quotation number : 21773[0K[?25h[?25l$ Quotation number : 2177[0K[?25h[?25l$ Quotation number : 217[0K[?25h[?25l$ Quotation number : 21[0K[?25h[?25l$ Quotation number : 2[0K[?25h[?25l$ Quotation number :[0K[22G[?25h[21G[?25l$ Quotation number[0K[20G[?25h[19G[?25l$ Quotation numbe[0K[19G[?25h[?25l$ Quotation numb[0K[18G[?25h[?25l$ Quotation num[0K[17G[?25h[?25l$ Quotation nu[0K[16G[?25h[15G[?25l$ Quotation n[0K[?25h[?25l$ Quotation[0K[13G[?25h[12G[?25l$ Quotatio[0K[?25h[?25l$ Quotati[0K[?25h[?25l$ Quotat[0K[?25h[?25l$ Quota[0K[?25h[?25l$ Quot[0K[?25h[?25l$ Quo[0K[?25h[?25l$ Qu[0K[?25h[?25l$ Q[0K[?25h[?25l$[0K[3G[?25h[?25l$ g[0K[3G[?25h[4G[?25l$ gi[0K[?25ht[0K[7G[?25l$ git s[0K[?25ht[0Ka[0Ku[0Ks[0K[?25l$ git stau[0K[12G[?25h[11G[?25l$ git sta[0K[?25ht[0Ku[0K[?25ls[0K[12G[?25h[13G[?25l
+[0K[?25hOn branch master[0K[?25l
+You have unmerged paths.[0K
+  (fix conflicts and run "git commit")[0K
+  (use "git merge --abort" to abort the merge)[0K
+[0K
+Changes to be committed:[0K
+[0K
+        [0;32mmodified:   _book/bspr-workshop-2018.tex[0m[0K
+        [0;32mnew file:   bspr-workshop-2018.log[0m[0K
+        [0;32mnew file:   missfont.log[0m[0K
+[0K
+Unmerged paths:[0K
+  (use "git add <file>..." to mark resolution)[0K
+[0K
+        [0;31mboth modified:   .Rproj.user/shared/notebooks/paths[0m[0K
+        [0;31mboth modified:   _bookdown_files/bspr-workshop-2018_files/figure-latex/compare-normalisation-1.pdf[0m[0K
+        [0;31mboth modified:   _bookdown_files/bspr-workshop-2018_files/figure-latex/dendrograms-1.pdf[0m[0K
+        [0;31mboth modified:   _bookdown_files/bspr-workshop-2018_files/figure-latex/heatmap2-1.pdf[0m[0K
+        [0;31mboth modified:   _bookdown_files/bspr-workshop-2018_files/figure-latex/log-fc-1.pdf[0m[0K
+        [0;31mboth modified:   _bookdown_files/bspr-workshop-2018_files/figure-latex/mpg-plot-1,mpg_point_plot-1.pdf[0m[0K
+        [0;31mboth modified:   _bookdown_files/bspr-workshop-2018_files/figure-latex/mpg-plot-2-1.pdf[0m[0K
+        [0;31mboth modified:   _bookdown_files/bspr-workshop-2018_files/figure-latex/nice-vplot-1.pdf[0m[0K
+        [0;31mboth modified:   _bookdown_files/bspr-workshop-2018_files/figure-latex/p-val-plot-1.pdf[0m[0K
+        [0;31mboth modified:   _bookdown_files/bspr-workshop-2018_files/figure-latex/pheatmap-1.pdf[0m[0K
+        [0;31mboth modified:   _bookdown_files/bspr-workshop-2018_files/figure-latex/volcano-plot-1.pdf[0m[0K
+        [0;31mboth modified:   packages.bib[0m[0K
+[0K
+Changes not staged for commit:[0K
+  (use "git add <file>..." to update what will be committed)[0K
+  (use "git checkout -- <file>..." to discard changes in working directory)[0K
+[0K
+        [0;31mmodified:   .Rproj.user/6F98EBE9/console06/CAEA8888[0m[0K
+[0K
+[0K[?25h[?25l
+[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master|MERGING)[0m[0K
+$[0K[3G[?25h[?25l$ i[0K[?25hg[0Kt[0K[?25l$ ig[0K[?25h[?25l$ i[0K[?25h[?25l$[0K[4G[?25h[3G[?25l$ g[0K[?25hi[0Kt[0K[7G[?25l$ git a[0K[?25hd[0Kd[0K[11G[?25l$ git add .[0K[?25h[?25l
+[0K[?25h
