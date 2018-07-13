@@ -171,11 +171,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="5.8.1" data-path="transform.html"><a href="transform.html#calculating-similarity-and-clustering"><i class="fa fa-check"></i><b>5.8.1</b> Calculating similarity and clustering</a></li>
 <li class="chapter" data-level="5.8.2" data-path="transform.html"><a href="transform.html#plotting-the-heatmap"><i class="fa fa-check"></i><b>5.8.2</b> Plotting the heatmap</a></li>
 </ul></li>
-<li class="chapter" data-level="5.9" data-path="transform.html"><a href="transform.html#venn-diagram"><i class="fa fa-check"></i><b>5.9</b> Venn diagram</a></li>
+<li class="chapter" data-level="5.9" data-path="transform.html"><a href="transform.html#venn"><i class="fa fa-check"></i><b>5.9</b> Venn diagram</a></li>
 <li class="chapter" data-level="5.10" data-path="transform.html"><a href="transform.html#peptide-sequence-logos"><i class="fa fa-check"></i><b>5.10</b> Peptide sequence logos</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="going-further.html"><a href="going-further.html"><i class="fa fa-check"></i><b>6</b> Going further</a><ul>
-<li class="chapter" data-level="6.1" data-path="going-further.html"><a href="going-further.html#exporting-figures"><i class="fa fa-check"></i><b>6.1</b> Exporting figures</a></li>
+<li class="chapter" data-level="6.1" data-path="going-further.html"><a href="going-further.html#export-figs"><i class="fa fa-check"></i><b>6.1</b> Exporting figures</a></li>
 <li class="chapter" data-level="6.2" data-path="going-further.html"><a href="going-further.html#exporting-data"><i class="fa fa-check"></i><b>6.2</b> Exporting data</a><ul>
 <li class="chapter" data-level="6.2.1" data-path="going-further.html"><a href="going-further.html#writing-to-a-file"><i class="fa fa-check"></i><b>6.2.1</b> Writing to a file</a></li>
 <li class="chapter" data-level="6.2.2" data-path="going-further.html"><a href="going-further.html#for-r"><i class="fa fa-check"></i><b>6.2.2</b> For R</a></li>
@@ -208,9 +208,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="going-further" class="section level1">
 <h1><span class="header-section-number">Chapter 6</span> Going further</h1>
 <p>Here are a few links and suggestions about what else you might like to do with R.</p>
-<div id="exporting-figures" class="section level2">
+<div id="export-figs" class="section level2">
 <h2><span class="header-section-number">6.1</span> Exporting figures</h2>
-<p>Exporting figures is best done using the following structure:</p>
+<p>Exporting figures can be done using the following structure:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Open up a blank plot file, pdf,jpeg etc.</span>
 <span class="op">&lt;</span><span class="kw">plot_function</span>(<span class="st">&quot;file&quot;</span>,...)<span class="op">&gt;</span>
 <span class="co"># Write the plot to the file</span>
@@ -244,6 +244,26 @@ dat_tf <span class="op">%&gt;%</span>
 <p>If I had saved the plot to an object called <code>vplot</code> I would call that object instead of making the plot using <code>dat_tf</code> as shown here.</p>
 <p><a href="https://www.stat.berkeley.edu/classes/s133/saving.html">Here</a> is a general guide to the various formats you can export to.</p>
 <p>Alternatively, if you are working in <code>ggplot</code> you can use the <code>ggsave</code> function as described in <a href="http://r4ds.had.co.nz/graphics-for-communication.html#saving-your-plots">R4DS 28.7</a>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Plot</span>
+dat_tf <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># Add a threhold for significant observations</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">threshold =</span> <span class="kw">if_else</span>(log_fc <span class="op">&gt;=</span><span class="st"> </span><span class="dv">2</span> <span class="op">&amp;</span><span class="st"> </span>log_pval <span class="op">&gt;=</span><span class="st"> </span><span class="fl">1.3</span> <span class="op">|</span>
+<span class="st">                               </span>log_fc <span class="op">&lt;=</span><span class="st"> </span><span class="op">-</span><span class="dv">2</span> <span class="op">&amp;</span><span class="st"> </span>log_pval <span class="op">&gt;=</span><span class="st"> </span><span class="fl">1.3</span>,<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># Plot with points coloured according to the threshold</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(log_fc,log_pval, <span class="dt">colour =</span> threshold)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span><span class="st"> </span><span class="co"># Alpha sets the transparency of the points</span>
+<span class="st">  </span><span class="co"># Add dotted lines to indicate the threshold, semi-transparent</span>
+<span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="fl">1.3</span>, <span class="dt">linetype =</span> <span class="dv">2</span>, <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="dv">2</span>, <span class="dt">linetype =</span> <span class="dv">2</span>, <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="op">-</span><span class="dv">2</span>, <span class="dt">linetype =</span> <span class="dv">2</span>, <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span>
+<span class="st">  </span><span class="co"># Set the colour of the points</span>
+<span class="st">  </span><span class="kw">scale_colour_manual</span>(<span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&quot;A&quot;</span>=<span class="st"> &quot;red&quot;</span>, <span class="st">&quot;B&quot;</span>=<span class="st"> &quot;black&quot;</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;log2 fold change&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;-log10 p-value&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="co"># Relabel the axes</span>
+<span class="st">  </span><span class="kw">theme_minimal</span>() <span class="op">+</span><span class="st"> </span><span class="co"># Set the theme</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position=</span><span class="st">&quot;none&quot;</span>) <span class="co"># Hide the legend</span>
+
+<span class="co"># Use ggsave to save the plot as pdf</span>
+<span class="kw">ggsave</span>(<span class="st">&quot;volcano_plot.pdf&quot;</span>, <span class="dt">width =</span> <span class="dv">20</span>, <span class="dt">height =</span> <span class="dv">20</span>, <span class="dt">units =</span> <span class="st">&quot;cm&quot;</span>)</code></pre></div>
 </div>
 <div id="exporting-data" class="section level2">
 <h2><span class="header-section-number">6.2</span> Exporting data</h2>
@@ -283,6 +303,8 @@ dat_tf <span class="op">%&gt;%</span>
 </div>
 <div id="version-control" class="section level2">
 <h2><span class="header-section-number">6.6</span> Version control</h2>
+<p>Another thing you may wish to consider is version control, <em>“a system that records changes to a file or set of files over time so that you can recall specific versions later”.</em></p>
+<p>To get started, have a look at these <a href="https://speakerdeck.com/alicebartlett/git-for-humans">slides by Alice Bartlett</a> and check out the <a href="https://support.rstudio.com/hc/en-us/articles/200532077-Version-Control-with-Git-and-SVN">Rstudio version control guide</a>.</p>
 
 </div>
 </div>

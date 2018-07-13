@@ -289,7 +289,7 @@ Historically R converts strings to factors when we load and create data, but
 it's often not what we want as a default. Fortunately, in the tidyverse strings
 are not treated as factors by default.
 
-### Lists
+### Lists {#lists}
 
 Lists also group data into one dimensional sets of data. The difference being 
 that list group objects instead of individual values, such as several atomic 

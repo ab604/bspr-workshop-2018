@@ -747,31 +747,59 @@ dat_scaled %>%
            cutree_cols = 2) # Create breaks in heatmap
 ```
 
-## Venn diagram
+## Venn diagram {#venn}
 
 Another common plot used in proteomics is the Venn diagram. For these I use
 the `VennDiagram` package [@R-VennDiagram].
 
 For example if we wanted to compare the protein identifications found in the
-control and treatment sets of our data we could compare the protein accessions found
-in each condition. To do this we need to transform the data for example using
-the following steps:
+control and treatment sets of our data we could compare the protein accessions 
+found in each control experiment to see how well they replicate. 
+To do this we need to transform the data, for example using the following steps:
 
-1. 
+1. Rather than having variables for the protein concentrations called `control_1`,
+`control_2` etc. in this situation it would make more sense to have a variable
+called `concentration` and create a new variable for the experiments using the
+column labels, which I'll call `exp_type`. Why? By creating a variable with
+the experiment names, we can use `filter` to easily subset the identified
+proteins in each experiment using our new variable, as we'll see. 
+
+This is an example of using the 
+`gather` function. The `key` is the new column we wish to gather the old
+column names to, and `value` is the new column in which the values from the
+gathered columns go. I've given the new columns the names `exp_type` and `value`
+respectively. We don't want to gather the `protein_accession` or
+`protein_description` columns, so I use `c()` and use the minus sign to negate 
+them. These rows get duplicated to match the gathered observations. Hence we
+go from 7702 observations of 8 variables, to 46212 observations of 4 variables
+when we gather the 6 control and treatment columns. 
+
+To do the opposite i.e. spread one column to many columns, unsuprisingly uses
+the function `spread`. You can read more about both `gather` and `spread` in 
+the [R4DS tidy data chapter](http://r4ds.had.co.nz/tidy-data.html#spreading-and-gathering).
 
 ```{r transform-venn, fig.asp=1}
 # Transform data for Venn diagram to create long table with three columns 
 venn_dat <- dat %>%
-  # Drop protein description
-  select(-protein_description) %>% 
   # Gather columns according to experiment type to create exp_type 
   # and concentration variables. Don't use the protein accession.
-               gather(key = exp_type, value = concentration, -protein_accession)
+               gather(key = exp_type, value = concentration, 
+                      -c(protein_accession,protein_description))
 
-venn_dat
+# Glimpse the gathered data
+glimpse(venn_dat)
 ```
 
-```{r plot-venn}
+2. Having transformed the data, we then create three new objects that
+`filter` the rows for the three control assays using their names, and where
+a concentration was observed using `!is.na()`. The `!` means not and `is.na` tests
+for missing values labelled `NA`. So read this as
+*where concentration is not a missing value*. The output of filter is piped to
+the dplyr `pull` function which pulls out the values from the `protein_accession`
+column which are stored in the object. These are character vectors, so repeating
+this for all three experiment yields three character vectors of different sizes.
+
+```{r filter-venn}
 venn_cntl_1 <- venn_dat %>% 
   filter(exp_type == "control_1" & !is.na(concentration)) %>% 
   pull(protein_accession)
@@ -783,16 +811,41 @@ venn_cntl_2 <- venn_dat %>%
 venn_cntl_3 <- venn_dat %>% 
   filter(exp_type == "control_3" & !is.na(concentration)) %>% 
   pull(protein_accession)
+```
 
+3. The three character vectors can be collected into a single object, but as 
+they are different lengths, it has to be a [list object](#lists). Here we use `list()`
+to create a list of the three character vectors created in step 2. Note that
+I've named the list elements using strings in quotes e.g. `"Control 1"` this
+allows for a space in the names as I want to use these names on the venn diagram.
+
+```{r venn-list}
+# Create a list for plotting
 venn_list <- list("Control 1" = venn_cntl_1,
                   "Control 2" = venn_cntl_2,
                   "Control 3" = venn_cntl_3)
+```
 
+4. Finally we can plot the venn diagram using the list object`venn_list` to
+create a venn diagram object `prot_venn` using `venn.diagram` function from the
+`VennDiagram` package [@R-VennDiagram] and then plotting `prot_venn` using
+`grid.arrange` from the `gridExtra` package [@R-gridExtra].
+
+I'll leave as an exercise for the reader to look at all the options for
+`venn.diagram` and `grid.arrange`, but a couple of things to note here are
+that you can create three or four way venn diagrams, and if you create 
+several venn diagram objects, they can be plotted on the same plot using 
+`grid arrange`. Also here I've added a line to prevent the output of a log file
+using `futile.logger`. You might want these, but generally I don't.
+
+(ref:control-venn) Venn diagram of proteins identified in three control experiments
+
+```{r venn-plot,fig.cap='(ref:control-venn)', fig.asp=1,fig.align='center'}
+# Prevent the output of a log file
 futile.logger::flog.threshold(futile.logger::ERROR, name = "VennDiagramLogger")
 
+# Create a venn diagram object
 prot_venn <- venn.diagram(venn_list,NULL, 
-               #height = 1000,
-               #width = 1000,
                col = "transparent",
                fill = c("cornflowerblue", "green", "yellow"),
                alpha = 0.50,
@@ -801,37 +854,60 @@ prot_venn <- venn.diagram(venn_list,NULL,
                fontface = "bold",
                cat.col = c("darkblue", "darkgreen", "orange"),
                cat.cex = 0.8,
-               #cat.pos = 0,
-               #cat.dist = 0.07,
                cat.fontfamily = "sans",
-               #rotation.degree = 270,
                margin = 0.2,
                main = "Proteins identified in control experiments",
                main.fontfamily = "sans",
-               print.mode = c("raw","percent"),
+               print.mode = c("raw","percent"), # Show both numbers and percent
                main.pos = c(0.5,0.9)
   )
 
+# Plot the venn diagram using the gridExtra package
 grid.arrange(gTree(children = prot_venn))
 ```
 
-
+Figure \@ref(fig:venn-plot) then shows us that there is a core of around 1500
+proteins identified in all three control experiements. You could try something
+similar with the treatment experiments.
 
 ## Peptide sequence logos
 
 Finally, creating sequence logos from peptides is another common task, especially
-if you are doing immunopeptidomics and would like to explore the fequency of
-amino acid types at each position in a set of peptide sequences. The
-`ggseqlogo` package enables us to do this `ggplot` style [@R-ggseqlogo].
+if you are doing immunopeptidomics or any situatio where you would like to explore 
+the fequency of amino acid types at each position in a set of peptide sequences.
+The`ggseqlogo` package enables us to do this `ggplot2` style [@R-ggseqlogo] for
+protein, DNA and RNA sequences.
 
 Here using sample data that comes with the ggseqlogo package and illusrated
 in the [ggseqlogo tutorial](https://omarwagih.github.io/ggseqlogo/).
 
-As with the venn diagram, we need a list to contain our groups of 
-peptides as they
+As with the venn diagram, peptide vectors are not generally of equal length 
+and therefore are collected into a [list object](#lists). We don't have any
+peptides in the example data for the workshop, but the concept of using `pull`
+to extract character vectors was shown in Section \@ref(venn). In this
+scenario we'd be extracting character vectors of the peptide sequences and then
+collecting them as a named list.
+
+`ggseqlogo` provides some data `seqs_aa` containing a sets of kinase-substrate 
+phosphorylation sites. This is represented as a named list of character vectors 
+where the names represent the names of the kinases associated with the 
+phosphosites.
+
+Below, we load the example data and then the plotting uses the `ggseqlogo` function
+which as with `ggplot` the first arguement is the data. Other arguements can 
+be passed either within the function or added using the `+` operater as per
+`ggplot`.
+
+Here are two examples:
 
 ```{r ggseqlogo}
+# Load the example data
 data(ggseqlogo_sample)
 
-ggseqlogo(seqs_aa, method='p')
+# Plot the protein sequences with default arguements 
+ggseqlogo(data = seqs_aa)
+
+# Plot the protein sequences, plotting probability, and change the theme
+ggseqlogo(data = seqs_aa, method = 'prob') +
+  theme_classic()
 ```

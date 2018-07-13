@@ -128,7 +128,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{July 12 2018}
+    \date{July 13 2018}
 
 \usepackage{booktabs}
 
@@ -1000,7 +1000,7 @@ Historically R converts strings to factors when we load and create data,
 but it's often not what we want as a default. Fortunately, in the
 tidyverse strings are not treated as factors by default.
 
-\subsection{Lists}\label{lists}
+\hypertarget{lists}{\subsection{Lists}\label{lists}}
 
 Lists also group data into one dimensional sets of data. The difference
 being that list group objects instead of individual values, such as
@@ -2724,51 +2724,87 @@ so do explore.
 highlight clusters.}\label{fig:pheatmap}
 \end{figure}
 
-\section{Venn diagram}\label{venn-diagram}
+\section{Venn diagram}\label{venn}
 
 Another common plot used in proteomics is the Venn diagram. For these I
 use the \texttt{VennDiagram} package \citep{R-VennDiagram}.
 
 For example if we wanted to compare the protein identifications found in
 the control and treatment sets of our data we could compare the protein
-accessions found in each condition. To do this we need to transform the
-data for example using the following steps:
+accessions found in each control experiment to see how well they
+replicate. To do this we need to transform the data, for example using
+the following steps:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
+\tightlist
 \item
+  Rather than having variables for the protein concentrations called
+  \texttt{control\_1}, \texttt{control\_2} etc. in this situation it
+  would make more sense to have a variable called \texttt{concentration}
+  and create a new variable for the experiments using the column labels,
+  which I'll call \texttt{exp\_type}. Why? By creating a variable with
+  the experiment names, we can use \texttt{filter} to easily subset the
+  identified proteins in each experiment using our new variable, as
+  we'll see.
 \end{enumerate}
+
+This is an example of using the \texttt{gather} function. The
+\texttt{key} is the new column we wish to gather the old column names
+to, and \texttt{value} is the new column in which the values from the
+gathered columns go. I've given the new columns the names
+\texttt{exp\_type} and \texttt{value} respectively. We don't want to
+gather the \texttt{protein\_accession} or \texttt{protein\_description}
+columns, so I use \texttt{c()} and use the minus sign to negate them.
+These rows get duplicated to match the gathered observations. Hence we
+go from 7702 observations of 8 variables, to 46212 observations of 4
+variables when we gather the 6 control and treatment columns.
+
+To do the opposite i.e.~spread one column to many columns, unsuprisingly
+uses the function \texttt{spread}. You can read more about both
+\texttt{gather} and \texttt{spread} in the
+\href{http://r4ds.had.co.nz/tidy-data.html\#spreading-and-gathering}{R4DS
+tidy data chapter}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{# Transform data for Venn diagram to create long table with three columns }
 \NormalTok{venn_dat <-}\StringTok{ }\NormalTok{dat }\OperatorTok{%>%}
-\StringTok{  }\CommentTok{# Drop protein description}
-\StringTok{  }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\NormalTok{protein_description) }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\CommentTok{# Gather columns according to experiment type to create exp_type }
 \StringTok{  }\CommentTok{# and concentration variables. Don't use the protein accession.}
-\StringTok{               }\KeywordTok{gather}\NormalTok{(}\DataTypeTok{key =}\NormalTok{ exp_type, }\DataTypeTok{value =}\NormalTok{ concentration, }\OperatorTok{-}\NormalTok{protein_accession)}
+\StringTok{               }\KeywordTok{gather}\NormalTok{(}\DataTypeTok{key =}\NormalTok{ exp_type, }\DataTypeTok{value =}\NormalTok{ concentration, }
+                      \OperatorTok{-}\KeywordTok{c}\NormalTok{(protein_accession,protein_description))}
 
-\NormalTok{venn_dat}
+\CommentTok{# Glimpse the gathered data}
+\KeywordTok{glimpse}\NormalTok{(venn_dat)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## # A tibble: 46,212 x 3
-##    protein_accession  exp_type  concentration
-##    <chr>              <chr>             <dbl>
-##  1 VATA_HUMAN_P38606  control_1         0.811
-##  2 RL35A_HUMAN_P18077 control_1         0.367
-##  3 MYH10_HUMAN_P35580 control_1         2.98 
-##  4 RHOG_HUMAN_P84095  control_1         0.142
-##  5 PSA1_HUMAN_P25786  control_1         1.07 
-##  6 PRDX5_HUMAN_P30044 control_1         0.566
-##  7 ACLY_HUMAN_P53396  control_1         5.00 
-##  8 VDAC2_HUMAN_P45880 control_1         1.35 
-##  9 LRC47_HUMAN_Q8N1G4 control_1         0.927
-## 10 CH60_HUMAN_P10809  control_1         9.45 
-## # ... with 46,202 more rows
+## Observations: 46,212
+## Variables: 4
+## $ protein_accession   <chr> "VATA_HUMAN_P38606", "RL35A_HUMAN_P18077",...
+## $ protein_description <chr> "V-type proton ATPase catalytic subunit A ...
+## $ exp_type            <chr> "control_1", "control_1", "control_1", "co...
+## $ concentration       <dbl> 0.8114, 0.3672, 2.9815, 0.1424, 1.0748, 0....
 \end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Having transformed the data, we then create three new objects that
+  \texttt{filter} the rows for the three control assays using their
+  names, and where a concentration was observed using \texttt{!is.na()}.
+  The \texttt{!} means not and \texttt{is.na} tests for missing values
+  labelled \texttt{NA}. So read this as \emph{where concentration is not
+  a missing value}. The output of filter is piped to the dplyr
+  \texttt{pull} function which pulls out the values from the
+  \texttt{protein\_accession} column which are stored in the object.
+  These are character vectors, so repeating this for all three
+  experiment yields three character vectors of different sizes.
+\end{enumerate}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2783,11 +2819,59 @@ data for example using the following steps:
 \NormalTok{venn_cntl_}\DecValTok{3}\NormalTok{ <-}\StringTok{ }\NormalTok{venn_dat }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{filter}\NormalTok{(exp_type }\OperatorTok{==}\StringTok{ "control_3"} \OperatorTok{&}\StringTok{ }\OperatorTok{!}\KeywordTok{is.na}\NormalTok{(concentration)) }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{pull}\NormalTok{(protein_accession)}
+\end{Highlighting}
+\end{Shaded}
 
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  The three character vectors can be collected into a single object, but
+  as they are different lengths, it has to be a
+  \protect\hyperlink{lists}{list object}. Here we use \texttt{list()} to
+  create a list of the three character vectors created in step 2. Note
+  that I've named the list elements using strings in quotes e.g.
+  \texttt{"Control\ 1"} this allows for a space in the names as I want
+  to use these names on the venn diagram.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Create a list for plotting}
 \NormalTok{venn_list <-}\StringTok{ }\KeywordTok{list}\NormalTok{(}\StringTok{"Control 1"}\NormalTok{ =}\StringTok{ }\NormalTok{venn_cntl_}\DecValTok{1}\NormalTok{,}
                   \StringTok{"Control 2"}\NormalTok{ =}\StringTok{ }\NormalTok{venn_cntl_}\DecValTok{2}\NormalTok{,}
                   \StringTok{"Control 3"}\NormalTok{ =}\StringTok{ }\NormalTok{venn_cntl_}\DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Finally we can plot the venn diagram using the list
+  object\texttt{venn\_list} to create a venn diagram object
+  \texttt{prot\_venn} using \texttt{venn.diagram} function from the
+  \texttt{VennDiagram} package \citep{R-VennDiagram} and then plotting
+  \texttt{prot\_venn} using \texttt{grid.arrange} from the
+  \texttt{gridExtra} package \citep{R-gridExtra}.
+\end{enumerate}
+
+I'll leave as an exercise for the reader to look at all the options for
+\texttt{venn.diagram} and \texttt{grid.arrange}, but a couple of things
+to note here are that you can create three or four way venn diagrams,
+and if you create several venn diagram objects, they can be plotted on
+the same plot using \texttt{grid\ arrange}. Also here I've added a line
+to prevent the output of a log file using \texttt{futile.logger}. You
+might want these, but generally I don't.
+
+
+
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Prevent the output of a log file}
 \NormalTok{futile.logger}\OperatorTok{::}\KeywordTok{flog.threshold}\NormalTok{(futile.logger}\OperatorTok{::}\NormalTok{ERROR, }\DataTypeTok{name =} \StringTok{"VennDiagramLogger"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -2798,9 +2882,8 @@ data for example using the following steps:
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\CommentTok{# Create a venn diagram object}
 \NormalTok{prot_venn <-}\StringTok{ }\KeywordTok{venn.diagram}\NormalTok{(venn_list,}\OtherTok{NULL}\NormalTok{, }
-               \CommentTok{#height = 1000,}
-               \CommentTok{#width = 1000,}
                \DataTypeTok{col =} \StringTok{"transparent"}\NormalTok{,}
                \DataTypeTok{fill =} \KeywordTok{c}\NormalTok{(}\StringTok{"cornflowerblue"}\NormalTok{, }\StringTok{"green"}\NormalTok{, }\StringTok{"yellow"}\NormalTok{),}
                \DataTypeTok{alpha =} \FloatTok{0.50}\NormalTok{,}
@@ -2809,56 +2892,96 @@ data for example using the following steps:
                \DataTypeTok{fontface =} \StringTok{"bold"}\NormalTok{,}
                \DataTypeTok{cat.col =} \KeywordTok{c}\NormalTok{(}\StringTok{"darkblue"}\NormalTok{, }\StringTok{"darkgreen"}\NormalTok{, }\StringTok{"orange"}\NormalTok{),}
                \DataTypeTok{cat.cex =} \FloatTok{0.8}\NormalTok{,}
-               \CommentTok{#cat.pos = 0,}
-               \CommentTok{#cat.dist = 0.07,}
                \DataTypeTok{cat.fontfamily =} \StringTok{"sans"}\NormalTok{,}
-               \CommentTok{#rotation.degree = 270,}
                \DataTypeTok{margin =} \FloatTok{0.2}\NormalTok{,}
                \DataTypeTok{main =} \StringTok{"Proteins identified in control experiments"}\NormalTok{,}
                \DataTypeTok{main.fontfamily =} \StringTok{"sans"}\NormalTok{,}
-               \DataTypeTok{print.mode =} \KeywordTok{c}\NormalTok{(}\StringTok{"raw"}\NormalTok{,}\StringTok{"percent"}\NormalTok{),}
+               \DataTypeTok{print.mode =} \KeywordTok{c}\NormalTok{(}\StringTok{"raw"}\NormalTok{,}\StringTok{"percent"}\NormalTok{), }\CommentTok{# Show both numbers and percent}
                \DataTypeTok{main.pos =} \KeywordTok{c}\NormalTok{(}\FloatTok{0.5}\NormalTok{,}\FloatTok{0.9}\NormalTok{)}
 \NormalTok{  )}
 
+\CommentTok{# Plot the venn diagram using the gridExtra package}
 \KeywordTok{grid.arrange}\NormalTok{(}\KeywordTok{gTree}\NormalTok{(}\DataTypeTok{children =}\NormalTok{ prot_venn))}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bspr-workshop-2018_files/figure-latex/plot-venn-1.pdf}
+\begin{figure}
+
+{\centering \includegraphics{bspr-workshop-2018_files/figure-latex/venn-plot-1} 
+
+}
+
+\caption{Venn diagram of proteins identified in three control
+experiments}\label{fig:venn-plot}
+\end{figure}
+
+Figure \ref{fig:venn-plot} then shows us that there is a core of around
+1500 proteins identified in all three control experiements. You could
+try something similar with the treatment experiments.
 
 \section{Peptide sequence logos}\label{peptide-sequence-logos}
 
 Finally, creating sequence logos from peptides is another common task,
-especially if you are doing immunopeptidomics and would like to explore
-the fequency of amino acid types at each position in a set of peptide
-sequences. The \texttt{ggseqlogo} package enables us to do this
-\texttt{ggplot} style \citep{R-ggseqlogo}.
+especially if you are doing immunopeptidomics or any situatio where you
+would like to explore the fequency of amino acid types at each position
+in a set of peptide sequences. The\texttt{ggseqlogo} package enables us
+to do this \texttt{ggplot2} style \citep{R-ggseqlogo} for protein, DNA
+and RNA sequences.
 
 Here using sample data that comes with the ggseqlogo package and
 illusrated in the
 \href{https://omarwagih.github.io/ggseqlogo/}{ggseqlogo tutorial}.
 
-As with the venn diagram, we need a list to contain our groups of
-peptides as they
+As with the venn diagram, peptide vectors are not generally of equal
+length and therefore are collected into a \protect\hyperlink{lists}{list
+object}. We don't have any peptides in the example data for the
+workshop, but the concept of using \texttt{pull} to extract character
+vectors was shown in Section \ref{venn}. In this scenario we'd be
+extracting character vectors of the peptide sequences and then
+collecting them as a named list.
+
+\texttt{ggseqlogo} provides some data \texttt{seqs\_aa} containing a
+sets of kinase-substrate phosphorylation sites. This is represented as a
+named list of character vectors where the names represent the names of
+the kinases associated with the phosphosites.
+
+Below, we load the example data and then the plotting uses the
+\texttt{ggseqlogo} function which as with \texttt{ggplot} the first
+arguement is the data. Other arguements can be passed either within the
+function or added using the \texttt{+} operater as per \texttt{ggplot}.
+
+Here are two examples:
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\CommentTok{# Load the example data}
 \KeywordTok{data}\NormalTok{(ggseqlogo_sample)}
 
-\KeywordTok{ggseqlogo}\NormalTok{(seqs_aa, }\DataTypeTok{method=}\StringTok{'p'}\NormalTok{)}
+\CommentTok{# Plot the protein sequences with default arguements }
+\KeywordTok{ggseqlogo}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ seqs_aa)}
 \end{Highlighting}
 \end{Shaded}
 
 \includegraphics{bspr-workshop-2018_files/figure-latex/ggseqlogo-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Plot the protein sequences, plotting probability, and change the theme}
+\KeywordTok{ggseqlogo}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ seqs_aa, }\DataTypeTok{method =} \StringTok{'prob'}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme_classic}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bspr-workshop-2018_files/figure-latex/ggseqlogo-2.pdf}
 
 \chapter{Going further}\label{going-further}
 
 Here are a few links and suggestions about what else you might like to
 do with R.
 
-\section{Exporting figures}\label{exporting-figures}
+\section{Exporting figures}\label{export-figs}
 
-Exporting figures is best done using the following structure:
+Exporting figures can be done using the following structure:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2913,6 +3036,31 @@ Alternatively, if you are working in \texttt{ggplot} you can use the
 \texttt{ggsave} function as described in
 \href{http://r4ds.had.co.nz/graphics-for-communication.html\#saving-your-plots}{R4DS
 28.7}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Plot}
+\NormalTok{dat_tf }\OperatorTok{%>%}
+\StringTok{  }\CommentTok{# Add a threhold for significant observations}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{threshold =} \KeywordTok{if_else}\NormalTok{(log_fc }\OperatorTok{>=}\StringTok{ }\DecValTok{2} \OperatorTok{&}\StringTok{ }\NormalTok{log_pval }\OperatorTok{>=}\StringTok{ }\FloatTok{1.3} \OperatorTok{|}
+\StringTok{                               }\NormalTok{log_fc }\OperatorTok{<=}\StringTok{ }\OperatorTok{-}\DecValTok{2} \OperatorTok{&}\StringTok{ }\NormalTok{log_pval }\OperatorTok{>=}\StringTok{ }\FloatTok{1.3}\NormalTok{,}\StringTok{"A"}\NormalTok{, }\StringTok{"B"}\NormalTok{)) }\OperatorTok{%>%}
+\StringTok{  }\CommentTok{# Plot with points coloured according to the threshold}
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(log_fc,log_pval, }\DataTypeTok{colour =}\NormalTok{ threshold)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{alpha =} \FloatTok{0.5}\NormalTok{) }\OperatorTok{+}\StringTok{ }\CommentTok{# Alpha sets the transparency of the points}
+\StringTok{  }\CommentTok{# Add dotted lines to indicate the threshold, semi-transparent}
+\StringTok{  }\KeywordTok{geom_hline}\NormalTok{(}\DataTypeTok{yintercept =} \FloatTok{1.3}\NormalTok{, }\DataTypeTok{linetype =} \DecValTok{2}\NormalTok{, }\DataTypeTok{alpha =} \FloatTok{0.5}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_vline}\NormalTok{(}\DataTypeTok{xintercept =} \DecValTok{2}\NormalTok{, }\DataTypeTok{linetype =} \DecValTok{2}\NormalTok{, }\DataTypeTok{alpha =} \FloatTok{0.5}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_vline}\NormalTok{(}\DataTypeTok{xintercept =} \OperatorTok{-}\DecValTok{2}\NormalTok{, }\DataTypeTok{linetype =} \DecValTok{2}\NormalTok{, }\DataTypeTok{alpha =} \FloatTok{0.5}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\CommentTok{# Set the colour of the points}
+\StringTok{  }\KeywordTok{scale_colour_manual}\NormalTok{(}\DataTypeTok{values =} \KeywordTok{c}\NormalTok{(}\StringTok{"A"}\NormalTok{=}\StringTok{ "red"}\NormalTok{, }\StringTok{"B"}\NormalTok{=}\StringTok{ "black"}\NormalTok{)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{xlab}\NormalTok{(}\StringTok{"log2 fold change"}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{ylab}\NormalTok{(}\StringTok{"-log10 p-value"}\NormalTok{) }\OperatorTok{+}\StringTok{ }\CommentTok{# Relabel the axes}
+\StringTok{  }\KeywordTok{theme_minimal}\NormalTok{() }\OperatorTok{+}\StringTok{ }\CommentTok{# Set the theme}
+\StringTok{  }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{legend.position=}\StringTok{"none"}\NormalTok{) }\CommentTok{# Hide the legend}
+
+\CommentTok{# Use ggsave to save the plot as pdf}
+\KeywordTok{ggsave}\NormalTok{(}\StringTok{"volcano_plot.pdf"}\NormalTok{, }\DataTypeTok{width =} \DecValTok{20}\NormalTok{, }\DataTypeTok{height =} \DecValTok{20}\NormalTok{, }\DataTypeTok{units =} \StringTok{"cm"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
 \section{Exporting data}\label{exporting-data}
 
@@ -3007,6 +3155,16 @@ start, for example Leon Eyrich Jessen's
 Learning for Cancer Immunotherapy} tutorial.
 
 \section{Version control}\label{version-control}
+
+Another thing you may wish to consider is version control, \emph{``a
+system that records changes to a file or set of files over time so that
+you can recall specific versions later''.}
+
+To get started, have a look at these
+\href{https://speakerdeck.com/alicebartlett/git-for-humans}{slides by
+Alice Bartlett} and check out the
+\href{https://support.rstudio.com/hc/en-us/articles/200532077-Version-Control-with-Git-and-SVN}{Rstudio
+version control guide}.
 
 \bibliography{packages.bib,book.bib}
 

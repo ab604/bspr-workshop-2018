@@ -3,9 +3,9 @@
 Here are a few links and suggestions about what else you might like to do with
 R.
 
-## Exporting figures
+## Exporting figures {#export-figs}
 
-Exporting figures is best done using the following structure:
+Exporting figures can be done using the following structure:
 
 ```{r export-plots, eval=FALSE}
 # Open up a blank plot file, pdf,jpeg etc.
@@ -52,6 +52,29 @@ guide to the various formats you can export to.
 
 Alternatively, if you are working in `ggplot` you can use the `ggsave` function
 as described in [R4DS 28.7](http://r4ds.had.co.nz/graphics-for-communication.html#saving-your-plots).
+
+```{r ggsave, eval=FALSE}
+# Plot
+dat_tf %>%
+  # Add a threhold for significant observations
+  mutate(threshold = if_else(log_fc >= 2 & log_pval >= 1.3 |
+                               log_fc <= -2 & log_pval >= 1.3,"A", "B")) %>%
+  # Plot with points coloured according to the threshold
+  ggplot(aes(log_fc,log_pval, colour = threshold)) +
+  geom_point(alpha = 0.5) + # Alpha sets the transparency of the points
+  # Add dotted lines to indicate the threshold, semi-transparent
+  geom_hline(yintercept = 1.3, linetype = 2, alpha = 0.5) + 
+  geom_vline(xintercept = 2, linetype = 2, alpha = 0.5) +
+  geom_vline(xintercept = -2, linetype = 2, alpha = 0.5) +
+  # Set the colour of the points
+  scale_colour_manual(values = c("A"= "red", "B"= "black")) +
+  xlab("log2 fold change") + ylab("-log10 p-value") + # Relabel the axes
+  theme_minimal() + # Set the theme
+  theme(legend.position="none") # Hide the legend
+
+# Use ggsave to save the plot as pdf
+ggsave("volcano_plot.pdf", width = 20, height = 20, units = "cm")
+```
 
 
 ## Exporting data
@@ -122,3 +145,7 @@ If you are interested in machine learning, then [TensorFlow](https://tensorflow.
 example Leon Eyrich Jessen's [Deep Learning for Cancer Immunotherapy](https://tensorflow.rstudio.com/blog/dl-for-cancer-immunotherapy.html) tutorial.
 
 ## Version control
+
+Another thing you may wish to consider is version control, *"a system that records changes to a file or set of files over time so that you can recall specific versions later".*
+
+To get started, have a look at these [slides by Alice Bartlett ](https://speakerdeck.com/alicebartlett/git-for-humans) and check out the [Rstudio version control guide ](https://support.rstudio.com/hc/en-us/articles/200532077-Version-Control-with-Git-and-SVN).

@@ -171,11 +171,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="5.8.1" data-path="transform.html"><a href="transform.html#calculating-similarity-and-clustering"><i class="fa fa-check"></i><b>5.8.1</b> Calculating similarity and clustering</a></li>
 <li class="chapter" data-level="5.8.2" data-path="transform.html"><a href="transform.html#plotting-the-heatmap"><i class="fa fa-check"></i><b>5.8.2</b> Plotting the heatmap</a></li>
 </ul></li>
-<li class="chapter" data-level="5.9" data-path="transform.html"><a href="transform.html#venn-diagram"><i class="fa fa-check"></i><b>5.9</b> Venn diagram</a></li>
+<li class="chapter" data-level="5.9" data-path="transform.html"><a href="transform.html#venn"><i class="fa fa-check"></i><b>5.9</b> Venn diagram</a></li>
 <li class="chapter" data-level="5.10" data-path="transform.html"><a href="transform.html#peptide-sequence-logos"><i class="fa fa-check"></i><b>5.10</b> Peptide sequence logos</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="going-further.html"><a href="going-further.html"><i class="fa fa-check"></i><b>6</b> Going further</a><ul>
-<li class="chapter" data-level="6.1" data-path="going-further.html"><a href="going-further.html#exporting-figures"><i class="fa fa-check"></i><b>6.1</b> Exporting figures</a></li>
+<li class="chapter" data-level="6.1" data-path="going-further.html"><a href="going-further.html#export-figs"><i class="fa fa-check"></i><b>6.1</b> Exporting figures</a></li>
 <li class="chapter" data-level="6.2" data-path="going-further.html"><a href="going-further.html#exporting-data"><i class="fa fa-check"></i><b>6.2</b> Exporting data</a><ul>
 <li class="chapter" data-level="6.2.1" data-path="going-further.html"><a href="going-further.html#writing-to-a-file"><i class="fa fa-check"></i><b>6.2.1</b> Writing to a file</a></li>
 <li class="chapter" data-level="6.2.2" data-path="going-further.html"><a href="going-further.html#for-r"><i class="fa fa-check"></i><b>6.2.2</b> For R</a></li>
@@ -682,36 +682,33 @@ Figure 5.10: Heatmap created using <code>pheatmap</code> with breaks to highligh
 </div>
 </div>
 </div>
-<div id="venn-diagram" class="section level2">
+<div id="venn" class="section level2">
 <h2><span class="header-section-number">5.9</span> Venn diagram</h2>
 <p>Another common plot used in proteomics is the Venn diagram. For these I use the <code>VennDiagram</code> package <span class="citation">(Chen <a href="#ref-R-VennDiagram">2018</a>)</span>.</p>
-<p>For example if we wanted to compare the protein identifications found in the control and treatment sets of our data we could compare the protein accessions found in each condition. To do this we need to transform the data for example using the following steps:</p>
+<p>For example if we wanted to compare the protein identifications found in the control and treatment sets of our data we could compare the protein accessions found in each control experiment to see how well they replicate. To do this we need to transform the data, for example using the following steps:</p>
 <ol style="list-style-type: decimal">
-<li></li>
+<li>Rather than having variables for the protein concentrations called <code>control_1</code>, <code>control_2</code> etc. in this situation it would make more sense to have a variable called <code>concentration</code> and create a new variable for the experiments using the column labels, which I’ll call <code>exp_type</code>. Why? By creating a variable with the experiment names, we can use <code>filter</code> to easily subset the identified proteins in each experiment using our new variable, as we’ll see.</li>
 </ol>
+<p>This is an example of using the <code>gather</code> function. The <code>key</code> is the new column we wish to gather the old column names to, and <code>value</code> is the new column in which the values from the gathered columns go. I’ve given the new columns the names <code>exp_type</code> and <code>value</code> respectively. We don’t want to gather the <code>protein_accession</code> or <code>protein_description</code> columns, so I use <code>c()</code> and use the minus sign to negate them. These rows get duplicated to match the gathered observations. Hence we go from 7702 observations of 8 variables, to 46212 observations of 4 variables when we gather the 6 control and treatment columns.</p>
+<p>To do the opposite i.e. spread one column to many columns, unsuprisingly uses the function <code>spread</code>. You can read more about both <code>gather</code> and <code>spread</code> in the <a href="http://r4ds.had.co.nz/tidy-data.html#spreading-and-gathering">R4DS tidy data chapter</a>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Transform data for Venn diagram to create long table with three columns </span>
 venn_dat &lt;-<span class="st"> </span>dat <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="co"># Drop protein description</span>
-<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>protein_description) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="co"># Gather columns according to experiment type to create exp_type </span>
 <span class="st">  </span><span class="co"># and concentration variables. Don&#39;t use the protein accession.</span>
-<span class="st">               </span><span class="kw">gather</span>(<span class="dt">key =</span> exp_type, <span class="dt">value =</span> concentration, <span class="op">-</span>protein_accession)
+<span class="st">               </span><span class="kw">gather</span>(<span class="dt">key =</span> exp_type, <span class="dt">value =</span> concentration, 
+                      <span class="op">-</span><span class="kw">c</span>(protein_accession,protein_description))
 
-venn_dat</code></pre></div>
-<pre><code>## # A tibble: 46,212 x 3
-##    protein_accession  exp_type  concentration
-##    &lt;chr&gt;              &lt;chr&gt;             &lt;dbl&gt;
-##  1 VATA_HUMAN_P38606  control_1         0.811
-##  2 RL35A_HUMAN_P18077 control_1         0.367
-##  3 MYH10_HUMAN_P35580 control_1         2.98 
-##  4 RHOG_HUMAN_P84095  control_1         0.142
-##  5 PSA1_HUMAN_P25786  control_1         1.07 
-##  6 PRDX5_HUMAN_P30044 control_1         0.566
-##  7 ACLY_HUMAN_P53396  control_1         5.00 
-##  8 VDAC2_HUMAN_P45880 control_1         1.35 
-##  9 LRC47_HUMAN_Q8N1G4 control_1         0.927
-## 10 CH60_HUMAN_P10809  control_1         9.45 
-## # ... with 46,202 more rows</code></pre>
+<span class="co"># Glimpse the gathered data</span>
+<span class="kw">glimpse</span>(venn_dat)</code></pre></div>
+<pre><code>## Observations: 46,212
+## Variables: 4
+## $ protein_accession   &lt;chr&gt; &quot;VATA_HUMAN_P38606&quot;, &quot;RL35A_HUMAN_P18077&quot;,...
+## $ protein_description &lt;chr&gt; &quot;V-type proton ATPase catalytic subunit A ...
+## $ exp_type            &lt;chr&gt; &quot;control_1&quot;, &quot;control_1&quot;, &quot;control_1&quot;, &quot;co...
+## $ concentration       &lt;dbl&gt; 0.8114, 0.3672, 2.9815, 0.1424, 1.0748, 0....</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>Having transformed the data, we then create three new objects that <code>filter</code> the rows for the three control assays using their names, and where a concentration was observed using <code>!is.na()</code>. The <code>!</code> means not and <code>is.na</code> tests for missing values labelled <code>NA</code>. So read this as <em>where concentration is not a missing value</em>. The output of filter is piped to the dplyr <code>pull</code> function which pulls out the values from the <code>protein_accession</code> column which are stored in the object. These are character vectors, so repeating this for all three experiment yields three character vectors of different sizes.</li>
+</ol>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">venn_cntl_<span class="dv">1</span> &lt;-<span class="st"> </span>venn_dat <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">filter</span>(exp_type <span class="op">==</span><span class="st"> &quot;control_1&quot;</span> <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span><span class="kw">is.na</span>(concentration)) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">pull</span>(protein_accession)
@@ -722,17 +719,24 @@ venn_cntl_<span class="dv">2</span> &lt;-<span class="st"> </span>venn_dat <span
 
 venn_cntl_<span class="dv">3</span> &lt;-<span class="st"> </span>venn_dat <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">filter</span>(exp_type <span class="op">==</span><span class="st"> &quot;control_3&quot;</span> <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span><span class="kw">is.na</span>(concentration)) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">pull</span>(protein_accession)
-
+<span class="st">  </span><span class="kw">pull</span>(protein_accession)</code></pre></div>
+<ol start="3" style="list-style-type: decimal">
+<li>The three character vectors can be collected into a single object, but as they are different lengths, it has to be a <a href="tidyverse.html#lists">list object</a>. Here we use <code>list()</code> to create a list of the three character vectors created in step 2. Note that I’ve named the list elements using strings in quotes e.g. <code>&quot;Control 1&quot;</code> this allows for a space in the names as I want to use these names on the venn diagram.</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Create a list for plotting</span>
 venn_list &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="st">&quot;Control 1&quot;</span> =<span class="st"> </span>venn_cntl_<span class="dv">1</span>,
                   <span class="st">&quot;Control 2&quot;</span> =<span class="st"> </span>venn_cntl_<span class="dv">2</span>,
-                  <span class="st">&quot;Control 3&quot;</span> =<span class="st"> </span>venn_cntl_<span class="dv">3</span>)
+                  <span class="st">&quot;Control 3&quot;</span> =<span class="st"> </span>venn_cntl_<span class="dv">3</span>)</code></pre></div>
+<ol start="4" style="list-style-type: decimal">
+<li>Finally we can plot the venn diagram using the list object<code>venn_list</code> to create a venn diagram object <code>prot_venn</code> using <code>venn.diagram</code> function from the <code>VennDiagram</code> package <span class="citation">(Chen <a href="#ref-R-VennDiagram">2018</a>)</span> and then plotting <code>prot_venn</code> using <code>grid.arrange</code> from the <code>gridExtra</code> package <span class="citation">(Auguie <a href="#ref-R-gridExtra">2017</a>)</span>.</li>
+</ol>
+<p>I’ll leave as an exercise for the reader to look at all the options for <code>venn.diagram</code> and <code>grid.arrange</code>, but a couple of things to note here are that you can create three or four way venn diagrams, and if you create several venn diagram objects, they can be plotted on the same plot using <code>grid arrange</code>. Also here I’ve added a line to prevent the output of a log file using <code>futile.logger</code>. You might want these, but generally I don’t.</p>
 
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Prevent the output of a log file</span>
 futile.logger<span class="op">::</span><span class="kw">flog.threshold</span>(futile.logger<span class="op">::</span>ERROR, <span class="dt">name =</span> <span class="st">&quot;VennDiagramLogger&quot;</span>)</code></pre></div>
 <pre><code>## NULL</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">prot_venn &lt;-<span class="st"> </span><span class="kw">venn.diagram</span>(venn_list,<span class="ot">NULL</span>, 
-               <span class="co">#height = 1000,</span>
-               <span class="co">#width = 1000,</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Create a venn diagram object</span>
+prot_venn &lt;-<span class="st"> </span><span class="kw">venn.diagram</span>(venn_list,<span class="ot">NULL</span>, 
                <span class="dt">col =</span> <span class="st">&quot;transparent&quot;</span>,
                <span class="dt">fill =</span> <span class="kw">c</span>(<span class="st">&quot;cornflowerblue&quot;</span>, <span class="st">&quot;green&quot;</span>, <span class="st">&quot;yellow&quot;</span>),
                <span class="dt">alpha =</span> <span class="fl">0.50</span>,
@@ -741,29 +745,42 @@ futile.logger<span class="op">::</span><span class="kw">flog.threshold</span>(fu
                <span class="dt">fontface =</span> <span class="st">&quot;bold&quot;</span>,
                <span class="dt">cat.col =</span> <span class="kw">c</span>(<span class="st">&quot;darkblue&quot;</span>, <span class="st">&quot;darkgreen&quot;</span>, <span class="st">&quot;orange&quot;</span>),
                <span class="dt">cat.cex =</span> <span class="fl">0.8</span>,
-               <span class="co">#cat.pos = 0,</span>
-               <span class="co">#cat.dist = 0.07,</span>
                <span class="dt">cat.fontfamily =</span> <span class="st">&quot;sans&quot;</span>,
-               <span class="co">#rotation.degree = 270,</span>
                <span class="dt">margin =</span> <span class="fl">0.2</span>,
                <span class="dt">main =</span> <span class="st">&quot;Proteins identified in control experiments&quot;</span>,
                <span class="dt">main.fontfamily =</span> <span class="st">&quot;sans&quot;</span>,
-               <span class="dt">print.mode =</span> <span class="kw">c</span>(<span class="st">&quot;raw&quot;</span>,<span class="st">&quot;percent&quot;</span>),
+               <span class="dt">print.mode =</span> <span class="kw">c</span>(<span class="st">&quot;raw&quot;</span>,<span class="st">&quot;percent&quot;</span>), <span class="co"># Show both numbers and percent</span>
                <span class="dt">main.pos =</span> <span class="kw">c</span>(<span class="fl">0.5</span>,<span class="fl">0.9</span>)
   )
 
+<span class="co"># Plot the venn diagram using the gridExtra package</span>
 <span class="kw">grid.arrange</span>(<span class="kw">gTree</span>(<span class="dt">children =</span> prot_venn))</code></pre></div>
-<p><img src="bspr-workshop-2018_files/figure-html/plot-venn-1.png" width="672" /></p>
+<div class="figure" style="text-align: center"><span id="fig:venn-plot"></span>
+<img src="bspr-workshop-2018_files/figure-html/venn-plot-1.png" alt="Venn diagram of proteins identified in three control experiments" width="672" />
+<p class="caption">
+Figure 5.11: Venn diagram of proteins identified in three control experiments
+</p>
+</div>
+<p>Figure <a href="transform.html#fig:venn-plot">5.11</a> then shows us that there is a core of around 1500 proteins identified in all three control experiements. You could try something similar with the treatment experiments.</p>
 </div>
 <div id="peptide-sequence-logos" class="section level2">
 <h2><span class="header-section-number">5.10</span> Peptide sequence logos</h2>
-<p>Finally, creating sequence logos from peptides is another common task, especially if you are doing immunopeptidomics and would like to explore the fequency of amino acid types at each position in a set of peptide sequences. The <code>ggseqlogo</code> package enables us to do this <code>ggplot</code> style <span class="citation">(Wagih <a href="#ref-R-ggseqlogo">2017</a>)</span>.</p>
+<p>Finally, creating sequence logos from peptides is another common task, especially if you are doing immunopeptidomics or any situatio where you would like to explore the fequency of amino acid types at each position in a set of peptide sequences. The<code>ggseqlogo</code> package enables us to do this <code>ggplot2</code> style <span class="citation">(Wagih <a href="#ref-R-ggseqlogo">2017</a>)</span> for protein, DNA and RNA sequences.</p>
 <p>Here using sample data that comes with the ggseqlogo package and illusrated in the <a href="https://omarwagih.github.io/ggseqlogo/">ggseqlogo tutorial</a>.</p>
-<p>As with the venn diagram, we need a list to contain our groups of peptides as they</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(ggseqlogo_sample)
+<p>As with the venn diagram, peptide vectors are not generally of equal length and therefore are collected into a <a href="tidyverse.html#lists">list object</a>. We don’t have any peptides in the example data for the workshop, but the concept of using <code>pull</code> to extract character vectors was shown in Section <a href="transform.html#venn">5.9</a>. In this scenario we’d be extracting character vectors of the peptide sequences and then collecting them as a named list.</p>
+<p><code>ggseqlogo</code> provides some data <code>seqs_aa</code> containing a sets of kinase-substrate phosphorylation sites. This is represented as a named list of character vectors where the names represent the names of the kinases associated with the phosphosites.</p>
+<p>Below, we load the example data and then the plotting uses the <code>ggseqlogo</code> function which as with <code>ggplot</code> the first arguement is the data. Other arguements can be passed either within the function or added using the <code>+</code> operater as per <code>ggplot</code>.</p>
+<p>Here are two examples:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Load the example data</span>
+<span class="kw">data</span>(ggseqlogo_sample)
 
-<span class="kw">ggseqlogo</span>(seqs_aa, <span class="dt">method=</span><span class="st">&#39;p&#39;</span>)</code></pre></div>
+<span class="co"># Plot the protein sequences with default arguements </span>
+<span class="kw">ggseqlogo</span>(<span class="dt">data =</span> seqs_aa)</code></pre></div>
 <p><img src="bspr-workshop-2018_files/figure-html/ggseqlogo-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Plot the protein sequences, plotting probability, and change the theme</span>
+<span class="kw">ggseqlogo</span>(<span class="dt">data =</span> seqs_aa, <span class="dt">method =</span> <span class="st">&#39;prob&#39;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_classic</span>()</code></pre></div>
+<p><img src="bspr-workshop-2018_files/figure-html/ggseqlogo-2.png" width="672" /></p>
 
 </div>
 </div>
@@ -777,6 +794,9 @@ futile.logger<span class="op">::</span><span class="kw">flog.threshold</span>(fu
 </div>
 <div id="ref-R-VennDiagram">
 <p>Chen, Hanbo. 2018. <em>VennDiagram: Generate High-Resolution Venn and Euler Plots</em>. <a href="https://CRAN.R-project.org/package=VennDiagram" class="uri">https://CRAN.R-project.org/package=VennDiagram</a>.</p>
+</div>
+<div id="ref-R-gridExtra">
+<p>Auguie, Baptiste. 2017. <em>GridExtra: Miscellaneous Functions for “Grid” Graphics</em>. <a href="https://CRAN.R-project.org/package=gridExtra" class="uri">https://CRAN.R-project.org/package=gridExtra</a>.</p>
 </div>
 <div id="ref-R-ggseqlogo">
 <p>Wagih, Omar. 2017. <em>Ggseqlogo: A ’Ggplot2’ Extension for Drawing Publication-Ready Sequence Logos</em>. <a href="https://CRAN.R-project.org/package=ggseqlogo" class="uri">https://CRAN.R-project.org/package=ggseqlogo</a>.</p>
