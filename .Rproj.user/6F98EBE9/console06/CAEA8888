@@ -1256,4 +1256,215 @@ Changes not staged for commit:[0K
 [0K[?25h[?25l
 [0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master|MERGING)[0m[0K
 $[0K[3G[?25h[?25l$ i[0K[?25hg[0Kt[0K[?25l$ ig[0K[?25h[?25l$ i[0K[?25h[?25l$[0K[4G[?25h[3G[?25l$ g[0K[?25hi[0Kt[0K[7G[?25l$ git a[0K[?25hd[0Kd[0K[11G[?25l$ git add .[0K[?25h[?25l
-[0K[?25h
+[0K[?25hHEAD is now at 511a435 force update[0K[?25l
+[0K[?25h[?25l
+[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K
+$[0K[3G[?25h[?25l$ git stash[0K[13G[?25h[?25l$ git stash .[0K[?25h[?25l$ git pull origin master[0K[?25h[?25l
+[0K[?25hFrom github.com:ab604/bspr-workshop-2018[0K[?25l
+ * branch            master     -> FETCH_HEAD[0K
+[0K[?25hUpdating 511a435..1de3622[0K[?25l
+[0K[?25hFast-forward[0K[?25l
+[0K[?25h .../8F6288BF-index/1/6F98EBE94F4FE32/chunks.json   |    1 [0;31m-[0m[0K[?25l
+ .../notebooks/8F6288BF-index/1/s/chunks.json       |    1 [0;31m-[0m[0K
+ .Rproj.user/shared/notebooks/paths                 |   35 [0;32m+[0;31m-[0m[0K
+ 01-intro.Rmd                                       |    4 [0;32m+[0;31m-[0m[0K
+ 02-tidyverse.Rmd                                   |    2 [0;32m+[0;31m-[0m[0K
+ 05-data-transformation.Rmd                         |  134 [0;32m+[0;31m-[0m[0K
+ 06-going-further.Rmd                               |   33 [0;32m+[0;31m-[0m[0K
+ _book/applications.html                            |  188 [0;31m--[0m[0K
+ _book/bspr-workshop-2018.epub                      |  Bin [0;31m1043281[0m -> [0;32m1085890[0m bytes[0K
+ _book/bspr-workshop-2018.pdf                       |  Bin [0;31m1373995[0m -> [0;32m1777047[0m bytes[0K
+ _book/bspr-workshop-2018.tex                       |  363 [0;32m+++[0;31m-[0m[0K
+ .../figure-html/clustering-1.png                   |  Bin [0;31m16698[0m -> [0;32m0[0m bytes[0K
+ .../figure-html/compare-normalisation-1.png        |  Bin [0;31m16936[0m -> [0;32m16936[0m bytes[0K
+ .../figure-html/data-distribution-1.png            |  Bin [0;31m26481[0m -> [0;32m0[0m bytes[0K
+ .../figure-html/dendrograms-1.png                  |  Bin [0;31m20729[0m -> [0;32m20729[0m bytes[0K
+ .../figure-html/fold-change-1.png                  |  Bin [0;31m13912[0m -> [0;32m0[0m bytes[0K
+ .../figure-html/fold-change-2.png                  |  Bin [0;31m14049[0m -> [0;32m0[0m bytes[0K
+ .../figure-html/ggseqlogo-1.png                    |  Bin [0;31m0[0m -> [0;32m20854[0m bytes[0K
+ .../figure-html/ggseqlogo-2.png                    |  Bin [0;31m0[0m -> [0;32m59591[0m bytes[0K
+ .../figure-html/heatmap-1-1.png                    |  Bin [0;31m25011[0m -> [0;32m0[0m bytes[0K
+ .../figure-html/heatmap-1.png                      |  Bin [0;31m31639[0m -> [0;32m0[0m bytes[0K
+ .../figure-html/heatmap-2-1.png                    |  Bin [0;31m30194[0m -> [0;32m0[0m bytes[0K
+ .../figure-html/heatmap-2-2.png                    |  Bin [0;31m29369[0m -> [0;32m0[0m bytes[0K
+ .../figure-html/heatmap-2-3.png                    |  Bin [0;31m21003[0m -> [0;32m0[0m bytes[0K
+ .../figure-html/heatmap2-1.png                     |  Bin [0;31m33102[0m -> [0;32m33095[0m bytes[0K
+ .../figure-html/log-fc-1.png                       |  Bin [0;31m24336[0m -> [0;32m24336[0m bytes[0K
+ .../figure-html/log-fc-2.png                       |  Bin [0;31m18184[0m -> [0;32m0[0m bytes[0K
+ .../figure-html/mpg-plot-1,mpg_point_plot-1.png    |  Bin [0;31m10930[0m -> [0;32m10930[0m bytes[0K
+ .../figure-html/mpg-plot-2-1.png                   |  Bin [0;31m15373[0m -> [0;32m15373[0m bytes[0K
+ .../figure-html/nice-fig-1.png                     |  Bin [0;31m11181[0m -> [0;32m0[0m bytes[0K
+ .../figure-html/nice-vplot-1.png                   |  Bin [0;31m46736[0m -> [0;32m46724[0m bytes[0K
+ .../figure-html/p-val-plot-1.png                   |  Bin [0;31m17472[0m -> [0;32m17472[0m bytes[0K
+ .../figure-html/pheatmap-1.png                     |  Bin [0;31m28572[0m -> [0;32m28573[0m bytes[0K
+ .../figure-html/plot-venn-1.png                    |  Bin [0;31m0[0m -> [0;32m37499[0m bytes[0K
+ .../figure-html/t-test-1.png                       |  Bin [0;31m13073[0m -> [0;32m0[0m bytes[0K
+ .../figure-html/t-test-2.png                       |  Bin [0;31m12556[0m -> [0;32m0[0m bytes[0K
+ .../figure-html/t-tests-1.png                      |  Bin [0;31m13047[0m -> [0;32m0[0m bytes[0K
+ .../figure-html/t-tests-2.png                      |  Bin [0;31m14544[0m -> [0;32m0[0m bytes[0K
+ .../figure-html/tidy-data-1.png                    |  Bin [0;31m22938[0m -> [0;32m0[0m bytes[0K
+ .../figure-html/tidy-data-2.png                    |  Bin [0;31m19093[0m -> [0;32m0[0m bytes[0K
+ .../figure-html/tidy-data-3.png                    |  Bin [0;31m15352[0m -> [0;32m0[0m bytes[0K
+ .../figure-html/unnamed-chunk-2-1.png              |  Bin [0;31m29976[0m -> [0;32m0[0m bytes[0K
+ .../figure-html/unnamed-chunk-2-2.png              |  Bin [0;31m29541[0m -> [0;32m0[0m bytes[0K
+ .../figure-html/unnamed-chunk-2-3.png              |  Bin [0;31m16865[0m -> [0;32m0[0m bytes[0K
+ .../figure-html/unnamed-chunk-3-1.png              |  Bin [0;31m102440[0m -> [0;32m0[0m bytes[0K
+ .../figure-html/unnamed-chunk-3-2.png              |  Bin [0;31m101875[0m -> [0;32m0[0m bytes[0K
+ .../figure-html/unnamed-chunk-3-3.png              |  Bin [0;31m24109[0m -> [0;32m0[0m bytes[0K
+ .../figure-html/venn-plot-1.png                    |  Bin [0;31m0[0m -> [0;32m41383[0m bytes[0K
+ .../figure-html/vol-pot-1.png                      |  Bin [0;31m19724[0m -> [0;32m0[0m bytes[0K
+ .../figure-html/vol-pot-2.png                      |  Bin [0;31m28669[0m -> [0;32m0[0m bytes[0K
+ .../figure-html/volcano-plot-1.png                 |  Bin [0;31m15290[0m -> [0;32m15290[0m bytes[0K
+ .../figure-html/volcano-plot-2.png                 |  Bin [0;31m36948[0m -> [0;32m0[0m bytes[0K
+ _book/dplyr.html                                   |    5 [0;32m+[0;31m-[0m[0K
+ _book/final-words.html                             |  182 [0;31m--[0m[0K
+ _book/fold-change-and-t-test.html                  |  515 [0;31m-----[0m[0K
+ _book/going-further.html                           |   34 [0;32m+[0;31m-[0m[0K
+ _book/import.html                                  |    6 [0;32m+[0;31m-[0m[0K
+ _book/importing-and-inspecting-data.html           |  294 [0;31m---[0m[0K
+ ...importing-and-transforming-proteomics-data.html |  246 [0;31m---[0m[0K
+ _book/index.html                                   |   10 [0;32m+[0;31m-[0m[0K
+ _book/intro.html                                   |    5 [0;32m+[0;31m-[0m[0K
+ _book/literature.html                              |  182 [0;31m--[0m[0K
+ _book/methods.html                                 |  182 [0;31m--[0m[0K
+ _book/references.html                              |   11 [0;32m+[0;31m-[0m[0K
+ _book/requirements.html                            |  191 [0;31m--[0m[0K
+ _book/search_index.json                            |    8 [0;32m+[0;31m-[0m[0K
+ _book/the-tidyverse.html                           |  209 [0;31m--[0m[0K
+ _book/tidyverse.html                               |    5 [0;32m+[0;31m-[0m[0K
+ _book/transform.html                               |  109 [0;32m+[0;31m-[0m[0K
+ _book/transformation-and-visualisation.html        |  489 [0;31m-----[0m[0K
+ _book/visualising-proteomics-data.html             |  243 [0;31m---[0m[0K
+ .../figure-epub3/compare-normalisation-1.png       |  Bin [0;31m3810[0m -> [0;32m3765[0m bytes[0K
+ .../figure-epub3/dendrograms-1.png                 |  Bin [0;31m7015[0m -> [0;32m7015[0m bytes[0K
+ .../figure-epub3/ggseqlogo-1.png                   |  Bin [0;31m0[0m -> [0;32m6582[0m bytes[0K
+ .../figure-epub3/ggseqlogo-2.png                   |  Bin [0;31m0[0m -> [0;32m17483[0m bytes[0K
+ .../figure-epub3/heatmap2-1.png                    |  Bin [0;31m7483[0m -> [0;32m7492[0m bytes[0K
+ .../figure-epub3/log-fc-1.png                      |  Bin [0;31m3832[0m -> [0;32m4095[0m bytes[0K
+ .../figure-epub3/mpg-plot-1,mpg_point_plot-1.png   |  Bin [0;31m3186[0m -> [0;32m3184[0m bytes[0K
+ .../figure-epub3/mpg-plot-2-1.png                  |  Bin [0;31m4889[0m -> [0;32m4901[0m bytes[0K
+ .../figure-epub3/nice-vplot-1.png                  |  Bin [0;31m9316[0m -> [0;32m9245[0m bytes[0K
+ .../figure-epub3/p-val-plot-1.png                  |  Bin [0;31m3868[0m -> [0;32m3768[0m bytes[0K
+ .../figure-epub3/pheatmap-1.png                    |  Bin [0;31m7123[0m -> [0;32m7123[0m bytes[0K
+ .../figure-epub3/plot-venn-1.png                   |  Bin [0;31m0[0m -> [0;32m14367[0m bytes[0K
+ .../figure-epub3/venn-plot-1.png                   |  Bin [0;31m0[0m -> [0;32m15033[0m bytes[0K
+ .../figure-epub3/volcano-plot-1.png                |  Bin [0;31m5146[0m -> [0;32m5086[0m bytes[0K
+ .../figure-html/compare-normalisation-1.png        |  Bin [0;31m16936[0m -> [0;32m16936[0m bytes[0K
+ .../figure-html/dendrograms-1.png                  |  Bin [0;31m20729[0m -> [0;32m20729[0m bytes[0K
+ .../figure-html/ggseqlogo-1.png                    |  Bin [0;31m0[0m -> [0;32m20854[0m bytes[0K
+ .../figure-html/ggseqlogo-2.png                    |  Bin [0;31m0[0m -> [0;32m59591[0m bytes[0K
+ .../figure-html/heatmap2-1.png                     |  Bin [0;31m33102[0m -> [0;32m33095[0m bytes[0K
+ .../figure-html/log-fc-1.png                       |  Bin [0;31m24336[0m -> [0;32m24336[0m bytes[0K
+ .../figure-html/mpg-plot-1,mpg_point_plot-1.png    |  Bin [0;31m10930[0m -> [0;32m10930[0m bytes[0K
+ .../figure-html/mpg-plot-2-1.png                   |  Bin [0;31m15373[0m -> [0;32m15373[0m bytes[0K
+ .../figure-html/nice-vplot-1.png                   |  Bin [0;31m46736[0m -> [0;32m46724[0m bytes[0K
+ .../figure-html/p-val-plot-1.png                   |  Bin [0;31m17472[0m -> [0;32m17472[0m bytes[0K
+ .../figure-html/pheatmap-1.png                     |  Bin [0;31m28572[0m -> [0;32m28573[0m bytes[0K
+ .../figure-html/plot-venn-1.png                    |  Bin [0;31m0[0m -> [0;32m37499[0m bytes[0K
+ .../figure-html/venn-plot-1.png                    |  Bin [0;31m0[0m -> [0;32m41383[0m bytes[0K
+ .../figure-html/volcano-plot-1.png                 |  Bin [0;31m15290[0m -> [0;32m15290[0m bytes[0K
+ .../figure-latex/compare-normalisation-1.pdf       |  Bin [0;31m29887[0m -> [0;32m29887[0m bytes[0K
+ .../figure-latex/dendrograms-1.pdf                 |  Bin [0;31m5562[0m -> [0;32m5562[0m bytes[0K
+ .../figure-latex/ggseqlogo-1.pdf                   |  Bin [0;31m0[0m -> [0;32m117766[0m bytes[0K
+ .../figure-latex/ggseqlogo-2.pdf                   |  Bin [0;31m0[0m -> [0;32m216653[0m bytes[0K
+ .../figure-latex/heatmap2-1.pdf                    |  Bin [0;31m14190[0m -> [0;32m14190[0m bytes[0K
+ .../figure-latex/log-fc-1.pdf                      |  Bin [0;31m4423[0m -> [0;32m4423[0m bytes[0K
+ .../figure-latex/mpg-plot-1,mpg_point_plot-1.pdf   |  Bin [0;31m11178[0m -> [0;32m11178[0m bytes[0K
+ .../figure-latex/mpg-plot-2-1.pdf                  |  Bin [0;31m12002[0m -> [0;32m12002[0m bytes[0K
+ .../figure-latex/nice-vplot-1.pdf                  |  Bin [0;31m70902[0m -> [0;32m70902[0m bytes[0K
+ .../figure-latex/p-val-plot-1.pdf                  |  Bin [0;31m4484[0m -> [0;32m4484[0m bytes[0K
+ .../figure-latex/pheatmap-1.pdf                    |  Bin [0;31m6995[0m -> [0;32m6995[0m bytes[0K
+ .../figure-latex/plot-venn-1.pdf                   |  Bin [0;31m0[0m -> [0;32m51405[0m bytes[0K
+ .../figure-latex/venn-plot-1.pdf                   |  Bin [0;31m0[0m -> [0;32m51733[0m bytes[0K
+ .../figure-latex/volcano-plot-1.pdf                |  Bin [0;31m70220[0m -> [0;32m70220[0m bytes[0K
+ bspr-workshop-2018.Rmd                             | 2122 [0;31m--------------------[0m[0K
+ bspr-workshop-2018.log                             | 1262 [0;31m------------[0m[0K
+ missfont.log                                       |   12 [0;32m+[0m[0K
+ packages.bib                                       |   16 [0;32m+[0;31m-[0m[0K
+ 117 files changed, 667 insertions(+), 6432 deletions(-)[0K
+ delete mode 100644 .Rproj.user/shared/notebooks/8F6288BF-index/1/6F98EBE94F4FE32/chunks.json[0K
+ delete mode 100644 .Rproj.user/shared/notebooks/8F6288BF-index/1/s/chunks.json[0K
+ delete mode 100644 _book/applications.html[0K
+ delete mode 100644 _book/bspr-workshop-2018_files/figure-html/clustering-1.png[0K
+ delete mode 100644 _book/bspr-workshop-2018_files/figure-html/data-distribution-1.png[0K
+ delete mode 100644 _book/bspr-workshop-2018_files/figure-html/fold-change-1.png[0K
+ delete mode 100644 _book/bspr-workshop-2018_files/figure-html/fold-change-2.png[0K
+ create mode 100644 _book/bspr-workshop-2018_files/figure-html/ggseqlogo-1.png[0K
+ create mode 100644 _book/bspr-workshop-2018_files/figure-html/ggseqlogo-2.png[0K
+ delete mode 100644 _book/bspr-workshop-2018_files/figure-html/heatmap-1-1.png[0K
+ delete mode 100644 _book/bspr-workshop-2018_files/figure-html/heatmap-1.png[0K
+ delete mode 100644 _book/bspr-workshop-2018_files/figure-html/heatmap-2-1.png[0K
+ delete mode 100644 _book/bspr-workshop-2018_files/figure-html/heatmap-2-2.png[0K
+ delete mode 100644 _book/bspr-workshop-2018_files/figure-html/heatmap-2-3.png[0K
+ delete mode 100644 _book/bspr-workshop-2018_files/figure-html/log-fc-2.png[0K
+ delete mode 100644 _book/bspr-workshop-2018_files/figure-html/nice-fig-1.png[0K
+ create mode 100644 _book/bspr-workshop-2018_files/figure-html/plot-venn-1.png[0K
+ delete mode 100644 _book/bspr-workshop-2018_files/figure-html/t-test-1.png[0K
+ delete mode 100644 _book/bspr-workshop-2018_files/figure-html/t-test-2.png[0K
+ delete mode 100644 _book/bspr-workshop-2018_files/figure-html/t-tests-1.png[0K
+ delete mode 100644 _book/bspr-workshop-2018_files/figure-html/t-tests-2.png[0K
+ delete mode 100644 _book/bspr-workshop-2018_files/figure-html/tidy-data-1.png[0K
+ delete mode 100644 _book/bspr-workshop-2018_files/figure-html/tidy-data-2.png[0K
+ delete mode 100644 _book/bspr-workshop-2018_files/figure-html/tidy-data-3.png[0K
+ delete mode 100644 _book/bspr-workshop-2018_files/figure-html/unnamed-chunk-2-1.png[0K
+ delete mode 100644 _book/bspr-workshop-2018_files/figure-html/unnamed-chunk-2-2.png[0K
+ delete mode 100644 _book/bspr-workshop-2018_files/figure-html/unnamed-chunk-2-3.png[0K
+ delete mode 100644 _book/bspr-workshop-2018_files/figure-html/unnamed-chunk-3-1.png[0K
+ delete mode 100644 _book/bspr-workshop-2018_files/figure-html/unnamed-chunk-3-2.png[0K
+ delete mode 100644 _book/bspr-workshop-2018_files/figure-html/unnamed-chunk-3-3.png[0K
+ create mode 100644 _book/bspr-workshop-2018_files/figure-html/venn-plot-1.png[0K
+ delete mode 100644 _book/bspr-workshop-2018_files/figure-html/vol-pot-1.png[0K
+ delete mode 100644 _book/bspr-workshop-2018_files/figure-html/vol-pot-2.png[0K
+ delete mode 100644 _book/bspr-workshop-2018_files/figure-html/volcano-plot-2.png[0K
+ delete mode 100644 _book/final-words.html[0K
+ delete mode 100644 _book/fold-change-and-t-test.html[0K
+ delete mode 100644 _book/importing-and-inspecting-data.html[0K
+ delete mode 100644 _book/importing-and-transforming-proteomics-data.html[0K
+ delete mode 100644 _book/literature.html[0K
+ delete mode 100644 _book/methods.html[0K
+ delete mode 100644 _book/requirements.html[0K
+ delete mode 100644 _book/the-tidyverse.html[0K
+ delete mode 100644 _book/transformation-and-visualisation.html[0K
+ delete mode 100644 _book/visualising-proteomics-data.html[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_files/figure-epub3/ggseqlogo-1.png[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_files/figure-epub3/ggseqlogo-2.png[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_files/figure-epub3/plot-venn-1.png[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_files/figure-epub3/venn-plot-1.png[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_files/figure-html/ggseqlogo-1.png[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_files/figure-html/ggseqlogo-2.png[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_files/figure-html/plot-venn-1.png[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_files/figure-html/venn-plot-1.png[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_files/figure-latex/ggseqlogo-1.pdf[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_files/figure-latex/ggseqlogo-2.pdf[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_files/figure-latex/plot-venn-1.pdf[0K
+ create mode 100644 _bookdown_files/bspr-workshop-2018_files/figure-latex/venn-plot-1.pdf[0K
+ delete mode 100644 bspr-workshop-2018.Rmd[0K
+ delete mode 100644 bspr-workshop-2018.log[0K
+[0K[?25h[?25l
+[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K
+$[0K[3G[?25h[?25l$ g[0K[?25hi[0Kt[0K[7G[?25l$ git s[0K[?25ht[0Ka[0Kt[0Ku[0Ks[0K[?25l
+[0K[?25hOn branch master[0K[?25l
+Changes not staged for commit:[0K
+  (use "git add <file>..." to update what will be committed)[0K
+  (use "git checkout -- <file>..." to discard changes in working directory)[0K
+[0K
+        [0;31mmodified:   .Rproj.user/6F98EBE9/console06/CAEA8888[0m[0K
+[0K
+no changes added to commit (use "git add" and/or "git commit -a")[0K
+[0K[?25h[?25l
+[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K
+$[0K[3G[?25h[?25l$ git status[0K[?25h[?25l
+[0K[?25hOn branch master[0K[?25l
+Changes not staged for commit:[0K
+  (use "git add <file>..." to update what will be committed)[0K
+  (use "git checkout -- <file>..." to discard changes in working directory)[0K
+[0K
+        [0;31mmodified:   .Rproj.user/6F98EBE9/console06/CAEA8888[0m[0K
+        [0;31mmodified:   .Rproj.user/6F98EBE9/sources/prop/INDEX[0m[0K
+        [0;31mmodified:   .Rproj.user/shared/notebooks/paths[0m[0K
+        [0;31mmodified:   .gitignore[0m[0K
+[0K
+no changes added to commit (use "git add" and/or "git commit -a")[0K
+[0K[?25h[?25l
+[0;32mab604@ab604-proteome [0;35m [0;33m/e/bspr-workshop-2018[0;36m (master)[0m[0K
+$[0K[3G[?25h[?25l$ g[0K[?25hi[0Kt[0K[7G[?25l$ git a[0K[?25hd[0Kd[0K[11G[?25l$ git add .[0K[?25h
