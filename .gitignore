@@ -39,3 +39,4 @@ rsconnect/
 *.raw
 *.py
 
+.Rproj.user
