@@ -15,7 +15,11 @@
 /*.Rcheck/
 
 # RStudio files
+<<<<<<< HEAD
 .Rproj.user
+=======
+.Rproj.user/*
+>>>>>>> b736c76e9f341cab07e984747cf11c291718137b
 
 # produced vignettes
 vignettes/*.html
@@ -38,6 +42,5 @@ rsconnect/
 # Raw mass spec files
 *.raw
 *.py
-
 
 .Rproj.user

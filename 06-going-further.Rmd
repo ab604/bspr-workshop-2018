@@ -128,7 +128,14 @@ following community members on Twitter such as [Jenny Bryan](https://twitter.com
 [literate programming](https://en.wikipedia.org/wiki/Literate_programming), saving time as we can create analysis, reports, dashboards or web apps at the same time
 as writing code. R Markdown can use multiple programming languages. 
 See also [R4DS R Markdown](http://r4ds.had.co.nz/r-markdown.html) and
-[R4DS R Markdown formats](http://r4ds.had.co.nz/r-markdown-formats.html).
+[R4DS R Markdown formats](http://r4ds.had.co.nz/r-markdown-formats.html) and
+the [R Markdown: The Definitive Guide](https://bookdown.org/yihui/rmarkdown/).
+
+As linked in Section \@ref(viz) Claus Wilke has written a very nice guide to 
+visualising data using R cvisualising data using R called
+[Fundamentals of Data Visualization](http://serialmentor.com/dataviz/index.html) 
+which is very helpful when it comes to thinking about how to best create figures
+for a report, poster or presentation.
 
 You can use [blogdown](https://bookdown.org/yihui/blogdown/) to build websites.
 I created this guide to [buidling an academic website with blogdown](http://ab604.github.io/docs/website_bookdown/).
