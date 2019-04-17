@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Data Science Workshop</title>
+  <title>Chapter 3 Creating scripts and importing data | Data Science Workshop</title>
   <meta name="description" content="Lessons for the BSPR 2018 Data Science Workshop">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Data Science Workshop" />
+  <meta property="og:title" content="Chapter 3 Creating scripts and importing data | Data Science Workshop" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Data Science Workshop" />
+  <meta name="twitter:title" content="Chapter 3 Creating scripts and importing data | Data Science Workshop" />
   
   <meta name="twitter:description" content="Lessons for the BSPR 2018 Data Science Workshop" />
   
@@ -35,6 +35,7 @@
 <link rel="next" href="dplyr.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -49,41 +50,67 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 </head>
@@ -207,28 +234,51 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="import" class="section level1">
 <h1><span class="header-section-number">Chapter 3</span> Creating scripts and importing data</h1>
-<p>Our analysis is of an example data set of observations for 7702 proteins from cells in three control experiments and three treatment experiments. The observations are signal intensity measurements from the mass spectrometer. These intensities relate the concentration of protein observed in each experiment and under each condition.</p>
-<p>We consider raw data as the data as we receive it. This doesn’t mean it hasn’t be processed in some way, it just means it hasn’t been processed by us. Generally speaking we don’t change the raw data file, what we do is import it and create an object in R which we then transform.</p>
+<p>Our analysis is of an example data set of observations for 7702 proteins
+from cells in three control experiments and three treatment experiments.
+The observations are signal intensity measurements from the mass spectrometer.
+These intensities relate the concentration of protein observed in each experiment
+and under each condition.</p>
+<p>We consider raw data as the data as we receive it. This doesn’t mean it hasn’t be
+processed in some way, it just means it hasn’t been processed by us.
+Generally speaking we don’t change the raw data file, what we do is import it and
+create an object in R which we then transform.</p>
 <p>So let’s understand how to import some data.</p>
 <div id="some-definitions" class="section level2">
 <h2><span class="header-section-number">3.1</span> Some definitions</h2>
 <ul>
-<li><strong>Importing</strong> means getting data into our R environment by creating an object that we can then manipulate. The raw data file remains unchanged.</li>
+<li><strong>Importing</strong> means getting data into our R environment by creating an object
+that we can then manipulate. The raw data file remains unchanged.</li>
 <li><strong>Inspecting</strong> means looking at the dataset to understand what it contains.</li>
-<li><strong>Tidying</strong> refers to getting data into a consistent format that makes it easy to use in later steps.</li>
+<li><strong>Tidying</strong> refers to getting data into a consistent format that makes it easy
+to use in later steps.</li>
 </ul>
 <div id="file-formats" class="section level3">
 <h3><span class="header-section-number">3.1.1</span> Rectangular data and flat formats</h3>
 <p>Two further things to note:</p>
 <ol style="list-style-type: decimal">
-<li><p>Here we are only considering <strong>rectangular data</strong>, the sort that comes in rows and columns such as in a spreadsheet. Lots of our data types exist, such as images, but can also be handled by R. As mentioned in <a href="import.html#biocondutor">3.5.1</a> genomic data in particular has led to a project called <a href="http://bioconductor.org/">Bioconductor</a> for the development of analysis tools primarily in R, many of which deal with non-rectangular data, but this is beyond the scope here.</p></li>
-<li><p><strong>Flat formats</strong> are files that only contain plain text, with each line representing a set of observations and the variables separated by delimiters such as tabs, commas or spaces. Therefore there aren’t multiple tables such as we’d get in an Excel file, or meta-data such as the colour highlighting of a cell in an Excel file. The advantages of flat files is that they can be opened and used by many different computing languages or programs. So unless there is a good reason not to use a flat format, and there are good reasons, they are the best way to store data in many situations.</p></li>
+<li><p>Here we are only considering <strong>rectangular data</strong>, the sort that comes
+in rows and columns such as in a spreadsheet. Lots of our data types exist,
+such as images, but can also be
+handled by R. As mentioned in <a href="import.html#biocondutor">3.5.1</a> genomic data in particular has
+led to a project called <a href="http://bioconductor.org/">Bioconductor</a> for the
+development of analysis tools primarily in R, many of which deal with
+non-rectangular data, but this is beyond the scope here.</p></li>
+<li><p><strong>Flat formats</strong> are files that only contain plain text, with each line
+representing a set of observations and the variables separated by delimiters
+such as tabs, commas or spaces. Therefore there aren’t multiple tables such
+as we’d get in an Excel file, or meta-data such as the colour highlighting of
+a cell in an Excel file. The advantages of flat files is that they can be
+opened and used by many different computing languages or programs.
+So unless there is a good reason not to use a flat format, and there are good
+reasons, they are the best way to store data in many situations.</p></li>
 </ol>
 </div>
 </div>
 <div id="using-scripts" class="section level2">
 <h2><span class="header-section-number">3.2</span> Using scripts</h2>
-<p>Using the console is useful, but as we build up a workflow, that is to say, writing code to:</p>
+<p>Using the console is useful, but as we build up a workflow, that is to say,
+writing code to:</p>
 <ul>
 <li>load packages</li>
 <li>load data</li>
@@ -236,8 +286,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>and output some results</li>
 </ul>
 <p>Then it’s much more useful to contain this in a script: a document of our code.</p>
-<p>Why? When we write and save our code in scripts, we can re-use it, share it or edit it. But <strong>most importantly a script is a record</strong>.</p>
-<p>Cmd/Ctrl + Shift + N will open a new script file up and you should see something like Figure <a href="import.html#fig:script-pane">3.1</a> with the script editor pane open:</p>
+<p>Why? When we write and save our code in scripts, we can re-use it, share it or
+edit it. But <strong>most importantly a script is a record</strong>.</p>
+<p>Cmd/Ctrl + Shift + N will open a new script file up and you should see something
+like Figure <a href="import.html#fig:script-pane">3.1</a> with the script editor pane open:</p>
 
 <div class="figure" style="text-align: center"><span id="fig:script-pane"></span>
 <img src="img/rstudio_screenshot_four_panes.PNG" alt="Rstudio with the script editor pane open." width="80%" />
@@ -248,7 +300,8 @@ Figure 3.1: Rstudio with the script editor pane open.
 </div>
 <div id="running-code" class="section level2">
 <h2><span class="header-section-number">3.3</span> Running code</h2>
-<p>We can run a highlighted portion of code in your script if you click the Run button at the top of the scripts pane as shown in Figure <a href="import.html#fig:run-script">3.2</a>.</p>
+<p>We can run a highlighted portion of code in your script if you click the Run
+button at the top of the scripts pane as shown in Figure <a href="import.html#fig:run-script">3.2</a>.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:run-script"></span>
 <img src="img/run_script.PNG" alt="Scripts can be run by clicking the Source button." width="80%" />
@@ -262,18 +315,28 @@ Figure 3.2: Scripts can be run by clicking the Source button.
 <div id="creating-a-r-script" class="section level2">
 <h2><span class="header-section-number">3.4</span> Creating a R script</h2>
 <p>We first need to create a script that will form the basis of our analysis.</p>
-<p>Go to the file menu and select New Files &gt; R script. This should open the script editor pane.</p>
-<p>Now let’s save the script, by going to File &gt; Save and we should find ourselves prompted to save the script in our Project Directory.</p>
-<p>Following the advice about <a href="intro.html#names">naming things</a> we can create a new R script called <code>01-bspr-workshop-july-2018</code>.</p>
-<p>This name is machine readable (no spaces or special characters), human readable, and works well with default ordering by beginning with <code>01</code>.</p>
+<p>Go to the file menu and select New Files &gt; R script. This should open the script
+editor pane.</p>
+<p>Now let’s save the script, by going to File &gt; Save and we should find ourselves
+prompted to save the script in our Project Directory.</p>
+<p>Following the advice about <a href="intro.html#names">naming things</a> we can create a new R script
+called <code>01-bspr-workshop-july-2018</code>.</p>
+<p>This name is machine readable (no spaces or special characters), human readable,
+and works well with default ordering by beginning with <code>01</code>.</p>
 </div>
 <div id="setting-up-our-environment" class="section level2">
 <h2><span class="header-section-number">3.5</span> Setting up our environment</h2>
-<p>At the head of our script it’s common to put a title, the name of the author and the date, and any other useful information. This is created as comments using the <code>#</code> at the start of each line.</p>
-<p>It’s then usual to follow this by code to load the packages we need into our our R environment using the <code>library()</code> function and providing the name of the package we wish to load. Packages are collections of R functions.</p>
-<p>Often we break the code up into regions by adding dashes (or equals symbols) to the comment line. This enables us to run chunks of the script separately from running the whole script when using our code.</p>
+<p>At the head of our script it’s common to put a title, the name of the author
+and the date, and any other useful information. This is created as comments
+using the <code>#</code> at the start of each line.</p>
+<p>It’s then usual to follow this by code to load the packages we need into our
+our R environment using the <code>library()</code> function and providing the name of the
+package we wish to load. Packages are collections of R functions.</p>
+<p>Often we break the code up into regions by adding dashes (or equals symbols)
+to the comment line. This enables us to run chunks of the script separately from
+running the whole script when using our code.</p>
 <p>Here is a typical head for a script:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># My workshop script</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># My workshop script</span>
 <span class="co"># 7th July 2018</span>
 <span class="co"># Alistair Bailey</span>
 
@@ -284,23 +347,32 @@ Figure 3.2: Scripts can be run by clicking the Source button.
 <span class="kw">library</span>(pheatmap)
 <span class="kw">library</span>(gridExtra)
 <span class="kw">library</span>(VennDiagram)
-<span class="kw">library</span>(ggseqlogo)</code></pre></div>
+<span class="kw">library</span>(ggseqlogo)</code></pre>
 <div id="biocondutor" class="section level3">
 <h3><span class="header-section-number">3.5.1</span> Bioconductor</h3>
-<p>As an aside there are many proteomics specific R packages, these are generally found through <a href="https://www.bioconductor.org/">Bioconductor</a> which is a project that was initiated in 2001 to create tools for the analysis of high-throughput genomic data, but also includes other ’omics data tools <span class="citation">(R. C. Gentleman et al. <a href="#ref-gentleman2004">2004</a>,<span class="citation">Huber et al. (<a href="#ref-huber2015">2015</a>)</span>)</span>.</p>
-<p>Exploring Bioconductor is beyond our scope here, but well worth exploring for manipulation and analysis of raw data formats such as mzxml files.</p>
+<p>As an aside there are many proteomics specific R packages, these are generally
+found through <a href="https://www.bioconductor.org/">Bioconductor</a> which is a project
+that was initiated in 2001 to create tools for the analysis of high-throughput
+genomic data, but also includes other ’omics data tools <span class="citation">(Gentleman et al. <a href="#ref-gentleman2004">2004</a>, @huber2015)</span>.</p>
+<p>Exploring Bioconductor is beyond our scope here, but well worth exploring for
+manipulation and analysis of raw data formats such as mzxml files.</p>
 </div>
 </div>
 <div id="importing-data" class="section level2">
 <h2><span class="header-section-number">3.6</span> Importing data</h2>
-<p>Assuming our data is in a <a href="import.html#file-formats">flat format</a>, we can import it into our environment using the tidyverse <code>readr</code> package.</p>
-<p>If our data was an excel file, we can use the tidyverse <code>readxl</code> package to import the data, but it will remove any meta-data and each table in the excel file will become a separate R object as per tidy data principles.</p>
+<p>Assuming our data is in a <a href="import.html#file-formats">flat format</a>, we can import it into our
+environment using the tidyverse <code>readr</code> package.</p>
+<p>If our data was an excel file, we can use the tidyverse <code>readxl</code> package to
+import the data, but it will remove any meta-data and each table in the excel
+file will become a separate R object as per tidy data principles.</p>
 <p>For the purposes of this workshop we have a <code>csv</code> (comma separated variable) file.</p>
-<p>If you haven’t done so already <a href="https://raw.githubusercontent.com/ab604/ab604.github.io/master/docs/070718-proteomics-example-data.csv" download>Click here to download</a> the example data and save it to our project directory. Check the <code>Files</code> pane to see it’s there.</p>
+<p>If you haven’t done so already
+<a href="https://raw.githubusercontent.com/ab604/ab604.github.io/master/docs/070718-proteomics-example-data.csv" download>Click here to download</a> the example data and save it to our project
+directory. Check the <code>Files</code> pane to see it’s there.</p>
 <p>We then import data and assign it to an object we’ll call <code>data</code> like so:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Import example data ----------------------------------------------------------</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Import example data ----------------------------------------------------------</span>
 <span class="co"># Import the example data with read_csv from the readr package</span>
-dat &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_csv</span>(<span class="st">&quot;data/070718-proteomics-example-data.csv&quot;</span>)</code></pre></div>
+dat &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_csv</span>(<span class="st">&quot;data/070718-proteomics-example-data.csv&quot;</span>)</code></pre>
 <pre><code>## Parsed with column specification:
 ## cols(
 ##   protein_accession = col_character(),
@@ -317,35 +389,42 @@ dat &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw
 <h2><span class="header-section-number">3.7</span> Exploring the data</h2>
 <div id="glimpse-head-and-str" class="section level3">
 <h3><span class="header-section-number">3.7.1</span> <code>glimpse</code>, <code>head</code> and <code>str</code></h3>
-<p>The first thing to do with any data set is to actually look at it. Here are four ways to have look at the data in the <code>Console</code>: calling the object directly, <code>glimpse</code>, <code>head</code> and <code>str</code>.</p>
+<p>The first thing to do with any data set is to actually look at it. Here are
+four ways to have look at the data in the <code>Console</code>: calling the object directly,
+<code>glimpse</code>, <code>head</code> and <code>str</code>.</p>
 <ol style="list-style-type: decimal">
-<li>We can just call the object and return it to the <code>Console</code>, which may or may not be useful depending on the size and type of object we call.</li>
+<li>We can just call the object and return it to the <code>Console</code>, which may or may
+not be useful depending on the size and type of object we call.</li>
 </ol>
-<p>2 .<code>glimpse</code> is a tidyverse function that tries to show us as much data in a data.frame or tibble as possible, telling us the <a href="tidyverse.html#atomics">atomic types</a> of data in the table, the number of observations and the number of variables, and importantly shows all the column variable names by transposing the table.</p>
+<p>2 .<code>glimpse</code> is a tidyverse function that tries to show us as much data in
+a data.frame or tibble as possible, telling us the <a href="tidyverse.html#atomics">atomic types</a> of
+data in the table, the number of observations and the number of variables, and
+importantly shows all the column variable names by transposing the table.</p>
 <ol start="3" style="list-style-type: decimal">
 <li><p><code>head</code> is a base function that shows us the 6 lines of a R object by default.</p></li>
-<li><p><code>str</code> is a base function that show the structure of a R object, so it provides a lot of information, but is not so easy to read.</p></li>
+<li><p><code>str</code> is a base function that show the structure of a R object, so it provides
+a lot of information, but is not so easy to read.</p></li>
 </ol>
 <p>The outputs for these four functions is shown below:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># call object</span>
-dat</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># call object</span>
+dat</code></pre>
 <pre><code>## # A tibble: 7,702 x 8
-##    protein_accession protein_description     control_1 control_2 control_3
-##    &lt;chr&gt;             &lt;chr&gt;                       &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
-##  1 VATA_HUMAN_P38606 V-type proton ATPase c~     0.811     0.858     1.04 
-##  2 RL35A_HUMAN_P180~ 60S ribosomal protein ~     0.367     0.385     0.409
-##  3 MYH10_HUMAN_P355~ Myosin-10 OS=Homo sapi~     2.98      4.62      2.87 
-##  4 RHOG_HUMAN_P84095 Rho-related GTP-bindin~     0.142     0.224     0.128
-##  5 PSA1_HUMAN_P25786 Proteasome subunit alp~     1.07      0.945     0.803
-##  6 PRDX5_HUMAN_P300~ Peroxiredoxin-5_ mitoc~     0.566     0.540     0.488
-##  7 ACLY_HUMAN_P53396 ATP-citrate synthase O~     5.00      4.22      5.03 
-##  8 VDAC2_HUMAN_P458~ Voltage-dependent anio~     1.35      1.33      1.14 
-##  9 LRC47_HUMAN_Q8N1~ Leucine-rich repeat-co~     0.927     0.770     1.17 
-## 10 CH60_HUMAN_P10809 60 kDa heat shock prot~     9.45      8.41     10.4  
+##    protein_accessi~ protein_descrip~ control_1 control_2 control_3
+##    &lt;chr&gt;            &lt;chr&gt;                &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+##  1 VATA_HUMAN_P386~ V-type proton A~     0.811     0.858     1.04 
+##  2 RL35A_HUMAN_P18~ 60S ribosomal p~     0.367     0.385     0.409
+##  3 MYH10_HUMAN_P35~ Myosin-10 OS=Ho~     2.98      4.62      2.87 
+##  4 RHOG_HUMAN_P840~ Rho-related GTP~     0.142     0.224     0.128
+##  5 PSA1_HUMAN_P257~ Proteasome subu~     1.07      0.945     0.803
+##  6 PRDX5_HUMAN_P30~ Peroxiredoxin-5~     0.566     0.540     0.488
+##  7 ACLY_HUMAN_P533~ ATP-citrate syn~     5.00      4.22      5.03 
+##  8 VDAC2_HUMAN_P45~ Voltage-depende~     1.35      1.33      1.14 
+##  9 LRC47_HUMAN_Q8N~ Leucine-rich re~     0.927     0.770     1.17 
+## 10 CH60_HUMAN_P108~ 60 kDa heat sho~     9.45      8.41     10.4  
 ## # ... with 7,692 more rows, and 3 more variables: treatment_1 &lt;dbl&gt;,
 ## #   treatment_2 &lt;dbl&gt;, treatment_3 &lt;dbl&gt;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># tidyverse glimpse function</span>
-<span class="kw">glimpse</span>(dat)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># tidyverse glimpse function</span>
+<span class="kw">glimpse</span>(dat)</code></pre>
 <pre><code>## Observations: 7,702
 ## Variables: 8
 ## $ protein_accession   &lt;chr&gt; &quot;VATA_HUMAN_P38606&quot;, &quot;RL35A_HUMAN_P18077&quot;,...
@@ -356,22 +435,22 @@ dat</code></pre></div>
 ## $ treatment_1         &lt;dbl&gt; 0.6448, 0.4109, 7.1670, 0.1643, 0.7884, 0....
 ## $ treatment_2         &lt;dbl&gt; 0.7190, 0.4634, 2.0052, 0.2466, 0.8798, 1....
 ## $ treatment_3         &lt;dbl&gt; 0.4805, 0.3561, 0.8995, 0.1268, 0.7631, 0....</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># head function</span>
-<span class="kw">head</span>(dat)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># head function</span>
+<span class="kw">head</span>(dat)</code></pre>
 <pre><code>## # A tibble: 6 x 8
-##   protein_accession protein_description      control_1 control_2 control_3
-##   &lt;chr&gt;             &lt;chr&gt;                        &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
-## 1 VATA_HUMAN_P38606 V-type proton ATPase ca~     0.811     0.858     1.04 
-## 2 RL35A_HUMAN_P180~ 60S ribosomal protein L~     0.367     0.385     0.409
-## 3 MYH10_HUMAN_P355~ Myosin-10 OS=Homo sapie~     2.98      4.62      2.87 
-## 4 RHOG_HUMAN_P84095 Rho-related GTP-binding~     0.142     0.224     0.128
-## 5 PSA1_HUMAN_P25786 Proteasome subunit alph~     1.07      0.945     0.803
-## 6 PRDX5_HUMAN_P300~ Peroxiredoxin-5_ mitoch~     0.566     0.540     0.488
+##   protein_accessi~ protein_descrip~ control_1 control_2 control_3
+##   &lt;chr&gt;            &lt;chr&gt;                &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+## 1 VATA_HUMAN_P386~ V-type proton A~     0.811     0.858     1.04 
+## 2 RL35A_HUMAN_P18~ 60S ribosomal p~     0.367     0.385     0.409
+## 3 MYH10_HUMAN_P35~ Myosin-10 OS=Ho~     2.98      4.62      2.87 
+## 4 RHOG_HUMAN_P840~ Rho-related GTP~     0.142     0.224     0.128
+## 5 PSA1_HUMAN_P257~ Proteasome subu~     1.07      0.945     0.803
+## 6 PRDX5_HUMAN_P30~ Peroxiredoxin-5~     0.566     0.540     0.488
 ## # ... with 3 more variables: treatment_1 &lt;dbl&gt;, treatment_2 &lt;dbl&gt;,
 ## #   treatment_3 &lt;dbl&gt;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># str function</span>
-<span class="kw">str</span>(dat)</code></pre></div>
-<pre><code>## Classes &#39;tbl_df&#39;, &#39;tbl&#39; and &#39;data.frame&#39;:    7702 obs. of  8 variables:
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># str function</span>
+<span class="kw">str</span>(dat)</code></pre>
+<pre><code>## Classes &#39;spec_tbl_df&#39;, &#39;tbl_df&#39;, &#39;tbl&#39; and &#39;data.frame&#39;: 7702 obs. of  8 variables:
 ##  $ protein_accession  : chr  &quot;VATA_HUMAN_P38606&quot; &quot;RL35A_HUMAN_P18077&quot; &quot;MYH10_HUMAN_P35580&quot; &quot;RHOG_HUMAN_P84095&quot; ...
 ##  $ protein_description: chr  &quot;V-type proton ATPase catalytic subunit A OS=Homo sapiens GN=ATP6V1A PE=1 SV=2&quot; &quot;60S ribosomal protein L35a OS=Homo sapiens GN=RPL35A PE=1 SV=2&quot; &quot;Myosin-10 OS=Homo sapiens GN=MYH10 PE=1 SV=3&quot; &quot;Rho-related GTP-binding protein RhoG OS=Homo sapiens GN=RHOG PE=1 SV=1&quot; ...
 ##  $ control_1          : num  0.811 0.367 2.982 0.142 1.075 ...
@@ -380,34 +459,32 @@ dat</code></pre></div>
 ##  $ treatment_1        : num  0.645 0.411 7.167 0.164 0.788 ...
 ##  $ treatment_2        : num  0.719 0.463 2.005 0.247 0.88 ...
 ##  $ treatment_3        : num  0.48 0.356 0.899 0.127 0.763 ...
-##  - attr(*, &quot;spec&quot;)=List of 2
-##   ..$ cols   :List of 8
-##   .. ..$ protein_accession  : list()
-##   .. .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_character&quot; &quot;collector&quot;
-##   .. ..$ protein_description: list()
-##   .. .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_character&quot; &quot;collector&quot;
-##   .. ..$ control_1          : list()
-##   .. .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_double&quot; &quot;collector&quot;
-##   .. ..$ control_2          : list()
-##   .. .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_double&quot; &quot;collector&quot;
-##   .. ..$ control_3          : list()
-##   .. .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_double&quot; &quot;collector&quot;
-##   .. ..$ treatment_1        : list()
-##   .. .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_double&quot; &quot;collector&quot;
-##   .. ..$ treatment_2        : list()
-##   .. .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_double&quot; &quot;collector&quot;
-##   .. ..$ treatment_3        : list()
-##   .. .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_double&quot; &quot;collector&quot;
-##   ..$ default: list()
-##   .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_guess&quot; &quot;collector&quot;
-##   ..- attr(*, &quot;class&quot;)= chr &quot;col_spec&quot;</code></pre>
-<p>To see the data in a <em>spreadsheet</em> fashion use <code>View(dat)</code>, note the capital V and a new tab will open. This can also be launched from the <code>Environment</code> tab by clicking on <code>dat</code>.</p>
-<p>Although this provides us with some useful information, such as the number of observations and variables, to understand more plotting the data will be helpful as we’ll see in Section <a href="transform.html#normalisation">5.3</a>.</p>
+##  - attr(*, &quot;spec&quot;)=
+##   .. cols(
+##   ..   protein_accession = col_character(),
+##   ..   protein_description = col_character(),
+##   ..   control_1 = col_double(),
+##   ..   control_2 = col_double(),
+##   ..   control_3 = col_double(),
+##   ..   treatment_1 = col_double(),
+##   ..   treatment_2 = col_double(),
+##   ..   treatment_3 = col_double()
+##   .. )</code></pre>
+<p>To see the data in a <em>spreadsheet</em> fashion use <code>View(dat)</code>, note the capital V
+and a new tab will open. This can also be launched from the <code>Environment</code> tab by
+clicking on <code>dat</code>.</p>
+<p>Although this provides us with some useful information, such as the number of
+observations and variables, to understand more plotting the data will be
+helpful as we’ll see in Section <a href="transform.html#normalisation">5.3</a>.</p>
 </div>
 <div id="summary-statisitics" class="section level3">
 <h3><span class="header-section-number">3.7.2</span> Summary statisitics</h3>
-<p>Another useful way to quickly get a sense of the data is to use the <code>summary</code> function, which will return summary of the spread of the data and importantly if there are missing values. We can see immediately below that the experimental replicates have different distributions, and missing values that we need to deal with in Chapter <a href="transform.html#transform">5</a>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(dat)</code></pre></div>
+<p>Another useful way to quickly get a sense of the data is to use the <code>summary</code>
+function, which will return summary of the spread of the data and importantly
+if there are missing values. We can see immediately below that the experimental
+replicates have different distributions, and missing values that we need to
+deal with in Chapter <a href="transform.html#transform">5</a>.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(dat)</code></pre>
 <pre><code>##  protein_accession  protein_description   control_1        control_2     
 ##  Length:7702        Length:7702         Min.   : 0.001   Min.   : 0.000  
 ##  Class :character   Class :character    1st Qu.: 0.143   1st Qu.: 0.132  
@@ -431,10 +508,7 @@ dat</code></pre></div>
 <h3>References</h3>
 <div id="refs" class="references">
 <div id="ref-gentleman2004">
-<p>Gentleman, Robert C, Vincent J Carey, Douglas M Bates, Ben Bolstad, Marcel Dettling, Sandrine Dudoit, Byron Ellis, et al. 2004. “Bioconductor: Open Software Development for Computational Biology and Bioinformatics.” <em>Genome Biology</em> 5 (10): R80. doi:<a href="https://doi.org/10.1186/gb-2004-5-10-r80">10.1186/gb-2004-5-10-r80</a>.</p>
-</div>
-<div id="ref-huber2015">
-<p>Huber, Wolfgang, Vincent J Carey, Robert Gentleman, Simon Anders, Marc Carlson, Benilton S Carvalho, Hector Corrada Bravo, et al. 2015. “Orchestrating High-Throughput Genomic Analysis with Bioconductor.” <em>Nature Methods</em> 12 (2): 115–21. doi:<a href="https://doi.org/10.1038/nmeth.3252">10.1038/nmeth.3252</a>.</p>
+<p>Gentleman, Robert C, Vincent J Carey, Douglas M Bates, Ben Bolstad, Marcel Dettling, Sandrine Dudoit, Byron Ellis, et al. 2004. “Bioconductor: Open Software Development for Computational Biology and Bioinformatics.” <em>Genome Biology</em> 5 (10): R80. <a href="https://doi.org/10.1186/gb-2004-5-10-r80">https://doi.org/10.1186/gb-2004-5-10-r80</a>.</p>
 </div>
 </div>
             </section>
@@ -463,7 +537,7 @@ gitbook.start({
 "google": false,
 "linkedin": false,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
 "all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
@@ -473,6 +547,10 @@ gitbook.start({
 "size": 2
 },
 "edit": {
+"link": null,
+"text": null
+},
+"history": {
 "link": null,
 "text": null
 },
@@ -489,8 +567,8 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
     script.src = src;

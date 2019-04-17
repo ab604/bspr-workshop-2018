@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Data Science Workshop</title>
+  <title>Chapter 1 Introduction | Data Science Workshop</title>
   <meta name="description" content="Lessons for the BSPR 2018 Data Science Workshop">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Data Science Workshop" />
+  <meta property="og:title" content="Chapter 1 Introduction | Data Science Workshop" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Data Science Workshop" />
+  <meta name="twitter:title" content="Chapter 1 Introduction | Data Science Workshop" />
   
   <meta name="twitter:description" content="Lessons for the BSPR 2018 Data Science Workshop" />
   
@@ -35,6 +35,7 @@
 <link rel="next" href="tidyverse.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -49,41 +50,67 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 </head>
@@ -207,13 +234,23 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="intro" class="section level1">
 <h1><span class="header-section-number">Chapter 1</span> Introduction</h1>
-<p>There are many resources for learning R on the web. Much of Chapters <a href="intro.html#intro">1</a>, <a href="tidyverse.html#tidyverse">2</a>, <a href="import.html#import">3</a> and <a href="dplyr.html#dplyr">4</a> derive from a <a href="http://www.datacarpentry.org/lessons/">Data Carpentry lesson</a> using ecological data that I have previously <a href="https://southampton-rsg.github.io/2017-08-01-southampton-dc/novice/R-ecology-lesson/index.html">reworked</a>, which in turn takes a lot from <a href="http://r4ds.had.co.nz/">Hadley Wickham’s R for Data Science</a> aka <strong>R4DS</strong>. Follow the links to access those materials.</p>
-<p>Chapter <a href="transform.html#transform">5</a> deals with some statistical transformations and visualisation methods in the context of proteomics data.</p>
-<p>Whilst finally in Chapter <a href="going-further.html#going-further">6</a> there is some advice about how to build upon the materials covered here.</p>
+<p>There are many resources for learning R on the web. Much of Chapters <a href="intro.html#intro">1</a>,
+<a href="tidyverse.html#tidyverse">2</a>, <a href="import.html#import">3</a> and <a href="dplyr.html#dplyr">4</a> derive from
+a <a href="http://www.datacarpentry.org/lessons/">Data Carpentry lesson</a> using
+ecological data that I have previously <a href="https://southampton-rsg.github.io/2017-08-01-southampton-dc/novice/R-ecology-lesson/index.html">reworked</a>,
+which in turn takes a lot from <a href="http://r4ds.had.co.nz/">Hadley Wickham’s R for Data Science</a> aka <strong>R4DS</strong>.
+Follow the links to access those materials.</p>
+<p>Chapter <a href="transform.html#transform">5</a> deals with some statistical transformations and
+visualisation methods in the context of proteomics data.</p>
+<p>Whilst finally in
+Chapter <a href="going-further.html#going-further">6</a> there is some advice about how to build upon the
+materials covered here.</p>
 <p>In terms of philosophy:</p>
 <ol style="list-style-type: decimal">
-<li><p>The primary motivation for using tools such as R is to get more done, in less time and with less pain.</p></li>
-<li><p>And the overall aim is to <em>understand and communicate</em> findings from our data.</p></li>
+<li><p>The primary motivation for using tools such as R is to get more done, in
+less time and with less pain.</p></li>
+<li><p>And the overall aim is to <em>understand and communicate</em> findings from our
+data.</p></li>
 </ol>
 
 <div class="figure" style="text-align: center"><span id="fig:pipeline"></span>
@@ -222,26 +259,45 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 Figure 1.1: Data project workflow.
 </p>
 </div>
-<p>As shown in Figure <a href="intro.html#fig:pipeline">1.1</a> of typical data analysis workflow, to acheive this aim we need to learn tools that enable us to perform the fundamental tasks of tasks of importing, tidying and often transforming the data. Transformation means for example, selecting a subset of the data to work with, or calculating the mean of a set of observations. We’ll cover that in Chapter <a href="transform.html#transform">5</a>.</p>
+<p>As shown in Figure <a href="intro.html#fig:pipeline">1.1</a> of typical data analysis workflow,
+to acheive this aim we need to learn tools that enable us to perform the
+fundamental tasks of tasks of importing, tidying and
+often transforming the data. Transformation means for example, selecting a
+subset of the data to work with, or calculating the mean of a set of observations.
+We’ll cover that in Chapter <a href="transform.html#transform">5</a>.</p>
 <p>But first…</p>
 <div id="r-rstudio" class="section level2">
 <h2><span class="header-section-number">1.1</span> What are R and RStudio?</h2>
 <p><strong><em>“There are only two kinds of languages: the ones people complain about and the ones nobody uses”</em></strong></p>
 <p><em>Bjarne Stroustrup</em></p>
-<p><strong>R</strong> is a programming language that follows the philosophy laid down by it’s predecessor S. The philosophy being that users begin in an interactive environment where they don’t consciously think of themselves as programming. It was created in 1993, and documented in <span class="citation">(Ihaka and Gentleman <a href="#ref-ihaka1996">1996</a>)</span>.</p>
-<p>Reasons R has become popular include that it is both open source and cross platform, and that it has broad functionality, from the analysis of data and creating powerful graphical visualisations and web apps.</p>
-<p>Like all languages though it has limitations, for example the syntax is initially confusing.</p>
+<p><strong>R</strong> is a programming language that follows the philosophy laid down by it’s
+predecessor S. The philosophy being that users begin in an interactive
+environment where they don’t consciously think of themselves as programming.
+It was created in 1993, and documented in <span class="citation">(Ihaka and Gentleman <a href="#ref-ihaka1996">1996</a>)</span>.</p>
+<p>Reasons R has become popular include that it is both open source and cross platform,
+and that it has broad functionality, from the analysis of data and creating
+powerful graphical visualisations and web apps.</p>
+<p>Like all languages though it has limitations, for example the syntax is initially
+confusing.</p>
 <p>Take for example the word <code>environment</code>…</p>
 <div id="environments" class="section level3">
 <h3><span class="header-section-number">1.1.1</span> Environments</h3>
-<p>An environment is where we bring our data to work with it. Here we work in a R envrionment, using the R language as a set of tools. <strong>RStudio</strong> is an integrated development environment, or IDE for R programming. It is regularly updated, and upgrading enables access to the latest features.</p>
+<p>An environment is where we bring our data to work with it. Here we work in a R
+envrionment, using the R language as a set of tools.
+<strong>RStudio</strong> is an integrated development environment, or IDE for R programming.
+It is regularly updated, and upgrading enables access to the latest features.</p>
 <p>The latest version can be downloaded here: <a href="http://www.rstudio.com/download" class="uri">http://www.rstudio.com/download</a></p>
 </div>
 </div>
 <div id="why-learn-r-or-any-language" class="section level2">
 <h2><span class="header-section-number">1.2</span> Why learn R, or any language ?</h2>
-<p>We can write R code without saving it, but it’s generally more useful to write and save our code as a script. Working with scripts makes the steps you used in your analysis clear, and the code you write can be inspected by someone else who can give you feedback and spot mistakes.</p>
-<p>Learning R (or any programming language) and working with scripts forces you to have deeper understanding of what you are doing, facilitates your learning and comprehension of the methods you use:</p>
+<p>We can write R code without saving it, but it’s generally more useful to write
+and save our code as a script. Working with scripts makes the steps you used in
+your analysis clear, and the code you write can be inspected by someone else who
+can give you feedback and spot mistakes.</p>
+<p>Learning R (or any programming language) and working with scripts forces you to
+have deeper understanding of what you are doing, facilitates your learning
+and comprehension of the methods you use:</p>
 <ul>
 <li>Writing and publishing code is important for reproducible resarch</li>
 <li>R has many thousands of packages covering many disciplines.</li>
@@ -252,13 +308,23 @@ Figure 1.1: Data project workflow.
 </div>
 <div id="finding-your-way-around-rstudio" class="section level2">
 <h2><span class="header-section-number">1.3</span> Finding your way around RStudio</h2>
-<p>Let’s begin by learning about <a href="https://www.rstudio.com/">RStudio</a>, the Integrated Development Environment (IDE).</p>
-<p>We will use R Studio IDE to write code, navigate the files found on our computer, inspect the variables we are going to create, and visualize the plots we will generate. R Studio can also be used for other things (e.g., version control, developing packages, writing Shiny apps) that we don’t have time to cover during this workshop.</p>
+<p>Let’s begin by learning about <a href="https://www.rstudio.com/">RStudio</a>, the
+Integrated Development Environment (IDE).</p>
+<p>We will use R Studio IDE to write code, navigate the files found on our computer,
+inspect the variables we are going to create, and visualize the plots we will
+generate. R Studio can also be used for other things (e.g., version control,
+developing packages, writing Shiny apps) that we don’t have time to cover during
+this workshop.</p>
 <p>R Studio is divided into “Panes”, see Figure <a href="intro.html#fig:rstudio">1.2</a>.</p>
-<p>When you first open it, there are three panes,the console where you type commands, your environment/history (top-right), and your files/plots/packages/help/viewer (bottom-right).</p>
-<p>The enivronment shows all the R objects you have created or are using, such as data you have imported.</p>
+<p>When you first open it, there are three panes,the console where you type
+commands, your environment/history (top-right), and your
+files/plots/packages/help/viewer (bottom-right).</p>
+<p>The enivronment shows all the R objects you have created or are using, such
+as data you have imported.</p>
 <p>The output pane can be used to view any plots you have created.</p>
-<p>Not opened at first start up is the fourth default pane: the script editor pane, but this will open as soon as we create/edit a R script (or many other document types). <em>The script editor is where will be typing much of the time.</em></p>
+<p>Not opened at first start up is the fourth default pane: the script editor pane,
+but this will open as soon as we create/edit a R script (or many other document types).
+<em>The script editor is where will be typing much of the time.</em></p>
 
 <div class="figure" style="text-align: center"><span id="fig:rstudio"></span>
 <img src="img/rstudio_ide_image.png" alt="The Rstudio Integrated Development Environment (IDE)." width="80%" />
@@ -266,14 +332,25 @@ Figure 1.1: Data project workflow.
 Figure 1.2: The Rstudio Integrated Development Environment (IDE).
 </p>
 </div>
-<p>The placement of these panes and their content can be customized (see menu, R Studio -&gt; Tools -&gt; Global Options -&gt; Pane Layout). One of the advantages of using R Studio is that all the information you need to write code is available ina single window. Additionally, with many shortcuts, auto-completion, and highlighting for the major file types you use while developing in R, R Studio will make typing easier and less error-prone.</p>
+<p>The placement of these panes and their content can be customized (see menu,
+R Studio -&gt; Tools -&gt; Global Options -&gt; Pane Layout). One of the advantages of
+using R Studio is that all the information you need to write code is available
+ina single window. Additionally, with many shortcuts, auto-completion, and
+highlighting for the major file types you use while developing in R, R Studio
+will make typing easier and less error-prone.</p>
 <p>Time for a philosphical diversion…</p>
 <div id="what-is-real" class="section level3">
 <h3><span class="header-section-number">1.3.1</span> What is real?</h3>
-<p>At the start, we might consider our environment “real” - that is to say the objects we’ve created/loaded and are using are “real”. But it’s much better in the long run to consider our scripts as “real” - our scripts are where we write down the code that creates our objects that we’ll be using in our environment.</p>
+<p>At the start, we might consider our environment “real” - that is to say the objects
+we’ve created/loaded and are using are “real”. But it’s much better in the long run
+to consider our scripts as “real” - our scripts are where we write down the code
+that creates our objects that we’ll be using in our environment.</p>
 <p><strong>As a script is a document, it is reproducible</strong></p>
-<p>Or to put it another way: we can easily recreate an environment from our scripts, but not so easily create a script from an enivronment.</p>
-<p>To support this notion of thinking in terms of our scripts as real, we recommend turning off the preservation of workspaces between sessions by setting the Tools &gt; Global Options menu in R studio as shown in Figure <a href="intro.html#fig:workspace">1.3</a>:</p>
+<p>Or to put it another way: we can easily recreate an environment from our scripts,
+but not so easily create a script from an enivronment.</p>
+<p>To support this notion of thinking in terms of our scripts as real, we recommend
+turning off the preservation of workspaces between sessions by setting the
+Tools &gt; Global Options menu in R studio as shown in Figure <a href="intro.html#fig:workspace">1.3</a>:</p>
 
 <div class="figure" style="text-align: center"><span id="fig:workspace"></span>
 <img src="img/rdata_turn_off.png" alt="Don’t save your workspace, save your script instead." width="80%" />
@@ -293,8 +370,20 @@ Figure 1.3: Don’t save your workspace, save your script instead.
 Figure 1.4: Your working directory
 </p>
 </div>
-<p>If you are unfamiliar with how computers structure folders and files, then consider a tree with a root from which the trunk extends and branches divide. In the image above, the ~ symbol represents a contraction of the path from the root to the ‘home’ directory (in Windows this is ‘Documents’) and then the forward slashes are the branches. (Note: Windows uses backslashes, Unix type systems and R use forwardslashes).</p>
-<p>It is good practice to keep a set of related data, analyses, and text self-contained in a single folder, called the <strong>working directory</strong>. All of the scripts within this folder can then use <em>relative paths</em> to files that indicate where inside the project a file is located (as opposed to absolute paths, which point to where a file is on a specific computer). Working this way makes it a lot easier to move your project around on your computer and share it with others without worrying about whether or not the underlying scripts will still work.</p>
+<p>If you are unfamiliar with how computers structure folders and files, then
+consider a tree with a root from which the trunk extends and branches divide.
+In the image above, the ~ symbol represents a contraction of the path from the
+root to the ‘home’ directory (in Windows this is ‘Documents’) and then the
+forward slashes are the branches. (Note: Windows uses backslashes, Unix type
+systems and R use forwardslashes).</p>
+<p>It is good practice to keep a set of related data, analyses, and text
+self-contained in a single folder, called the <strong>working directory</strong>. All of the
+scripts within this folder can then use <em>relative paths</em> to files that indicate
+where inside the project a file is located (as opposed to absolute paths, which
+point to where a file is on a specific computer). Working this way makes it
+a lot easier to move your project around on your computer and share it with
+others without worrying about whether or not the underlying scripts will still
+work.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:dir-structure"></span>
 <img src="img/R-ecology-work_dir_structure.png" alt="A typical directory structure" width="80%" />
@@ -305,8 +394,12 @@ Figure 1.5: A typical directory structure
 </div>
 <div id="r-projects" class="section level2">
 <h2><span class="header-section-number">1.5</span> R projects</h2>
-<p>RStudio also has a facility to keep all files associated with a particular analysis together called a project.</p>
-<p>Creating a project creates a working directory for you and also remembers its location (allowing you to quickly navigate to it) and optionally preserves custom settings and open files to make it easier to resume work after a break.</p>
+<p>RStudio also has a facility to keep all files associated with a particular
+analysis together called a project.</p>
+<p>Creating a project creates a working directory for you and also remembers
+its location (allowing you to quickly navigate to it) and optionally preserves
+custom settings and open files to make it easier to resume work after a
+break.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:r-projects"></span>
 <img src="img/rstudio_create_project.PNG" alt="Creating a R project" width="80%" />
@@ -317,16 +410,22 @@ Figure 1.6: Creating a R project
 <p>Below, we will go through the steps for creating an “R Project”:</p>
 <ul>
 <li>Start R Studio (presentation of R Studio -below- should happen here)</li>
-<li>Under the <code>File</code> menu, click on <code>New project</code>, choose <code>New directory</code>, then <code>Empty project</code></li>
-<li>Enter a name for this new folder (or “directory”, in computer science), and choose a convenient location for it. This will be your <strong>working directory</strong> for the rest of the day (e.g., <code>~/bspr-workshop</code>)</li>
+<li>Under the <code>File</code> menu, click on <code>New project</code>, choose <code>New directory</code>, then
+<code>Empty project</code></li>
+<li>Enter a name for this new folder (or “directory”, in computer science), and
+choose a convenient location for it. This will be your <strong>working directory</strong>
+for the rest of the day (e.g., <code>~/bspr-workshop</code>)</li>
 <li>Click on “Create project”</li>
-<li>Under the <code>Files</code> tab on the right of the screen, click on <code>New Folder</code> and create a folder named <code>data</code> within your newly created working directory. (e.g., <code>~/bspr-workshopdata</code>)</li>
-<li>Create a new R script (File &gt; New File &gt; R script) and save it in your working directory (e.g. <code>bspr-workshop-script.R</code>)</li>
+<li>Under the <code>Files</code> tab on the right of the screen, click on <code>New Folder</code> and
+create a folder named <code>data</code> within your newly created working directory. (e.g., <code>~/bspr-workshopdata</code>)</li>
+<li>Create a new R script (File &gt; New File &gt; R script) and save it in your working
+directory (e.g. <code>bspr-workshop-script.R</code>)</li>
 </ul>
 </div>
 <div id="names" class="section level2">
 <h2><span class="header-section-number">1.6</span> Naming things</h2>
-<p><a href="https://ropensci.org/blog/2017/12/08/rprofile-jenny-bryan/">Jenny Bryan</a> has three principles for <a href="http://www2.stat.duke.edu/~rcs46/lectures_2015/01-markdown-git/slides/naming-slides/naming-slides.pdf">naming things</a> that are well worth remembering.</p>
+<p><a href="https://ropensci.org/blog/2017/12/08/rprofile-jenny-bryan/">Jenny Bryan</a>
+has three principles for <a href="http://www2.stat.duke.edu/~rcs46/lectures_2015/01-markdown-git/slides/naming-slides/naming-slides.pdf">naming things</a> that are well worth remembering.</p>
 <p>When you names something, a file or an object, ideally it should be:</p>
 <ol style="list-style-type: decimal">
 <li>Machine readable (no whitespace, punctuation, upper AND lowercase…)</li>
@@ -337,15 +436,27 @@ Figure 1.6: Creating a R project
 <div id="seeking-help" class="section level2">
 <h2><span class="header-section-number">1.7</span> Seeking help</h2>
 <p>If you need help with a specific R function, let’s say <code>barplot()</code>, you can type:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">?barplot</code></pre></div>
-<p>If you can’t find what you are looking for, you can use the <a href="http://www.rdocumentation.org">rdocumention.org</a> website that searches through the help files across all packages available.</p>
-<p>A Google or internet search “R &lt;task&gt;” will often either send you to the appropriate package documentation or a helpful forum question that someone else already asked, such as <a href="http://stackoverflow.com/questions/tagged/r">Stack Overflow</a> or the <a href="https://community.rstudio.com/">RStudio Community</a>.</p>
+<pre class="sourceCode r"><code class="sourceCode r">?barplot</code></pre>
+<p>If you can’t find what you are looking for, you can use the
+<a href="http://www.rdocumentation.org">rdocumention.org</a> website that searches through
+the help files across all packages available.</p>
+<p>A Google or internet search “R &lt;task&gt;” will often either send you to the appropriate package documentation or a helpful forum question that someone else already asked,
+such as <a href="http://stackoverflow.com/questions/tagged/r">Stack Overflow</a> or
+the <a href="https://community.rstudio.com/">RStudio Community</a>.</p>
 <div id="asking-for-help" class="section level3">
 <h3><span class="header-section-number">1.7.1</span> Asking for help</h3>
-<p>As well as knowing <a href="https://www.tidyverse.org/help/#where-to-ask">where to ask</a>, the key to get help from someone is for them to grasp your problem rapidly. You should make it as easy as possible to pinpoint where the issue might be.</p>
-<p>Try to use the correct words to describe your problem. For instance, a package is not the same thing as a library. Most people will understand what you meant, but others have really strong feelings about the difference in meaning. The key point is that it can make things confusing for people trying to help you. Be as precise as possible when describing your problem.</p>
-<p>If possible, try to reduce what doesn’t work to a simple <em>reproducible example</em> otherwise known as a <em>reprex</em>.</p>
-<p>For more information on how to write a reproducible example see <a href="https://www.tidyverse.org/help/#reprex">this article</a>.</p>
+<p>As well as knowing <a href="https://www.tidyverse.org/help/#where-to-ask">where to ask</a>, the key to get help
+from someone is for them to grasp your problem rapidly. You
+should make it as easy as possible to pinpoint where the issue might be.</p>
+<p>Try to use the correct words to describe your problem. For instance, a
+package is not the same thing as a library. Most people will understand
+what you meant, but others have really strong feelings about the difference
+in meaning. The key point is that it can make things confusing for people
+trying to help you. Be as precise as possible when describing your problem.</p>
+<p>If possible, try to reduce what doesn’t work to a simple <em>reproducible
+example</em> otherwise known as a <em>reprex</em>.</p>
+<p>For more information on how to write a reproducible example see
+<a href="https://www.tidyverse.org/help/#reprex">this article</a>.</p>
 
 </div>
 </div>
@@ -353,7 +464,7 @@ Figure 1.6: Creating a R project
 <h3>References</h3>
 <div id="refs" class="references">
 <div id="ref-ihaka1996">
-<p>Ihaka, Ross, and Robert Gentleman. 1996. “R: A Language for Data Analysis and Graphics.” <em>Journal of Computational and Graphical Statistics</em> 5 (3). Taylor &amp; Francis: 299–314.</p>
+<p>Ihaka, Ross, and Robert Gentleman. 1996. “R: A Language for Data Analysis and Graphics.” <em>Journal of Computational and Graphical Statistics</em> 5 (3): 299–314.</p>
 </div>
 </div>
             </section>
@@ -382,7 +493,7 @@ gitbook.start({
 "google": false,
 "linkedin": false,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
 "all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
@@ -392,6 +503,10 @@ gitbook.start({
 "size": 2
 },
 "edit": {
+"link": null,
+"text": null
+},
+"history": {
 "link": null,
 "text": null
 },
@@ -408,8 +523,8 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
     script.src = src;

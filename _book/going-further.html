@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Data Science Workshop</title>
+  <title>Chapter 6 Going further | Data Science Workshop</title>
   <meta name="description" content="Lessons for the BSPR 2018 Data Science Workshop">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Data Science Workshop" />
+  <meta property="og:title" content="Chapter 6 Going further | Data Science Workshop" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Data Science Workshop" />
+  <meta name="twitter:title" content="Chapter 6 Going further | Data Science Workshop" />
   
   <meta name="twitter:description" content="Lessons for the BSPR 2018 Data Science Workshop" />
   
@@ -35,6 +35,7 @@
 <link rel="next" href="references.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -49,41 +50,67 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 </head>
@@ -207,32 +234,33 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="going-further" class="section level1">
 <h1><span class="header-section-number">Chapter 6</span> Going further</h1>
-<p>Here are a few links and suggestions about what else you might like to do with R.</p>
+<p>Here are a few links and suggestions about what else you might like to do with
+R.</p>
 <div id="export-figs" class="section level2">
 <h2><span class="header-section-number">6.1</span> Exporting figures</h2>
 <p>Exporting figures can be done using the following structure:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Open up a blank plot file, pdf,jpeg etc.</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Open up a blank plot file, pdf,jpeg etc.</span>
 <span class="op">&lt;</span><span class="kw">plot_function</span>(<span class="st">&quot;file&quot;</span>,...)<span class="op">&gt;</span>
 <span class="co"># Write the plot to the file</span>
 <span class="er">&lt;</span>plot_object<span class="op">&gt;</span>
 <span class="co"># Close the file</span>
-<span class="kw">dev.off</span>()</code></pre></div>
+<span class="kw">dev.off</span>()</code></pre>
 <p>For example to export the volcano plot from Figure <a href="transform.html#fig:nice-vplot">5.7</a> to a pdf, we do:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Open up a blank plot file, pdf,jpeg etc.</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Open up a blank plot file, pdf,jpeg etc.</span>
 <span class="kw">pdf</span>(<span class="st">&quot;volcano_plot.pdf&quot;</span>)
 
 <span class="co"># Write the plot to the file</span>
 dat_tf <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="co"># Add a threhold for significant observations</span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">threshold =</span> <span class="kw">if_else</span>(log_fc <span class="op">&gt;=</span><span class="st"> </span><span class="dv">2</span> <span class="op">&amp;</span><span class="st"> </span>log_pval <span class="op">&gt;=</span><span class="st"> </span><span class="fl">1.3</span> <span class="op">|</span>
-<span class="st">                               </span>log_fc <span class="op">&lt;=</span><span class="st"> </span><span class="op">-</span><span class="dv">2</span> <span class="op">&amp;</span><span class="st"> </span>log_pval <span class="op">&gt;=</span><span class="st"> </span><span class="fl">1.3</span>,<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>)) <span class="op">%&gt;%</span>
+<span class="st">                               </span>log_fc <span class="op">&lt;=</span><span class="st"> </span><span class="dv">-2</span> <span class="op">&amp;</span><span class="st"> </span>log_pval <span class="op">&gt;=</span><span class="st"> </span><span class="fl">1.3</span>,<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="co"># Plot with points coloured according to the threshold</span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(log_fc,log_pval, <span class="dt">colour =</span> threshold)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span><span class="st"> </span><span class="co"># Alpha sets the transparency of the points</span>
 <span class="st">  </span><span class="co"># Add dotted lines to indicate the threshold, semi-transparent</span>
 <span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="fl">1.3</span>, <span class="dt">linetype =</span> <span class="dv">2</span>, <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="dv">2</span>, <span class="dt">linetype =</span> <span class="dv">2</span>, <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="op">-</span><span class="dv">2</span>, <span class="dt">linetype =</span> <span class="dv">2</span>, <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="dv">-2</span>, <span class="dt">linetype =</span> <span class="dv">2</span>, <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span>
 <span class="st">  </span><span class="co"># Set the colour of the points</span>
 <span class="st">  </span><span class="kw">scale_colour_manual</span>(<span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&quot;A&quot;</span>=<span class="st"> &quot;red&quot;</span>, <span class="st">&quot;B&quot;</span>=<span class="st"> &quot;black&quot;</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;log2 fold change&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;-log10 p-value&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="co"># Relabel the axes</span>
@@ -240,22 +268,25 @@ dat_tf <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position=</span><span class="st">&quot;none&quot;</span>) <span class="co"># Hide the legend</span>
 
 <span class="co"># Close the file</span>
-<span class="kw">dev.off</span>()</code></pre></div>
-<p>If I had saved the plot to an object called <code>vplot</code> I would call that object instead of making the plot using <code>dat_tf</code> as shown here.</p>
-<p><a href="https://www.stat.berkeley.edu/classes/s133/saving.html">Here</a> is a general guide to the various formats you can export to.</p>
-<p>Alternatively, if you are working in <code>ggplot</code> you can use the <code>ggsave</code> function as described in <a href="http://r4ds.had.co.nz/graphics-for-communication.html#saving-your-plots">R4DS 28.7</a>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Plot</span>
+<span class="kw">dev.off</span>()</code></pre>
+<p>If I had saved the plot to an object called <code>vplot</code> I would call that object
+instead of making the plot using <code>dat_tf</code> as shown here.</p>
+<p><a href="https://www.stat.berkeley.edu/classes/s133/saving.html">Here</a> is a general
+guide to the various formats you can export to.</p>
+<p>Alternatively, if you are working in <code>ggplot</code> you can use the <code>ggsave</code> function
+as described in <a href="http://r4ds.had.co.nz/graphics-for-communication.html#saving-your-plots">R4DS 28.7</a>.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Plot</span>
 dat_tf <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="co"># Add a threhold for significant observations</span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">threshold =</span> <span class="kw">if_else</span>(log_fc <span class="op">&gt;=</span><span class="st"> </span><span class="dv">2</span> <span class="op">&amp;</span><span class="st"> </span>log_pval <span class="op">&gt;=</span><span class="st"> </span><span class="fl">1.3</span> <span class="op">|</span>
-<span class="st">                               </span>log_fc <span class="op">&lt;=</span><span class="st"> </span><span class="op">-</span><span class="dv">2</span> <span class="op">&amp;</span><span class="st"> </span>log_pval <span class="op">&gt;=</span><span class="st"> </span><span class="fl">1.3</span>,<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>)) <span class="op">%&gt;%</span>
+<span class="st">                               </span>log_fc <span class="op">&lt;=</span><span class="st"> </span><span class="dv">-2</span> <span class="op">&amp;</span><span class="st"> </span>log_pval <span class="op">&gt;=</span><span class="st"> </span><span class="fl">1.3</span>,<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="co"># Plot with points coloured according to the threshold</span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(log_fc,log_pval, <span class="dt">colour =</span> threshold)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span><span class="st"> </span><span class="co"># Alpha sets the transparency of the points</span>
 <span class="st">  </span><span class="co"># Add dotted lines to indicate the threshold, semi-transparent</span>
 <span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="fl">1.3</span>, <span class="dt">linetype =</span> <span class="dv">2</span>, <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="dv">2</span>, <span class="dt">linetype =</span> <span class="dv">2</span>, <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="op">-</span><span class="dv">2</span>, <span class="dt">linetype =</span> <span class="dv">2</span>, <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="dv">-2</span>, <span class="dt">linetype =</span> <span class="dv">2</span>, <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span>
 <span class="st">  </span><span class="co"># Set the colour of the points</span>
 <span class="st">  </span><span class="kw">scale_colour_manual</span>(<span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&quot;A&quot;</span>=<span class="st"> &quot;red&quot;</span>, <span class="st">&quot;B&quot;</span>=<span class="st"> &quot;black&quot;</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;log2 fold change&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;-log10 p-value&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="co"># Relabel the axes</span>
@@ -263,44 +294,69 @@ dat_tf <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position=</span><span class="st">&quot;none&quot;</span>) <span class="co"># Hide the legend</span>
 
 <span class="co"># Use ggsave to save the plot as pdf</span>
-<span class="kw">ggsave</span>(<span class="st">&quot;volcano_plot.pdf&quot;</span>, <span class="dt">width =</span> <span class="dv">20</span>, <span class="dt">height =</span> <span class="dv">20</span>, <span class="dt">units =</span> <span class="st">&quot;cm&quot;</span>)</code></pre></div>
+<span class="kw">ggsave</span>(<span class="st">&quot;volcano_plot.pdf&quot;</span>, <span class="dt">width =</span> <span class="dv">20</span>, <span class="dt">height =</span> <span class="dv">20</span>, <span class="dt">units =</span> <span class="st">&quot;cm&quot;</span>)</code></pre>
 </div>
 <div id="exporting-data" class="section level2">
 <h2><span class="header-section-number">6.2</span> Exporting data</h2>
-<p>There is a <a href="https://cran.r-project.org/doc/manuals/r-release/R-data.html">full manual for the import and export of data</a> in R. However here are few pointers:</p>
+<p>There is a <a href="https://cran.r-project.org/doc/manuals/r-release/R-data.html">full manual for the import and export of data</a> in R.
+However here are few pointers:</p>
 <div id="writing-to-a-file" class="section level3">
 <h3><span class="header-section-number">6.2.1</span> Writing to a file</h3>
-<p>One of the most portables way to share data is by writing to a csv file. These files can be opened in many programs. The tidyverse package contains two functions for csv files, <code>write_csv</code> and for Excel <code>write_excel_csv</code>. The latter form adds a bit of metadata that tells Excel about the file encoding. See <a href="http://r4ds.had.co.nz/data-import.html#writing-to-a-file">R4DS writing to a file</a>.</p>
-<p>For example to write a csv file of <code>dat_tf</code> to a file called <code>04072018_transformed_data.csv</code> to our working directory for sharing with a colleague using excel, the code is of the form <code>&lt;function&gt;(&lt;r-object&gt;,&quot;filename&quot;)</code> like so:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">write_excel_csv</span>(dat_tf,<span class="st">&quot;04072018_transformed_data.csv&quot;</span>)</code></pre></div>
+<p>One of the most portables way to share data is by writing to a csv file. These
+files can be opened in many programs. The tidyverse package contains two
+functions for csv files, <code>write_csv</code> and for Excel <code>write_excel_csv</code>. The
+latter form adds a bit of metadata that tells Excel about the file encoding.
+See <a href="http://r4ds.had.co.nz/data-import.html#writing-to-a-file">R4DS writing to a file</a>.</p>
+<p>For example to write a csv file of <code>dat_tf</code> to a file called
+<code>04072018_transformed_data.csv</code> to our working directory for sharing
+with a colleague using excel, the code is of the form
+<code>&lt;function&gt;(&lt;r-object&gt;,"filename")</code> like so:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">write_excel_csv</span>(dat_tf,<span class="st">&quot;04072018_transformed_data.csv&quot;</span>)</code></pre>
 <p>Note that the file name is a string and is in quotes.</p>
 </div>
 <div id="for-r" class="section level3">
 <h3><span class="header-section-number">6.2.2</span> For R</h3>
-<p>If you are exporting data to use yourself in R, the custom <code>.rds</code> format is a good choice and preserves the R structure.</p>
+<p>If you are exporting data to use yourself in R, the custom <code>.rds</code> format is a
+good choice and preserves the R structure.</p>
 <p>In the tidyverse <code>write_rds</code> follows the same structure as <code>write_csv</code>.</p>
 <p>You can read back in using <code>read_rds</code>.</p>
 </div>
 </div>
 <div id="joining-the-r-community" class="section level2">
 <h2><span class="header-section-number">6.3</span> Joining the R community</h2>
-<p>It’s worth joining the <a href="https://community.rstudio.com/">RStudio Community</a> and following community members on Twitter such as <a href="https://twitter.com/JennyBryan">Jenny Bryan</a>, <a href="https://twitter.com/hadleywickham">Hadley Wickham</a>, <a href="https://twitter.com/xieyihui">Yihui Xie</a>, <a href="https://twitter.com/dataandme">Mara Averick</a>, <a href="https://twitter.com/drob">David Robinson</a> and <a href="https://twitter.com/juliasilge">Julia Silge</a>.</p>
-<p>If you can afford <a href="https://www.datacamp.com">DataCamp</a> then this is my preferred learning platform.</p>
-<p>And if you can’t, then <a href="https://swirlstats.com/">swirl</a> is free.</p>
+<p>It’s worth joining the <a href="https://community.rstudio.com/">RStudio Community</a> and
+following community members on Twitter such as <a href="https://twitter.com/JennyBryan">Jenny Bryan</a>, <a href="https://twitter.com/hadleywickham">Hadley Wickham</a>, <a href="https://twitter.com/xieyihui">Yihui Xie</a>, <a href="https://twitter.com/dataandme">Mara Averick</a>,
+<a href="https://twitter.com/drob">David Robinson</a>
+and <a href="https://twitter.com/juliasilge">Julia Silge</a>.</p>
+<p>I would not reccomend DataCamp due to their <a href="https://juliasilge.com/blog/datacamp-misconduct/">misconduct</a>.</p>
+<p>And <a href="https://swirlstats.com/">swirl</a> is free.</p>
 </div>
 <div id="communication-creating-reports-presentations-and-websites" class="section level2">
 <h2><span class="header-section-number">6.4</span> Communication: creating reports, presentations and websites</h2>
-<p><a href="https://rmarkdown.rstudio.com/lesson-1.html">R Markdown</a> <span class="citation">(Allaire et al. <a href="#ref-R-rmarkdown">2018</a>)</span> enables us to do <a href="https://en.wikipedia.org/wiki/Literate_programming">literate programming</a>, saving time as we can create analysis, reports, dashboards or web apps at the same time as writing code. R Markdown can use multiple programming languages. See also <a href="http://r4ds.had.co.nz/r-markdown.html">R4DS R Markdown</a> and <a href="http://r4ds.had.co.nz/r-markdown-formats.html">R4DS R Markdown formats</a> and the <a href="https://bookdown.org/yihui/rmarkdown/">R Markdown: The Definitive Guide</a>.</p>
-<p>As linked in Section <a href="tidyverse.html#viz">2.2.1</a> Claus Wilke has written a very nice guide to visualising data using R cvisualising data using R called <a href="http://serialmentor.com/dataviz/index.html">Fundamentals of Data Visualization</a> which is very helpful when it comes to thinking about how to best create figures for a report, poster or presentation.</p>
-<p>You can use <a href="https://bookdown.org/yihui/blogdown/">blogdown</a> to build websites. I created this guide to <a href="http://ab604.github.io/docs/website_bookdown/">buidling an academic website with blogdown</a>.</p>
+<p><a href="https://rmarkdown.rstudio.com/lesson-1.html">R Markdown</a> <span class="citation">(Allaire et al. <a href="#ref-R-rmarkdown">2019</a>)</span> enables us to do
+<a href="https://en.wikipedia.org/wiki/Literate_programming">literate programming</a>, saving time as we can create analysis, reports, dashboards or web apps at the same time
+as writing code. R Markdown can use multiple programming languages.
+See also <a href="http://r4ds.had.co.nz/r-markdown.html">R4DS R Markdown</a> and
+<a href="http://r4ds.had.co.nz/r-markdown-formats.html">R4DS R Markdown formats</a> and
+the <a href="https://bookdown.org/yihui/rmarkdown/">R Markdown: The Definitive Guide</a>.</p>
+<p>As linked in Section <a href="tidyverse.html#viz">2.2.1</a> Claus Wilke has written a very nice guide to
+visualising data using R cvisualising data using R called
+<a href="http://serialmentor.com/dataviz/index.html">Fundamentals of Data Visualization</a>
+which is very helpful when it comes to thinking about how to best create figures
+for a report, poster or presentation.</p>
+<p>You can use <a href="https://bookdown.org/yihui/blogdown/">blogdown</a> to build websites.
+I created this guide to <a href="http://ab604.github.io/docs/website_bookdown/">buidling an academic website with blogdown</a>.</p>
 <div id="using-bookdown-to-write-a-thesis-dissertaion" class="section level3">
 <h3><span class="header-section-number">6.4.1</span> Using bookdown to write a thesis dissertaion</h3>
-<p>I used the bookdown package to create these materials <span class="citation">(Xie <a href="#ref-R-bookdown">2018</a>)</span> and you can use it to write a thesis dissertaion, as detailed very nicely in this blog by <a href="https://eddjberry.netlify.com/post/writing-your-thesis-with-bookdown/">Edd Berry</a>.</p>
+<p>I used the bookdown package to create these materials <span class="citation">(Xie <a href="#ref-R-bookdown">2018</a>)</span> and you can
+use it to write a thesis dissertaion, as detailed very nicely in this blog by
+<a href="https://eddjberry.netlify.com/post/writing-your-thesis-with-bookdown/">Edd Berry</a>.</p>
 </div>
 </div>
 <div id="machine-learning" class="section level2">
 <h2><span class="header-section-number">6.5</span> Machine Learning</h2>
-<p>If you are interested in machine learning, then <a href="https://tensorflow.rstudio.com/">TensorFlow</a> is a good place to start, for example Leon Eyrich Jessen’s <a href="https://tensorflow.rstudio.com/blog/dl-for-cancer-immunotherapy.html">Deep Learning for Cancer Immunotherapy</a> tutorial.</p>
+<p>If you are interested in machine learning, then <a href="https://tensorflow.rstudio.com/">TensorFlow</a> is a good place to start, for
+example Leon Eyrich Jessen’s <a href="https://tensorflow.rstudio.com/blog/dl-for-cancer-immunotherapy.html">Deep Learning for Cancer Immunotherapy</a> tutorial.</p>
 </div>
 <div id="version-control" class="section level2">
 <h2><span class="header-section-number">6.6</span> Version control</h2>
@@ -312,10 +368,10 @@ dat_tf <span class="op">%&gt;%</span>
 <h3>References</h3>
 <div id="refs" class="references">
 <div id="ref-R-rmarkdown">
-<p>Allaire, JJ, Yihui Xie, Jonathan McPherson, Javier Luraschi, Kevin Ushey, Aron Atkins, Hadley Wickham, Joe Cheng, and Winston Chang. 2018. <em>Rmarkdown: Dynamic Documents for R</em>. <a href="https://CRAN.R-project.org/package=rmarkdown" class="uri">https://CRAN.R-project.org/package=rmarkdown</a>.</p>
+<p>Allaire, JJ, Yihui Xie, Jonathan McPherson, Javier Luraschi, Kevin Ushey, Aron Atkins, Hadley Wickham, Joe Cheng, Winston Chang, and Richard Iannone. 2019. <em>Rmarkdown: Dynamic Documents for R</em>. <a href="https://CRAN.R-project.org/package=rmarkdown">https://CRAN.R-project.org/package=rmarkdown</a>.</p>
 </div>
 <div id="ref-R-bookdown">
-<p>Xie, Yihui. 2018. <em>Bookdown: Authoring Books and Technical Documents with R Markdown</em>. <a href="https://CRAN.R-project.org/package=bookdown" class="uri">https://CRAN.R-project.org/package=bookdown</a>.</p>
+<p>Xie, Yihui. 2018. <em>Bookdown: Authoring Books and Technical Documents with R Markdown</em>. <a href="https://CRAN.R-project.org/package=bookdown">https://CRAN.R-project.org/package=bookdown</a>.</p>
 </div>
 </div>
             </section>
@@ -344,7 +400,7 @@ gitbook.start({
 "google": false,
 "linkedin": false,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
 "all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
@@ -354,6 +410,10 @@ gitbook.start({
 "size": 2
 },
 "edit": {
+"link": null,
+"text": null
+},
+"history": {
 "link": null,
 "text": null
 },
@@ -370,8 +430,8 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
     script.src = src;

@@ -117,10 +117,9 @@ following community members on Twitter such as [Jenny Bryan](https://twitter.com
 [David Robinson](https://twitter.com/drob)
  and [Julia Silge](https://twitter.com/juliasilge).
  
- If you can afford [DataCamp](https://www.datacamp.com) then this is my preferred
- learning platform.
+ I would not reccomend DataCamp due to their [misconduct](https://juliasilge.com/blog/datacamp-misconduct/). 
  
- And if you can't, then [swirl](https://swirlstats.com/) is free.
+ And [swirl](https://swirlstats.com/) is free.
 
 ## Communication: creating reports, presentations and websites
 

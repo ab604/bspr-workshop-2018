@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Data Science Workshop</title>
+  <title>Chapter 5 Transforming and visualising proteomics data | Data Science Workshop</title>
   <meta name="description" content="Lessons for the BSPR 2018 Data Science Workshop">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Data Science Workshop" />
+  <meta property="og:title" content="Chapter 5 Transforming and visualising proteomics data | Data Science Workshop" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Data Science Workshop" />
+  <meta name="twitter:title" content="Chapter 5 Transforming and visualising proteomics data | Data Science Workshop" />
   
   <meta name="twitter:description" content="Lessons for the BSPR 2018 Data Science Workshop" />
   
@@ -35,6 +35,7 @@
 <link rel="next" href="going-further.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -49,41 +50,67 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 </head>
@@ -207,14 +234,32 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="transform" class="section level1">
 <h1><span class="header-section-number">Chapter 5</span> Transforming and visualising proteomics data</h1>
-<p>Having imported our data set of observations for 7702 proteins from cells in three control experiments and three treatment experiments. Remember, the observations are signal intensity measurements from the mass spectrometer, and these intensities relate to the amount of protein in each experiment and under each condition.</p>
-<p>Now we will transform the data to examine the effect of the treatment on the cellular proteome and visualise the output using a volcano plot and a heatmap. The hypothesis we are testing is that treatment changes the concentration of protein we observe.</p>
-<p>A volcano plot is commonly used way of plotting changes in observed values on the x-axis against the likelihood of observing that change due to chance on the y-axis. Heatmaps are another way of visualising the relative (increase and decrease of) amounts of observed values.</p>
+<p>Having imported our data set of observations for 7702 proteins
+from cells in three control experiments and three treatment experiments.
+Remember, the observations are signal intensity measurements from the mass
+spectrometer, and these intensities relate to the amount of protein in each
+experiment and under each condition.</p>
+<p>Now we will transform the data to examine the effect of
+the treatment on the cellular proteome and visualise the output using a volcano
+plot and a heatmap. The hypothesis we are testing is that treatment
+changes the concentration of protein we observe.</p>
+<p>A volcano plot is commonly used way of plotting changes in observed values
+on the x-axis against the likelihood of observing that change due to chance
+on the y-axis. Heatmaps are another way of visualising the relative
+(increase and decrease of) amounts of observed values.</p>
 <div id="fold-change-and-log-fold-change" class="section level2">
 <h2><span class="header-section-number">5.1</span> Fold change and log-fold change</h2>
-<p>Fold changes are ratios, the ratio of say protein expression before and after treatment, where a value larger than 1 for a protein implies that protein expression was greater after the treatment.</p>
-<p>In life sciences, fold change is often reported as log-fold change. Why is that? There are at least two reasons which can be shown by plotting.</p>
-<p>One is that ratios are not symmetrical around 1, so it’s difficult to observe both changes in the forwards and backwards direcion i.e. proteins where expression went up and proteins where expression went down due to treatment. When we transform ratios on a log scale, the scale becomes symmetric around 0 and thus we can now observe the distribution of ratios in terms of positive, negative or no change.</p>
+<p>Fold changes are ratios, the ratio of say protein expression before and
+after treatment, where a value larger than 1 for a protein implies that
+protein expression was greater after the treatment.</p>
+<p>In life sciences, fold change is often reported as log-fold change. Why is that?
+There are at least two reasons which can be shown by plotting.</p>
+<p>One is that ratios are not symmetrical around 1, so it’s difficult to observe
+both changes in the forwards and backwards direcion i.e. proteins where expression
+went up and proteins where expression went down due to treatment. When we
+transform ratios on a log scale, the scale becomes symmetric around 0 and thus
+we can now observe the distribution of ratios in terms of positive, negative or
+no change.</p>
 
 <div class="figure"><span id="fig:fold-change-1"></span>
 <img src="bspr-workshop-2018_files/figure-html/fold-change-1-1.png" alt="Ratios are not symmetric around one, logratios are symmetric around zero." width="672" />
@@ -222,10 +267,16 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 Figure 5.1: Ratios are not symmetric around one, logratios are symmetric around zero.
 </p>
 </div>
-<p>A second reason is that transforming values onto a log scale changes where the numbers actually occur when plotted on that scale. If we consider the log scale to represent magnitudes, then we can more easily see changes of small and large magnitudes when we plot the data.</p>
+<p>A second reason is that transforming values onto a log scale changes where
+the numbers actually occur when plotted on that scale. If we consider the log
+scale to represent magnitudes, then we can more easily see changes of small and
+large magnitudes when we plot the data.</p>
 <p>For example, a fold change of 32 times can be either a ratio 1/32 or 32/1.</p>
-<p>As shown in Figure <a href="transform.html#fig:fold-change-2">5.2</a>, 1/32 is much closer to 1 than 32/1, but transformed to a log scale we see that in terms of magnitude of difference it is the same as 32/1.</p>
-<p>Often the log transformation is to a base of 2 as each increment of 1 represents a doubling, but sometimes a base of 10 is used, for example for p-values.</p>
+<p>As shown in Figure <a href="transform.html#fig:fold-change-2">5.2</a>, 1/32 is much closer to 1 than 32/1,
+but transformed to a log scale we see that in terms of magnitude of difference it
+is the same as 32/1.</p>
+<p>Often the log transformation is to a base of 2 as each increment of 1 represents
+a doubling, but sometimes a base of 10 is used, for example for p-values.</p>
 
 <div class="figure"><span id="fig:fold-change-2"></span>
 <img src="bspr-workshop-2018_files/figure-html/fold-change-2-1.png" alt="Transformation of scales using log transformation." width="672" />
@@ -243,36 +294,58 @@ values recorded for each replicate (columns).
 
 2. Tidy up and deal with missing values, either impute or exclude missing values
 and normalise. --->
-<p>Unless we’re really lucky, it’s unlikely that we’ll get observations for the same numbers of proteins in all replicated experiments. This means there will be missing values for some proteins when looking at all the experiments together. This then raises the question of what to do about the missing values? We have two choices:</p>
+<p>Unless we’re really lucky, it’s unlikely that we’ll get observations for
+the same numbers of proteins in all replicated experiments. This means
+there will be missing values for some proteins when looking at all the
+experiments together. This then raises the question of what to do about the
+missing values? We have two choices:</p>
 <ol style="list-style-type: decimal">
 <li>Only analyse the proteins that we have observations for in all experiments.</li>
 <li>Impute values for the missing values from the existing observations.</li>
 </ol>
-<p>There are pros and cons to either approach. Here for simplicity we’ll use only the proteins for which we have observations in all assays.</p>
-<p>We can drop the proteins with missing values by piping our data set to the <code>drop_na()</code> function from the <code>tidyr</code> package like so. We assign this to a new object called <code>dat_tidy</code>.</p>
-<p>We’ll use the summarise function to compare the number of proteins before and after dropping the missing values using the <code>n()</code> counting function.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Remove the missing values</span>
+<p>There are pros and cons to either approach. Here for simplicity we’ll use only
+the proteins for which we have observations in all assays.</p>
+<p>We can drop the proteins with missing values by piping our data set to the
+<code>drop_na()</code> function from the <code>tidyr</code> package like so. We assign this to a new
+object called <code>dat_tidy</code>.</p>
+<p>We’ll use the summarise function to compare the number of proteins before and
+after dropping the missing values using the <code>n()</code> counting function.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Remove the missing values</span>
 dat_tidy &lt;-<span class="st"> </span>dat <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">drop_na</span>()
 <span class="co"># Nunber of proteins in original data</span>
-dat <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">Number_of_proteins =</span> <span class="kw">n</span>())</code></pre></div>
+dat <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">Number_of_proteins =</span> <span class="kw">n</span>())</code></pre>
 <pre><code>## # A tibble: 1 x 1
 ##   Number_of_proteins
 ##                &lt;int&gt;
 ## 1               7702</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Nunber of proteins without missing values</span>
-dat_tidy <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">Number_of_proteins =</span> <span class="kw">n</span>())</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Nunber of proteins without missing values</span>
+dat_tidy <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">Number_of_proteins =</span> <span class="kw">n</span>())</code></pre>
 <pre><code>## # A tibble: 1 x 1
 ##   Number_of_proteins
 ##                &lt;int&gt;
 ## 1               1145</code></pre>
-<p>This shrinks the dataset from 7,702 proteins to 1,145 proteins, so we can see why imputing the missing values might be more atrractive.</p>
-<p>One approach you might like to try is to impute the data by replacing the missing values with the mean observation for each protein under each condition.</p>
+<p>This shrinks the dataset from 7,702 proteins to 1,145 proteins, so we can see
+why imputing the missing values might be more atrractive.</p>
+<p>One approach you might like to try is to impute the data by replacing the
+missing values with the mean observation for each protein under each condition.</p>
 </div>
 <div id="normalisation" class="section level2">
 <h2><span class="header-section-number">5.3</span> Data normalization</h2>
-<p>To perform statistical inference, for example whether treatment increases or decreases protein abundance, we need to account for the variation that occurs from run to run on our spectrometers and each give rise to a different distribution. This is as opposed to variation arising from treatment versus control which we are interested in understanding. Hence normalisation seeks to reduce the run-to-run sources of variation.</p>
-<p>A method of normalization introduced for DNA microarray analysis is quantile normalisation <span class="citation">(B. M. Bolstad et al. <a href="#ref-bolstad2003">2003</a>)</span>. There are various ways to normalise data, so using quantile normalisation here is primarily to demonstate the approach in R, you should consider what is best for your data.</p>
-<p>If we consider our proteomics data as a distribution of values, one value for the concentration of each protein in our experiment that together form a distribution. Figure <a href="transform.html#fig:data-dist">5.3</a> shows the distribution of protein concentrations observed for the three control and three treatment assays. As we can see the distributions are different for each assay.</p>
+<p>To perform statistical inference, for example whether treatment increases or
+decreases protein abundance, we need to account for the variation that occurs
+from run to run on our spectrometers and each give rise to a different
+distribution. This is as opposed to variation arising from treatment versus
+control which we are interested in understanding. Hence normalisation seeks to
+reduce the run-to-run sources of variation.</p>
+<p>A method of normalization introduced for DNA microarray analysis is
+quantile normalisation <span class="citation">(Bolstad et al. <a href="#ref-bolstad2003">2003</a>)</span>. There are various ways to normalise data,
+so using quantile normalisation here is primarily to demonstate the approach in
+R, you should consider what is best for your data.</p>
+<p>If we consider our proteomics data as a distribution of values, one value for
+the concentration of each protein in our experiment that together form a
+distribution. Figure <a href="transform.html#fig:data-dist">5.3</a> shows the distribution of
+protein concentrations observed for the three control and three treatment assays.
+As we can see the distributions are different for each assay.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:data-dist"></span>
 <img src="bspr-workshop-2018_files/figure-html/data-dist-1.png" alt="Protein data for six assays plotted as a distributions." width="80%" />
@@ -280,15 +353,25 @@ dat_tidy <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"
 Figure 5.3: Protein data for six assays plotted as a distributions.
 </p>
 </div>
-<p>A quantile represents a region of distribution, for example the 0.95 quantile is the value such that 95% of the data lies below it. To normalize two or more distributions with each other without recourse to a reference distribution we:</p>
+<p>A quantile represents a region of distribution, for example the 0.95 quantile
+is the value such that 95% of the data lies below it. To normalize two or more
+distributions with each other without recourse to a reference distribution we:</p>
 <ol style="list-style-type: lower-roman">
-<li>Rank the value in each experiment (represented in the columns) from lowest to highest. In other words identify the quantiles for each protein in each experiment.</li>
+<li>Rank the value in each experiment (represented in the columns) from
+lowest to highest. In other words identify the quantiles for each protein
+in each experiment.</li>
 <li>Sort each experiment (the columns) from lowest to highest value.</li>
 <li>Calculate the mean across the rows for the sorted values.</li>
-<li>Then substitute these mean values back according to rank for each experiment to restore the original order.</li>
+<li>Then substitute these mean values back according to rank for each experiment
+to restore the original order.</li>
 </ol>
-<p>This results in the highest ranking observation in each experiment becoming the mean of the highest observations across all experiments, the second ranking observation in each experiment becoming the mean of the second highest observations across all experiments. Therefore the distributions for each each experiment are now the same.</p>
-<p><a href="https://davetang.org/muse/2014/07/07/quantile-normalisation-in-r/">Dave Tang’s Blog:Quantile Normalisation in R</a> has more details on this approach.</p>
+<p>This results in the highest ranking observation in each experiment
+becoming the mean of the highest observations across all experiments, the
+second ranking observation in each experiment becoming the mean of the
+second highest observations across all experiments. Therefore the
+distributions for each each experiment are now the same.</p>
+<p><a href="https://davetang.org/muse/2014/07/07/quantile-normalisation-in-r/">Dave Tang’s Blog:Quantile Normalisation in R</a> has more
+details on this approach.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:quant-norm"></span>
 <img src="img/quant_norm.png" alt="Quantile Normalisation from Rafael Irizarry’s tweet." width="80%" />
@@ -296,10 +379,19 @@ Figure 5.3: Protein data for six assays plotted as a distributions.
 Figure 5.4: Quantile Normalisation from <a href="https://twitter.com/rafalab/status/545586012219772928?ref_src=twsrc%5Etfw">Rafael Irizarry’s tweet</a>.
 </p>
 </div>
-<p>These result of quantile normalisation is that our distributions become statisitcally identitical, which we can see by plotting the densities of the normalized data. As shown in Figure <a href="transform.html#fig:compare-normalisation">5.5</a> the distributions all overlay.</p>
-<p>We do this by creating a <a href="tidyverse.html#function-anatomy">function</a>. This takes a data frame as the arguement and pefrorms the steps described to iterate through the data frame.</p>
-<p>The code below is probably quite tricky to understand if you’ve not seen <code>map</code> functions before, but they enable a function such as <code>rank</code> or <code>sort</code> to be used on each column iteratively. What’s important here is to understand the aim, even if understanding the code requires some more reading. You can read about <a href="http://r4ds.had.co.nz/iteration.html#the-map-functions">map functions in R4DS</a>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Quantile normalisation : the aim is to give different distributions the</span>
+<p>These result of quantile normalisation is that our distributions become
+statisitcally identitical, which we can see by plotting the densities of the
+normalized data. As shown in Figure <a href="transform.html#fig:compare-normalisation">5.5</a> the distributions
+all overlay.</p>
+<p>We do this by creating a <a href="tidyverse.html#function-anatomy">function</a>. This takes a data
+frame as the arguement and pefrorms the steps described to iterate through
+the data frame.</p>
+<p>The code below is probably quite tricky to understand if
+you’ve not seen <code>map</code> functions before, but they enable a function such as <code>rank</code>
+or <code>sort</code> to be used on each column iteratively. What’s important here is
+to understand the aim, even if understanding the code requires some more reading.
+You can read about <a href="http://r4ds.had.co.nz/iteration.html#the-map-functions">map functions in R4DS</a>.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Quantile normalisation : the aim is to give different distributions the</span>
 <span class="co"># same statistical properties</span>
 quantile_normalisation &lt;-<span class="st"> </span><span class="cf">function</span>(df){
   
@@ -319,40 +411,68 @@ quantile_normalisation &lt;-<span class="st"> </span><span class="cf">function</
   df_final &lt;-<span class="st"> </span><span class="kw">map_df</span>(df_rank,index_to_mean, <span class="dt">my_mean=</span>df_mean)
   
   <span class="kw">return</span>(df_final)
-}</code></pre></div>
-<p>The normalisation function is used by piping <code>dat_tidy</code> first to <code>select</code> to exclude the first two columns with the protein accession and description in, and then to the normalisation function. We re-bind the protein accession and description afterwards from <code>dat_tidy</code> by piping the output to <code>bind_cols()</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat_norm &lt;-<span class="st"> </span>dat_tidy <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="op">-</span><span class="kw">c</span>(protein_accession<span class="op">:</span>protein_description)) <span class="op">%&gt;%</span><span class="st"> </span>
+}</code></pre>
+<p>The normalisation function is used by piping <code>dat_tidy</code> first to <code>select</code> to
+exclude the first two columns with the protein accession and description in, and
+then to the normalisation function. We re-bind the protein accession and description afterwards from <code>dat_tidy</code> by piping the output to <code>bind_cols()</code>.</p>
+<pre class="sourceCode r"><code class="sourceCode r">dat_norm &lt;-<span class="st"> </span>dat_tidy <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="op">-</span><span class="kw">c</span>(protein_accession<span class="op">:</span>protein_description)) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">quantile_normalisation</span>() <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">bind_cols</span>(dat_tidy[,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>],.)</code></pre></div>
-
+<span class="st">  </span><span class="kw">bind_cols</span>(dat_tidy[,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>],.)</code></pre>
+<p>(ref:compare-qnorm) Comparison of the protein distributions before normalization (left)
+and after quantile normalization (right).</p>
 <div class="figure" style="text-align: center"><span id="fig:compare-normalisation"></span>
-<img src="bspr-workshop-2018_files/figure-html/compare-normalisation-1.png" alt="Comparison of the protein distributions before normalization (left) and after quantile normalization (right)." width="80%" />
+<img src="bspr-workshop-2018_files/figure-html/compare-normalisation-1.png" alt="(ref:compare-qnorm)" width="80%" />
 <p class="caption">
-Figure 5.5: Comparison of the protein distributions before normalization (left) and after quantile normalization (right).
+Figure 5.5: (ref:compare-qnorm)
 </p>
 </div>
 </div>
 <div id="hypothesis-testing-with-the-t-test" class="section level2">
 <h2><span class="header-section-number">5.4</span> Hypothesis testing with the t-test</h2>
-<p>Having removed missing values and normalised the data, we can consider our hypothesis: treatement changes the amount of protein we observe in the cells.</p>
-<p>In practice then, what we would like to know is whether the mean value for each protein in our control and treatment assays differs due to chance or due a real effect. We therefore need to calculate the difference for each protein between treatment and control, and the probability that any difference occurs due to chance. This is what the p-value from the output of a t-test seeks to do. We need to perform 1145 t-tests.</p>
-<p><strong>Note</strong> There are biocondutor packages that contain functions written to do this. However as a learning exercise we are going to work through the problem.</p>
-<p>Here I assume the reader is familiar with t-tests, but just to re-cap some important points:</p>
+<p>Having removed missing values and normalised the data, we can consider our
+hypothesis: treatement changes the amount of protein we observe in the cells.</p>
+<p>In practice then, what we would like to know is whether the mean value for each
+protein in our control and treatment assays differs due to chance or due a
+real effect. We therefore need to calculate the difference for each protein
+between treatment and control, and the probability that any difference occurs
+due to chance. This is what the p-value from the output of a
+t-test seeks to do. We need to perform 1145 t-tests.</p>
+<p><strong>Note</strong> There are biocondutor packages that contain functions written to do
+this. However as a learning exercise we are going to work through the problem.</p>
+<p>Here I assume the reader is familiar with t-tests, but just to re-cap some
+important points:</p>
 <ul>
-<li><p>We assume that the true population from which our data samples are indpendent, identically distributed and follow a normal distribution. This is not in fact true in practice, but t-test is robust to this assumption.</p></li>
+<li><p>We assume that the true population from which our data samples are
+indpendent, identically distributed and follow a normal distribution. This is
+not in fact true in practice, but t-test is robust to this assumption.</p></li>
 <li><p>We assume unequal variances between the control and treatment for each protein. Hence we will perform a Welch’s t-test for unequal variances.</p></li>
-<li><p>We don’t know whether the effect of the treatment is to increase or decrease the concentration of the protein, hence we will perform a two-sided t-test.</p></li>
-<li><p>The observations for the proteins are for proteins of the same type but from independent experiments, rather than observations of the same individuals before and after treatment. Hence we test the observations as unpaired samples.</p></li>
+<li><p>We don’t know whether the effect of the treatment is to increase or decrease
+the concentration of the protein, hence we will perform a two-sided t-test.</p></li>
+<li><p>The observations for the proteins are for proteins of the same type but from
+independent experiments, rather than observations of the same individuals
+before and after treatment. Hence we test the observations as unpaired samples.</p></li>
 </ul>
-<p>In R we use the base function <code>t.test</code> to perform Welch Two Sample t-test and this outputs the p-values we need for each protein. However, the challenge here is that our data has three observations for each condition for each protein, hence we need to group the observations for each protein according to the experimental condition as inputs to each t-test.</p>
-<p>We’re going to follow what is called the <em>split-apply-combine</em> approach to deal with this problem:</p>
+<p>In R we use the base function <code>t.test</code> to perform Welch Two Sample t-test and
+this outputs the p-values we need for each protein. However, the challenge here
+is that our data has three observations for each condition for each protein,
+hence we need to group the observations for each protein according to the
+experimental condition as inputs to each t-test.</p>
+<p>We’re going to follow what is called the <em>split-apply-combine</em> approach to deal
+with this problem:</p>
 <ol style="list-style-type: decimal">
 <li>Split the data into control and treatment groups.</li>
-<li>Apply the t-test function to each protein using the grouped inputs and store the p-value.</li>
+<li>Apply the t-test function to each protein using the grouped inputs and
+store the p-value.</li>
 <li>Combine all the p-values for each protein into a single vector.</li>
 </ol>
-<p>To this end I’ve created a function called <code>t_test</code> that takes a data frame and two group vectors as inputs. It splits the data into <code>x</code> and <code>y</code> by subsetting the the data frame according to the columns defined by the groups. The extra steps here are that the subset data has to be unlisted and converted to numeric type for input to the <code>t.test</code> function. We then perform the t-test, which will calculate the mean of <code>x</code> and <code>y</code> and store the result in a new object, and finally the function creates a data frame with a single variable<code>p_val</code> which is then returned as the function output.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># T-test function for multiple experiments</span>
+<p>To this end I’ve created a function called <code>t_test</code> that takes a data frame
+and two group vectors as inputs. It splits the data into <code>x</code> and <code>y</code> by
+subsetting the the data frame according to the columns defined by the groups.
+The extra steps here are that the subset data has to be unlisted and converted
+to numeric type for input to the <code>t.test</code> function. We then perform the t-test,
+which will calculate the mean of <code>x</code> and <code>y</code> and store the result in a new
+object, and finally the function creates a data frame with a single variable<code>p_val</code> which is then returned as the function output.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># T-test function for multiple experiments</span>
 t_test &lt;-<span class="st"> </span><span class="cf">function</span>(dt,grp1,grp2){
   <span class="co"># Subset control group and convert to numeric</span>
   x &lt;-<span class="st"> </span>dt[grp1] <span class="op">%&gt;%</span><span class="st"> </span>unlist <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.numeric</span>()
@@ -364,19 +484,35 @@ t_test &lt;-<span class="st"> </span><span class="cf">function</span>(dt,grp1,gr
   p_vals &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">p_val =</span> result<span class="op">$</span>p.value)
   <span class="co"># Return p-values</span>
   <span class="kw">return</span>(p_vals)
-} </code></pre></div>
-<p>To use the <code>t_test</code> function to perform many t-tests and not just one t-test, we need to pass our <code>t_test</code> function as an arguement to another function.</p>
-<p>This probably seems quite confusing, but the point here is that we want to loop through every row in our table, and group the three control and three treatment columns separately. Our <code>t_test</code> function deals with the latter problem, and by passing it to <code>adply</code> from the <code>plyr</code> package we can loop through each row and it adds the calculated p-values to our original table.</p>
-<p>Concretely then, <code>adply</code> takes an array and applies the <code>t_test</code> function to each row and we supply the column group indices arguments to the <code>t_test</code> funcition. Here the indicies are columns 3 to 5 for the control experiments and columns 6 to 8 for the treatment functions. The function returns the input data with an additional corresponding p-value column. <strong>Note</strong> I’ve piped the output to <code>as.tibble()</code> to transform the data.frame output of <code>adply</code> to tibble form to prevent errors that can occur if we try to bind data frames and tibbles.</p>
-<p>An important point here is that we can use this function for any number of columns and rows providing our data is in the same tidy form by changing the grouping indices.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Apply t-test function to data using plyr adply</span>
+} </code></pre>
+<p>To use the <code>t_test</code> function to perform many t-tests and not just one t-test, we
+need to pass our <code>t_test</code> function as an arguement to another function.</p>
+<p>This probably seems quite confusing, but the point here is that we want to loop
+through every row in our table, and group the three control and three treatment
+columns separately. Our <code>t_test</code> function deals with the latter problem, and
+by passing it to <code>adply</code> from the <code>plyr</code> package we can loop through each row
+and it adds the calculated p-values to our original table.</p>
+<p>Concretely then, <code>adply</code> takes an array and applies the <code>t_test</code> function to
+each row and we supply the column group indices arguments to the <code>t_test</code>
+funcition. Here the indicies are columns 3 to 5 for the control experiments and
+columns 6 to 8 for the treatment functions. The function returns the input
+data with an additional corresponding p-value column. <strong>Note</strong> I’ve piped
+the output to <code>as.tibble()</code> to transform the data.frame output of <code>adply</code> to
+tibble form to prevent errors that can occur if we try to bind data frames
+and tibbles.</p>
+<p>An important point here is that we can use this function for any number of
+columns and rows providing our data is in the same tidy form by changing the
+grouping indices.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Apply t-test function to data using plyr adply</span>
 <span class="co">#  .margins = 1, slice by rows, .fun = t_test plus t_test arguements</span>
 dat_pvals &lt;-<span class="st"> </span>plyr<span class="op">::</span><span class="kw">adply</span>(dat_norm,<span class="dt">.margins =</span> <span class="dv">1</span>, <span class="dt">.fun =</span> t_test, 
-                <span class="dt">grp1 =</span> <span class="kw">c</span>(<span class="dv">3</span><span class="op">:</span><span class="dv">5</span>), <span class="dt">grp2 =</span> <span class="kw">c</span>(<span class="dv">6</span><span class="op">:</span><span class="dv">8</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.tibble</span>()</code></pre></div>
-<p>To check our function, here’s a comparision of calculating the first protein p-value as a single t-test as shown in the following code and the output of the function.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Perform t-test on first protein</span>
+                <span class="dt">grp1 =</span> <span class="kw">c</span>(<span class="dv">3</span><span class="op">:</span><span class="dv">5</span>), <span class="dt">grp2 =</span> <span class="kw">c</span>(<span class="dv">6</span><span class="op">:</span><span class="dv">8</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.tibble</span>()</code></pre>
+<p>To check our function, here’s a comparision of calculating the first protein
+p-value as a single t-test as shown in the following code and the output of
+the function.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Perform t-test on first protein</span>
 <span class="kw">t.test</span>(<span class="kw">as.numeric</span>(dat_norm[<span class="dv">1</span>,<span class="dv">3</span><span class="op">:</span><span class="dv">5</span>]),
-                    <span class="kw">as.numeric</span>(dat_norm[<span class="dv">1</span>,<span class="dv">6</span><span class="op">:</span><span class="dv">8</span>]))<span class="op">$</span>p.value</code></pre></div>
+                    <span class="kw">as.numeric</span>(dat_norm[<span class="dv">1</span>,<span class="dv">6</span><span class="op">:</span><span class="dv">8</span>]))<span class="op">$</span>p.value</code></pre>
 <table>
 <thead>
 <tr class="header">
@@ -392,7 +528,7 @@ dat_pvals &lt;-<span class="st"> </span>plyr<span class="op">::</span><span clas
 </tbody>
 </table>
 <p>We can plot a histogram of the p-values:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Plot histogram</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Plot histogram</span>
 dat_pvals <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(p_val)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="fl">0.05</span>, 
@@ -401,22 +537,32 @@ dat_pvals <span class="op">%&gt;%</span><span class="st"> </span>
            <span class="dt">colour =</span> <span class="st">&quot;white&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;p-value&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Frequency&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">theme_minimal</span>()</code></pre></div>
+<span class="st">  </span><span class="kw">theme_minimal</span>()</code></pre>
 <p><img src="bspr-workshop-2018_files/figure-html/p-val-plot-1.png" width="672" /></p>
 </div>
 <div id="calculating-fold-change" class="section level2">
 <h2><span class="header-section-number">5.5</span> Calculating fold change</h2>
-<p>To perform log transformation of the observations for each protein we take our data and use select to exlude the columns of character vectors and the pipe the output to <code>log2()</code> and use the pipe again to create a data frame.</p>
-<p>Then we use <code>bind_cols</code> to bind the first two columns of <code>dat_pvals</code> followed by <code>dat_log</code> and the last column of <code>dat_pvals</code>. This maintains the original column order.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Select columns and log data</span>
+<p>To perform log transformation of the observations for each protein we take our
+data and use select to exlude the columns of character vectors and the pipe the
+output to <code>log2()</code> and use the pipe again to create a data frame.</p>
+<p>Then we use <code>bind_cols</code> to bind the first two columns of <code>dat_pvals</code> followed
+by <code>dat_log</code> and the last column of <code>dat_pvals</code>. This maintains the original
+column order.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Select columns and log data</span>
 dat_log &lt;-<span class="st"> </span>dat_pvals <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">select</span>(<span class="op">-</span><span class="kw">c</span>(protein_accession,protein_description,p_val)) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">log2</span>()
 
 <span class="co"># Bind columns to create transformed data frame</span>
-dat_combine &lt;-<span class="st"> </span><span class="kw">bind_cols</span>(dat_pvals[,<span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)], dat_log, dat_pvals[,<span class="dv">9</span>]) </code></pre></div>
-<p>The log fold change is then the difference between the log mean control and log mean treatment values. By use of grouping by the protein accession we can then use <code>mutate</code> to create new variables that calculate the mean values and then calculate the <code>log_fc</code>. Whilst we’re about it, we can also calculate a -log10(p-value). As with fold change, transforming the p-value on a log10 scale means that a p-value of 0.05 or below is transformed to 1.3 or above and a p-value of 0.01 is equal to 2.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat_fc &lt;-<span class="st"> </span>dat_combine <span class="op">%&gt;%</span><span class="st"> </span>
+dat_combine &lt;-<span class="st"> </span><span class="kw">bind_cols</span>(dat_pvals[,<span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)], dat_log, dat_pvals[,<span class="dv">9</span>]) </code></pre>
+<p>The log fold change is then the difference between the log mean control and
+log mean treatment values. By use of grouping by the protein accession we
+can then use <code>mutate</code> to create new variables that calculate the mean values
+and then calculate the <code>log_fc</code>. Whilst we’re about it, we can also calculate
+a -log10(p-value). As with fold change, transforming the p-value on a log10
+scale means that a p-value of 0.05 or below is transformed to 1.3 or above and
+a p-value of 0.01 is equal to 2.</p>
+<pre class="sourceCode r"><code class="sourceCode r">dat_fc &lt;-<span class="st"> </span>dat_combine <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">group_by</span>(protein_accession) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">mean_control =</span> <span class="kw">mean</span>(<span class="kw">c</span>(control_<span class="dv">1</span>,
                                control_<span class="dv">2</span>,
@@ -425,12 +571,14 @@ dat_combine &lt;-<span class="st"> </span><span class="kw">bind_cols</span>(dat_
                                                     treatment_<span class="dv">2</span>,
                                                     treatment_<span class="dv">3</span>)),
          <span class="dt">log_fc =</span> mean_control <span class="op">-</span><span class="st"> </span>mean_treatment,
-         <span class="dt">log_pval =</span> <span class="op">-</span><span class="dv">1</span><span class="op">*</span><span class="kw">log10</span>(p_val))</code></pre></div>
-<p>The next step is not necessary, but for ease of viewing we subset <code>dat_fc</code> to create a new data frame called <code>dat_tf</code> that contains only four variables. We could potentially write this to a csv file for sharing.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Final transformed data</span>
+         <span class="dt">log_pval =</span> <span class="dv">-1</span><span class="op">*</span><span class="kw">log10</span>(p_val))</code></pre>
+<p>The next step is not necessary, but for ease of viewing we subset <code>dat_fc</code> to
+create a new data frame called <code>dat_tf</code> that contains only four variables.
+We could potentially write this to a csv file for sharing.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Final transformed data</span>
 dat_tf &lt;-<span class="st"> </span>dat_fc <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(protein_accession,
                             protein_description,
-                            log_fc, log_pval)</code></pre></div>
+                            log_fc, log_pval)</code></pre>
 <p>Let’s look at the head of the final table:</p>
 <table>
 <thead>
@@ -477,9 +625,12 @@ dat_tf &lt;-<span class="st"> </span>dat_fc <span class="op">%&gt;%</span><span 
 </div>
 <div id="visualising-the-transformed-data" class="section level2">
 <h2><span class="header-section-number">5.6</span> Visualising the transformed data</h2>
-<p>Plotting a histogram of the log fold change gives an indication of whether the treatment has an effect on the cells. Most values are close to zero, but there are some observations far above and below zero suggesting the treatment does have an effect.</p>
+<p>Plotting a histogram of the log fold change gives an indication of whether the
+treatment has an effect on the cells. Most values are close to zero, but there
+are some observations far above and below zero suggesting the treatment
+does have an effect.</p>
 
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Plot a histogram to look at the distribution.</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Plot a histogram to look at the distribution.</span>
 dat_tf <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(log_fc)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="fl">0.5</span>,
@@ -488,42 +639,57 @@ dat_tf <span class="op">%&gt;%</span>
            <span class="dt">colour =</span> <span class="st">&quot;white&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;log2 fold change&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Frequency&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">theme_minimal</span>()</code></pre></div>
+<span class="st">  </span><span class="kw">theme_minimal</span>()</code></pre>
 <div class="figure" style="text-align: center"><span id="fig:log-fc"></span>
 <img src="bspr-workshop-2018_files/figure-html/log-fc-1.png" alt="Histogram of log fold change." width="80%" />
 <p class="caption">
 Figure 5.6: Histogram of log fold change.
 </p>
 </div>
-<p>However, we don’t know if these fold changes are dueto chance or not, which is why we calculated the p-values. A volcano plot will include the p-value information.</p>
+<p>However, we don’t know if these fold changes are dueto chance or not, which is
+why we calculated the p-values. A volcano plot will include the p-value
+information.</p>
 </div>
 <div id="volcano-plot" class="section level2">
 <h2><span class="header-section-number">5.7</span> Volcano plot</h2>
 <!--- 7. Create a combined table of log fold change and p-values for all the proteins
 for plotting a volcano plot. --->
-<p>A volcano plot is a plot of the log fold change in the observation between two conditions on the x-axis, for example the protein expression between treatment and control conditions. On the y-axis is the corresponding p-value for each observation, representing the likelihood that an observed change is due to the different conditions rather than arising from a natural variation in the fold change that might be observed if we performed many replications of the experiment.</p>
-<p>The aim of a volcano plot is to enable the viewer to quickly see the effect (if any) of an experiment with two conditions on many species (i.e. proteins) in terms of both an increase and decrease of the observed value.</p>
-<p>Like all plots it has it’s good and bad points, namely it’s good that we can visualise a lot of complex information in one plot. However this is also it’s main weakness, it’s rather complicated to understand in one glance.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat_tf <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(log_fc,log_pval)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()</code></pre></div>
+<p>A volcano plot is a plot of the log fold change in the observation between two
+conditions on the x-axis, for example the protein expression between treatment
+and control conditions. On the y-axis is the corresponding p-value for each
+observation, representing the likelihood that an observed change
+is due to the different conditions rather than arising from a natural variation
+in the fold change that might be observed if we performed many replications of
+the experiment.</p>
+<p>The aim of a volcano plot is to enable the viewer to quickly see the effect
+(if any) of an experiment with two conditions on many species (i.e. proteins)
+in terms of both an increase and decrease of the observed value.</p>
+<p>Like all plots it has it’s good and bad points, namely it’s good that we can
+visualise a lot of complex information in one plot. However this is also it’s
+main weakness, it’s rather complicated to understand in one glance.</p>
+<pre class="sourceCode r"><code class="sourceCode r">dat_tf <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(log_fc,log_pval)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()</code></pre>
 <p><img src="bspr-workshop-2018_files/figure-html/volcano-plot-1.png" width="672" /></p>
-<p>However it would be much more useful with some extra formatting, so the code below shows one way to transform the data to include a threshold which can then be used by ggplot to create an additional aesthetic. The code below also includes some extra formatiing which the reader can explore.</p>
+<p>However it would be much more useful with some extra formatting, so the code
+below shows one way to transform the data to include a threshold which can
+then be used by ggplot to create an additional aesthetic. The code below
+also includes some extra formatiing which the reader can explore.</p>
 
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat_tf <span class="op">%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r">dat_tf <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="co"># Add a threhold for significant observations</span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">threshold =</span> <span class="kw">if_else</span>(log_fc <span class="op">&gt;=</span><span class="st"> </span><span class="dv">2</span> <span class="op">&amp;</span><span class="st"> </span>log_pval <span class="op">&gt;=</span><span class="st"> </span><span class="fl">1.3</span> <span class="op">|</span>
-<span class="st">                               </span>log_fc <span class="op">&lt;=</span><span class="st"> </span><span class="op">-</span><span class="dv">2</span> <span class="op">&amp;</span><span class="st"> </span>log_pval <span class="op">&gt;=</span><span class="st"> </span><span class="fl">1.3</span>,<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>)) <span class="op">%&gt;%</span>
+<span class="st">                               </span>log_fc <span class="op">&lt;=</span><span class="st"> </span><span class="dv">-2</span> <span class="op">&amp;</span><span class="st"> </span>log_pval <span class="op">&gt;=</span><span class="st"> </span><span class="fl">1.3</span>,<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="co"># Plot with points coloured according to the threshold</span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(log_fc,log_pval, <span class="dt">colour =</span> threshold)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span><span class="st"> </span><span class="co"># Alpha sets the transparency of the points</span>
 <span class="st">  </span><span class="co"># Add dotted lines to indicate the threshold, semi-transparent</span>
 <span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="fl">1.3</span>, <span class="dt">linetype =</span> <span class="dv">2</span>, <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="dv">2</span>, <span class="dt">linetype =</span> <span class="dv">2</span>, <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="op">-</span><span class="dv">2</span>, <span class="dt">linetype =</span> <span class="dv">2</span>, <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="dv">-2</span>, <span class="dt">linetype =</span> <span class="dv">2</span>, <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span>
 <span class="st">  </span><span class="co"># Set the colour of the points</span>
 <span class="st">  </span><span class="kw">scale_colour_manual</span>(<span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&quot;A&quot;</span>=<span class="st"> &quot;red&quot;</span>, <span class="st">&quot;B&quot;</span>=<span class="st"> &quot;black&quot;</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;log2 fold change&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;-log10 p-value&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="co"># Relabel the axes</span>
 <span class="st">  </span><span class="kw">theme_minimal</span>() <span class="op">+</span><span class="st"> </span><span class="co"># Set the theme</span>
-<span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position=</span><span class="st">&quot;none&quot;</span>) <span class="co"># Hide the legend</span></code></pre></div>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position=</span><span class="st">&quot;none&quot;</span>) <span class="co"># Hide the legend</span></code></pre>
 <div class="figure" style="text-align: center"><span id="fig:nice-vplot"></span>
 <img src="bspr-workshop-2018_files/figure-html/nice-vplot-1.png" alt="A volcano plot with formatting to highlight the significant proteins" width="80%" />
 <p class="caption">
@@ -532,41 +698,49 @@ Figure 5.7: A volcano plot with formatting to highlight the significant proteins
 </div>
 <div id="but-which-proteins-are-the-significant-observations" class="section level3">
 <h3><span class="header-section-number">5.7.1</span> But which proteins are the significant observations?</h3>
-<p>To extract the proteins in red in Figure <a href="transform.html#fig:nice-vplot">5.7</a> we filter <code>dat_tf</code> according to our threshold and then create a new variable using the <code>str_extract</code> function used in Section <a href="dplyr.html#mutate">4.5</a>.</p>
-<p><strong>Note</strong> We need to ungroup the data we grouped when calculating the log_fc to be able to select columns without keeping the grouping variable column too.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat_tf <span class="op">%&gt;%</span>
+<p>To extract the proteins in red in Figure <a href="transform.html#fig:nice-vplot">5.7</a> we filter <code>dat_tf</code>
+according to our threshold and then create a new variable using the <code>str_extract</code>
+function used in Section <a href="dplyr.html#mutate">4.5</a>.</p>
+<p><strong>Note</strong> We need to ungroup the data we grouped when calculating the log_fc to
+be able to select columns without keeping the grouping variable column too.</p>
+<pre class="sourceCode r"><code class="sourceCode r">dat_tf <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="co"># Filter for significant observations</span>
-<span class="st">  </span><span class="kw">filter</span>(log_pval <span class="op">&gt;=</span><span class="st"> </span><span class="fl">1.3</span> <span class="op">&amp;</span><span class="st"> </span>(log_fc <span class="op">&gt;=</span><span class="st"> </span><span class="dv">2</span> <span class="op">|</span><span class="st"> </span>log_fc <span class="op">&lt;=</span><span class="st"> </span><span class="op">-</span><span class="dv">2</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(log_pval <span class="op">&gt;=</span><span class="st"> </span><span class="fl">1.3</span> <span class="op">&amp;</span><span class="st"> </span>(log_fc <span class="op">&gt;=</span><span class="st"> </span><span class="dv">2</span> <span class="op">|</span><span class="st"> </span>log_fc <span class="op">&lt;=</span><span class="st"> </span><span class="dv">-2</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="co"># Get last six characters</span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">prot_id =</span> <span class="kw">str_extract</span>(protein_accession,<span class="st">&quot;.{6}$&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="co"># Ungroup the data</span>
 <span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="co"># Select columns of interest</span>
-<span class="st">  </span><span class="kw">select</span>(prot_id,protein_description,log_fc,log_pval)</code></pre></div>
+<span class="st">  </span><span class="kw">select</span>(prot_id,protein_description,log_fc,log_pval)</code></pre>
 <pre><code>## # A tibble: 5 x 4
-##   prot_id protein_description                              log_fc log_pval
-##   &lt;chr&gt;   &lt;chr&gt;                                             &lt;dbl&gt;    &lt;dbl&gt;
-## 1 Q02952  A-kinase anchor protein 12 OS=Homo sapiens GN=A~  -2.29     1.52
-## 2 O94808  Glutamine--fructose-6-phosphate aminotransferas~  -3.09     2.45
-## 3 H7BYV1  Interferon-induced transmembrane protein 2 (Fra~   2.05     2.46
-## 4 P06756  Integrin alpha-V OS=Homo sapiens GN=ITGAV PE=1 ~  -2.22     2.62
-## 5 Q8TDI0  Chromodomain-helicase-DNA-binding protein 5 OS=~   5.04     1.60</code></pre>
+##   prot_id protein_description                               log_fc log_pval
+##   &lt;chr&gt;   &lt;chr&gt;                                              &lt;dbl&gt;    &lt;dbl&gt;
+## 1 Q02952  A-kinase anchor protein 12 OS=Homo sapiens GN=AK~  -2.29     1.52
+## 2 O94808  Glutamine--fructose-6-phosphate aminotransferase~  -3.09     2.45
+## 3 H7BYV1  Interferon-induced transmembrane protein 2 (Frag~   2.05     2.46
+## 4 P06756  Integrin alpha-V OS=Homo sapiens GN=ITGAV PE=1 S~  -2.22     2.62
+## 5 Q8TDI0  Chromodomain-helicase-DNA-binding protein 5 OS=H~   5.04     1.60</code></pre>
 </div>
 </div>
 <div id="creating-a-heatmap" class="section level2">
 <h2><span class="header-section-number">5.8</span> Creating a heatmap</h2>
-<p>Here we’ll create a heatmap using the <code>heatmap.2</code> function from the <code>gplots</code> package and the <code>pheatmap</code> function from the <code>pheatmap</code> package.</p>
+<p>Here we’ll create a heatmap using the <code>heatmap.2</code> function from the <code>gplots</code>
+package and the <code>pheatmap</code> function from the <code>pheatmap</code> package.</p>
 <p>To create a heatmap we need to perform a few more transformations:</p>
 <ol style="list-style-type: decimal">
-<li><p>Filter the data according to a threshold of significance. This time we’ll use a more relaxed log_fc cut-off to ensure we have enough proteins to plot. At the same time we’ll extract the protein ids as before.</p></li>
-<li><p>We then have to transform our filtered data into a <code>matrix.data.frame</code> object for use with <code>pheatmap</code>. We name the rows with the protein ids</p></li>
-<li><p>We’ll use base R function <code>scale</code> to centre our log transformed data around zero. To do this per experiment we transpose the matrix as scale centres rows, and the flip the matrix back again.</p></li>
+<li><p>Filter the data according to a threshold of significance. This time we’ll use
+a more relaxed log_fc cut-off to ensure we have enough proteins to plot. At
+the same time we’ll extract the protein ids as before.</p></li>
+<li><p>We then have to transform our filtered data into a <code>matrix.data.frame</code> object
+for use with <code>pheatmap</code>. We name the rows with the protein ids</p></li>
+<li><p>We’ll use base R function <code>scale</code> to centre our log transformed data around zero. To do this per experiment we transpose the matrix as scale centres rows,
+and the flip the matrix back again.</p></li>
 </ol>
 <!-- 1. Clustering the data -->
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Keep the same p-val cut-off, but relax the log_fc to 1 which represents a </span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Keep the same p-val cut-off, but relax the log_fc to 1 which represents a </span>
 <span class="co"># doubling</span>
 dat_filt &lt;-<span class="st"> </span>dat_fc <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">filter</span>(log_pval <span class="op">&gt;=</span><span class="st"> </span><span class="fl">1.3</span> <span class="op">&amp;</span><span class="st"> </span>(log_fc <span class="op">&gt;=</span><span class="st"> </span><span class="dv">1</span> <span class="op">|</span><span class="st"> </span>log_fc <span class="op">&lt;=</span><span class="st"> </span><span class="op">-</span><span class="dv">1</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(log_pval <span class="op">&gt;=</span><span class="st"> </span><span class="fl">1.3</span> <span class="op">&amp;</span><span class="st"> </span>(log_fc <span class="op">&gt;=</span><span class="st"> </span><span class="dv">1</span> <span class="op">|</span><span class="st"> </span>log_fc <span class="op">&lt;=</span><span class="st"> </span><span class="dv">-1</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">prot_id =</span> <span class="kw">str_extract</span>(protein_accession,<span class="st">&quot;.{6}$&quot;</span>))
 
 <span class="co"># Convert to matrix data frame</span>
@@ -574,21 +748,31 @@ dat_matrix &lt;-<span class="st"> </span><span class="kw">as.matrix.data.frame</
 <span class="co"># Name the rows with protein ids</span>
 <span class="kw">row.names</span>(dat_matrix) &lt;-<span class="st"> </span>dat_filt<span class="op">$</span>prot_id
 <span class="co"># Transpose and scale the data to a mean of zero and sd of one</span>
-dat_scaled &lt;-<span class="st"> </span><span class="kw">scale</span>(<span class="kw">t</span>(dat_matrix)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">t</span>()</code></pre></div>
+dat_scaled &lt;-<span class="st"> </span><span class="kw">scale</span>(<span class="kw">t</span>(dat_matrix)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">t</span>()</code></pre>
 <div id="calculating-similarity-and-clustering" class="section level3">
 <h3><span class="header-section-number">5.8.1</span> Calculating similarity and clustering</h3>
-<p>At this point we could just plot the data, but to understand what the heatmap functions do to cluster the data, let’s step through the process.</p>
-<p>Our data here as log fold change in concentrations, but how do we group them? The simplest thing to do is to turn the data into distances, as a measure of similarity, where close things are similar and distant things are dissimilar.</p>
+<p>At this point we could just plot the data, but to understand what the heatmap
+functions do to cluster the data, let’s step through the process.</p>
+<p>Our data here as log fold change in concentrations, but how do we group them?
+The simplest thing to do is to turn the data into distances, as a measure of
+similarity, where close things are similar and distant things are dissimilar.</p>
 <p>The Euclidean distance <span class="math inline">\(d\)</span> between a pair of observations <span class="math inline">\(x_i\)</span> and <span class="math inline">\(y_i\)</span> is defined as:</p>
 <p><span class="math inline">\(d = \sqrt{\sum{_i}(x_i - y_i)^2}\)</span></p>
 <p>Lets calculate the distance between the columns in <code>dat_scaled</code>.</p>
-<p>In <code>dat_scaled</code> the experiments are in the columns. In calculating the distance is between the experiments for all the proteins in each experiment. What would we expect?</p>
-<p>We’d expect the controls to be close to each other and the treated to be close to each other, right?</p>
-<p>Let’s do this in detail, for example the distance between <code>control_1</code> and <code>control_2</code> is <code>sqrt(sum((dat_scaled[,1] - dat_scaled[,2])^2))</code>.</p>
-<p>This means we take the column 2 values from column 1 values, squaring the results and summing them all to a single value and taking the square root to find the linear distance between these rows, which is 3.26.</p>
+<p>In <code>dat_scaled</code> the experiments are in the columns. In calculating the distance
+is between the experiments for all the proteins in each experiment. What would
+we expect?</p>
+<p>We’d expect the controls to be close to each other and the treated to be close
+to each other, right?</p>
+<p>Let’s do this in detail, for example the distance between <code>control_1</code> and
+<code>control_2</code> is <code>sqrt(sum((dat_scaled[,1] - dat_scaled[,2])^2))</code>.</p>
+<p>This means we take the column 2 values from column 1 values, squaring the results
+and summing them all to a single value and taking the square root to find the
+linear distance between these rows, which is 3.26.</p>
 <p>You can check this against the first value in <code>d1</code> that we calculate below in using <code>dist</code>.</p>
-<p>We do the same for the proteins, but we don’t know what to expect. Here’s the code for calculating both distance matrices</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Transpose the matrix to calculate distance between experiments, row-wise</span>
+<p>We do the same for the proteins, but we don’t know what to expect. Here’s the
+code for calculating both distance matrices</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Transpose the matrix to calculate distance between experiments, row-wise</span>
 d1 &lt;-<span class="st"> </span>dat_scaled <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">t</span>() <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">dist</span>(.,<span class="dt">method =</span> <span class="st">&quot;euclidean&quot;</span>, <span class="dt">diag =</span> <span class="ot">FALSE</span>, <span class="dt">upper =</span> <span class="ot">FALSE</span>)
 <span class="co"># Calculate the distance between proteins row-wise </span>
@@ -596,39 +780,53 @@ d2 &lt;-<span class="st"> </span>dat_scaled <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">dist</span>(.,<span class="dt">method =</span> <span class="st">&quot;euclidean&quot;</span>, <span class="dt">diag =</span> <span class="ot">FALSE</span>, <span class="dt">upper =</span> <span class="ot">FALSE</span>)
 
 <span class="co"># Show the values for d1</span>
-<span class="kw">round</span>(d1,<span class="dv">2</span>)</code></pre></div>
+<span class="kw">round</span>(d1,<span class="dv">2</span>)</code></pre>
 <pre><code>##             control_1 control_2 control_3 treatment_1 treatment_2
 ## control_2        3.26                                            
 ## control_3        3.20      3.27                                  
 ## treatment_1      8.97      8.60      8.65                        
 ## treatment_2      9.40      8.98      8.86        2.35            
 ## treatment_3      9.04      8.56      8.50        2.46        1.71</code></pre>
-<p>Having calculated the distance matrices, we can cluster proteins and experiments accordingly.</p>
-<p>There are lots of flavours of clustering, and no clear way to say which is best. Here we’ll use the Ward criterion for clustering which attempts to minimise the variance within clusters as it merges the data into clusters, using the distances we’ve calculated. The data is merged from the bottom up (aka agglomeration) adding data points to a cluster and splitting them according to the variance criterion.</p>
-<p>See Wikipedia for more detail: <a href="https://en.wikipedia.org/wiki/Hierarchical_clustering">Hierarchical clustering</a></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Clustering distance between experiments using Ward linkage</span>
+<p>Having calculated the distance matrices, we can cluster proteins and experiments
+accordingly.</p>
+<p>There are lots of flavours of clustering, and no clear way to say which is best.
+Here we’ll use the Ward criterion for clustering which attempts to minimise the
+variance within clusters as it merges the data into clusters, using the distances
+we’ve calculated. The data is merged from the bottom up (aka agglomeration)
+adding data points to a cluster and splitting them according to the variance
+criterion.</p>
+<p>See Wikipedia for more detail:
+<a href="https://en.wikipedia.org/wiki/Hierarchical_clustering">Hierarchical clustering</a></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Clustering distance between experiments using Ward linkage</span>
 c1 &lt;-<span class="st"> </span><span class="kw">hclust</span>(d1, <span class="dt">method =</span> <span class="st">&quot;ward.D2&quot;</span>, <span class="dt">members =</span> <span class="ot">NULL</span>)
 <span class="co"># Clustering distance between proteins using Ward linkage</span>
-c2 &lt;-<span class="st"> </span><span class="kw">hclust</span>(d2, <span class="dt">method =</span> <span class="st">&quot;ward.D2&quot;</span>, <span class="dt">members =</span> <span class="ot">NULL</span>)</code></pre></div>
-<p>Now lets look at the dendrograms made by clustering our distance matrices <code>d1</code> and <code>d2</code>:</p>
+c2 &lt;-<span class="st"> </span><span class="kw">hclust</span>(d2, <span class="dt">method =</span> <span class="st">&quot;ward.D2&quot;</span>, <span class="dt">members =</span> <span class="ot">NULL</span>)</code></pre>
+<p>Now lets look at the dendrograms made by
+clustering our distance matrices <code>d1</code> and <code>d2</code>:</p>
 
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Check clustering by plotting dendrograms</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Check clustering by plotting dendrograms</span>
 <span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">1</span>),<span class="dt">cex=</span><span class="fl">0.5</span>) <span class="co"># Make 2 rows, 1 col plot frame and shrink labels</span>
-<span class="kw">plot</span>(c1); <span class="kw">plot</span>(c2) <span class="co"># Plot both cluster dendrograms</span></code></pre></div>
+<span class="kw">plot</span>(c1); <span class="kw">plot</span>(c2) <span class="co"># Plot both cluster dendrograms</span></code></pre>
 <div class="figure" style="text-align: center"><span id="fig:dendrograms"></span>
 <img src="bspr-workshop-2018_files/figure-html/dendrograms-1.png" alt="Dendrograms of Ward clustering of distance matrices" width="80%" />
 <p class="caption">
 Figure 5.8: Dendrograms of Ward clustering of distance matrices
 </p>
 </div>
-<p>As we’d expect, Figure <a href="transform.html#fig:dendrograms">5.8</a> shows the controls and treatments cluster respectively.</p>
+<p>As we’d expect, Figure <a href="transform.html#fig:dendrograms">5.8</a> shows the controls and treatments
+cluster respectively.</p>
 <!-- 2. Plot the data -->
 </div>
 <div id="plotting-the-heatmap" class="section level3">
 <h3><span class="header-section-number">5.8.2</span> Plotting the heatmap</h3>
-<p>The <code>heatmap.2</code> function from the <code>gplots</code> package will automatically perform the distance calculation and clustering we performed, and it can also do the scaling we did. It only requires the matrix as an input by default. It will use a different clustering method by default.</p>
-<p>However, as we’ve performed scaling and calculated the clusters, we can pass them to heatmap function.</p>
-<p>I’ll leave it to the reader to explore all the options here, but the concept in the code below to create Figure <a href="transform.html#fig:heatmap2">5.9</a> is:</p>
+<p>The <code>heatmap.2</code> function from the <code>gplots</code> package will automatically perform
+the distance calculation and clustering we performed, and it can also do
+the scaling we did. It only requires the matrix as an input by default. It will
+use a different clustering method by default.</p>
+<p>However, as we’ve performed scaling and calculated the clusters, we can pass
+them to heatmap function.</p>
+<p>I’ll leave it to the reader to explore all the options here, but the concept in
+the code below to create Figure <a href="transform.html#fig:heatmap2">5.9</a> is:</p>
 <ul>
 <li>Create a 25 increment blue/white/red colour pallette</li>
 <li>Pipe <code>dat_scaled</code> to a function that renames the colums</li>
@@ -637,7 +835,7 @@ Figure 5.8: Dendrograms of Ward clustering of distance matrices
 <li>Change some aesthetics such as the colours, and the font sizes</li>
 </ul>
 
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Set colours for heatmap, 25 increments</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Set colours for heatmap, 25 increments</span>
 my_palette &lt;-<span class="st"> </span><span class="kw">colorRampPalette</span>(<span class="kw">c</span>(<span class="st">&quot;blue&quot;</span>,<span class="st">&quot;white&quot;</span>,<span class="st">&quot;red&quot;</span>))(<span class="dt">n =</span> <span class="dv">25</span>)
 
 <span class="co"># Plot heatmap with heatmap.2</span>
@@ -654,18 +852,23 @@ dat_scaled <span class="op">%&gt;%</span><span class="st"> </span>
           <span class="dt">density.info=</span><span class="st">&quot;histogram&quot;</span>,   <span class="co"># Plot histogram of data and colour key</span>
           <span class="dt">trace=</span><span class="st">&quot;none&quot;</span>,               <span class="co"># Turn of trace lines from heat map</span>
           <span class="dt">col =</span> my_palette,           <span class="co"># Use my colour scheme</span>
-          <span class="dt">cexRow=</span><span class="fl">0.6</span>,<span class="dt">cexCol=</span><span class="fl">0.75</span>)     <span class="co"># Amend row and column label fonts</span></code></pre></div>
+          <span class="dt">cexRow=</span><span class="fl">0.6</span>,<span class="dt">cexCol=</span><span class="fl">0.75</span>)     <span class="co"># Amend row and column label fonts</span></code></pre>
 <div class="figure" style="text-align: center"><span id="fig:heatmap2"></span>
 <img src="bspr-workshop-2018_files/figure-html/heatmap2-1.png" alt="Heatmap created with heatmap.2 using the clusters calculated." width="80%" />
 <p class="caption">
 Figure 5.9: Heatmap created with <code>heatmap.2</code> using the clusters calculated.
 </p>
 </div>
-<p>An alternative and more <code>ggplot</code> style is to use the <code>pheatmap</code> package and function <span class="citation">(Kolde <a href="#ref-R-pheatmap">2018</a>)</span>.</p>
-<p>In Figure <a href="transform.html#fig:pheatmap">5.10</a> <code>dat_scaled</code> is piped to <code>set_columns</code> again to rename the experiments for aesthetic reasons. The output is the piped to <code>pheatmap</code> which performs the distance and clustering automatically. The only additional arguements used here are to change the fontsize and create some breaks in the plot to highlight the clustering.</p>
+<p>An alternative and more <code>ggplot</code> style is to use the <code>pheatmap</code> package and
+function <span class="citation">(Kolde <a href="#ref-R-pheatmap">2019</a>)</span>.</p>
+<p>In Figure <a href="transform.html#fig:pheatmap">5.10</a> <code>dat_scaled</code> is piped to <code>set_columns</code> again to
+rename the experiments for aesthetic reasons. The output is the piped to
+<code>pheatmap</code> which performs the distance and clustering automatically. The only
+additional arguements used here are to change the fontsize and create some
+breaks in the plot to highlight the clustering.</p>
 <p>There is lots more that <code>pheatmap</code> can do in terms of aesthetics, so do explore.</p>
 
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat_scaled <span class="op">%&gt;%</span><span class="st"> </span>
+<pre class="sourceCode r"><code class="sourceCode r">dat_scaled <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="co"># Rename the comlums</span>
 <span class="st">  </span>magrittr<span class="op">::</span><span class="kw">set_colnames</span>(<span class="kw">c</span>(<span class="st">&quot;Ctl 1&quot;</span>, <span class="st">&quot;Ctl 2&quot;</span>, <span class="st">&quot;Ctl 3&quot;</span>,
                                     <span class="st">&quot;Trt 1&quot;</span>, <span class="st">&quot;Trt 2&quot;</span>, <span class="st">&quot;Trt 3&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
@@ -673,7 +876,7 @@ Figure 5.9: Heatmap created with <code>heatmap.2</code> using the clusters calcu
 <span class="st">  </span><span class="kw">pheatmap</span>(.,
            <span class="dt">fontsize =</span> <span class="dv">7</span>,
            <span class="dt">cutree_rows =</span> <span class="dv">2</span>, <span class="co"># Create breaks in heatmap</span>
-           <span class="dt">cutree_cols =</span> <span class="dv">2</span>) <span class="co"># Create breaks in heatmap</span></code></pre></div>
+           <span class="dt">cutree_cols =</span> <span class="dv">2</span>) <span class="co"># Create breaks in heatmap</span></code></pre>
 <div class="figure" style="text-align: center"><span id="fig:pheatmap"></span>
 <img src="bspr-workshop-2018_files/figure-html/pheatmap-1.png" alt="Heatmap created using pheatmap with breaks to highlight clusters." width="80%" />
 <p class="caption">
@@ -684,14 +887,33 @@ Figure 5.10: Heatmap created using <code>pheatmap</code> with breaks to highligh
 </div>
 <div id="venn" class="section level2">
 <h2><span class="header-section-number">5.9</span> Venn diagram</h2>
-<p>Another common plot used in proteomics is the Venn diagram. For these I use the <code>VennDiagram</code> package <span class="citation">(Chen <a href="#ref-R-VennDiagram">2018</a>)</span>.</p>
-<p>For example if we wanted to compare the protein identifications found in the control and treatment sets of our data we could compare the protein accessions found in each control experiment to see how well they replicate. To do this we need to transform the data, for example using the following steps:</p>
+<p>Another common plot used in proteomics is the Venn diagram. For these I use
+the <code>VennDiagram</code> package <span class="citation">(Chen <a href="#ref-R-VennDiagram">2018</a>)</span>.</p>
+<p>For example if we wanted to compare the protein identifications found in the
+control and treatment sets of our data we could compare the protein accessions
+found in each control experiment to see how well they replicate.
+To do this we need to transform the data, for example using the following steps:</p>
 <ol style="list-style-type: decimal">
-<li>Rather than having variables for the protein concentrations called <code>control_1</code>, <code>control_2</code> etc. in this situation it would make more sense to have a variable called <code>concentration</code> and create a new variable for the experiments using the column labels, which I’ll call <code>exp_type</code>. Why? By creating a variable with the experiment names, we can use <code>filter</code> to easily subset the identified proteins in each experiment using our new variable, as we’ll see.</li>
+<li>Rather than having variables for the protein concentrations called <code>control_1</code>,
+<code>control_2</code> etc. in this situation it would make more sense to have a variable
+called <code>concentration</code> and create a new variable for the experiments using the
+column labels, which I’ll call <code>exp_type</code>. Why? By creating a variable with
+the experiment names, we can use <code>filter</code> to easily subset the identified
+proteins in each experiment using our new variable, as we’ll see.</li>
 </ol>
-<p>This is an example of using the <code>gather</code> function. The <code>key</code> is the new column we wish to gather the old column names to, and <code>value</code> is the new column in which the values from the gathered columns go. I’ve given the new columns the names <code>exp_type</code> and <code>value</code> respectively. We don’t want to gather the <code>protein_accession</code> or <code>protein_description</code> columns, so I use <code>c()</code> and use the minus sign to negate them. These rows get duplicated to match the gathered observations. Hence we go from 7702 observations of 8 variables, to 46212 observations of 4 variables when we gather the 6 control and treatment columns.</p>
-<p>To do the opposite i.e. spread one column to many columns, unsuprisingly uses the function <code>spread</code>. You can read more about both <code>gather</code> and <code>spread</code> in the <a href="http://r4ds.had.co.nz/tidy-data.html#spreading-and-gathering">R4DS tidy data chapter</a>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Transform data for Venn diagram to create long table with three columns </span>
+<p>This is an example of using the
+<code>gather</code> function. The <code>key</code> is the new column we wish to gather the old
+column names to, and <code>value</code> is the new column in which the values from the
+gathered columns go. I’ve given the new columns the names <code>exp_type</code> and <code>value</code>
+respectively. We don’t want to gather the <code>protein_accession</code> or
+<code>protein_description</code> columns, so I use <code>c()</code> and use the minus sign to negate
+them. These rows get duplicated to match the gathered observations. Hence we
+go from 7702 observations of 8 variables, to 46212 observations of 4 variables
+when we gather the 6 control and treatment columns.</p>
+<p>To do the opposite i.e. spread one column to many columns, unsuprisingly uses
+the function <code>spread</code>. You can read more about both <code>gather</code> and <code>spread</code> in
+the <a href="http://r4ds.had.co.nz/tidy-data.html#spreading-and-gathering">R4DS tidy data chapter</a>.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Transform data for Venn diagram to create long table with three columns </span>
 venn_dat &lt;-<span class="st"> </span>dat <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="co"># Gather columns according to experiment type to create exp_type </span>
 <span class="st">  </span><span class="co"># and concentration variables. Don&#39;t use the protein accession.</span>
@@ -699,7 +921,7 @@ venn_dat &lt;-<span class="st"> </span>dat <span class="op">%&gt;%</span>
                       <span class="op">-</span><span class="kw">c</span>(protein_accession,protein_description))
 
 <span class="co"># Glimpse the gathered data</span>
-<span class="kw">glimpse</span>(venn_dat)</code></pre></div>
+<span class="kw">glimpse</span>(venn_dat)</code></pre>
 <pre><code>## Observations: 46,212
 ## Variables: 4
 ## $ protein_accession   &lt;chr&gt; &quot;VATA_HUMAN_P38606&quot;, &quot;RL35A_HUMAN_P18077&quot;,...
@@ -707,9 +929,16 @@ venn_dat &lt;-<span class="st"> </span>dat <span class="op">%&gt;%</span>
 ## $ exp_type            &lt;chr&gt; &quot;control_1&quot;, &quot;control_1&quot;, &quot;control_1&quot;, &quot;co...
 ## $ concentration       &lt;dbl&gt; 0.8114, 0.3672, 2.9815, 0.1424, 1.0748, 0....</code></pre>
 <ol start="2" style="list-style-type: decimal">
-<li>Having transformed the data, we then create three new objects that <code>filter</code> the rows for the three control assays using their names, and where a concentration was observed using <code>!is.na()</code>. The <code>!</code> means not and <code>is.na</code> tests for missing values labelled <code>NA</code>. So read this as <em>where concentration is not a missing value</em>. The output of filter is piped to the dplyr <code>pull</code> function which pulls out the values from the <code>protein_accession</code> column which are stored in the object. These are character vectors, so repeating this for all three experiment yields three character vectors of different sizes.</li>
+<li>Having transformed the data, we then create three new objects that
+<code>filter</code> the rows for the three control assays using their names, and where
+a concentration was observed using <code>!is.na()</code>. The <code>!</code> means not and <code>is.na</code> tests
+for missing values labelled <code>NA</code>. So read this as
+<em>where concentration is not a missing value</em>. The output of filter is piped to
+the dplyr <code>pull</code> function which pulls out the values from the <code>protein_accession</code>
+column which are stored in the object. These are character vectors, so repeating
+this for all three experiment yields three character vectors of different sizes.</li>
 </ol>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">venn_cntl_<span class="dv">1</span> &lt;-<span class="st"> </span>venn_dat <span class="op">%&gt;%</span><span class="st"> </span>
+<pre class="sourceCode r"><code class="sourceCode r">venn_cntl_<span class="dv">1</span> &lt;-<span class="st"> </span>venn_dat <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">filter</span>(exp_type <span class="op">==</span><span class="st"> &quot;control_1&quot;</span> <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span><span class="kw">is.na</span>(concentration)) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">pull</span>(protein_accession)
 
@@ -719,23 +948,35 @@ venn_cntl_<span class="dv">2</span> &lt;-<span class="st"> </span>venn_dat <span
 
 venn_cntl_<span class="dv">3</span> &lt;-<span class="st"> </span>venn_dat <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">filter</span>(exp_type <span class="op">==</span><span class="st"> &quot;control_3&quot;</span> <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span><span class="kw">is.na</span>(concentration)) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">pull</span>(protein_accession)</code></pre></div>
+<span class="st">  </span><span class="kw">pull</span>(protein_accession)</code></pre>
 <ol start="3" style="list-style-type: decimal">
-<li>The three character vectors can be collected into a single object, but as they are different lengths, it has to be a <a href="tidyverse.html#lists">list object</a>. Here we use <code>list()</code> to create a list of the three character vectors created in step 2. Note that I’ve named the list elements using strings in quotes e.g. <code>&quot;Control 1&quot;</code> this allows for a space in the names as I want to use these names on the venn diagram.</li>
+<li>The three character vectors can be collected into a single object, but as
+they are different lengths, it has to be a <a href="tidyverse.html#lists">list object</a>. Here we use <code>list()</code>
+to create a list of the three character vectors created in step 2. Note that
+I’ve named the list elements using strings in quotes e.g. <code>"Control 1"</code> this
+allows for a space in the names as I want to use these names on the venn diagram.</li>
 </ol>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Create a list for plotting</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Create a list for plotting</span>
 venn_list &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="st">&quot;Control 1&quot;</span> =<span class="st"> </span>venn_cntl_<span class="dv">1</span>,
                   <span class="st">&quot;Control 2&quot;</span> =<span class="st"> </span>venn_cntl_<span class="dv">2</span>,
-                  <span class="st">&quot;Control 3&quot;</span> =<span class="st"> </span>venn_cntl_<span class="dv">3</span>)</code></pre></div>
+                  <span class="st">&quot;Control 3&quot;</span> =<span class="st"> </span>venn_cntl_<span class="dv">3</span>)</code></pre>
 <ol start="4" style="list-style-type: decimal">
-<li>Finally we can plot the venn diagram using the list object<code>venn_list</code> to create a venn diagram object <code>prot_venn</code> using <code>venn.diagram</code> function from the <code>VennDiagram</code> package <span class="citation">(Chen <a href="#ref-R-VennDiagram">2018</a>)</span> and then plotting <code>prot_venn</code> using <code>grid.arrange</code> from the <code>gridExtra</code> package <span class="citation">(Auguie <a href="#ref-R-gridExtra">2017</a>)</span>.</li>
+<li>Finally we can plot the venn diagram using the list object<code>venn_list</code> to
+create a venn diagram object <code>prot_venn</code> using <code>venn.diagram</code> function from the
+<code>VennDiagram</code> package <span class="citation">(Chen <a href="#ref-R-VennDiagram">2018</a>)</span> and then plotting <code>prot_venn</code> using
+<code>grid.arrange</code> from the <code>gridExtra</code> package <span class="citation">(Auguie <a href="#ref-R-gridExtra">2017</a>)</span>.</li>
 </ol>
-<p>I’ll leave as an exercise for the reader to look at all the options for <code>venn.diagram</code> and <code>grid.arrange</code>, but a couple of things to note here are that you can create three or four way venn diagrams, and if you create several venn diagram objects, they can be plotted on the same plot using <code>grid arrange</code>. Also here I’ve added a line to prevent the output of a log file using <code>futile.logger</code>. You might want these, but generally I don’t.</p>
+<p>I’ll leave as an exercise for the reader to look at all the options for
+<code>venn.diagram</code> and <code>grid.arrange</code>, but a couple of things to note here are
+that you can create three or four way venn diagrams, and if you create
+several venn diagram objects, they can be plotted on the same plot using
+<code>grid arrange</code>. Also here I’ve added a line to prevent the output of a log file
+using <code>futile.logger</code>. You might want these, but generally I don’t.</p>
 
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Prevent the output of a log file</span>
-futile.logger<span class="op">::</span><span class="kw">flog.threshold</span>(futile.logger<span class="op">::</span>ERROR, <span class="dt">name =</span> <span class="st">&quot;VennDiagramLogger&quot;</span>)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Prevent the output of a log file</span>
+futile.logger<span class="op">::</span><span class="kw">flog.threshold</span>(futile.logger<span class="op">::</span>ERROR, <span class="dt">name =</span> <span class="st">&quot;VennDiagramLogger&quot;</span>)</code></pre>
 <pre><code>## NULL</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Create a venn diagram object</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Create a venn diagram object</span>
 prot_venn &lt;-<span class="st"> </span><span class="kw">venn.diagram</span>(venn_list,<span class="ot">NULL</span>, 
                <span class="dt">col =</span> <span class="st">&quot;transparent&quot;</span>,
                <span class="dt">fill =</span> <span class="kw">c</span>(<span class="st">&quot;cornflowerblue&quot;</span>, <span class="st">&quot;green&quot;</span>, <span class="st">&quot;yellow&quot;</span>),
@@ -754,32 +995,50 @@ prot_venn &lt;-<span class="st"> </span><span class="kw">venn.diagram</span>(ven
   )
 
 <span class="co"># Plot the venn diagram using the gridExtra package</span>
-<span class="kw">grid.arrange</span>(<span class="kw">gTree</span>(<span class="dt">children =</span> prot_venn))</code></pre></div>
+<span class="kw">grid.arrange</span>(<span class="kw">gTree</span>(<span class="dt">children =</span> prot_venn))</code></pre>
 <div class="figure" style="text-align: center"><span id="fig:venn-plot"></span>
 <img src="bspr-workshop-2018_files/figure-html/venn-plot-1.png" alt="Venn diagram of proteins identified in three control experiments" width="672" />
 <p class="caption">
 Figure 5.11: Venn diagram of proteins identified in three control experiments
 </p>
 </div>
-<p>Figure <a href="transform.html#fig:venn-plot">5.11</a> then shows us that there is a core of around 1500 proteins identified in all three control experiements. You could try something similar with the treatment experiments.</p>
+<p>Figure <a href="transform.html#fig:venn-plot">5.11</a> then shows us that there is a core of around 1500
+proteins identified in all three control experiements. You could try something
+similar with the treatment experiments.</p>
 </div>
 <div id="peptide-sequence-logos" class="section level2">
 <h2><span class="header-section-number">5.10</span> Peptide sequence logos</h2>
-<p>Finally, creating sequence logos from peptides is another common task, especially if you are doing immunopeptidomics or any situatio where you would like to explore the fequency of amino acid types at each position in a set of peptide sequences. The<code>ggseqlogo</code> package enables us to do this <code>ggplot2</code> style <span class="citation">(Wagih <a href="#ref-R-ggseqlogo">2017</a>)</span> for protein, DNA and RNA sequences.</p>
-<p>Here using sample data that comes with the ggseqlogo package and illusrated in the <a href="https://omarwagih.github.io/ggseqlogo/">ggseqlogo tutorial</a>.</p>
-<p>As with the venn diagram, peptide vectors are not generally of equal length and therefore are collected into a <a href="tidyverse.html#lists">list object</a>. We don’t have any peptides in the example data for the workshop, but the concept of using <code>pull</code> to extract character vectors was shown in Section <a href="transform.html#venn">5.9</a>. In this scenario we’d be extracting character vectors of the peptide sequences and then collecting them as a named list.</p>
-<p><code>ggseqlogo</code> provides some data <code>seqs_aa</code> containing a sets of kinase-substrate phosphorylation sites. This is represented as a named list of character vectors where the names represent the names of the kinases associated with the phosphosites.</p>
-<p>Below, we load the example data and then the plotting uses the <code>ggseqlogo</code> function which as with <code>ggplot</code> the first arguement is the data. Other arguements can be passed either within the function or added using the <code>+</code> operater as per <code>ggplot</code>.</p>
+<p>Finally, creating sequence logos from peptides is another common task, especially
+if you are doing immunopeptidomics or any situatio where you would like to explore
+the fequency of amino acid types at each position in a set of peptide sequences.
+The<code>ggseqlogo</code> package enables us to do this <code>ggplot2</code> style <span class="citation">(Wagih <a href="#ref-R-ggseqlogo">2017</a>)</span> for
+protein, DNA and RNA sequences.</p>
+<p>Here using sample data that comes with the ggseqlogo package and illusrated
+in the <a href="https://omarwagih.github.io/ggseqlogo/">ggseqlogo tutorial</a>.</p>
+<p>As with the venn diagram, peptide vectors are not generally of equal length
+and therefore are collected into a <a href="tidyverse.html#lists">list object</a>. We don’t have any
+peptides in the example data for the workshop, but the concept of using <code>pull</code>
+to extract character vectors was shown in Section <a href="transform.html#venn">5.9</a>. In this
+scenario we’d be extracting character vectors of the peptide sequences and then
+collecting them as a named list.</p>
+<p><code>ggseqlogo</code> provides some data <code>seqs_aa</code> containing a sets of kinase-substrate
+phosphorylation sites. This is represented as a named list of character vectors
+where the names represent the names of the kinases associated with the
+phosphosites.</p>
+<p>Below, we load the example data and then the plotting uses the <code>ggseqlogo</code> function
+which as with <code>ggplot</code> the first arguement is the data. Other arguements can
+be passed either within the function or added using the <code>+</code> operater as per
+<code>ggplot</code>.</p>
 <p>Here are two examples:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Load the example data</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Load the example data</span>
 <span class="kw">data</span>(ggseqlogo_sample)
 
 <span class="co"># Plot the protein sequences with default arguements </span>
-<span class="kw">ggseqlogo</span>(<span class="dt">data =</span> seqs_aa)</code></pre></div>
+<span class="kw">ggseqlogo</span>(<span class="dt">data =</span> seqs_aa)</code></pre>
 <p><img src="bspr-workshop-2018_files/figure-html/ggseqlogo-1.png" width="672" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Plot the protein sequences, plotting probability, and change the theme</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Plot the protein sequences, plotting probability, and change the theme</span>
 <span class="kw">ggseqlogo</span>(<span class="dt">data =</span> seqs_aa, <span class="dt">method =</span> <span class="st">&#39;prob&#39;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">theme_classic</span>()</code></pre></div>
+<span class="st">  </span><span class="kw">theme_classic</span>()</code></pre>
 <p><img src="bspr-workshop-2018_files/figure-html/ggseqlogo-2.png" width="672" /></p>
 
 </div>
@@ -790,16 +1049,16 @@ Figure 5.11: Venn diagram of proteins identified in three control experiments
 <p>Bolstad, B M, R A Irizarry, M Astrand, and T P Speed. 2003. “A Comparison of Normalization Methods for High Density Oligonucleotide Array Data Based on Variance and Bias.” <em>Bioinformatics (Oxford, England)</em> 19 (2): 185–93.</p>
 </div>
 <div id="ref-R-pheatmap">
-<p>Kolde, Raivo. 2018. <em>Pheatmap: Pretty Heatmaps</em>. <a href="https://CRAN.R-project.org/package=pheatmap" class="uri">https://CRAN.R-project.org/package=pheatmap</a>.</p>
+<p>Kolde, Raivo. 2019. <em>Pheatmap: Pretty Heatmaps</em>. <a href="https://CRAN.R-project.org/package=pheatmap">https://CRAN.R-project.org/package=pheatmap</a>.</p>
 </div>
 <div id="ref-R-VennDiagram">
-<p>Chen, Hanbo. 2018. <em>VennDiagram: Generate High-Resolution Venn and Euler Plots</em>. <a href="https://CRAN.R-project.org/package=VennDiagram" class="uri">https://CRAN.R-project.org/package=VennDiagram</a>.</p>
+<p>Chen, Hanbo. 2018. <em>VennDiagram: Generate High-Resolution Venn and Euler Plots</em>. <a href="https://CRAN.R-project.org/package=VennDiagram">https://CRAN.R-project.org/package=VennDiagram</a>.</p>
 </div>
 <div id="ref-R-gridExtra">
-<p>Auguie, Baptiste. 2017. <em>GridExtra: Miscellaneous Functions for “Grid” Graphics</em>. <a href="https://CRAN.R-project.org/package=gridExtra" class="uri">https://CRAN.R-project.org/package=gridExtra</a>.</p>
+<p>Auguie, Baptiste. 2017. <em>GridExtra: Miscellaneous Functions for "Grid" Graphics</em>. <a href="https://CRAN.R-project.org/package=gridExtra">https://CRAN.R-project.org/package=gridExtra</a>.</p>
 </div>
 <div id="ref-R-ggseqlogo">
-<p>Wagih, Omar. 2017. <em>Ggseqlogo: A ’Ggplot2’ Extension for Drawing Publication-Ready Sequence Logos</em>. <a href="https://CRAN.R-project.org/package=ggseqlogo" class="uri">https://CRAN.R-project.org/package=ggseqlogo</a>.</p>
+<p>Wagih, Omar. 2017. <em>Ggseqlogo: A ’Ggplot2’ Extension for Drawing Publication-Ready Sequence Logos</em>. <a href="https://CRAN.R-project.org/package=ggseqlogo">https://CRAN.R-project.org/package=ggseqlogo</a>.</p>
 </div>
 </div>
             </section>
@@ -828,7 +1087,7 @@ gitbook.start({
 "google": false,
 "linkedin": false,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
 "all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
@@ -838,6 +1097,10 @@ gitbook.start({
 "size": 2
 },
 "edit": {
+"link": null,
+"text": null
+},
+"history": {
 "link": null,
 "text": null
 },
@@ -854,8 +1117,8 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
     script.src = src;
